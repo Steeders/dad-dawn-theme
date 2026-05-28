@@ -1,0 +1,15 @@
+/* ============================================================
+   DO-A-DOT ART — Custom Overrides
+   All Do-A-Dot-specific styles go here. NEVER edit base.css.
+   This file is loaded after base.css and dad-tokens.css, so it
+   wins specificity ties.
+
+   Organize as the design ports in:
+   - 1. Globals (body, links, buttons)
+   - 2. Header / announcement / footer
+   - 3. Section: Home (hero, featured, color-strip, etc.)
+   - 4. Section: Collection (PLP)
+   - 5. Section: Product (PDP)
+   - 6. Section: Cart / Search / Account / Blog / Utility
+   - 7. Theme blocks (product-spotlight, etc.)
+   ============================================================ */

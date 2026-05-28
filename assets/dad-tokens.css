@@ -1,0 +1,257 @@
+/* ============================================================
+   DO-A-DOT ART — Design Tokens
+   Source of truth for the Do-A-Dot design system. Ported from
+   the Claude Design bundle (see clients/do-a-dot/design/).
+   Loaded by layout/theme.liquid AFTER base.css.
+   ============================================================
+   NOTE: @font-face declarations live inline in theme.liquid so
+   the {{ 'Font.ttf' | asset_url }} filter resolves to the
+   Shopify CDN. Do not add @font-face here.
+   ============================================================ */
+
+:root {
+  /* =========================================================
+     CORE PALETTE — from PMS-spec'd brand guide, page 11
+     12 marker colors + black/white. Use as your primary
+     vocabulary; never invent new hues.
+     ========================================================= */
+  --dad-pink:        #f286b6;
+  --dad-hot-pink:    #df1883;
+  --dad-red:         #ee2c39;
+  --dad-orange:      #f89a30;
+  --dad-yellow:      #ffd241;
+  --dad-green:       #6dbe4b;
+  --dad-dark-green:  #2b9a47;
+  --dad-teal:        #009491;
+  --dad-blue:        #51c8ed;
+  --dad-dark-blue:   #2f56a5;
+  --dad-purple:      #a55b96;
+  --dad-dark-purple: #94368e;
+  --dad-white:       #ffffff;
+  --dad-black:       #000000;
+
+  /* Soft, child-friendly tints for backgrounds & blocks. */
+  --dad-cream:       #fff8e8;
+  --dad-sky-tint:    #e9f6fd;
+  --dad-pink-tint:   #fde6f0;
+  --dad-yellow-tint: #fff3c2;
+  --dad-green-tint:  #e5f5dc;
+  --dad-purple-tint: #f1e3ef;
+
+  /* Ink — never pure black. */
+  --dad-ink:         #2b2a2d;
+  --dad-ink-muted:   #6a6770;
+  --dad-ink-soft:    #9c98a4;
+  --dad-rule:        #e8e2d8;
+
+  /* =========================================================
+     SEMANTIC ALIASES — use these in components so we can
+     reskin without touching markup.
+     ========================================================= */
+  --fg:            var(--dad-ink);
+  --fg-muted:      var(--dad-ink-muted);
+  --fg-soft:       var(--dad-ink-soft);
+  --fg-inverse:    var(--dad-white);
+
+  --bg:            var(--dad-cream);
+  --bg-elev:       var(--dad-white);
+  --bg-tint:       var(--dad-yellow-tint);
+
+  --accent:        var(--dad-hot-pink);
+  --accent-2:      var(--dad-blue);
+  --accent-3:      var(--dad-yellow);
+  --accent-4:      var(--dad-green);
+
+  --link:          var(--dad-dark-blue);
+  --link-hover:    var(--dad-hot-pink);
+
+  --success:       var(--dad-dark-green);
+  --warning:       var(--dad-orange);
+  --danger:        var(--dad-red);
+  --info:          var(--dad-blue);
+
+  --border:        var(--dad-rule);
+  --border-strong: var(--dad-ink);
+
+  /* =========================================================
+     TYPE FAMILIES
+     ========================================================= */
+  --font-display: "Dimbo", "Lilita One", "Fredoka", "Comic Sans MS", system-ui, sans-serif;
+  --font-script:  "Kids Script", "Caveat", "Patrick Hand", cursive;
+  --font-body:    "Quicksand", "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* =========================================================
+     TYPE SCALE — fluid, child-friendly. Body bottoms out at
+     16px so it stays readable for adult shoppers too.
+     ========================================================= */
+  --fs-display-xl: clamp(48px, 7vw, 96px);
+  --fs-display-lg: clamp(40px, 5.5vw, 72px);
+  --fs-display:    clamp(32px, 4vw, 56px);
+  --fs-h2:         clamp(26px, 3vw, 40px);
+  --fs-h3:         clamp(20px, 2.2vw, 28px);
+  --fs-h4:         18px;
+  --fs-script-lg:  clamp(40px, 5vw, 72px);
+  --fs-script:     clamp(28px, 3vw, 44px);
+  --fs-lead:       19px;
+  --fs-body:       16px;
+  --fs-small:      14px;
+  --fs-micro:      12px;
+
+  --lh-tight:   1.05;
+  --lh-snug:    1.2;
+  --lh-normal:  1.5;
+  --lh-loose:   1.7;
+
+  --tracking-display: -0.005em;
+  --tracking-body:    0;
+  --tracking-allcaps: 0.08em;
+
+  /* =========================================================
+     RADII — chunky and rounded. Nothing sharp.
+     ========================================================= */
+  --r-xs:   6px;
+  --r-sm:   10px;
+  --r-md:   16px;
+  --r-lg:   24px;
+  --r-xl:   32px;
+  --r-pill: 999px;
+  --r-blob: 60% 40% 55% 45% / 50% 60% 40% 50%;
+
+  /* =========================================================
+     SHADOWS — soft sticker drop + colored sticker lift.
+     No tight UI shadows; these are tactile and toy-like.
+     ========================================================= */
+  --shadow-sticker: 0 4px 0 rgba(43,42,45,0.12), 0 12px 24px -8px rgba(43,42,45,0.18);
+  --shadow-card:    0 2px 0 rgba(43,42,45,0.08), 0 18px 36px -16px rgba(43,42,45,0.22);
+  --shadow-soft:    0 8px 28px -12px rgba(43,42,45,0.15);
+  --shadow-pop:     0 8px 0 rgba(0,0,0,0.10);
+  --shadow-inset:   inset 0 -3px 0 rgba(0,0,0,0.08);
+  --shadow-focus:   0 0 0 4px rgba(81,200,237,0.45);
+
+  /* =========================================================
+     SPACING — 4px base, generous at the top end.
+     ========================================================= */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 20px;
+  --s-6: 24px;
+  --s-8: 32px;
+  --s-10: 40px;
+  --s-12: 48px;
+  --s-16: 64px;
+  --s-20: 80px;
+  --s-24: 96px;
+
+  /* =========================================================
+     MOTION
+     ========================================================= */
+  --ease-bounce: cubic-bezier(.34,1.56,.64,1);
+  --ease-out:    cubic-bezier(.2,.8,.2,1);
+  --ease-in:     cubic-bezier(.4,0,1,1);
+  --dur-fast:    140ms;
+  --dur-med:     240ms;
+  --dur-slow:    420ms;
+}
+
+/* ============================================================
+   SEMANTIC TYPE RULESETS — apply on raw elements OR via class.
+   Headers: Dimbo, sentence case (NEVER all caps per brand).
+   Subheads: Kids Script OR Quicksand Bold, often lowercase.
+   Body: Quicksand.
+   ============================================================ */
+
+.dad-h1, h1.dad {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--fs-display);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tracking-display);
+  color: var(--fg);
+  text-wrap: balance;
+  margin: 0 0 var(--s-4);
+}
+.dad-h2, h2.dad {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--fs-h2);
+  line-height: var(--lh-snug);
+  color: var(--fg);
+  text-wrap: balance;
+  margin: 0 0 var(--s-3);
+}
+.dad-h3, h3.dad {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--fs-h3);
+  line-height: var(--lh-snug);
+  color: var(--fg);
+  margin: 0 0 var(--s-2);
+}
+.dad-h4, h4.dad {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--fs-h4);
+  line-height: var(--lh-snug);
+  text-transform: lowercase;
+  color: var(--fg);
+  margin: 0 0 var(--s-2);
+}
+.dad-script {
+  font-family: var(--font-script);
+  font-weight: 400;
+  font-size: var(--fs-script);
+  line-height: var(--lh-snug);
+  color: var(--accent);
+}
+.dad-script-lg { font-family: var(--font-script); font-size: var(--fs-script-lg); line-height: var(--lh-tight); }
+
+.dad-lead, p.dad-lead {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: var(--fs-lead);
+  line-height: var(--lh-normal);
+  color: var(--fg);
+  text-wrap: pretty;
+  margin: 0 0 var(--s-4);
+}
+.dad-body, p.dad {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: var(--fs-body);
+  line-height: var(--lh-normal);
+  color: var(--fg);
+  text-wrap: pretty;
+  margin: 0 0 var(--s-3);
+}
+.dad-small { font-family: var(--font-body); font-weight: 500; font-size: var(--fs-small); color: var(--fg-muted); }
+.dad-micro { font-family: var(--font-body); font-weight: 600; font-size: var(--fs-micro); color: var(--fg-muted); letter-spacing: var(--tracking-allcaps); text-transform: uppercase; }
+
+.dad-eyebrow {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--fs-small);
+  color: var(--accent);
+  text-transform: lowercase;
+}
+
+a.dad, .dad-link {
+  color: var(--link);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+a.dad:hover, .dad-link:hover { color: var(--link-hover); }
+
+.dad-surface {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: var(--fs-body);
+  line-height: var(--lh-normal);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
