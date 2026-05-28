@@ -18,6 +18,7 @@
   --dad-pink:        #f286b6;
   --dad-hot-pink:    #df1883;
   --dad-red:         #ee2c39;
+  --dad-brand-red:   #EC1B2A;  /* Lead accent — from brand guide. */
   --dad-orange:      #f89a30;
   --dad-yellow:      #ffd241;
   --dad-green:       #6dbe4b;
@@ -57,13 +58,13 @@
   --bg-elev:       var(--dad-white);
   --bg-tint:       var(--dad-yellow-tint);
 
-  --accent:        var(--dad-hot-pink);
+  --accent:        var(--dad-brand-red);
   --accent-2:      var(--dad-blue);
   --accent-3:      var(--dad-yellow);
   --accent-4:      var(--dad-green);
 
   --link:          var(--dad-dark-blue);
-  --link-hover:    var(--dad-hot-pink);
+  --link-hover:    var(--dad-brand-red);
 
   --success:       var(--dad-dark-green);
   --warning:       var(--dad-orange);

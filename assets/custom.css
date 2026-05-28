@@ -29,9 +29,9 @@ body {
 
 /* Beat Dawn's `.gradient` class on <body> (which sets background from
    --color-background, normally driven by the theme customizer's color
-   scheme). We always want cream regardless of scheme. */
+   scheme). We want crisp white regardless of scheme. */
 body.gradient {
-  background: var(--dad-cream);
+  background: var(--dad-white);
 }
 
 /* Headings — Dimbo display, sentence case (never ALL CAPS per brand). */
