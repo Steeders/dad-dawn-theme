@@ -73,6 +73,33 @@ a:hover {
   border-radius: var(--r-xs);
 }
 
+/* Buttons — chunky pill with hover lift. Dawn handles colors and the
+   hard-offset drop shadow via the customizer settings (buttons_radius,
+   buttons_border_thickness, buttons_shadow_*). We only add the lift
+   transition for the tactile, toy-like feel. */
+.button,
+.button--primary,
+.button--secondary,
+.shopify-payment-button__button {
+  font-family: var(--font-body);
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+  transition: transform var(--dur-fast) var(--ease-out),
+              box-shadow var(--dur-fast) var(--ease-out);
+}
+.button:hover,
+.button--primary:hover,
+.button--secondary:hover,
+.shopify-payment-button__button:hover {
+  transform: translateY(-1px);
+}
+.button:active,
+.button--primary:active,
+.button--secondary:active {
+  transform: translateY(0);
+}
+
 /* ============================================================
    2. FOOTER — sections/dad-footer.liquid
    ============================================================ */
