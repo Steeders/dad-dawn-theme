@@ -101,47 +101,17 @@ a:hover {
 }
 
 /* ============================================================
-   2. ANNOUNCEMENT BAR — sections/announcement-bar.liquid
-   Restyle Dawn's stock section to dark-ink-on-cream-text with
-   small yellow dot accents flanking the message.
+   2. ANNOUNCEMENT BAR
+   Intentionally NOT overridden — let the color scheme assigned
+   in the theme editor drive its appearance.
    ============================================================ */
-
-.announcement-bar {
-  background: var(--dad-ink);
-  color: var(--dad-cream);
-  border: none;
-}
-.announcement-bar__message {
-  color: var(--dad-cream);
-  font-family: var(--font-body);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  text-transform: none;
-  padding: 9px 0;
-}
-.announcement-bar__message::before,
-.announcement-bar__message::after {
-  content: "";
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--dad-yellow);
-  vertical-align: middle;
-  margin: 0 10px;
-}
-.announcement-bar__link {
-  color: var(--dad-cream);
-}
-.announcement-bar__link:hover {
-  color: var(--dad-yellow);
-}
 
 /* ============================================================
    3. HEADER — sections/header.liquid (Dawn stock, restyled)
-   White header, lowercase nav, brand-red hover underline, slim
-   icon row with brand-red cart-count badge.
+   White header, lowercase nav, brand-red hover underline.
+   We do NOT touch .header__menu-item padding/layout — Dawn
+   relies on those for sticky/drawer behavior. We only restyle
+   typography on the span inside (which is what Dawn underlines).
    ============================================================ */
 
 .header-wrapper,
@@ -150,65 +120,42 @@ a:hover {
   border-bottom: 1px solid var(--border);
 }
 
-.header {
-  padding-top: 18px;
-  padding-bottom: 18px;
-}
-
-/* Wordmark (text variant) — when shop.name renders instead of a logo image. */
-.header__heading-link {
+/* Text-only wordmark fallback (when no logo image is uploaded). */
+.header__heading-link,
+.header__heading-link .h2,
+.header__heading-link span {
   font-family: var(--font-display);
   font-weight: 400;
   color: var(--fg);
-}
-.header__heading-logo,
-.header__heading-link .h2 {
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: 28px;
   letter-spacing: var(--tracking-display);
-  color: var(--fg);
 }
 
-/* Nav links ------------------------------------------------- */
-.header__menu-item,
+/* Nav link typography. Target the <span> Dawn renders inside
+   .header__menu-item — that's the element Dawn already underlines. */
 .header__menu-item span {
   font-family: var(--font-body);
   font-weight: 600;
   font-size: 14px;
   text-transform: lowercase;
-  color: var(--fg);
   letter-spacing: 0.005em;
-  padding: 6px 2px;
-  border-bottom: 2px solid transparent;
-  transition: color var(--dur-fast) var(--ease-out),
-              border-color var(--dur-fast) var(--ease-out);
 }
-.header__menu-item:hover,
+
+/* Hover and active underline — color via text-decoration-color
+   so it inherits Dawn's offset/thickness behavior cleanly. */
+.header__menu-item:hover {
+  color: var(--accent);
+}
 .header__menu-item:hover span {
-  color: var(--accent);
-  border-bottom-color: var(--accent);
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 2px;
 }
-.header__menu-item[aria-current="page"],
-.header__active-menu-item,
-.header__menu-item[aria-current="page"] span {
+.header__active-menu-item {
   color: var(--accent);
-  border-bottom-color: var(--accent);
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 2px;
 }
 
-/* Icons (search / account / cart) --------------------------- */
-.header__icons .header__icon,
-.header__icon {
-  color: var(--fg);
-  border-radius: 50%;
-  transition: background var(--dur-fast);
-}
-.header__icons .header__icon:not(.header__icon--summary):hover,
-.header__icon:hover {
-  background: rgba(43, 42, 45, 0.06);
-}
-
-/* Cart count badge — brand red pill in upper-right of cart icon. */
+/* Cart count badge — brand red pill (only visible when cart has items). */
 .cart-count-bubble {
   background: var(--accent);
   color: var(--fg-inverse);
@@ -221,7 +168,7 @@ a:hover {
   padding: 0 5px;
 }
 
-/* Menu drawer (mobile) -------------------------------------- */
+/* Mobile menu drawer ---------------------------------------- */
 .menu-drawer {
   background: var(--dad-white);
 }
