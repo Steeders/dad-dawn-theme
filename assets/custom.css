@@ -184,7 +184,130 @@ a:hover {
 }
 
 /* ============================================================
-   4. FOOTER — sections/dad-footer.liquid
+   4. PRODUCT CARDS — used on featured-collection, PLP, related
+   Dawn's card structure: .card-wrapper > .card > .card__inner
+   (with .card__media) and .card__content > .card__information
+   (with .card__heading and .price).
+   ============================================================ */
+
+.card-wrapper {
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+.card-wrapper:hover {
+  transform: translateY(-2px);
+}
+
+/* Card body — keep transparent ("flat" variant per design) by default;
+   Dawn's --card-color-background sometimes injects color, override. */
+.card {
+  background: transparent;
+}
+.card__inner {
+  background: transparent;
+}
+
+/* Thumbnail container — soft pink tint, rounded square. */
+.card .card__media,
+.card__inner .card__media {
+  border-radius: var(--r-md);
+  background: var(--dad-pink-tint);
+  overflow: hidden;
+}
+.card .card__media img,
+.card__inner .card__media img {
+  border-radius: var(--r-md);
+}
+
+/* Title typography — Dimbo display, sentence case. */
+.card__heading,
+.card-information__text,
+.card .card__heading > a,
+.card-information .card__heading > a {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.15;
+  letter-spacing: var(--tracking-display);
+  color: var(--fg);
+  text-decoration: none;
+  text-wrap: balance;
+}
+.card__heading > a:hover {
+  color: var(--accent);
+}
+
+/* Price — Dimbo for the regular price; ink-muted for compare-at. */
+.price .price-item--regular,
+.price-item--regular {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 18px;
+  color: var(--fg);
+  letter-spacing: 0;
+}
+.price__sale .price-item--sale {
+  color: var(--accent);
+}
+.price__sale .price-item--regular {
+  color: var(--fg-soft);
+  text-decoration: line-through;
+}
+
+/* Card information stack spacing. */
+.card__information,
+.card-information {
+  padding-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Quick view / quick add icon button (where Dawn renders it) — soften. */
+.quick-add__submit,
+.quick-add-modal__toggle {
+  border-radius: var(--r-pill);
+}
+
+/* ============================================================
+   5. HERO (image-banner) — sections/image-banner.liquid
+   Tighten the overlay text-box to feel like the design's
+   image-led layout: cream backdrop with soft blur, rounded.
+   ============================================================ */
+
+.banner__heading,
+.banner__heading.h0,
+.banner__heading.h1 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: var(--tracking-display);
+  line-height: 1.05;
+  text-wrap: balance;
+  color: var(--fg);
+}
+
+.banner__text {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: var(--fs-lead);
+  line-height: var(--lh-normal);
+  color: var(--fg);
+}
+
+/* The "box" Dawn renders the overlay text in. Give it the design's
+   cream backdrop + blur + chunky rounded corners. */
+.banner__box {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-radius: var(--r-xl);
+  padding: 40px 44px;
+}
+
+/* If a hero variant has the box transparent ("image overlays directly"),
+   our default still keeps headings visible since color is --fg. */
+
+/* ============================================================
+   6. FOOTER — sections/dad-footer.liquid
    ============================================================ */
 
 .dad-footer {
