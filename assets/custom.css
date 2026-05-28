@@ -95,33 +95,32 @@ a:hover {
               box-shadow var(--dur-fast) var(--ease-out);
 }
 
-/* Default colored drop-shadow on the :before layer.
-   Dark / ink default — overridden per-variant below. */
+/* Per the design: shadow is reserved for the primary CTA only
+   (.btn.pop in the source). Default buttons get no shadow — only
+   a subtle 1px lift on hover. Add to Cart gets the chunky pop. */
+
+/* Kill Dawn's customizer-driven default shadow on .button:before. */
 .button:before,
 .shopify-challenge__button:before,
 .customer button:before {
-  box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.18) !important;
+  box-shadow: none !important;
   transition: box-shadow var(--dur-fast) var(--ease-out);
 }
 
-/* Hover — the BUTTON stays put, the SHADOW grows taller (4 → 7px).
-   Per the design, this is the only thing that changes on hover.
-   No transform — that read as the button physically moving, which
-   felt weird in practice. */
-.button:not([disabled]):hover:before,
-.shopify-challenge__button:not([disabled]):hover:before,
-.customer button:not([disabled]):hover:before {
-  box-shadow: 0 7px 0 0 rgba(0, 0, 0, 0.22) !important;
+/* All buttons: subtle 1px lift on hover (per .btn:hover in the design). */
+.button:not([disabled]):hover,
+.shopify-challenge__button:not([disabled]):hover,
+.customer button:not([disabled]):hover {
+  transform: translateY(-1px);
+}
+.button:not([disabled]):active,
+.shopify-challenge__button:active,
+.customer button:active {
+  transform: translateY(0);
 }
 
-/* Active — shadow shrinks to 2px (button feels pressed). */
-.button:not([disabled]):active:before,
-.shopify-challenge__button:active:before {
-  box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.2) !important;
-}
-
-/* Disable Dawn's hover-border-ring (the .button:after outline that
-   appeared on hover). The lift + shadow growth is enough feedback. */
+/* Disable Dawn's hover border ring (.button:after) — design has no
+   border outline on hover, just the lift and (for pop) the shadow. */
 .button:not([disabled]):hover::after,
 .shopify-challenge__button:hover::after,
 .customer button:hover::after,
@@ -503,8 +502,14 @@ a:hover {
   }
 }
 
-/* Add to Cart — brand-red with a darker-red drop shadow underneath
-   (the "side of the button" effect, not a gray drop shadow). */
+/* Add to Cart — the design's .btn.pop port verbatim.
+   Brand-red bg + matching darker-red hard-offset shadow (4px at
+   rest, 6px on hover). The button lifts 2px on hover (overriding
+   the global -1px) so the bottom of the shadow stays in place
+   while the "side" of the button grows from 4px to 6px tall.
+   That's the "rising off the page" effect.
+
+   Source: storefront.css lines 157-162 (.shop .btn.pop). */
 .product-form__submit,
 .product-form__submit.button,
 .product-form__submit.button--primary {
@@ -516,13 +521,16 @@ a:hover {
 .product-form__submit.button:hover {
   background: var(--accent);
   border-color: var(--accent);
-  filter: brightness(0.96);
+  transform: translateY(-2px);
+}
+.product-form__submit:active {
+  transform: translateY(0);
 }
 .product-form__submit:before {
-  box-shadow: 0 4px 0 0 #A4111D !important; /* 70% darker brand red */
+  box-shadow: 0 4px 0 0 #A4111D !important; /* color-mix(brand-red 70%, black) */
 }
-.product-form__submit:hover:before {
-  box-shadow: 0 7px 0 0 #A4111D !important;
+.product-form__submit:not([disabled]):hover:before {
+  box-shadow: 0 6px 0 0 #A4111D !important;
 }
 .product-form__submit:active:before {
   box-shadow: 0 2px 0 0 #A4111D !important;
