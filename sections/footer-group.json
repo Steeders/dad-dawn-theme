@@ -3,47 +3,56 @@
   "type": "footer",
   "sections": {
     "footer": {
-      "type": "footer",
+      "type": "dad-footer",
       "blocks": {
-        "footer-0": {
-          "type": "link_list",
+        "col-shop": {
+          "type": "menu_column",
           "settings": {
-            "heading": "Quick links",
-            "menu": "footer"
+            "heading": "shop",
+            "menu": "footer",
+            "accent": "pink"
           }
         },
-        "footer-1": {
-          "type": "link_list",
+        "col-learn": {
+          "type": "menu_column",
           "settings": {
-            "heading": "Info",
-            "menu": "footer"
+            "heading": "learn",
+            "menu": "footer",
+            "accent": "yellow"
           }
         },
-        "footer-2": {
-          "type": "text",
+        "col-help": {
+          "type": "menu_column",
           "settings": {
-            "heading": "Our mission",
-            "subtext": "<p>Share contact information, store details, and brand content with your customers.<\/p>"
+            "heading": "help",
+            "menu": "footer",
+            "accent": "blue"
+          }
+        },
+        "col-stay": {
+          "type": "menu_column",
+          "settings": {
+            "heading": "stay in touch",
+            "menu": "footer",
+            "accent": "green"
           }
         }
       },
       "block_order": [
-        "footer-0",
-        "footer-1",
-        "footer-2"
+        "col-shop",
+        "col-learn",
+        "col-help",
+        "col-stay"
       ],
       "settings": {
-        "color_scheme": "scheme-1",
-        "newsletter_enable": true,
-        "newsletter_heading": "Subscribe to our emails",
-        "show_social": true,
-        "enable_country_selector": false,
-        "enable_language_selector": false,
-        "payment_enable": true,
-        "show_policy": false,
-        "margin_top": 48,
-        "padding_top": 36,
-        "padding_bottom": 36
+        "show_dot_strip": true,
+        "signoff": "hi, friends!",
+        "description": "<p>Mess-free, big-hearted craft supplies from a 30-year-old family business. Made for tiny hands. Loved by big imaginations.</p>",
+        "help_label": "questions? we answer them ourselves.",
+        "help_phone": "949-DOT-ARTS",
+        "help_email": "hello@dotart.com",
+        "made_in_label": "made in the usa",
+        "copyright": "© 1995–2026 Do-A-Dot Art, Inc. Made for little hands in San Clemente, CA."
       }
     }
   },

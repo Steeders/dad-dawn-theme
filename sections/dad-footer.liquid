@@ -1,0 +1,280 @@
+{%- comment -%}
+  Do-A-Dot Art — Footer section
+  Replaces Dawn's stock sections/footer.liquid (which stays untouched
+  for clean upstream merges). Wired in via sections/footer-group.json.
+{%- endcomment -%}
+
+<footer class="dad-footer" role="contentinfo">
+  {%- if section.settings.show_dot_strip -%}
+    <div class="dad-footer__dot-strip" aria-hidden="true">
+      <span style="--c: var(--dad-pink); --s: 26px; --r: -12deg; --y: -2px;"></span>
+      <span style="--c: var(--dad-yellow); --s: 26px; --r: 8deg; --y: 2px;"></span>
+      <span style="--c: var(--dad-orange); --s: 32px; --r: -4deg;"></span>
+      <span style="--c: var(--dad-dark-green); --s: 26px; --r: 14deg; --y: -3px;"></span>
+      <span style="--c: var(--dad-blue); --s: 26px; --r: -8deg; --y: 2px;"></span>
+      <span style="--c: var(--dad-hot-pink); --s: 28px; --r: 6deg;"></span>
+      <span style="--c: var(--dad-orange); --s: 30px; --r: -14deg; --y: -2px; opacity: 0.85;"></span>
+      <span style="--c: var(--dad-yellow); --s: 26px; --r: 10deg; --y: 2px;"></span>
+    </div>
+  {%- endif -%}
+
+  <div class="dad-footer__watermark" aria-hidden="true">do·a·dot</div>
+
+  <div class="dad-footer__container">
+    <div class="dad-footer__grid">
+
+      <div class="dad-footer__brand">
+        <div class="dad-footer__brand-row">
+          {%- if section.settings.logo != blank -%}
+            <img
+              class="dad-footer__wm"
+              src="{{ section.settings.logo | image_url: width: 320 }}"
+              alt="{{ shop.name | escape }}"
+              width="160"
+              height="32"
+              loading="lazy"
+            >
+          {%- else -%}
+            <span class="dad-footer__wm-text">{{ shop.name }}</span>
+          {%- endif -%}
+          {%- if section.settings.signoff != blank -%}
+            <span class="dad-footer__signoff">{{ section.settings.signoff }}</span>
+          {%- endif -%}
+        </div>
+
+        {%- if section.settings.description != blank -%}
+          <p class="dad-footer__desc">{{ section.settings.description }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.help_phone != blank or section.settings.help_email != blank -%}
+          <div class="dad-footer__help-pill">
+            {%- if section.settings.help_label != blank -%}
+              <span class="dad-footer__help-l">{{ section.settings.help_label }}</span>
+            {%- endif -%}
+            <span class="dad-footer__help-v">
+              {%- if section.settings.help_phone != blank -%}
+                <strong>{{ section.settings.help_phone }}</strong>
+              {%- endif -%}
+              {%- if section.settings.help_phone != blank and section.settings.help_email != blank -%} · {%- endif -%}
+              {%- if section.settings.help_email != blank -%}
+                <a href="mailto:{{ section.settings.help_email }}">{{ section.settings.help_email }}</a>
+              {%- endif -%}
+            </span>
+          </div>
+        {%- endif -%}
+
+        <div class="dad-footer__social">
+          {%- if section.settings.instagram_url != blank -%}
+            <a href="{{ section.settings.instagram_url }}" class="dad-footer__iconbtn" aria-label="Instagram" target="_blank" rel="noopener">
+              <span class="svg-wrapper">{{- 'icon-instagram.svg' | inline_asset_content -}}</span>
+            </a>
+          {%- endif -%}
+          {%- if section.settings.tiktok_url != blank -%}
+            <a href="{{ section.settings.tiktok_url }}" class="dad-footer__iconbtn" aria-label="TikTok" target="_blank" rel="noopener">
+              <span class="svg-wrapper">{{- 'icon-tiktok.svg' | inline_asset_content -}}</span>
+            </a>
+          {%- endif -%}
+          {%- if section.settings.youtube_url != blank -%}
+            <a href="{{ section.settings.youtube_url }}" class="dad-footer__iconbtn" aria-label="YouTube" target="_blank" rel="noopener">
+              <span class="svg-wrapper">{{- 'icon-youtube.svg' | inline_asset_content -}}</span>
+            </a>
+          {%- endif -%}
+          {%- if section.settings.pinterest_url != blank -%}
+            <a href="{{ section.settings.pinterest_url }}" class="dad-footer__iconbtn" aria-label="Pinterest" target="_blank" rel="noopener">
+              <span class="svg-wrapper">{{- 'icon-pinterest.svg' | inline_asset_content -}}</span>
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'menu_column' -%}
+          <div class="dad-footer__col" data-accent="{{ block.settings.accent }}" {{ block.shopify_attributes }}>
+            <h4 class="dad-footer__col-heading">{{ block.settings.heading }}</h4>
+            {%- if block.settings.menu != blank -%}
+              <ul class="dad-footer__col-list">
+                {%- for link in block.settings.menu.links -%}
+                  <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+
+    </div>
+
+    <div class="dad-footer__bottom">
+      <span class="dad-footer__made-badge">
+        {{ section.settings.made_in_label }}
+      </span>
+      <span class="dad-footer__copy">{{ section.settings.copyright }}</span>
+      <span class="dad-footer__pay">
+        {%- for type in shop.enabled_payment_types -%}
+          {{ type | payment_type_svg_tag: class: 'dad-footer__pay-icon' }}
+        {%- endfor -%}
+      </span>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer (Do-A-Dot)",
+  "tag": "section",
+  "class": "section-dad-footer",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Top dot strip"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_dot_strip",
+      "label": "Show colored dot strip at top",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Brand block"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Footer wordmark (transparent PNG/SVG on dark)"
+    },
+    {
+      "type": "text",
+      "id": "signoff",
+      "label": "Script sign-off",
+      "default": "hi, friends!",
+      "info": "Rendered in Kids Script, yellow, slight rotation."
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Brand description",
+      "default": "<p>Mess-free, big-hearted craft supplies from a 30-year-old family business. Made for tiny hands. Loved by big imaginations.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Help pill"
+    },
+    {
+      "type": "text",
+      "id": "help_label",
+      "label": "Label",
+      "default": "questions? we answer them ourselves."
+    },
+    {
+      "type": "text",
+      "id": "help_phone",
+      "label": "Phone",
+      "default": "949-DOT-ARTS"
+    },
+    {
+      "type": "text",
+      "id": "help_email",
+      "label": "Email",
+      "default": "hello@dotart.com"
+    },
+    {
+      "type": "header",
+      "content": "Social links"
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "url",
+      "id": "tiktok_url",
+      "label": "TikTok URL"
+    },
+    {
+      "type": "url",
+      "id": "youtube_url",
+      "label": "YouTube URL"
+    },
+    {
+      "type": "url",
+      "id": "pinterest_url",
+      "label": "Pinterest URL"
+    },
+    {
+      "type": "header",
+      "content": "Bottom bar"
+    },
+    {
+      "type": "text",
+      "id": "made_in_label",
+      "label": "Made-in badge",
+      "default": "made in the usa"
+    },
+    {
+      "type": "text",
+      "id": "copyright",
+      "label": "Copyright line",
+      "default": "© 1995–2026 Do-A-Dot Art, Inc. Made for little hands in San Clemente, CA."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "menu_column",
+      "name": "Menu column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "shop"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu",
+          "info": "Pick a navigation menu created in Online Store → Navigation."
+        },
+        {
+          "type": "select",
+          "id": "accent",
+          "label": "Heading accent color",
+          "options": [
+            { "value": "pink", "label": "Pink" },
+            { "value": "yellow", "label": "Yellow" },
+            { "value": "blue", "label": "Blue" },
+            { "value": "green", "label": "Green" },
+            { "value": "orange", "label": "Orange" }
+          ],
+          "default": "pink"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Footer (Do-A-Dot)",
+      "blocks": [
+        {
+          "type": "menu_column",
+          "settings": { "heading": "shop", "accent": "pink" }
+        },
+        {
+          "type": "menu_column",
+          "settings": { "heading": "learn", "accent": "yellow" }
+        },
+        {
+          "type": "menu_column",
+          "settings": { "heading": "help", "accent": "blue" }
+        },
+        {
+          "type": "menu_column",
+          "settings": { "heading": "stay in touch", "accent": "green" }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
