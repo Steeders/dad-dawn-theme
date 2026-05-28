@@ -119,14 +119,26 @@ a:hover {
   transform: translateY(0);
 }
 
-/* Disable Dawn's hover border ring (.button:after) — design has no
-   border outline on hover, just the lift and (for pop) the shadow. */
-.button:not([disabled]):hover::after,
-.shopify-challenge__button:hover::after,
-.customer button:hover::after,
-.shopify-payment-button__button--unbranded:hover::after {
-  --border-offset: 0;
-  box-shadow: none;
+/* Disable Dawn's border-ring pseudo-element ENTIRELY on every button
+   (rest, hover, focus — all states). The design has no border
+   outlines; this was the black outline around Add to Cart. */
+.button::after,
+.shopify-challenge__button::after,
+.customer button::after,
+.shopify-payment-button__button--unbranded::after,
+.shopify-payment-button__button::after {
+  display: none !important;
+}
+
+/* Kill any drop shadow on Shop Pay and related payment buttons — they
+   inherit the customizer shadow but the brand-locked iframe makes it
+   look bleeding-red under the purple button. */
+.shopify-payment-button__button::before,
+.shopify-payment-button__button--branded::before,
+.shopify-payment-button__button--unbranded::before,
+.shopify-payment-button [role="button"]::before {
+  display: none !important;
+  box-shadow: none !important;
 }
 
 /* ============================================================
