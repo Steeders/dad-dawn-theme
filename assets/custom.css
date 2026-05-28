@@ -206,11 +206,13 @@ a:hover {
   background: transparent;
 }
 
-/* Thumbnail container — soft pink tint, rounded square. */
+/* Thumbnail container — keep rounded, let the product photo carry
+   the color. No background tint (interferes with Dawn's secondary-
+   image hover crossfade and competes with colorful packaging). */
 .card .card__media,
 .card__inner .card__media {
   border-radius: var(--r-md);
-  background: var(--dad-pink-tint);
+  background: transparent;
   overflow: hidden;
 }
 .card .card__media img,
