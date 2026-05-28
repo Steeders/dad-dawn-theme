@@ -693,7 +693,8 @@
               before quantity_selector when this block is buy_buttons.
             {%- endcomment -%}
             {% # theme-check-disable ParserBlockingScript,UnclosedHTMLElement %}
-            {%- if block.type == 'buy_buttons' and forloop.index0 > 0 and section.blocks[forloop.index0 | minus: 1].type == 'quantity_selector' -%}
+            {%- assign dad_prev_index = forloop.index0 | minus: 1 -%}
+            {%- if block.type == 'buy_buttons' and forloop.index0 > 0 and section.blocks[dad_prev_index].type == 'quantity_selector' -%}
               </div>
             {%- endif -%}
             {% # theme-check-enable ParserBlockingScript,UnclosedHTMLElement %}
