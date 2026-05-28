@@ -104,27 +104,17 @@ a:hover {
   transition: box-shadow var(--dur-fast) var(--ease-out);
 }
 
-/* Hover — lift 2px, shadow grows from 4 → 6, looks like the button is
-   rising off the page (the shadow IS the "side" of the button). */
-.button:not([disabled]):hover,
-.button--primary:not([disabled]):hover,
-.button--secondary:not([disabled]):hover,
-.shopify-challenge__button:not([disabled]):hover,
-.customer button:not([disabled]):hover {
-  transform: translateY(-2px);
-}
+/* Hover — the BUTTON stays put, the SHADOW grows taller (4 → 7px).
+   Per the design, this is the only thing that changes on hover.
+   No transform — that read as the button physically moving, which
+   felt weird in practice. */
 .button:not([disabled]):hover:before,
 .shopify-challenge__button:not([disabled]):hover:before,
 .customer button:not([disabled]):hover:before {
-  box-shadow: 0 6px 0 0 rgba(0, 0, 0, 0.22) !important;
+  box-shadow: 0 7px 0 0 rgba(0, 0, 0, 0.22) !important;
 }
 
-/* Active — press back down. */
-.button:not([disabled]):active,
-.shopify-challenge__button:active,
-.customer button:active {
-  transform: translateY(0);
-}
+/* Active — shadow shrinks to 2px (button feels pressed). */
 .button:not([disabled]):active:before,
 .shopify-challenge__button:active:before {
   box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.2) !important;
@@ -532,7 +522,7 @@ a:hover {
   box-shadow: 0 4px 0 0 #A4111D !important; /* 70% darker brand red */
 }
 .product-form__submit:hover:before {
-  box-shadow: 0 6px 0 0 #A4111D !important;
+  box-shadow: 0 7px 0 0 #A4111D !important;
 }
 .product-form__submit:active:before {
   box-shadow: 0 2px 0 0 #A4111D !important;
