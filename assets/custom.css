@@ -73,13 +73,19 @@ a:hover {
   border-radius: var(--r-xs);
 }
 
-/* Buttons — chunky pill with hover lift. Dawn handles colors and the
-   hard-offset drop shadow via the customizer settings (buttons_radius,
-   buttons_border_thickness, buttons_shadow_*). We only add the lift
-   transition for the tactile, toy-like feel. */
+/* Buttons — chunky pill with the design's "rising out of the page" effect.
+   We override Dawn's shadow + hover-border-ring system:
+     .button:before  → drop shadow (we color it darker than the button bg)
+     .button:after   → hover border ring (we disable this — it's the
+                       gray/black outline Russell didn't want)
+   Plus a transform lift that grows the shadow, so the button looks like
+   it pops up off the page rather than gaining a focus ring. */
+
 .button,
 .button--primary,
 .button--secondary,
+.shopify-challenge__button,
+.customer button,
 .shopify-payment-button__button {
   font-family: var(--font-body);
   font-weight: 700;
@@ -88,16 +94,50 @@ a:hover {
   transition: transform var(--dur-fast) var(--ease-out),
               box-shadow var(--dur-fast) var(--ease-out);
 }
-.button:hover,
-.button--primary:hover,
-.button--secondary:hover,
-.shopify-payment-button__button:hover {
-  transform: translateY(-1px);
+
+/* Default colored drop-shadow on the :before layer.
+   Dark / ink default — overridden per-variant below. */
+.button:before,
+.shopify-challenge__button:before,
+.customer button:before {
+  box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.18) !important;
+  transition: box-shadow var(--dur-fast) var(--ease-out);
 }
-.button:active,
-.button--primary:active,
-.button--secondary:active {
+
+/* Hover — lift 2px, shadow grows from 4 → 6, looks like the button is
+   rising off the page (the shadow IS the "side" of the button). */
+.button:not([disabled]):hover,
+.button--primary:not([disabled]):hover,
+.button--secondary:not([disabled]):hover,
+.shopify-challenge__button:not([disabled]):hover,
+.customer button:not([disabled]):hover {
+  transform: translateY(-2px);
+}
+.button:not([disabled]):hover:before,
+.shopify-challenge__button:not([disabled]):hover:before,
+.customer button:not([disabled]):hover:before {
+  box-shadow: 0 6px 0 0 rgba(0, 0, 0, 0.22) !important;
+}
+
+/* Active — press back down. */
+.button:not([disabled]):active,
+.shopify-challenge__button:active,
+.customer button:active {
   transform: translateY(0);
+}
+.button:not([disabled]):active:before,
+.shopify-challenge__button:active:before {
+  box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Disable Dawn's hover-border-ring (the .button:after outline that
+   appeared on hover). The lift + shadow growth is enough feedback. */
+.button:not([disabled]):hover::after,
+.shopify-challenge__button:hover::after,
+.customer button:hover::after,
+.shopify-payment-button__button--unbranded:hover::after {
+  --border-offset: 0;
+  box-shadow: none;
 }
 
 /* ============================================================
@@ -509,7 +549,8 @@ a:hover {
   display: none;
 }
 
-/* Add to Cart — brand-red so it pops. Overrides scheme button color. */
+/* Add to Cart — brand-red with a darker-red drop shadow underneath
+   (the "side of the button" effect, not a gray drop shadow). */
 .product-form__submit,
 .product-form__submit.button,
 .product-form__submit.button--primary {
@@ -521,10 +562,16 @@ a:hover {
 .product-form__submit.button:hover {
   background: var(--accent);
   border-color: var(--accent);
-  filter: brightness(0.94);
+  filter: brightness(0.96);
 }
-.product-form__submit::after {
-  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.18);
+.product-form__submit:before {
+  box-shadow: 0 4px 0 0 #A4111D !important; /* 70% darker brand red */
+}
+.product-form__submit:hover:before {
+  box-shadow: 0 6px 0 0 #A4111D !important;
+}
+.product-form__submit:active:before {
+  box-shadow: 0 2px 0 0 #A4111D !important;
 }
 
 /* Accordion / details rows (product description sections). */
