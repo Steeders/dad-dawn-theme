@@ -309,7 +309,194 @@ a:hover {
    our default still keeps headings visible since color is --fg. */
 
 /* ============================================================
-   6. FOOTER — sections/dad-footer.liquid
+   6. PDP — sections/main-product.liquid (Dawn stock, restyled)
+   ============================================================ */
+
+/* Product title — Dimbo display, balanced wrap, tight. */
+.product__title h1,
+.product__title h2,
+.product__title .h1 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(36px, 4.5vw, 56px);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  color: var(--fg);
+  text-wrap: balance;
+  margin: 0 0 12px;
+}
+
+/* Price — Dimbo display, large. */
+.product__info-container .price,
+.product__info-container .price__container,
+.product__info-container .price-item--regular {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 1.1;
+  color: var(--fg);
+  letter-spacing: 0;
+}
+.product__info-container .price__sale .price-item--sale {
+  color: var(--accent);
+}
+.product__info-container .price__sale .price-item--regular {
+  color: var(--fg-soft);
+  font-size: 18px;
+  text-decoration: line-through;
+}
+
+/* Media gallery — rounded corners on the main image. */
+.product__media-wrapper .media,
+.product__media-wrapper .product__media,
+.product__media-item .media,
+.product__media-item .product__media {
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+
+/* Thumbnail list — rounded squares with ink border on active. */
+.thumbnail-list__item .thumbnail,
+.thumbnail {
+  border-radius: var(--r-sm);
+  border: 1.5px solid var(--border);
+  overflow: hidden;
+  transition: border-color var(--dur-fast);
+}
+.thumbnail-list__item .thumbnail[aria-current="true"],
+.thumbnail[aria-current="true"],
+.thumbnail.is-active {
+  border-color: var(--border-strong);
+}
+
+/* Product description body copy. */
+.product__description,
+.product__description p {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--fg);
+  max-width: 50ch;
+}
+
+/* Variant pickers (pill style) — when the customizer is set to "pills". */
+.product-form__input--pill input[type="radio"] + label,
+.product-form__input--pill .product-variant-option {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 13px;
+  text-transform: lowercase;
+  letter-spacing: 0.04em;
+  padding: 10px 16px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-sm);
+  background: var(--bg-elev);
+  color: var(--fg);
+  transition: border-color var(--dur-fast),
+              background var(--dur-fast);
+}
+.product-form__input--pill input[type="radio"]:checked + label,
+.product-form__input--pill .product-variant-option--selected {
+  border-color: var(--border-strong);
+  background: var(--dad-cream);
+}
+
+/* Variant label (e.g. "Color · Piggy Pink") above each picker. */
+.product-form__input legend,
+.product-form__input .form__label {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: lowercase;
+  letter-spacing: 0.04em;
+  color: var(--fg-muted);
+  margin-bottom: 10px;
+}
+
+/* Quantity selector — pill-shaped with ink border, Dimbo numbers. */
+.quantity {
+  border-radius: var(--r-pill);
+  border: 1.5px solid var(--border-strong);
+  background: var(--bg-elev);
+  overflow: hidden;
+  min-height: 50px;
+}
+.quantity__button {
+  background: transparent;
+  border: 0;
+  color: var(--fg);
+  font-family: var(--font-display);
+  font-size: 22px;
+  width: 42px;
+  cursor: pointer;
+}
+.quantity__button:hover {
+  background: rgba(43, 42, 45, 0.04);
+}
+.quantity__input {
+  font-family: var(--font-display);
+  font-size: 18px;
+  color: var(--fg);
+  background: transparent;
+  border: 0;
+  text-align: center;
+  min-width: 36px;
+}
+
+/* Accordion / details rows (product description sections). */
+.product__accordion details,
+.accordion details {
+  border-bottom: 1px solid var(--border);
+}
+.product__accordion summary,
+.accordion summary {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 20px;
+  color: var(--fg);
+  padding: 18px 0;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.product__accordion summary::-webkit-details-marker,
+.accordion summary::-webkit-details-marker {
+  display: none;
+}
+.product__accordion summary .icon-caret,
+.accordion summary .icon-caret {
+  color: var(--fg-muted);
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+.product__accordion details[open] summary .icon-caret,
+.accordion details[open] summary .icon-caret {
+  transform: rotate(180deg);
+}
+.product__accordion details > div,
+.accordion details > div {
+  padding: 0 0 18px;
+  max-width: 60ch;
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--fg);
+}
+
+/* "You may also like" / related products — inherit the product card
+   styles from section 4. Just tighten the section heading here. */
+.related-products .related-products__heading,
+.section-related-products h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(28px, 3vw, 40px);
+  letter-spacing: var(--tracking-display);
+}
+
+/* ============================================================
+   7. FOOTER — sections/dad-footer.liquid
    ============================================================ */
 
 .dad-footer {
