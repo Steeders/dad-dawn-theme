@@ -13,3 +13,62 @@
    - 6. Section: Cart / Search / Account / Blog / Utility
    - 7. Theme blocks (product-spotlight, etc.)
    ============================================================ */
+
+/* ============================================================
+   1. GLOBALS
+   ============================================================ */
+
+body {
+  color: var(--dad-ink);
+  font-family: var(--font-body);
+  font-weight: 500;
+  letter-spacing: 0;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Beat Dawn's `.gradient` class on <body> (which sets background from
+   --color-background, normally driven by the theme customizer's color
+   scheme). We always want cream regardless of scheme. */
+body.gradient {
+  background: var(--dad-cream);
+}
+
+/* Headings — Dimbo display, sentence case (never ALL CAPS per brand). */
+h1, h2, h3, h4, h5, h6,
+.h0, .h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: var(--tracking-display);
+  color: var(--fg);
+  text-wrap: balance;
+}
+
+/* Body copy in long-form areas — pretty wrap improves readability. */
+p {
+  text-wrap: pretty;
+}
+
+/* Links — dark-blue default, hot-pink hover, chunky underline. */
+a {
+  color: var(--link);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+a:hover {
+  color: var(--link-hover);
+}
+
+/* Selection color — soft yellow like a highlighter. */
+::selection {
+  background: var(--dad-yellow-tint);
+  color: var(--fg);
+}
+
+/* Focus rings — sky-blue from the design system. */
+:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+  border-radius: var(--r-xs);
+}
