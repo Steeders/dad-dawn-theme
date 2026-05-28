@@ -86,6 +86,19 @@
           {%- assign product_form_id = 'product-form-' | append: section.id -%}
 
           {%- for block in section.blocks -%}
+            {%- comment -%}
+              Do-A-Dot custom: wrap quantity_selector + buy_buttons in a flex
+              row container so they sit side-by-side (per the PDP design).
+              Only fires when these two blocks are adjacent in block_order.
+              theme-check can't statically pair this opening <div> with the
+              closing </div> below (they live in separate conditionals), so
+              we disable the unbalanced-tag check on these two injections.
+            {%- endcomment -%}
+            {% # theme-check-disable ParserBlockingScript,UnclosedHTMLElement %}
+            {%- if block.type == 'quantity_selector' and section.blocks[forloop.index].type == 'buy_buttons' -%}
+              <div class="dad-pdp-buy-row">
+            {%- endif -%}
+            {% # theme-check-enable ParserBlockingScript,UnclosedHTMLElement %}
             {%- case block.type -%}
               {%- when '@app' -%}
                 {% render block %}
@@ -675,6 +688,15 @@
               {%- when 'icon-with-text' -%}
                 {% render 'icon-with-text', block: block %}
             {%- endcase -%}
+            {%- comment -%}
+              Do-A-Dot custom: close the .dad-pdp-buy-row wrapper opened
+              before quantity_selector when this block is buy_buttons.
+            {%- endcomment -%}
+            {% # theme-check-disable ParserBlockingScript,UnclosedHTMLElement %}
+            {%- if block.type == 'buy_buttons' and forloop.index0 > 0 and section.blocks[forloop.index0 | minus: 1].type == 'quantity_selector' -%}
+              </div>
+            {%- endif -%}
+            {% # theme-check-enable ParserBlockingScript,UnclosedHTMLElement %}
           {%- endfor -%}
           <a href="{{ product.url }}" class="link product__view-details animate-arrow">
             {{ 'products.product.view_full_details' | t }}

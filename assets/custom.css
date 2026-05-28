@@ -473,6 +473,42 @@ a:hover {
   }
 }
 
+/* PDP buy row — quantity selector + Add to Cart side-by-side
+   (wrapped by main-product.liquid's dad-pdp-buy-row injection). */
+.dad-pdp-buy-row {
+  display: flex;
+  gap: 12px;
+  align-items: stretch;
+  margin: 8px 0 4px;
+  flex-wrap: wrap;
+}
+.dad-pdp-buy-row > .product-form__quantity {
+  flex: 0 0 auto;
+  margin: 0;
+}
+.dad-pdp-buy-row > .product-form {
+  flex: 1 1 240px;
+  margin: 0;
+}
+.dad-pdp-buy-row .quantity {
+  height: 100%;
+  min-height: 50px;
+}
+.dad-pdp-buy-row .product-form__buttons {
+  height: 100%;
+}
+.dad-pdp-buy-row .product-form__submit {
+  width: 100%;
+  height: 100%;
+  min-height: 50px;
+}
+/* Hide the inline "quantity" label inside the buy row — the pill is
+   self-explanatory and the label adds a stacked text row that breaks
+   the horizontal alignment. */
+.dad-pdp-buy-row .quantity__label {
+  display: none;
+}
+
 /* Add to Cart — brand-red so it pops. Overrides scheme button color. */
 .product-form__submit,
 .product-form__submit.button,
