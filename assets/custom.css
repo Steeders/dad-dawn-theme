@@ -346,13 +346,20 @@ a:hover {
   text-decoration: line-through;
 }
 
-/* Media gallery — rounded corners on the main image. */
+/* Media gallery — rounded corners on the main image and the wrapping
+   .product__media-item (which had a sharp default border showing
+   around the rounded inner image). */
 .product__media-wrapper .media,
 .product__media-wrapper .product__media,
+.product__media-item,
 .product__media-item .media,
 .product__media-item .product__media {
   border-radius: var(--r-lg);
   overflow: hidden;
+  border: 0;
+}
+.product__media-item img {
+  border-radius: var(--r-lg);
 }
 
 /* Thumbnail list — rounded squares with ink border on active. */
@@ -414,17 +421,25 @@ a:hover {
   margin-bottom: 10px;
 }
 
-/* Quantity selector — pill-shaped with ink border, Dimbo numbers. */
+/* Quantity selector — pill-shaped with ink border, Dimbo numbers.
+   Nuke ALL inner borders so only the outer pill renders cleanly. */
 .quantity {
   border-radius: var(--r-pill);
   border: 1.5px solid var(--border-strong);
   background: var(--bg-elev);
   overflow: hidden;
-  min-height: 50px;
+  min-height: 48px;
+  box-shadow: none;
+}
+.quantity::before,
+.quantity::after {
+  display: none;
 }
 .quantity__button {
   background: transparent;
   border: 0;
+  outline: 0;
+  box-shadow: none;
   color: var(--fg);
   font-family: var(--font-display);
   font-size: 22px;
@@ -440,8 +455,40 @@ a:hover {
   color: var(--fg);
   background: transparent;
   border: 0;
+  outline: 0;
+  box-shadow: none;
   text-align: center;
   min-width: 36px;
+}
+
+/* Info column — more breathing room. */
+.product__info-container {
+  padding-left: var(--s-6);
+  padding-right: var(--s-4);
+}
+@media (max-width: 749px) {
+  .product__info-container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+/* Add to Cart — brand-red so it pops. Overrides scheme button color. */
+.product-form__submit,
+.product-form__submit.button,
+.product-form__submit.button--primary {
+  background: var(--accent);
+  color: var(--fg-inverse);
+  border-color: var(--accent);
+}
+.product-form__submit:hover,
+.product-form__submit.button:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  filter: brightness(0.94);
+}
+.product-form__submit::after {
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.18);
 }
 
 /* Accordion / details rows (product description sections). */
