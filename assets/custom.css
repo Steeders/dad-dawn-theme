@@ -428,6 +428,124 @@ a:hover {
   max-width: 50ch;
 }
 
+/* Variant pickers — Do-A-Dot image swatch grid (single-option products
+   like the consolidated Dot Markers, rendered by
+   snippets/dad-variant-image-swatches.liquid). */
+.dad-variant-image-swatches {
+  border: 0;
+  padding: 0;
+  margin: 0 0 var(--s-6);
+}
+.dad-variant-image-swatches .form__label {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: lowercase;
+  letter-spacing: 0.04em;
+  color: var(--fg-muted);
+  margin-bottom: var(--s-3);
+  display: block;
+}
+.dad-variant-image-swatches .form__label [data-selected-value] {
+  color: var(--fg);
+  font-weight: 700;
+  text-transform: none;
+  letter-spacing: 0;
+}
+.dad-variant-image-swatches__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: var(--s-3);
+}
+
+/* Individual swatch — a clickable label that wraps the radio. */
+.dad-variant-image-swatch {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s-2);
+  padding: var(--s-2);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-md);
+  background: var(--bg-elev);
+  cursor: pointer;
+  transition: border-color var(--dur-fast) var(--ease-out),
+              box-shadow var(--dur-fast) var(--ease-out),
+              transform var(--dur-fast) var(--ease-out);
+}
+.dad-variant-image-swatch input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.dad-variant-image-swatch:hover {
+  border-color: var(--border-strong);
+}
+.dad-variant-image-swatch.is-selected {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent);
+}
+.dad-variant-image-swatch.is-unavailable {
+  opacity: 0.55;
+}
+.dad-variant-image-swatch.is-unavailable::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  background: linear-gradient(
+    to top right,
+    transparent calc(50% - 1px),
+    var(--fg-muted) 50%,
+    transparent calc(50% + 1px)
+  );
+  pointer-events: none;
+  border-radius: var(--r-sm);
+}
+
+.dad-variant-image-swatch__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  border-radius: var(--r-sm);
+  background: var(--dad-white);
+}
+.dad-variant-image-swatch__placeholder {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--r-sm);
+  background: var(--dad-pink-tint);
+}
+
+.dad-variant-image-swatch__name {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 11px;
+  line-height: 1.25;
+  text-align: center;
+  color: var(--fg);
+  text-wrap: balance;
+  padding: 0 2px;
+}
+
+.dad-variant-image-swatch__badge {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 9px;
+  text-transform: lowercase;
+  letter-spacing: 0.04em;
+  padding: 3px 6px;
+  border-radius: var(--r-pill);
+  background: var(--fg);
+  color: var(--fg-inverse);
+}
+
 /* Variant pickers (pill style) — when the customizer is set to "pills". */
 .product-form__input--pill input[type="radio"] + label,
 .product-form__input--pill .product-variant-option {
