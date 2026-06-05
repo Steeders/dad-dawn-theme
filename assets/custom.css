@@ -139,26 +139,38 @@ a:hover {
   box-shadow: none !important;
 }
 
-/* Purple "rising off the page" shadow on the actual Shop Pay button.
-   Shopify renders this via a <shop-pay-wallet-button> custom element
-   (Shadow DOM inside). The outer element box accepts box-shadow
-   even though its insides are sealed. The sibling
-   <more-payment-options-link> stays untouched. */
+/* DEBUG: Shop Pay shadow temporarily NEON GREEN to verify whether
+   the mysterious "red strip" under Buy with Shop is a separate
+   shadow (will stay red) or just rendering at the bottom edge of
+   the button itself (will turn green). Revert color once confirmed. */
 shop-pay-wallet-button {
   display: block;
   position: relative;
   border-radius: var(--r-pill);
-  box-shadow: 0 4px 0 0 #3D1FB5 !important;
+  box-shadow: 0 4px 0 0 #00FF00 !important;
   transition: box-shadow var(--dur-fast) var(--ease-out),
               transform var(--dur-fast) var(--ease-out);
 }
 shop-pay-wallet-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 0 0 #3D1FB5 !important;
+  box-shadow: 0 6px 0 0 #00FF00 !important;
 }
 shop-pay-wallet-button:active {
   transform: translateY(0);
-  box-shadow: 0 2px 0 0 #3D1FB5 !important;
+  box-shadow: 0 2px 0 0 #00FF00 !important;
+}
+
+/* Defensive sweep: kill any pseudo-elements on the Shop Pay wrapper
+   custom elements in case Shopify's runtime injects a shadow via
+   :before / :after that we haven't been able to find. */
+shop-pay-wallet-button::before,
+shop-pay-wallet-button::after,
+shopify-accelerated-checkout::before,
+shopify-accelerated-checkout::after,
+.shopify-payment-button::before,
+.shopify-payment-button::after {
+  display: none !important;
+  box-shadow: none !important;
 }
 
 /* ============================================================
