@@ -725,6 +725,9 @@ a:hover {
    6. PDP — sections/main-product.liquid (Dawn stock, restyled)
    ============================================================ */
 
+/* Hide "Shipping calculated at checkout" / tax note under price. */
+.product .product__tax { display: none; }
+
 /* Product title — Dimbo display, balanced wrap, tight. */
 .product__title h1,
 .product__title h2,
