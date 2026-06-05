@@ -1050,7 +1050,7 @@ a:hover {
 .accordion summary {
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: 20px;
+  font-size: 24px;
   color: var(--fg);
   padding: 18px 0;
   cursor: pointer;
@@ -1062,6 +1062,20 @@ a:hover {
 .product__accordion summary::-webkit-details-marker,
 .accordion summary::-webkit-details-marker {
   display: none;
+}
+/* Override Dawn's inner .h4 sizing inside the accordion title — match the
+   summary's 24px so the rendered <h2 class="h4 accordion__title"> looks right. */
+.product__accordion .accordion__title,
+.product__accordion .accordion__title.h4,
+.accordion .accordion__title,
+.accordion .accordion__title.h4 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 1.1;
+  letter-spacing: 0;
+  margin: 0;
+  color: var(--fg);
 }
 .product__accordion summary .icon-caret,
 .accordion summary .icon-caret {
