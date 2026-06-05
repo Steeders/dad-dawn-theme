@@ -45,17 +45,16 @@ h1, h2, h3, h4, h5, h6,
   text-wrap: balance;
 }
 
-/* Announcement bar — bump message size +20% for visibility.
-   Dawn h5 is 1.3rem desktop / 1.2rem mobile (13px / 12px); we go to
-   1.56rem / 1.45rem (~15.6px / ~14.5px). */
+/* Announcement bar — bump message size for visibility.
+   Target 18px desktop / 17px mobile (Dawn base is 62.5%, so 1rem = 10px). */
 .utility-bar .announcement-bar__message,
 .utility-bar .announcement-bar__message.h5 {
-  font-size: calc(var(--font-heading-scale) * 1.45rem);
+  font-size: calc(var(--font-heading-scale) * 1.7rem);
 }
 @media only screen and (min-width: 750px) {
   .utility-bar .announcement-bar__message,
   .utility-bar .announcement-bar__message.h5 {
-    font-size: calc(var(--font-heading-scale) * 1.56rem);
+    font-size: calc(var(--font-heading-scale) * 1.8rem);
   }
 }
 
