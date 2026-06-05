@@ -139,25 +139,26 @@ a:hover {
   box-shadow: none !important;
 }
 
-/* DEBUG: Shop Pay shadow temporarily NEON GREEN to verify whether
-   the mysterious "red strip" under Buy with Shop is a separate
-   shadow (will stay red) or just rendering at the bottom edge of
-   the button itself (will turn green). Revert color once confirmed. */
+/* Dark-purple shadow on the Shop Pay button so the lift effect on
+   hover reads as a brand-aligned 3D button. Note: Shop Pay's web
+   component (Shadow DOM) renders its own dark bottom edge for depth
+   that we cannot override from external CSS — visible as a thin
+   line below the button at rest. Our shadow stacks below it. */
 shop-pay-wallet-button {
   display: block;
   position: relative;
   border-radius: var(--r-pill);
-  box-shadow: 0 4px 0 0 #00FF00 !important;
+  box-shadow: 0 4px 0 0 #3D1FB5 !important;
   transition: box-shadow var(--dur-fast) var(--ease-out),
               transform var(--dur-fast) var(--ease-out);
 }
 shop-pay-wallet-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 0 0 #00FF00 !important;
+  box-shadow: 0 6px 0 0 #3D1FB5 !important;
 }
 shop-pay-wallet-button:active {
   transform: translateY(0);
-  box-shadow: 0 2px 0 0 #00FF00 !important;
+  box-shadow: 0 2px 0 0 #3D1FB5 !important;
 }
 
 /* Defensive sweep: kill any pseudo-elements AND box-shadow on every
@@ -693,13 +694,13 @@ shopify-accelerated-checkout,
   transform: translateY(0);
 }
 .product-form__submit:before {
-  box-shadow: 0 4px 0 0 #FFEB3B !important; /* DEBUG: yellow to test if mystery red is from here */
+  box-shadow: 0 4px 0 0 #A4111D !important; /* color-mix(brand-red 70%, black) */
 }
 .product-form__submit:not([disabled]):hover:before {
-  box-shadow: 0 6px 0 0 #FFEB3B !important;
+  box-shadow: 0 6px 0 0 #A4111D !important;
 }
 .product-form__submit:active:before {
-  box-shadow: 0 2px 0 0 #FFEB3B !important;
+  box-shadow: 0 2px 0 0 #A4111D !important;
 }
 
 /* Accordion / details rows (product description sections). */
