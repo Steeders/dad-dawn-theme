@@ -45,16 +45,19 @@ h1, h2, h3, h4, h5, h6,
   text-wrap: balance;
 }
 
-/* Announcement bar — bump message size for visibility.
+/* Announcement bar — Quicksand body font, bumped for visibility.
    Target 18px desktop / 17px mobile (Dawn base is 62.5%, so 1rem = 10px). */
 .utility-bar .announcement-bar__message,
 .utility-bar .announcement-bar__message.h5 {
-  font-size: calc(var(--font-heading-scale) * 1.7rem);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1.7rem;
+  letter-spacing: 0;
 }
 @media only screen and (min-width: 750px) {
   .utility-bar .announcement-bar__message,
   .utility-bar .announcement-bar__message.h5 {
-    font-size: calc(var(--font-heading-scale) * 1.8rem);
+    font-size: 1.8rem;
   }
 }
 
