@@ -343,7 +343,7 @@ a:hover {
 
 /* --- Hero --------------------------------------------------- */
 .collection-hero {
-  background: var(--bg-tint);
+  background: var(--dad-sky-tint);
   border-bottom: 1px solid var(--dad-rule);
   padding: 72px 0 64px;
 }
