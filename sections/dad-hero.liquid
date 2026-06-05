@@ -1,0 +1,141 @@
+{%- comment -%}
+  Do-A-Dot Art — Home hero. Ported from design components/home.jsx hero,
+  layout="image" (full-bleed lifestyle photo + frosted-white copy card).
+{%- endcomment -%}
+
+<section class="dad-hero" style="
+  {%- if section.settings.min_height_desktop -%}--dad-hero-min-h-desktop: {{ section.settings.min_height_desktop }}px;{%- endif -%}
+">
+  <div class="dad-hero__photo">
+    {%- if section.settings.image != blank -%}
+      {{ section.settings.image | image_url: width: 2400 | image_tag:
+        loading: 'eager',
+        widths: '600,900,1200,1600,2000,2400',
+        sizes: '100vw',
+        alt: section.settings.image.alt | default: section.settings.heading | escape
+      }}
+    {%- else -%}
+      <div class="dad-hero__photo-placeholder">Upload a hero image in the customizer</div>
+    {%- endif -%}
+  </div>
+
+  <div class="dad-hero__inner page-width">
+    <div class="dad-hero__card">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="dad-hero__eyebrow">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+
+      <h1 class="dad-hero__heading">
+        {{ section.settings.heading }}
+        {%- if section.settings.script_accent != blank -%}
+          <span class="dad-hero__script">{{ section.settings.script_accent }}</span>
+        {%- endif -%}
+      </h1>
+
+      {%- if section.settings.lede != blank -%}
+        <p class="dad-hero__lede">{{ section.settings.lede }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.btn1_label != blank or section.settings.btn2_label != blank -%}
+        <div class="dad-hero__actions">
+          {%- if section.settings.btn1_label != blank -%}
+            <a href="{{ section.settings.btn1_link | default: '#' }}" class="dad-hero__btn dad-hero__btn--primary">
+              <span>{{ section.settings.btn1_label }}</span>
+              <span class="dad-hero__btn-arrow" aria-hidden="true">→</span>
+            </a>
+          {%- endif -%}
+          {%- if section.settings.btn2_label != blank -%}
+            <a href="{{ section.settings.btn2_link | default: '#' }}" class="dad-hero__btn dad-hero__btn--ghost">
+              {{ section.settings.btn2_label }}
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Do-A-Dot Hero",
+  "tag": "section",
+  "class": "dad-hero-wrapper",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background image",
+      "info": "Lifestyle photo, full-bleed. Recommend 2400px wide."
+    },
+    {
+      "type": "range",
+      "id": "min_height_desktop",
+      "label": "Minimum height (desktop)",
+      "min": 480,
+      "max": 900,
+      "step": 20,
+      "default": 720,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Copy"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "the whole craft closet"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Made for little hands. Loved by"
+    },
+    {
+      "type": "text",
+      "id": "script_accent",
+      "label": "Script accent (appears under heading in pink)",
+      "default": "big imaginations."
+    },
+    {
+      "type": "textarea",
+      "id": "lede",
+      "label": "Lede",
+      "default": "Markers, watercolors, and chunky crayons — the whole craft closet, shipped direct from the family that's been making mess-free art easier for thirty years."
+    },
+    {
+      "type": "header",
+      "content": "Buttons"
+    },
+    {
+      "type": "text",
+      "id": "btn1_label",
+      "label": "Primary button label",
+      "default": "shop all"
+    },
+    {
+      "type": "url",
+      "id": "btn1_link",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "btn2_label",
+      "label": "Ghost button label",
+      "default": "meet the colors"
+    },
+    {
+      "type": "url",
+      "id": "btn2_link",
+      "label": "Ghost button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Do-A-Dot Hero"
+    }
+  ]
+}
+{% endschema %}
