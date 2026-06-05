@@ -39,6 +39,12 @@
             "show_gift_card_recipient": true
           }
         },
+        "trust_badges": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'dad-trust-badges' %}"
+          }
+        },
         "description": {
           "type": "description"
         },
@@ -93,6 +99,7 @@
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
+        "trust_badges",
         "description",
         "collapsible-row-0",
         "collapsible-row-1",

@@ -728,6 +728,63 @@ a:hover {
 /* Hide "Shipping calculated at checkout" / tax note under price. */
 .product .product__tax { display: none; }
 
+/* Trust badges — three icon + copy items shown below buy buttons.
+   Rendered by snippets/dad-trust-badges.liquid via custom_liquid block. */
+.dad-trust {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  padding: 24px 0;
+  margin: 8px 0 0;
+  border-top: 1px solid var(--dad-rule);
+  border-bottom: 1px solid var(--dad-rule);
+}
+.dad-trust__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  min-width: 0;
+}
+.dad-trust__icon {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--dad-ink);
+}
+.dad-trust__icon svg {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+.dad-trust__copy { min-width: 0; }
+.dad-trust__title {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.25;
+  text-transform: lowercase;
+  color: var(--dad-ink);
+  margin: 0 0 4px;
+}
+.dad-trust__sub {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--dad-ink-muted);
+}
+
+@media screen and (max-width: 749px) {
+  .dad-trust {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding: 18px 0;
+  }
+}
+
 /* Product title — Dimbo display, balanced wrap, tight. */
 .product__title h1,
 .product__title h2,

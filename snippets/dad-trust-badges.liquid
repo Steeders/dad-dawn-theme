@@ -1,0 +1,47 @@
+{%- comment -%}
+  Do-A-Dot trust signals — renders three icon + copy badges on the PDP
+  beneath the buy buttons. Drop in via a custom_liquid block:
+  {% render 'dad-trust-badges' %}
+{%- endcomment -%}
+
+<div class="dad-trust">
+  <div class="dad-trust__item">
+    <span class="dad-trust__icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M1 3h13v13H1z"/>
+        <path d="M14 8h4l3 3v5h-7z"/>
+        <circle cx="5.5" cy="18.5" r="2"/>
+        <circle cx="17.5" cy="18.5" r="2"/>
+      </svg>
+    </span>
+    <div class="dad-trust__copy">
+      <div class="dad-trust__title">free shipping over $35</div>
+      <div class="dad-trust__sub">ships in 1–2 business days</div>
+    </div>
+  </div>
+
+  <div class="dad-trust__item">
+    <span class="dad-trust__icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5l8-3z"/>
+      </svg>
+    </span>
+    <div class="dad-trust__copy">
+      <div class="dad-trust__title">non-toxic, astm certified</div>
+      <div class="dad-trust__sub">safe for ages 1+ with supervision</div>
+    </div>
+  </div>
+
+  <div class="dad-trust__item">
+    <span class="dad-trust__icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 3c-7 0-12 5-12 12 0 2 .6 4 1.6 5.6"/>
+        <path d="M21 3c0 7-5 12-12 12"/>
+      </svg>
+    </span>
+    <div class="dad-trust__copy">
+      <div class="dad-trust__title">made in the usa</div>
+      <div class="dad-trust__sub">family business since 1995</div>
+    </div>
+  </div>
+</div>
