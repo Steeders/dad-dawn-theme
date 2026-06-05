@@ -361,7 +361,7 @@ a:hover {
 .card-wrapper .price {
   margin-top: auto;
   text-align: right;
-  padding-right: 56px; /* room for the round + button */
+  padding-right: 72px; /* 12px card edge + 44px button + 16px gap */
 }
 
 /* --- Round dark "+" quick-add button (anchored bottom-right) ---- */
