@@ -328,11 +328,43 @@ a:hover {
   gap: 4px;
 }
 
-/* Quick-add (+) button — round dark, anchored bottom-right of card.
-   Ported from design product-card with floating "+" affordance. */
-.card-wrapper,
-.card-wrapper .card { position: relative; }
+/* --- Even card heights — push price/+ to bottom of every card --- */
+.product-grid .grid__item { display: flex; }
+.product-grid .grid__item > * { width: 100%; }
+.card-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 100%;
+}
+.card-wrapper .card,
+.card-wrapper .card__inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.card-wrapper .card__content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.card-wrapper .card__information {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+/* Price pinned to bottom + right-aligned so the price baseline always
+   lines up across the row regardless of title length. */
+.card-wrapper .card__information .price,
+.card-wrapper .price {
+  margin-top: auto;
+  text-align: right;
+  padding-right: 56px; /* room for the round + button */
+}
 
+/* --- Round dark "+" quick-add button (anchored bottom-right) ---- */
 .card-wrapper .quick-add {
   position: absolute;
   bottom: 12px;
@@ -342,10 +374,8 @@ a:hover {
   padding: 0;
   width: auto;
 }
-
-/* Round dark + button. Hide the text via font-size:0; pseudo-element
-   draws a thick + glyph centered. */
 .card-wrapper .quick-add__submit {
+  position: relative;
   width: 44px;
   height: 44px;
   min-width: 0;
@@ -353,59 +383,60 @@ a:hover {
   padding: 0;
   border-radius: 50%;
   background: var(--dad-ink);
-  color: var(--dad-white);
   border: 0;
   box-shadow: 0 4px 12px rgba(43, 42, 45, 0.18);
+  /* Hide Dawn's "Add to cart" / "Choose options" text + any inline arrow */
   font-size: 0;
   line-height: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
+  color: transparent;
+  overflow: hidden;
   transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
 }
+/* The visible "+" — absolutely-positioned, perfectly centered. */
 .card-wrapper .quick-add__submit::before {
-  content: "";
+  content: "+";
   position: absolute;
   inset: 0;
-  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--dad-white);
+  font-family: var(--font-body);
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1;
   background: transparent;
   box-shadow: none;
   opacity: 1;
+  z-index: 2;
 }
-.card-wrapper .quick-add__submit::after {
-  content: "+";
-  font-family: var(--font-body);
-  font-size: 24px;
-  font-weight: 700;
-  line-height: 1;
-  color: var(--dad-white);
-  display: block;
-}
-.card-wrapper .quick-add__submit:hover {
-  background: var(--dad-ink);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 14px rgba(43, 42, 45, 0.24);
-}
+.card-wrapper .quick-add__submit::after { display: none; }
 
-/* Hide all icon/arrow children Dawn injects (animate-arrow spans). */
+/* Dawn injects child spans / SVGs / spinners — hide them. */
 .card-wrapper .quick-add__submit .icon-wrap,
-.card-wrapper .quick-add__submit svg { display: none; }
+.card-wrapper .quick-add__submit > svg,
+.card-wrapper .quick-add__submit > span:not(.loading__spinner) { display: none; }
 
-/* Loading state — Dawn shows a spinner inside the button. */
+/* Loading spinner — keep it centered on top of the +. */
 .card-wrapper .quick-add__submit .loading__spinner {
   position: absolute;
   inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 3;
 }
-.card-wrapper .quick-add__submit .loading__spinner svg { display: block; width: 16px; height: 16px; }
+.card-wrapper .quick-add__submit .loading__spinner svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+  color: var(--dad-white);
+}
 
-/* Make the price line not overlap the button at small card widths
-   by reserving right padding on the card information. */
-.card-wrapper .card__information {
-  padding-right: 56px;
+.card-wrapper .quick-add__submit:hover {
+  background: var(--dad-ink);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(43, 42, 45, 0.24);
 }
 
 /* ============================================================
