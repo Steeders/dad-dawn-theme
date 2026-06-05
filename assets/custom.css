@@ -160,9 +160,9 @@ shop-pay-wallet-button:active {
   box-shadow: 0 2px 0 0 #00FF00 !important;
 }
 
-/* Defensive sweep: kill any pseudo-elements on the Shop Pay wrapper
-   custom elements in case Shopify's runtime injects a shadow via
-   :before / :after that we haven't been able to find. */
+/* Defensive sweep: kill any pseudo-elements AND box-shadow on every
+   wrapper around Shop Pay. One of these is producing the mystery
+   red strip. */
 shop-pay-wallet-button::before,
 shop-pay-wallet-button::after,
 shopify-accelerated-checkout::before,
@@ -170,6 +170,10 @@ shopify-accelerated-checkout::after,
 .shopify-payment-button::before,
 .shopify-payment-button::after {
   display: none !important;
+  box-shadow: none !important;
+}
+shopify-accelerated-checkout,
+.shopify-payment-button {
   box-shadow: none !important;
 }
 
