@@ -18,6 +18,30 @@
   {{ 'component-list-social.css' | asset_url | stylesheet_tag }}
 {% endif %}
 
+{%- if section.settings.custom_text_color != blank or section.settings.custom_background_color != blank -%}
+  {%- style -%}
+    #shopify-section-{{ section.id }} .utility-bar {
+      {%- if section.settings.custom_background_color != blank -%}
+        background: {{ section.settings.custom_background_color }};
+        --color-background: {{ section.settings.custom_background_color.red }}, {{ section.settings.custom_background_color.green }}, {{ section.settings.custom_background_color.blue }};
+      {%- endif -%}
+      {%- if section.settings.custom_text_color != blank -%}
+        color: {{ section.settings.custom_text_color }};
+        --color-foreground: {{ section.settings.custom_text_color.red }}, {{ section.settings.custom_text_color.green }}, {{ section.settings.custom_text_color.blue }};
+        --color-link: {{ section.settings.custom_text_color.red }}, {{ section.settings.custom_text_color.green }}, {{ section.settings.custom_text_color.blue }};
+      {%- endif -%}
+    }
+    {%- if section.settings.custom_text_color != blank -%}
+      #shopify-section-{{ section.id }} .utility-bar,
+      #shopify-section-{{ section.id }} .utility-bar a,
+      #shopify-section-{{ section.id }} .utility-bar .announcement-bar__message,
+      #shopify-section-{{ section.id }} .utility-bar .announcement-bar__link {
+        color: {{ section.settings.custom_text_color }};
+      }
+    {%- endif -%}
+  {%- endstyle -%}
+{%- endif -%}
+
 <div
   class="utility-bar color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator and section.blocks.size > 0 %} utility-bar--bottom-border{% elsif section.settings.show_line_separator and section.settings.show_social and social_icons%} utility-bar--bottom-border-social-only{% endif %}{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header-localization{% endif %}"
 >
@@ -192,7 +216,25 @@
       "id": "color_scheme",
       "label": "t:sections.all.colors.label",
       "default": "scheme-4"
-    },  
+    },
+    {
+      "type": "header",
+      "content": "Custom color override (optional)"
+    },
+    {
+      "type": "paragraph",
+      "content": "Set these to override the color scheme above. Leave blank to use the scheme."
+    },
+    {
+      "type": "color",
+      "id": "custom_text_color",
+      "label": "Text color"
+    },
+    {
+      "type": "color",
+      "id": "custom_background_color",
+      "label": "Background color"
+    },
     {
       "type": "checkbox",
       "id": "show_line_separator",

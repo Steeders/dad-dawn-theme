@@ -35,12 +35,13 @@ body.gradient {
 }
 
 /* Headings — Dimbo display, sentence case (never ALL CAPS per brand). */
+/* Note: color is INHERITED, not set, so Dawn color-schemes (e.g. white
+   text on brand-red scheme-4) flow through to the heading. */
 h1, h2, h3, h4, h5, h6,
 .h0, .h1, .h2, .h3, .h4, .h5, .h6 {
   font-family: var(--font-display);
   font-weight: 400;
   letter-spacing: var(--tracking-display);
-  color: var(--fg);
   text-wrap: balance;
 }
 
