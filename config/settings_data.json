@@ -30,10 +30,10 @@
           "settings": {
             "background": "#2B2A2D",
             "background_gradient": "",
-            "text": "#FFF8E8",
-            "button": "#FFF8E8",
+            "text": "#FFFFFF",
+            "button": "#FFFFFF",
             "button_label": "#2B2A2D",
-            "secondary_button_label": "#FFF8E8",
+            "secondary_button_label": "#FFFFFF",
             "shadow": "#000000"
           }
         },
@@ -166,7 +166,7 @@
       "predictive_search_show_vendor": false,
       "predictive_search_show_price": false,
       "currency_code_enabled": true,
-      "cart_type": "notification",
+      "cart_type": "drawer",
       "show_vendor": false,
       "show_cart_note": false,
       "cart_drawer_collection": "",

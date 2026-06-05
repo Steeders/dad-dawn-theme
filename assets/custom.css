@@ -318,6 +318,250 @@ a:hover {
 }
 
 /* ============================================================
+   4b. PLP — sections/main-collection-banner + main-collection-product-grid
+   Ported from design storefront.css "COLLECTION / PLP" block.
+   filter_type is set to "vertical" in templates/collection.json so
+   Dawn renders the sidebar layout (.facets-vertical).
+   ============================================================ */
+
+/* --- Hero --------------------------------------------------- */
+.collection-hero {
+  background: var(--bg-tint);
+  border-bottom: 1px solid var(--dad-rule);
+  padding: 72px 0 64px;
+}
+.collection-hero__inner {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.collection-hero__title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(48px, 6vw, 72px);
+  line-height: 1;
+  letter-spacing: -0.015em;
+  margin: 0 0 16px;
+  color: var(--dad-ink);
+}
+.collection-hero__description.rte {
+  font-family: var(--font-body);
+  font-size: var(--fs-lead);
+  line-height: var(--lh-normal);
+  color: var(--dad-ink);
+  max-width: 56ch;
+  margin: 0;
+}
+
+/* --- Vertical facets grid ----------------------------------- */
+@media screen and (min-width: 990px) {
+  .facets-vertical.page-width {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 56px;
+    padding-top: 40px;
+    padding-bottom: 80px;
+  }
+  .facets-vertical .facets-wrapper {
+    padding: 0;
+    border: none;
+  }
+  .facets-vertical .product-grid-container {
+    min-width: 0;
+  }
+}
+
+/* Drop Dawn's stock card-shaped backgrounds on the facets aside. */
+.facets-vertical .facets-wrapper details,
+.facets-vertical .facets-wrapper .facets__disclosure-vertical {
+  border-bottom: 1px solid var(--dad-rule);
+  padding: 18px 0;
+  background: transparent;
+}
+.facets-vertical .facets-wrapper details:first-of-type {
+  padding-top: 0;
+}
+
+/* Filter group headings — lowercase Quicksand label. */
+.facets__heading,
+.facets__heading--vertical,
+.facets-wrapper .facets__summary {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+  color: var(--dad-ink);
+  margin: 0 0 14px;
+}
+
+/* Filter checkboxes — square 18px, brand-red fill on check. */
+.facets-vertical .facet-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 0;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--dad-ink);
+  cursor: pointer;
+}
+.facets-vertical .facet-checkbox > input[type='checkbox'] + svg.icon-checkmark,
+.facets-vertical .facet-checkbox > svg {
+  display: none;
+}
+.facets-vertical .facet-checkbox::before {
+  content: '';
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid var(--dad-ink);
+  border-radius: 5px;
+  background: var(--dad-white);
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease;
+}
+.facets-vertical .facet-checkbox > input[type='checkbox']:checked ~ *,
+.facets-vertical .facet-checkbox:has(input:checked)::before {
+  background: var(--dad-ink);
+  background-image: linear-gradient(var(--dad-ink), var(--dad-ink)),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='20 6 9 17 4 12'/></svg>");
+  background-blend-mode: normal;
+  background-size: cover, 12px 12px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.facets-vertical .facet-checkbox .facets__product-count,
+.facets-vertical .facets__label .facets__product-count {
+  margin-left: auto;
+  color: var(--dad-ink-muted);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* --- Active-filter chips ------------------------------------ */
+.active-facets__button,
+.active-facets__button-inner {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: var(--r-pill);
+  background: var(--dad-white);
+  border: 1.5px solid var(--dad-ink);
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--dad-ink);
+  text-transform: lowercase;
+}
+.active-facets__button-remove,
+.active-facets__button-no-js {
+  text-decoration: none;
+  border: none;
+}
+.active-facets__button svg { opacity: 0.55; }
+
+/* "Clear all" link → ghost pill. */
+.active-facets a.facets__clear,
+.facets__clear-vertical {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  width: 100%;
+  padding: 10px 16px;
+  border-radius: var(--r-pill);
+  border: 1.5px solid var(--dad-ink);
+  background: transparent;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 13px;
+  text-transform: lowercase;
+  text-decoration: none;
+  color: var(--dad-ink);
+}
+
+/* --- Sort dropdown — pill, lowercase ------------------------ */
+.facets__form-vertical .select,
+.facets .facets__form .select {
+  border-radius: var(--r-pill);
+}
+.facets__form-vertical .facets__sort,
+.facets .facets__form .facets__sort {
+  border-radius: var(--r-pill);
+  border: 1.5px solid var(--dad-ink);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 13px;
+  text-transform: lowercase;
+  color: var(--dad-ink);
+  padding: 8px 36px 8px 14px;
+}
+
+/* Result count line — small/muted. */
+.product-count-vertical,
+.product-count {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--dad-ink-muted);
+}
+
+/* --- Product grid inside vertical layout -------------------- */
+/* Force a true 3-column CSS grid at desktop widths instead of
+   relying on Dawn's flex-basis math, which gets squeezed by the
+   240px sidebar and falls back to 2 columns. */
+@media screen and (min-width: 990px) {
+  .facets-vertical .collection .product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: 24px;
+    row-gap: 32px;
+  }
+  .facets-vertical .collection .product-grid > .grid__item {
+    width: auto;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+/* --- Pagination — round buttons, ink active ----------------- */
+.pagination-wrapper {
+  margin-top: 40px;
+}
+.pagination__list {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+.pagination__item {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1.5px solid var(--dad-ink);
+  background: var(--dad-white);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--dad-ink);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+.pagination__item--current,
+.pagination__item.pagination__item--current {
+  background: var(--dad-ink);
+  color: var(--dad-cream);
+}
+.pagination__item-arrow svg { width: 14px; height: 14px; }
+
+/* ============================================================
    5. HERO (image-banner) — sections/image-banner.liquid
    Tighten the overlay text-box to feel like the design's
    image-led layout: cream backdrop with soft blur, rounded.
@@ -1015,4 +1259,1929 @@ a:hover {
 @media (max-width: 567px) {
   .dad-footer__container { padding: 48px 20px 32px; }
   .dad-footer__grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+}
+
+/* ============================================================
+   6b. CART DRAWER — snippets/cart-drawer.liquid (Dawn stock)
+   Ported from design storefront.css "CART DRAWER" block.
+   ============================================================ */
+
+/* Scrim — darker, soft blur. */
+.cart-drawer__overlay {
+  background: rgba(43, 42, 45, 0.42);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+/* Panel — cream bg, ink left border, flush right. */
+.cart-drawer .drawer__inner {
+  width: 480px;
+  max-width: 100vw;
+  background: var(--dad-cream);
+  border-left: 1.5px solid var(--dad-ink);
+  border-radius: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  box-shadow: -12px 0 32px rgba(43, 42, 45, 0.08);
+}
+
+/* Header — ink rule, Dimbo title, round close. */
+.cart-drawer .drawer__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 28px;
+  border-bottom: 1.5px solid var(--dad-ink);
+  margin: 0;
+}
+.cart-drawer .drawer__heading {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 1;
+  margin: 0;
+  color: var(--dad-ink);
+  letter-spacing: 0;
+}
+.cart-drawer .drawer__close {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 0;
+  background: transparent;
+  color: var(--dad-ink);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  position: static;
+  top: auto;
+  right: auto;
+  transition: background 0.15s ease;
+}
+.cart-drawer .drawer__close:hover,
+.cart-drawer .drawer__close:focus {
+  background: rgba(43, 42, 45, 0.06);
+  box-shadow: none;
+}
+.cart-drawer .drawer__close svg { width: 14px; height: 14px; }
+
+/* Scroll area — items list. */
+.cart-drawer .drawer__cart-items-wrapper,
+.cart-drawer .cart-items {
+  flex: 1;
+  padding: 16px 28px;
+  background: var(--dad-cream);
+  border: 0;
+}
+
+/* Wipe Dawn's table layout — switch to a per-line grid. */
+.cart-drawer .cart-items thead,
+.cart-drawer .cart-items__heading { display: none; }
+.cart-drawer .cart-items,
+.cart-drawer .cart-items tbody {
+  display: block;
+}
+.cart-drawer .cart-item {
+  display: grid;
+  grid-template-columns: 80px 1fr auto;
+  gap: 16px;
+  align-items: start;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--dad-rule);
+}
+.cart-drawer .cart-item:last-child { border-bottom: 0; }
+.cart-drawer .cart-item > td {
+  padding: 0;
+  background: transparent;
+  border: 0;
+}
+
+/* Thumb — rounded with cream-tint backdrop. */
+.cart-drawer .cart-item__media,
+.cart-drawer .cart-item__image {
+  width: 80px;
+  height: 80px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--dad-yellow-tint);
+}
+.cart-drawer .cart-item__image {
+  object-fit: cover;
+  display: block;
+}
+
+/* Name + variant lines. */
+.cart-drawer .cart-item__details { min-width: 0; }
+.cart-drawer .cart-item__name {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.15;
+  color: var(--dad-ink);
+  margin: 0 0 4px;
+  text-decoration: none;
+}
+.cart-drawer .cart-item__name:hover { color: var(--dad-ink); text-decoration: underline; text-underline-offset: 3px; }
+.cart-drawer .product-option,
+.cart-drawer .cart-item dl {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--dad-ink-muted);
+  margin: 0 0 10px;
+}
+
+/* Quantity pill — small, ink stroke. */
+.cart-drawer .cart-item__quantity-wrapper {
+  margin-top: 4px;
+}
+.cart-drawer .cart-item__quantity .quantity {
+  border: 1.5px solid var(--dad-rule);
+  border-radius: var(--r-pill);
+  background: var(--dad-white);
+  min-height: 0;
+  width: auto;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  box-shadow: none;
+}
+.cart-drawer .cart-item__quantity .quantity__button {
+  width: 28px;
+  height: 28px;
+  border: 0;
+  background: transparent;
+  color: var(--dad-ink);
+  font-family: var(--font-display);
+  font-size: 16px;
+  padding: 0;
+  min-width: 28px;
+}
+.cart-drawer .cart-item__quantity .quantity__button svg { width: 12px; height: 12px; }
+.cart-drawer .cart-item__quantity .quantity__input {
+  width: 28px;
+  min-width: 22px;
+  text-align: center;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--dad-ink);
+  background: transparent;
+  border: 0;
+  padding: 0;
+  height: 28px;
+}
+
+/* Remove link. */
+.cart-drawer .cart-remove-button {
+  border: 0;
+  background: transparent;
+  margin-left: 12px;
+  padding: 0;
+}
+.cart-drawer .cart-remove-button a,
+.cart-drawer .cart-remove-button .button {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--dad-ink-muted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  min-height: 0;
+}
+.cart-drawer .cart-remove-button .button::before,
+.cart-drawer .cart-remove-button .button::after { display: none; }
+
+/* Price column — Dimbo. */
+.cart-drawer .cart-item__totals,
+.cart-drawer .cart-item__price-wrapper {
+  text-align: right;
+  font-family: var(--font-display);
+  font-size: 18px;
+  color: var(--dad-ink);
+}
+.cart-drawer .cart-item__final-price,
+.cart-drawer .cart-item .price--end {
+  font-family: var(--font-display);
+  font-size: 18px;
+  color: var(--dad-ink);
+}
+.cart-drawer .cart-item__old-price {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--dad-ink-soft);
+  text-decoration: line-through;
+  display: block;
+  margin-bottom: 2px;
+}
+
+/* Footer — ink top rule, stacked totals + checkout. */
+.cart-drawer .drawer__footer {
+  border-top: 1.5px solid var(--dad-ink);
+  padding: 20px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: var(--dad-cream);
+}
+.cart-drawer .totals {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+.cart-drawer .totals__total {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--dad-ink);
+  text-transform: lowercase;
+}
+.cart-drawer .totals__total-value {
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--dad-ink);
+}
+.cart-drawer .tax-note,
+.cart-drawer .tax-note.caption-large {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--dad-ink-muted);
+  margin: 0;
+  text-align: left;
+}
+
+/* Checkout CTA — brand-red pop button (same vocab as ATC). */
+.cart-drawer .cart__ctas { padding: 0; }
+.cart-drawer .cart__checkout-button {
+  width: 100%;
+  background: var(--accent);
+  color: var(--dad-white);
+  border: 2px solid var(--dad-ink);
+  border-radius: var(--r-pill);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 16px;
+  text-transform: lowercase;
+  letter-spacing: 0.01em;
+  padding: 14px 20px;
+  min-height: 0;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.cart-drawer .cart__checkout-button::before {
+  background: var(--dad-dark-red, #a4111d);
+  border-radius: var(--r-pill);
+  box-shadow: 0 4px 0 0 var(--dad-dark-red, #a4111d);
+  opacity: 1;
+}
+.cart-drawer .cart__checkout-button::after { display: none; }
+.cart-drawer .cart__checkout-button:hover {
+  transform: translateY(-2px);
+}
+.cart-drawer .cart__checkout-button:hover::before {
+  box-shadow: 0 6px 0 0 var(--dad-dark-red, #a4111d);
+}
+
+/* Empty state — center the message + button cleanly. */
+.cart-drawer .drawer__inner-empty {
+  padding: 80px 28px 28px;
+  text-align: center;
+}
+.cart-drawer .cart__empty-text {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 1.1;
+  color: var(--dad-ink);
+  margin: 0 0 24px;
+}
+.cart-drawer .drawer__inner-empty .button {
+  border-radius: var(--r-pill);
+  border: 2px solid var(--dad-ink);
+  background: var(--dad-white);
+  color: var(--dad-ink);
+  font-family: var(--font-body);
+  font-weight: 700;
+  text-transform: lowercase;
+}
+
+/* Mobile — full width drawer. */
+@media screen and (max-width: 749px) {
+  .cart-drawer .drawer__inner {
+    width: 100%;
+    border-left: 0;
+  }
+  .cart-drawer .drawer__header { padding: 16px 20px; }
+  .cart-drawer .cart-items,
+  .cart-drawer .drawer__cart-items-wrapper { padding: 12px 20px; }
+  .cart-drawer .drawer__footer { padding: 16px 20px; }
+}
+
+/* ============================================================
+   6c. SEARCH — header modal, predictive panel, results page
+   Ported from design storefront.css "SEARCH" block.
+   ============================================================ */
+
+/* --- Modal overlay + content shell -------------------------- */
+.search-modal .modal-overlay {
+  background: rgba(43, 42, 45, 0.42);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+.search-modal__content {
+  background: var(--dad-white);
+  padding: 20px 0;
+}
+.search-modal__form { width: 100%; }
+
+/* --- Search input — pill bar -------------------------------- */
+.search-modal .search .field,
+.template-search__search .search .field {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 24px;
+  background: var(--dad-white);
+  border: 1.5px solid var(--dad-ink);
+  border-radius: var(--r-pill);
+  height: 64px;
+  box-shadow: none;
+}
+.search-modal .search .field::before,
+.search-modal .search .field::after,
+.template-search__search .search .field::before,
+.template-search__search .search .field::after { display: none; }
+
+.search-modal .search__input.field__input,
+.template-search__search .search__input.field__input {
+  flex: 1;
+  height: 100%;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--dad-ink);
+  padding: 0;
+}
+.search-modal .search__input.field__input:focus,
+.template-search__search .search__input.field__input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Hide the floating label — the placeholder is enough. */
+.search-modal .search .field__label,
+.template-search__search .search .field__label { display: none; }
+
+/* Reset (x) button — small ink circle. */
+.search-modal .reset__button.field__button,
+.template-search__search .reset__button.field__button {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 0;
+  background: var(--dad-ink);
+  color: var(--dad-white);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  position: static;
+  top: auto;
+  right: auto;
+}
+.search-modal .reset__button.field__button svg,
+.template-search__search .reset__button.field__button svg {
+  width: 12px;
+  height: 12px;
+  color: var(--dad-white);
+}
+
+/* Submit (magnifier) button — ghost icon. */
+.search-modal .search__button.field__button,
+.template-search__search .search__button.field__button {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  background: transparent;
+  color: var(--dad-ink);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  position: static;
+  top: auto;
+  right: auto;
+}
+.search-modal .search__button.field__button svg,
+.template-search__search .search__button.field__button svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* --- Predictive results panel ------------------------------- */
+#predictive-search-results {
+  background: var(--dad-white);
+  border: 1.5px solid var(--dad-ink);
+  border-radius: var(--r-xl);
+  margin-top: 8px;
+  padding: 24px;
+  box-shadow: 0 12px 28px -16px rgba(43, 42, 45, 0.25);
+}
+.predictive-search__results-groups-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 32px;
+}
+.predictive-search__results-groups-wrapper--no-products {
+  grid-template-columns: 1fr;
+}
+.predictive-search__results-groups-wrapper--no-suggestions {
+  grid-template-columns: 1fr;
+}
+
+/* Group headings — lowercase micro caption. */
+.predictive-search__heading,
+.predictive-search__heading.text-body,
+.predictive-search__heading.caption-with-letter-spacing {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: lowercase;
+  color: var(--dad-ink-muted);
+  margin: 0 0 12px;
+  padding: 0;
+  border: 0;
+}
+
+/* Suggestion / collection / page / article rows. */
+.predictive-search__results-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+}
+.predictive-search__list-item { padding: 0; }
+.predictive-search__item.link,
+.predictive-search__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--dad-ink);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 15px;
+  border: 0;
+  background: transparent;
+  transition: background 0.12s ease;
+}
+.predictive-search__item:hover,
+.predictive-search__item:focus,
+.predictive-search__list-item[aria-selected='true'] .predictive-search__item {
+  background: rgba(43, 42, 45, 0.05);
+}
+.predictive-search__item-heading,
+.predictive-search__item-heading.h5 {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1.2;
+  color: var(--dad-ink);
+  margin: 0;
+  letter-spacing: 0;
+}
+
+/* Product row — 56px thumb + Dimbo title + Dimbo price. */
+.predictive-search__item--link-with-thumbnail {
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  align-items: center;
+  gap: 12px;
+}
+.predictive-search__item-image-wrapper,
+.predictive-search__item-image,
+.predictive-search__item--link-with-thumbnail .predictive-search__item-image {
+  width: 56px;
+  height: 56px;
+  aspect-ratio: 1;
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--dad-pink-tint);
+}
+.predictive-search__item--link-with-thumbnail .predictive-search__item-heading {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.05;
+  color: var(--dad-ink);
+}
+.predictive-search__item-vendor,
+.predictive-search__item-vendor.caption-with-letter-spacing {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--dad-ink-muted);
+  text-transform: lowercase;
+  letter-spacing: 0;
+  margin: 0 0 2px;
+}
+.predictive-search__item-price,
+.predictive-search__item .price {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--dad-ink);
+}
+
+/* Highlighted query match (e.g. "dot" in "<strong>dot</strong> markers"). */
+.predictive-search__item mark,
+.predictive-search__item-query-result strong {
+  background: transparent;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* --- Search results page header ----------------------------- */
+.template-search__header {
+  padding: 56px 0 32px;
+}
+.template-search__header .h2,
+.template-search__header h1.h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(40px, 5vw, 56px);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  color: var(--dad-ink);
+  margin: 0 0 20px;
+}
+.template-search__search {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+/* --- Empty state -------------------------------------------- */
+.template-search--empty .template-search__header { padding-bottom: 16px; }
+.template-search--empty .template-search__search { margin-bottom: 32px; }
+
+/* --- Results count / sub copy ------------------------------- */
+.template-search .product-count,
+.template-search .product-count-vertical {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--dad-ink-muted);
+}
+
+/* --- Mobile ------------------------------------------------- */
+@media screen and (max-width: 749px) {
+  .search-modal .search .field,
+  .template-search__search .search .field { height: 56px; padding: 0 16px; }
+  .search-modal .search__input.field__input,
+  .template-search__search .search__input.field__input { font-size: 16px; }
+  #predictive-search-results { padding: 18px; }
+  .predictive-search__results-groups-wrapper {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+/* ============================================================
+   7. ABOUT — sections/dad-about.liquid
+   Ported from design/components/about.jsx + storefront.css.
+   ============================================================ */
+
+/* Shared helpers used by About page. */
+.dad-about .dad-eyebrow {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: lowercase;
+  color: var(--dad-ink-muted);
+  margin-bottom: 14px;
+}
+
+/* --- Hero --------------------------------------------------- */
+.dad-about__hero {
+  padding: 80px 0 64px;
+  background: var(--bg-tint);
+  border-bottom: 1px solid var(--dad-rule);
+  position: relative;
+  overflow: hidden;
+}
+.dad-about__hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+.dad-about__hero-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(56px, 7vw, 88px);
+  line-height: 0.96;
+  letter-spacing: -0.015em;
+  margin: 0 0 24px;
+  color: var(--dad-ink);
+  text-wrap: balance;
+}
+.dad-about__lede {
+  font-family: var(--font-body);
+  font-size: 19px;
+  line-height: 1.5;
+  max-width: 50ch;
+  margin: 0;
+  color: var(--dad-ink);
+}
+.dad-about__hero-photo {
+  aspect-ratio: 4 / 5;
+  border-radius: 32px;
+  overflow: hidden;
+  background: var(--dad-white);
+  position: relative;
+}
+.dad-about__hero-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* --- Stats -------------------------------------------------- */
+.dad-about__stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  padding: 56px 0;
+  border-bottom: 1px solid var(--dad-rule);
+}
+.dad-about__stat-n {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 72px;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: var(--accent);
+}
+.dad-about__stat-l {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--dad-ink);
+  margin-top: 8px;
+  max-width: 24ch;
+  line-height: 1.4;
+}
+
+/* --- Story rows --------------------------------------------- */
+.dad-about__story { padding: 96px 0; }
+.dad-about__story-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  margin-bottom: 96px;
+}
+.dad-about__story-row:last-child { margin-bottom: 0; }
+.dad-about__story-row.is-reverse .dad-about__story-copy { order: 2; }
+.dad-about__story-heading {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(36px, 4vw, 48px);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  margin: 0 0 20px;
+  color: var(--dad-ink);
+}
+.dad-about__story-body { font-family: var(--font-body); }
+.dad-about__story-body p {
+  font-size: 17px;
+  line-height: 1.55;
+  margin: 0 0 16px;
+  max-width: 48ch;
+  color: var(--dad-ink);
+}
+.dad-about__story-body p:last-child { margin-bottom: 0; }
+.dad-about__story-photo {
+  aspect-ratio: 4 / 5;
+  border-radius: 28px;
+  overflow: hidden;
+  background: var(--dad-pink-tint);
+  position: relative;
+}
+.dad-about__story-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.dad-about__pullquote {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  right: 24px;
+  background: var(--dad-white);
+  border: 1.5px solid var(--dad-ink);
+  border-radius: 18px;
+  padding: 16px 18px;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.15;
+  letter-spacing: -0.005em;
+  color: var(--dad-ink);
+}
+.dad-about__pullquote-attr {
+  display: block;
+  margin-top: 6px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--dad-ink-muted);
+}
+
+/* --- Timeline ----------------------------------------------- */
+.dad-about__timeline {
+  background: var(--dad-white);
+  padding: 96px 0;
+  border-top: 1px solid var(--dad-rule);
+  border-bottom: 1px solid var(--dad-rule);
+}
+.dad-about__timeline-heading {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(36px, 4vw, 48px);
+  line-height: 1.02;
+  margin: 0 0 8px;
+  color: var(--dad-ink);
+}
+.dad-about__timeline .dad-about__lede {
+  font-size: 17px;
+  color: var(--dad-ink-muted);
+  margin: 0 0 56px;
+}
+.dad-about__timeline-track {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 24px;
+}
+.dad-about__timeline-track::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 22px;
+  height: 2px;
+  background: var(--dad-rule);
+  z-index: 0;
+}
+.dad-about__tl-step {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+}
+.dad-about__tl-marker {
+  width: 44px;
+  height: 44px;
+  background: var(--dad-white);
+  border: 2px solid var(--dad-ink);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 14px;
+  color: var(--dad-ink);
+}
+.dad-about__tl-step.is-milestone .dad-about__tl-marker {
+  background: var(--accent);
+  color: var(--dad-white);
+  border-color: var(--accent);
+}
+.dad-about__tl-year {
+  font-family: var(--font-display);
+  font-size: 22px;
+  line-height: 1;
+  color: var(--dad-ink);
+}
+.dad-about__tl-body {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--dad-ink-muted);
+  line-height: 1.45;
+}
+
+/* --- Values ------------------------------------------------- */
+.dad-about__values { padding: 96px 0; }
+.dad-about__values-heading {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(40px, 5vw, 56px);
+  line-height: 1.02;
+  margin: 0 0 64px;
+  max-width: 18ch;
+  color: var(--dad-ink);
+}
+.dad-about__values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+.dad-about__value {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 24px;
+  border-top: 1.5px solid var(--dad-ink);
+}
+.dad-about__value-num {
+  font-family: var(--font-display);
+  font-size: 14px;
+  letter-spacing: 0.03em;
+  color: var(--accent);
+}
+.dad-about__value-heading {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 1.1;
+  margin: 0;
+  color: var(--dad-ink);
+}
+.dad-about__value-body {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--dad-ink-muted);
+  margin: 0;
+  max-width: 36ch;
+}
+
+/* --- Team --------------------------------------------------- */
+.dad-about__team {
+  background: var(--dad-white);
+  padding: 96px 0;
+  border-top: 1px solid var(--dad-rule);
+}
+.dad-about__team-head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  margin-bottom: 56px;
+  gap: 24px;
+}
+.dad-about__team-heading {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(36px, 4vw, 48px);
+  line-height: 1.05;
+  margin: 8px 0 0;
+  color: var(--dad-ink);
+}
+.dad-about__team-subhead {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--dad-ink-muted);
+}
+.dad-about__team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+.dad-about__member-photo {
+  aspect-ratio: 4 / 5;
+  border-radius: 24px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+.dad-about__member-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.dad-about__member-name {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 1.05;
+  margin: 0 0 4px;
+  color: var(--dad-ink);
+}
+.dad-about__member-role {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.dad-about__member-bio {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--dad-ink-muted);
+  margin: 0;
+}
+
+/* Placeholder portrait (initial-letter, color-coded). */
+.dad-about__placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 64px;
+  background: var(--dad-pink-tint);
+  color: var(--accent);
+}
+.dad-about__member-photo--pink   { background: var(--dad-pink-tint); }
+.dad-about__member-photo--blue   { background: var(--dad-sky-tint); }
+.dad-about__member-photo--yellow { background: var(--dad-yellow-tint); }
+.dad-about__member-photo--green  { background: var(--dad-green-tint); }
+.dad-about__member-photo--purple { background: var(--dad-purple-tint); }
+.dad-about__placeholder--blue   { background: var(--dad-sky-tint);    color: var(--dad-dark-blue); }
+.dad-about__placeholder--yellow { background: var(--dad-yellow-tint); color: var(--dad-orange); }
+.dad-about__placeholder--green  { background: var(--dad-green-tint);  color: var(--dad-dark-green); }
+.dad-about__placeholder--purple { background: var(--dad-purple-tint); color: var(--dad-dark-purple); }
+
+/* --- CTA ---------------------------------------------------- */
+.dad-about__cta {
+  padding: 96px 48px;
+  background: var(--dad-ink);
+  color: var(--dad-white);
+  border-radius: 32px;
+  margin: 80px 0;
+  text-align: center;
+}
+.dad-about__cta-eyebrow { color: var(--dad-yellow); }
+.dad-about__cta-heading {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(48px, 6vw, 64px);
+  line-height: 1;
+  margin: 0 0 16px;
+  color: var(--dad-white);
+}
+.dad-about__cta-heading .dad-script { color: var(--dad-yellow); display: block; margin-top: 6px; }
+.dad-about__cta-body {
+  font-family: var(--font-body);
+  font-size: 18px;
+  margin: 0 auto 36px;
+  max-width: 50ch;
+  color: rgba(255, 255, 255, 0.85);
+}
+.dad-about__cta-actions {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.dad-about__cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 26px;
+  border-radius: var(--r-pill);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 16px;
+  text-transform: lowercase;
+  text-decoration: none;
+  border: 2px solid;
+  transition: transform 0.15s ease;
+}
+.dad-about__cta-btn--primary {
+  background: var(--accent);
+  color: var(--dad-white);
+  border-color: var(--accent);
+}
+.dad-about__cta-btn--ghost {
+  background: transparent;
+  color: var(--dad-white);
+  border-color: var(--dad-white);
+}
+.dad-about__cta-btn:hover { transform: translateY(-2px); }
+
+/* --- Mobile ------------------------------------------------- */
+@media screen and (max-width: 989px) {
+  .dad-about__hero-grid,
+  .dad-about__story-row { grid-template-columns: 1fr; gap: 32px; }
+  .dad-about__story-row.is-reverse .dad-about__story-copy { order: 0; }
+  .dad-about__stats { grid-template-columns: 1fr 1fr; gap: 24px; padding: 40px 0; }
+  .dad-about__timeline-track { grid-template-columns: 1fr; gap: 24px; }
+  .dad-about__timeline-track::before { display: none; }
+  .dad-about__values-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .dad-about__team-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
+  .dad-about__cta { padding: 56px 24px; border-radius: 24px; }
+  .dad-about__hero { padding: 56px 0 40px; }
+  .dad-about__story { padding: 56px 0; }
+  .dad-about__story-row { margin-bottom: 56px; }
+  .dad-about__timeline,
+  .dad-about__values,
+  .dad-about__team { padding: 64px 0; }
+}
+@media screen and (max-width: 567px) {
+  .dad-about__values-grid { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   8. BLOG INDEX — sections/main-blog.liquid (Dawn stock)
+   Ported from design storefront.css "BLOG" block.
+   ============================================================ */
+
+/* --- Blog index page title --------------------------------- */
+.main-blog .title--primary {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(56px, 7vw, 80px);
+  line-height: 0.98;
+  letter-spacing: -0.015em;
+  margin: 0 0 18px;
+  color: var(--dad-ink);
+  text-wrap: balance;
+  text-align: left;
+}
+
+/* --- Article grid ------------------------------------------- */
+.main-blog .blog-articles {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px 32px;
+  padding: 40px 0 80px;
+  border-top: 1px solid var(--dad-rule);
+  margin-top: 32px;
+}
+.main-blog .blog-articles__article {
+  margin: 0;
+  padding: 0;
+}
+
+/* --- Article card ------------------------------------------- */
+.article-card-wrapper.card-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  text-decoration: none;
+  color: inherit;
+}
+.article-card-wrapper .card__inner {
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  background: var(--dad-pink-tint);
+  border: 0;
+  box-shadow: none;
+}
+.article-card-wrapper .card__inner.ratio,
+.article-card-wrapper .article-card__image-wrapper.card__media {
+  aspect-ratio: 4 / 3;
+}
+.article-card-wrapper .article-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Reset Dawn's stock card content padding so meta + heading sit
+   tight under the photo per design. */
+.article-card-wrapper .card__content,
+.article-card-wrapper .card__information {
+  padding: 0;
+  gap: 8px;
+}
+
+/* Date / category caption — lowercase muted micro. */
+.article-card-wrapper .article-card__info,
+.article-card-wrapper .article-card__info.caption-with-letter-spacing.h5 {
+  display: flex;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+  color: var(--dad-ink-muted);
+  margin: 0;
+}
+.article-card-wrapper .article-card__info .circle-divider::after { display: none; }
+
+/* Heading — Dimbo, tighter. */
+.article-card-wrapper .card__heading,
+.article-card-wrapper .card__heading.h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 1.1;
+  letter-spacing: -0.005em;
+  margin: 0;
+  color: var(--dad-ink);
+}
+.article-card-wrapper .card__heading a,
+.article-card-wrapper .full-unstyled-link {
+  color: var(--dad-ink);
+  text-decoration: none;
+}
+.article-card-wrapper:hover .card__heading a,
+.article-card-wrapper .full-unstyled-link:hover {
+  color: var(--dad-ink);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* Excerpt copy. */
+.article-card-wrapper .article-card__excerpt {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--dad-ink-muted);
+  margin: 0;
+}
+
+/* "Read more →" footer link, hidden — design uses card-wide tap. */
+.article-card-wrapper .article-card__footer .article-card__link,
+.article-card-wrapper .article-card__footer { display: none; }
+
+/* ============================================================
+   8b. ARTICLE PAGE — sections/main-article.liquid (Dawn stock)
+   ============================================================ */
+
+/* --- Hero (centered, Dimbo title) --------------------------- */
+.article-template__hero-container {
+  padding: 56px 0 0;
+}
+.article-template__title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(48px, 6vw, 76px);
+  line-height: 1;
+  letter-spacing: -0.015em;
+  max-width: 22ch;
+  margin: 0 auto 24px;
+  color: var(--dad-ink);
+  text-align: center;
+  text-wrap: balance;
+}
+
+/* Author + date caption on hero. */
+.article-template .article-template__title + .caption-with-letter-spacing,
+.article-template .article-template__title ~ .caption-with-letter-spacing {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  align-items: center;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+  color: var(--dad-ink-muted);
+  margin: 0 auto 32px;
+}
+
+/* --- Cover image -------------------------------------------- */
+.article-template__hero-container .article-template__hero {
+  aspect-ratio: 16 / 9;
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  margin: 40px auto;
+  background: var(--dad-pink-tint);
+  max-width: 1100px;
+}
+.article-template__hero img,
+.article-template__hero-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* --- Article body (rich text) ------------------------------- */
+.article-template__content.rte {
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--dad-ink);
+}
+.article-template__content.rte p { margin: 0 0 22px; }
+.article-template__content.rte h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 38px;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  margin: 48px 0 16px;
+  color: var(--dad-ink);
+}
+.article-template__content.rte h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 1.1;
+  margin: 32px 0 12px;
+  color: var(--dad-ink);
+}
+.article-template__content.rte blockquote {
+  margin: 36px 0;
+  padding: 24px 28px;
+  border-left: 3px solid var(--accent);
+  background: var(--bg-tint);
+  border-radius: 0 var(--r-lg) var(--r-lg) 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 1.2;
+  letter-spacing: -0.005em;
+  color: var(--dad-ink);
+}
+.article-template__content.rte ul,
+.article-template__content.rte ol {
+  padding-left: 24px;
+  margin: 0 0 22px;
+}
+.article-template__content.rte li { margin-bottom: 8px; }
+.article-template__content.rte figure { margin: 36px 0; }
+.article-template__content.rte figure img {
+  width: 100%;
+  border-radius: var(--r-lg);
+}
+.article-template__content.rte figcaption {
+  font-size: 13px;
+  color: var(--dad-ink-muted);
+  font-weight: 600;
+  text-align: center;
+  margin-top: 12px;
+}
+.article-template__content.rte a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+/* --- Social share row --------------------------------------- */
+.article-template__social-sharing {
+  max-width: 720px;
+  margin: 56px auto 80px;
+  padding: 24px 28px;
+  background: var(--dad-white);
+  border: 1.5px solid var(--dad-ink);
+  border-radius: var(--r-lg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+.article-template__social-sharing .share-button__button {
+  border-radius: var(--r-pill);
+  border: 1.5px solid var(--dad-ink);
+  background: var(--dad-white);
+  color: var(--dad-ink);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 13px;
+  text-transform: lowercase;
+}
+
+/* --- Back-to-blog link -------------------------------------- */
+.article-template__back {
+  margin-top: 32px;
+  margin-bottom: 64px;
+}
+.article-template__link {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: lowercase;
+  color: var(--dad-ink);
+}
+
+/* --- Comments (light treatment, leave Dawn defaults mostly) - */
+.article-template__comment-wrapper {
+  background: var(--dad-white);
+  border-top: 1px solid var(--dad-rule);
+}
+
+/* --- Mobile ------------------------------------------------- */
+@media screen and (max-width: 989px) {
+  .main-blog .blog-articles {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px 20px;
+  }
+  .article-template__hero-container .article-template__hero { border-radius: var(--r-lg); margin: 24px 16px; }
+  .article-template__content.rte { font-size: 17px; }
+  .article-template__content.rte h2 { font-size: 32px; }
+  .article-template__social-sharing {
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 40px 16px 56px;
+  }
+}
+@media screen and (max-width: 567px) {
+  .main-blog .blog-articles { grid-template-columns: 1fr; gap: 32px; }
+  .article-template__title { font-size: 44px; }
+}
+
+/* ============================================================
+   9. CONTACT — sections/contact-form.liquid (Dawn stock)
+   Ported from design storefront.css "CONTACT" block.
+   ============================================================ */
+
+.contact {
+  padding-top: 24px;
+  padding-bottom: 80px;
+}
+.contact .title,
+.contact h2.title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(40px, 5vw, 56px);
+  line-height: 1;
+  letter-spacing: -0.015em;
+  text-align: left;
+  margin: 0 0 28px;
+  color: var(--dad-ink);
+}
+
+/* Wrap the form in a bordered card to match design. */
+.contact form {
+  background: var(--dad-white);
+  border: 1.5px solid var(--dad-ink);
+  border-radius: var(--r-xl);
+  padding: 40px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+.contact .contact__fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+/* --- Form fields (shared with customer pages) -------------- */
+.contact .field,
+.customer .field {
+  margin-bottom: 18px;
+  position: relative;
+}
+.contact .field__input,
+.customer .field__input,
+.contact textarea.field__input,
+.customer textarea.field__input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1.5px solid var(--dad-rule);
+  border-radius: var(--r-md);
+  background: var(--dad-white);
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--dad-ink);
+  outline: none;
+  box-shadow: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  min-height: 0;
+  height: auto;
+}
+.contact textarea.field__input,
+.customer textarea.field__input {
+  min-height: 132px;
+  resize: vertical;
+}
+.contact .field__input:focus,
+.customer .field__input:focus {
+  border-color: var(--dad-ink);
+  box-shadow: 0 0 0 4px var(--dad-sky-tint);
+}
+.contact .field:before,
+.contact .field:after,
+.customer .field:before,
+.customer .field:after { display: none; }
+
+/* Float label — convert Dawn's floating label to an above-input
+   block label (matches design's lowercase eyebrow style). */
+.contact .field__label,
+.customer .field__label {
+  position: static;
+  display: block;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+  color: var(--dad-ink);
+  margin-bottom: 6px;
+  background: transparent;
+  padding: 0;
+  pointer-events: auto;
+  transform: none;
+  top: auto;
+  left: auto;
+}
+/* Re-order label above input visually. */
+.contact .field,
+.customer .field {
+  display: flex;
+  flex-direction: column;
+}
+.contact .field .field__label,
+.customer .field .field__label { order: -1; }
+
+/* --- Submit button — brand-red pop -------------------------- */
+.contact button[type='submit'],
+.customer button[type='submit'] {
+  width: 100%;
+  margin-top: 8px;
+  background: var(--accent);
+  color: var(--dad-white);
+  border: 2px solid var(--dad-ink);
+  border-radius: var(--r-pill);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 16px;
+  text-transform: lowercase;
+  padding: 14px 20px;
+  min-height: 0;
+  transition: transform 0.15s ease;
+}
+.contact button[type='submit']::before,
+.customer button[type='submit']::before {
+  background: var(--dad-dark-red, #a4111d);
+  border-radius: var(--r-pill);
+  box-shadow: 0 4px 0 0 var(--dad-dark-red, #a4111d);
+  opacity: 1;
+}
+.contact button[type='submit']::after,
+.customer button[type='submit']::after { display: none; }
+.contact button[type='submit']:hover,
+.customer button[type='submit']:hover { transform: translateY(-2px); }
+.contact button[type='submit']:hover::before,
+.customer button[type='submit']:hover::before {
+  box-shadow: 0 6px 0 0 var(--dad-dark-red, #a4111d);
+}
+
+/* --- Form status / errors ----------------------------------- */
+.contact .form__message,
+.customer .form__message {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--dad-ink);
+  padding: 14px 16px;
+  background: var(--bg-tint);
+  border-radius: var(--r-md);
+  margin-bottom: 20px;
+}
+.contact .form-status,
+.customer .form-status {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--dad-ink);
+  margin: 0;
+}
+
+/* ============================================================
+   10. CUSTOMER ACCOUNT — login / register / account / addresses
+   Dawn wraps all customer pages in .customer
+   ============================================================ */
+
+.customer {
+  padding: 72px 0 80px;
+  background: var(--bg-tint);
+  min-height: 600px;
+}
+
+/* Page title — Dimbo, centered. */
+.customer .customer__title,
+.customer h1 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(48px, 6vw, 64px);
+  line-height: 0.96;
+  letter-spacing: -0.015em;
+  text-align: center;
+  margin: 0 auto 16px;
+  color: var(--dad-ink);
+}
+
+/* Form card — bordered white panel. */
+.customer .login,
+.customer .register,
+.customer #RecoverPasswordForm,
+.customer #RecoverEmailForm,
+.customer .account,
+.customer form {
+  background: var(--dad-white);
+  border: 1.5px solid var(--dad-ink);
+  border-radius: var(--r-xl);
+  padding: 40px;
+  max-width: 460px;
+  margin: 32px auto 0;
+}
+
+/* On account page (logged-in), allow wider layout for orders. */
+.customer .account {
+  max-width: 920px;
+  padding: 40px;
+}
+
+/* Account section headings (Order history, Account details). */
+.customer .account h2,
+.customer .order-history h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 1.05;
+  margin: 32px 0 16px;
+  color: var(--dad-ink);
+}
+.customer .account h2:first-child,
+.customer .order-history h2:first-child { margin-top: 0; }
+
+/* --- Order history table → cards on mobile ------------------ */
+.customer .order-history table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 8px;
+}
+.customer .order-history thead th {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+  color: var(--dad-ink-muted);
+  padding: 12px 16px;
+  border-bottom: 1.5px solid var(--dad-ink);
+  text-align: left;
+}
+.customer .order-history tbody td {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--dad-ink);
+  padding: 16px;
+  border-bottom: 1px solid var(--dad-rule);
+}
+.customer .order-history a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* --- Address block (account default address) ---------------- */
+.customer .account address,
+.customer .account .h4 + p {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--dad-ink);
+  font-style: normal;
+  background: var(--bg-tint);
+  border-radius: var(--r-md);
+  padding: 16px 18px;
+  margin: 8px 0 12px;
+}
+
+/* --- Logout / addresses links ------------------------------- */
+.customer .account a:not([class]),
+.customer p a {
+  color: var(--accent);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* --- Forgot password / "create account" link row ------------ */
+.customer .login__forgot-password,
+.customer .login__paragraph,
+.customer .register__paragraph {
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--dad-ink-muted);
+  margin-top: 16px;
+}
+.customer #login a,
+.customer #create_customer a,
+.customer #RecoverPasswordForm a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* --- Shop login button (Sign in with Shop) ------------------ */
+.customer shop-login-button {
+  margin: 0 auto 18px;
+  display: block;
+  text-align: center;
+}
+
+/* --- Activate / reset cards ---------------------------------- */
+.customer #ResetPasswordForm,
+.customer #ActivateAccountForm {
+  background: var(--dad-white);
+  border: 1.5px solid var(--dad-ink);
+  border-radius: var(--r-xl);
+  padding: 40px;
+  max-width: 460px;
+  margin: 32px auto 0;
+}
+
+/* --- Mobile ------------------------------------------------- */
+@media screen and (max-width: 749px) {
+  .contact .contact__fields { grid-template-columns: 1fr; }
+  .contact form,
+  .customer .login,
+  .customer .register,
+  .customer .account,
+  .customer #RecoverPasswordForm,
+  .customer #ResetPasswordForm,
+  .customer #ActivateAccountForm,
+  .customer form {
+    padding: 28px 24px;
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+  .customer { padding: 48px 0 64px; }
+  /* Stack order history table cells as rows. */
+  .customer .order-history thead { display: none; }
+  .customer .order-history tbody tr {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px 12px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--dad-rule);
+  }
+  .customer .order-history tbody td {
+    padding: 0;
+    border: 0;
+  }
+}
+
+/* ============================================================
+   11. UTILITY PAGES — 404, password, generic /pages/*, gift-card
+   ============================================================ */
+
+/* --- 404 ---------------------------------------------------- */
+.template-404 {
+  padding: 96px 24px;
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto;
+}
+.template-404 .title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(64px, 9vw, 96px);
+  line-height: 0.96;
+  letter-spacing: -0.02em;
+  margin: 0 0 16px;
+  color: var(--dad-ink);
+  text-wrap: balance;
+}
+.template-404 p {
+  font-family: var(--font-body);
+  font-size: 19px;
+  line-height: 1.5;
+  color: var(--dad-ink);
+  max-width: 50ch;
+  margin: 0 auto 32px;
+}
+.template-404 .button {
+  border-radius: var(--r-pill);
+  border: 2px solid var(--dad-ink);
+  background: var(--accent);
+  color: var(--dad-white);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 16px;
+  text-transform: lowercase;
+  padding: 14px 28px;
+  text-decoration: none;
+}
+.template-404 .button::before {
+  background: var(--dad-dark-red, #a4111d);
+  border-radius: var(--r-pill);
+  box-shadow: 0 4px 0 0 var(--dad-dark-red, #a4111d);
+  opacity: 1;
+}
+.template-404 .button::after { display: none; }
+.template-404 .button:hover { transform: translateY(-2px); }
+.template-404 .button:hover::before {
+  box-shadow: 0 6px 0 0 var(--dad-dark-red, #a4111d);
+}
+
+/* --- Password (storefront-locked) page --------------------- */
+.password-header {
+  padding: 96px 24px 64px;
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto;
+}
+.password-header h1.h2,
+.password-header .password-logo {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(48px, 6vw, 64px);
+  line-height: 1;
+  letter-spacing: -0.015em;
+  color: var(--dad-ink);
+  margin: 0 0 16px;
+}
+.password-content {
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--dad-ink);
+  max-width: 50ch;
+  margin: 0 auto 32px;
+}
+.password-link.link {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: lowercase;
+  color: var(--dad-ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Modal that opens for password entry. */
+.password-modal .modal__content {
+  background: var(--dad-white);
+  border: 1.5px solid var(--dad-ink);
+  border-radius: var(--r-xl);
+  padding: 40px;
+  max-width: 460px;
+}
+.password-modal__content-heading,
+.password-modal h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 1.05;
+  margin: 0 0 16px;
+  color: var(--dad-ink);
+}
+.password-field input,
+.password-field .field__input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1.5px solid var(--dad-rule);
+  border-radius: var(--r-md);
+  background: var(--dad-white);
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--dad-ink);
+}
+.password-field input:focus,
+.password-field .field__input:focus {
+  border-color: var(--dad-ink);
+  box-shadow: 0 0 0 4px var(--dad-sky-tint);
+  outline: none;
+}
+.password-button.button {
+  margin-top: 12px;
+  width: 100%;
+  background: var(--accent);
+  color: var(--dad-white);
+  border: 2px solid var(--dad-ink);
+  border-radius: var(--r-pill);
+  font-family: var(--font-body);
+  font-weight: 700;
+  text-transform: lowercase;
+}
+
+.password__footer {
+  padding: 24px;
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--dad-ink-muted);
+}
+.password__footer a { color: var(--dad-ink); text-decoration: underline; }
+
+/* --- Generic page template (/pages/<handle>) ---------------- */
+/* Policy pages, terms, refund, shipping, FAQ, etc. */
+.main-page-title.page-title,
+.main-page-title.h0 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(48px, 6vw, 72px);
+  line-height: 0.98;
+  letter-spacing: -0.015em;
+  color: var(--dad-ink);
+  margin: 56px 0 24px;
+  text-align: left;
+  text-wrap: balance;
+}
+.template-page .rte,
+.template-policy .rte {
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--dad-ink);
+  max-width: 720px;
+  margin: 0 auto;
+  padding-bottom: 80px;
+}
+.template-page .rte h2,
+.template-policy .rte h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  margin: 48px 0 16px;
+  color: var(--dad-ink);
+}
+.template-page .rte h3,
+.template-policy .rte h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 1.1;
+  margin: 32px 0 12px;
+  color: var(--dad-ink);
+}
+.template-page .rte p,
+.template-policy .rte p { margin: 0 0 20px; }
+.template-page .rte ul,
+.template-page .rte ol,
+.template-policy .rte ul,
+.template-policy .rte ol {
+  padding-left: 24px;
+  margin: 0 0 20px;
+}
+.template-page .rte li,
+.template-policy .rte li { margin-bottom: 8px; }
+.template-page .rte a,
+.template-policy .rte a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+/* --- Gift card page ----------------------------------------- */
+/* Dawn's gift_card.liquid layout renders a code + image + buttons. */
+.gift-card,
+.gift_card-template {
+  padding: 64px 24px;
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.gift-card__title,
+.gift-card__heading,
+.gift-card h2.h1 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(36px, 4vw, 48px);
+  line-height: 1.02;
+  margin: 0 0 16px;
+  color: var(--dad-ink);
+}
+.gift-card__code,
+.gift-card__code-text {
+  font-family: var(--font-display);
+  font-size: 24px;
+  letter-spacing: 0.06em;
+  background: var(--bg-tint);
+  border: 1.5px solid var(--dad-ink);
+  border-radius: var(--r-md);
+  padding: 16px 20px;
+  display: inline-block;
+  color: var(--dad-ink);
+}
+.gift-card__expiration {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--dad-ink-muted);
+  margin-top: 12px;
 }

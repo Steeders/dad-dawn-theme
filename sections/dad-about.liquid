@@ -1,0 +1,355 @@
+{%- comment -%}
+  Do-A-Dot Art — About page section. Ported from design/components/about.jsx.
+  Self-contained: hero, stats, story rows, timeline, values, team, CTA.
+  All copy is editable in the Shopify customizer. Blocks render in their
+  type's design slot — reordering blocks of different types has no effect;
+  reordering blocks of the same type does.
+{%- endcomment -%}
+
+{%- assign stat_blocks      = section.blocks | where: 'type', 'stat' -%}
+{%- assign story_blocks     = section.blocks | where: 'type', 'story_row' -%}
+{%- assign timeline_blocks  = section.blocks | where: 'type', 'timeline_step' -%}
+{%- assign value_blocks     = section.blocks | where: 'type', 'value' -%}
+{%- assign team_blocks      = section.blocks | where: 'type', 'team_member' -%}
+
+<div class="dad-about">
+
+  {%- comment -%} HERO {%- endcomment -%}
+  <section class="dad-about__hero">
+    <div class="page-width dad-about__hero-grid">
+      <div class="dad-about__hero-copy">
+        {%- if section.settings.hero_eyebrow != blank -%}
+          <span class="dad-eyebrow">{{ section.settings.hero_eyebrow }}</span>
+        {%- endif -%}
+        <h1 class="dad-about__hero-title">
+          {{ section.settings.hero_heading }}
+          {%- if section.settings.hero_heading_accent != blank -%}
+            <span class="dad-script">{{ section.settings.hero_heading_accent }}</span>
+          {%- endif -%}
+        </h1>
+        {%- if section.settings.hero_lede != blank -%}
+          <p class="dad-about__lede">{{ section.settings.hero_lede }}</p>
+        {%- endif -%}
+      </div>
+      <div class="dad-about__hero-photo">
+        {%- if section.settings.hero_image != blank -%}
+          {{ section.settings.hero_image | image_url: width: 800 | image_tag: loading: 'eager', widths: '400,600,800,1000', sizes: '(min-width: 750px) 50vw, 100vw' }}
+        {%- else -%}
+          <div class="dad-about__placeholder">family<br>photo</div>
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} STATS {%- endcomment -%}
+  {%- if stat_blocks.size > 0 -%}
+    <section class="page-width dad-about__stats">
+      {%- for block in stat_blocks -%}
+        <div class="dad-about__stat" {{ block.shopify_attributes }}>
+          <div class="dad-about__stat-n">{{ block.settings.number }}</div>
+          <div class="dad-about__stat-l">{{ block.settings.label }}</div>
+        </div>
+      {%- endfor -%}
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} STORY ROWS {%- endcomment -%}
+  {%- if story_blocks.size > 0 -%}
+    <section class="page-width dad-about__story">
+      {%- for block in story_blocks -%}
+        <div class="dad-about__story-row{% if block.settings.reverse %} is-reverse{% endif %}" {{ block.shopify_attributes }}>
+          <div class="dad-about__story-copy">
+            {%- if block.settings.eyebrow != blank -%}
+              <span class="dad-eyebrow">{{ block.settings.eyebrow }}</span>
+            {%- endif -%}
+            <h2 class="dad-about__story-heading">{{ block.settings.heading }}</h2>
+            <div class="dad-about__story-body rte">{{ block.settings.body }}</div>
+          </div>
+          <div class="dad-about__story-photo">
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 800 | image_tag: loading: 'lazy', widths: '400,600,800,1000', sizes: '(min-width: 750px) 50vw, 100vw' }}
+            {%- endif -%}
+            {%- if block.settings.pullquote != blank -%}
+              <div class="dad-about__pullquote">
+                {{ block.settings.pullquote }}
+                {%- if block.settings.pullquote_attribution != blank -%}
+                  <span class="dad-about__pullquote-attr">{{ block.settings.pullquote_attribution }}</span>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} TIMELINE {%- endcomment -%}
+  {%- if timeline_blocks.size > 0 -%}
+    <section class="dad-about__timeline">
+      <div class="page-width">
+        {%- if section.settings.timeline_heading != blank -%}
+          <h2 class="dad-about__timeline-heading">{{ section.settings.timeline_heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.timeline_lede != blank -%}
+          <p class="dad-about__lede">{{ section.settings.timeline_lede }}</p>
+        {%- endif -%}
+        <div class="dad-about__timeline-track">
+          {%- for block in timeline_blocks -%}
+            <div class="dad-about__tl-step{% if block.settings.milestone %} is-milestone{% endif %}" {{ block.shopify_attributes }}>
+              <div class="dad-about__tl-marker">{% if block.settings.milestone %}★{% else %}·{% endif %}</div>
+              <div class="dad-about__tl-year">{{ block.settings.year }}</div>
+              <div class="dad-about__tl-body">{{ block.settings.body }}</div>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} VALUES {%- endcomment -%}
+  {%- if value_blocks.size > 0 -%}
+    <section class="page-width dad-about__values">
+      {%- if section.settings.values_heading != blank -%}
+        <h2 class="dad-about__values-heading">{{ section.settings.values_heading }}</h2>
+      {%- endif -%}
+      <div class="dad-about__values-grid">
+        {%- for block in value_blocks -%}
+          <div class="dad-about__value" {{ block.shopify_attributes }}>
+            <span class="dad-about__value-num">{{ block.settings.number }}</span>
+            <h3 class="dad-about__value-heading">{{ block.settings.heading }}</h3>
+            <p class="dad-about__value-body">{{ block.settings.body }}</p>
+          </div>
+        {%- endfor -%}
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} TEAM {%- endcomment -%}
+  {%- if team_blocks.size > 0 -%}
+    <section class="dad-about__team">
+      <div class="page-width">
+        <div class="dad-about__team-head">
+          <div>
+            {%- if section.settings.team_eyebrow != blank -%}
+              <span class="dad-eyebrow">{{ section.settings.team_eyebrow }}</span>
+            {%- endif -%}
+            {%- if section.settings.team_heading != blank -%}
+              <h2 class="dad-about__team-heading">{{ section.settings.team_heading }}</h2>
+            {%- endif -%}
+          </div>
+          {%- if section.settings.team_subhead != blank -%}
+            <span class="dad-about__team-subhead">{{ section.settings.team_subhead }}</span>
+          {%- endif -%}
+        </div>
+        <div class="dad-about__team-grid">
+          {%- for block in team_blocks -%}
+            <div class="dad-about__member" {{ block.shopify_attributes }}>
+              <div class="dad-about__member-photo dad-about__member-photo--{{ block.settings.accent_color }}">
+                {%- if block.settings.photo != blank -%}
+                  {{ block.settings.photo | image_url: width: 600 | image_tag: loading: 'lazy', widths: '300,450,600', sizes: '(min-width: 990px) 25vw, 50vw' }}
+                {%- else -%}
+                  <div class="dad-about__placeholder dad-about__placeholder--{{ block.settings.accent_color }}">
+                    {{ block.settings.name | slice: 0, 1 }}
+                  </div>
+                {%- endif -%}
+              </div>
+              <h4 class="dad-about__member-name">{{ block.settings.name }}</h4>
+              <div class="dad-about__member-role">{{ block.settings.role }}</div>
+              <p class="dad-about__member-bio">{{ block.settings.bio }}</p>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} CTA {%- endcomment -%}
+  {%- if section.settings.cta_heading != blank -%}
+    <div class="page-width">
+      <div class="dad-about__cta">
+        {%- if section.settings.cta_eyebrow != blank -%}
+          <span class="dad-eyebrow dad-about__cta-eyebrow">{{ section.settings.cta_eyebrow }}</span>
+        {%- endif -%}
+        <h2 class="dad-about__cta-heading">
+          {{ section.settings.cta_heading }}
+          {%- if section.settings.cta_heading_accent != blank -%}
+            <span class="dad-script">{{ section.settings.cta_heading_accent }}</span>
+          {%- endif -%}
+        </h2>
+        {%- if section.settings.cta_body != blank -%}
+          <p class="dad-about__cta-body">{{ section.settings.cta_body }}</p>
+        {%- endif -%}
+        {%- if section.settings.cta_btn1_label != blank or section.settings.cta_btn2_label != blank -%}
+          <div class="dad-about__cta-actions">
+            {%- if section.settings.cta_btn1_label != blank -%}
+              <a href="{{ section.settings.cta_btn1_link | default: '#' }}" class="dad-about__cta-btn dad-about__cta-btn--primary">
+                {{ section.settings.cta_btn1_label }}
+              </a>
+            {%- endif -%}
+            {%- if section.settings.cta_btn2_label != blank -%}
+              <a href="{{ section.settings.cta_btn2_link | default: '#' }}" class="dad-about__cta-btn dad-about__cta-btn--ghost">
+                {{ section.settings.cta_btn2_label }}
+              </a>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  {%- endif -%}
+
+</div>
+
+{% schema %}
+{
+  "name": "About — Do-A-Dot",
+  "tag": "section",
+  "class": "dad-about-wrapper",
+  "settings": [
+    { "type": "header", "content": "Hero" },
+    { "type": "text", "id": "hero_eyebrow", "label": "Eyebrow", "default": "our story" },
+    { "type": "text", "id": "hero_heading", "label": "Heading", "default": "A kitchen-table experiment," },
+    { "type": "text", "id": "hero_heading_accent", "label": "Script accent (appears after heading)", "default": "thirty years in." },
+    { "type": "textarea", "id": "hero_lede", "label": "Lede", "default": "Do-A-Dot started in 1995 when a mom in San Clemente, California invented a non-drip marker for her two-year-old. Three decades later — still the same family, still the same idea: art should be easy enough for a toddler and clean enough for a parent." },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image" },
+
+    { "type": "header", "content": "Timeline" },
+    { "type": "text", "id": "timeline_heading", "label": "Heading", "default": "Thirty years, dot by dot." },
+    { "type": "textarea", "id": "timeline_lede", "label": "Lede", "default": "A short walk through the milestones that got us here." },
+
+    { "type": "header", "content": "Values" },
+    { "type": "text", "id": "values_heading", "label": "Heading", "default": "What we still believe." },
+
+    { "type": "header", "content": "Team" },
+    { "type": "text", "id": "team_eyebrow", "label": "Eyebrow", "default": "the people doing it" },
+    { "type": "text", "id": "team_heading", "label": "Heading", "default": "Meet the family." },
+    { "type": "text", "id": "team_subhead", "label": "Right-side note", "default": "nine of us, two dogs, one cat named Crayon." },
+
+    { "type": "header", "content": "CTA" },
+    { "type": "text", "id": "cta_eyebrow", "label": "Eyebrow", "default": "get colorful" },
+    { "type": "text", "id": "cta_heading", "label": "Heading", "default": "Ready to make the" },
+    { "type": "text", "id": "cta_heading_accent", "label": "Script accent (appears after heading)", "default": "happiest kind of mess?" },
+    { "type": "textarea", "id": "cta_body", "label": "Body", "default": "Markers, watercolors, chunky crayons — the whole craft closet, shipped direct from us to your front door." },
+    { "type": "text", "id": "cta_btn1_label", "label": "Primary button label", "default": "shop all" },
+    { "type": "url", "id": "cta_btn1_link", "label": "Primary button link" },
+    { "type": "text", "id": "cta_btn2_label", "label": "Ghost button label", "default": "see the color story" },
+    { "type": "url", "id": "cta_btn2_link", "label": "Ghost button link" }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        { "type": "text", "id": "number", "label": "Number / value", "default": "30" },
+        { "type": "textarea", "id": "label", "label": "Label", "default": "years of mess-free art, in business since 1995" }
+      ]
+    },
+    {
+      "type": "story_row",
+      "name": "Story row",
+      "settings": [
+        { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "how it started" },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "One mom. One ruined rug. One sponge." },
+        { "type": "richtext", "id": "body", "label": "Body" },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "pullquote", "label": "Pull-quote", "default": "I just wanted a marker that didn't ruin the rug." },
+        { "type": "text", "id": "pullquote_attribution", "label": "Pull-quote attribution", "default": "— Wendy, founder · 1995" },
+        { "type": "checkbox", "id": "reverse", "label": "Reverse layout (image on left)", "default": false }
+      ]
+    },
+    {
+      "type": "timeline_step",
+      "name": "Timeline step",
+      "settings": [
+        { "type": "text", "id": "year", "label": "Year", "default": "1995" },
+        { "type": "textarea", "id": "body", "label": "Body", "default": "Wendy invents the non-drip sponge tip in her kitchen." },
+        { "type": "checkbox", "id": "milestone", "label": "Highlight as milestone (brand-red star)", "default": false }
+      ]
+    },
+    {
+      "type": "value",
+      "name": "Value",
+      "settings": [
+        { "type": "text", "id": "number", "label": "Number (e.g. 01)", "default": "01" },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Easy enough for a toddler." },
+        { "type": "textarea", "id": "body", "label": "Body", "default": "Every product gets tested with a real two-year-old before it ships." }
+      ]
+    },
+    {
+      "type": "team_member",
+      "name": "Team member",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Name", "default": "Wendy" },
+        { "type": "text", "id": "role", "label": "Role", "default": "founder · still consulting" },
+        { "type": "textarea", "id": "bio", "label": "Bio", "default": "Invented the non-drip tip in 1995. Officially retired in 2022, unofficially still in the office every Tuesday." },
+        { "type": "image_picker", "id": "photo", "label": "Photo" },
+        {
+          "type": "select",
+          "id": "accent_color",
+          "label": "Placeholder color (used when no photo)",
+          "options": [
+            { "value": "pink",   "label": "Pink" },
+            { "value": "blue",   "label": "Blue" },
+            { "value": "yellow", "label": "Yellow" },
+            { "value": "green",  "label": "Green" },
+            { "value": "purple", "label": "Purple" }
+          ],
+          "default": "pink"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "About — Do-A-Dot",
+      "blocks": [
+        { "type": "stat", "settings": { "number": "30",   "label": "years of mess-free art, in business since 1995" } },
+        { "type": "stat", "settings": { "number": "12M+", "label": "markers in the wild — and counting" } },
+        { "type": "stat", "settings": { "number": "100%", "label": "family-owned, second generation running it" } },
+        { "type": "stat", "settings": { "number": "USA",  "label": "made in San Clemente, California since day one" } },
+
+        {
+          "type": "story_row",
+          "settings": {
+            "eyebrow": "how it started",
+            "heading": "One mom. One ruined rug. One sponge.",
+            "body": "<p>In the fall of 1995, our founder Wendy was trying to find a marker her two-year-old daughter could actually use. Every marker on the shelf either bled through paper, leaked all over fingers, or rolled off the table and onto the rug. (One did all three.)</p><p>She started experimenting in the kitchen — borrowing the sponge-tip mechanism from a different industry entirely — until she landed on something that wouldn't drip, wouldn't roll, and could survive a tight little fist. She named it Do-A-Dot. It was meant to be a one-off Christmas gift.</p><p>Twelve months later, every Crate & Barrel in the Midwest was carrying them.</p>",
+            "pullquote": "I just wanted a marker that didn't ruin the rug.",
+            "pullquote_attribution": "— Wendy, founder · 1995",
+            "reverse": false
+          }
+        },
+        {
+          "type": "story_row",
+          "settings": {
+            "eyebrow": "how it's going",
+            "heading": "Same family. Same idea. New craft closet.",
+            "body": "<p>Thirty years later, Wendy's daughter Jess and her husband Mark are running the business. They've spent the last few years working on something Wendy always wanted to do but never quite got to: <em>going beyond just markers</em>.</p><p>In 2026 we launched the first of those new tools — chunky crayons sized for the pincer grip, mess-free watercolor pans, a heavyweight pad that doesn't bleed through. All on the same idea Wendy started with: <em>easy enough for a toddler, clean enough for a parent</em>.</p><p>We still make almost everything in San Clemente. We still answer the customer-service email ourselves. The rugs, mostly, have been spared.</p>",
+            "pullquote": "My mom started it on a kitchen table. We're trying to do her proud.",
+            "pullquote_attribution": "— Jess & Mark · today",
+            "reverse": true
+          }
+        },
+
+        { "type": "timeline_step", "settings": { "year": "1995", "body": "Wendy invents the non-drip sponge tip in her kitchen. First retail order: 144 markers to a craft store in San Diego.", "milestone": true } },
+        { "type": "timeline_step", "settings": { "year": "2001", "body": "Walmart picks up Do-A-Dot Rainbow. The factory expands to a 6,000 sq-ft space.", "milestone": false } },
+        { "type": "timeline_step", "settings": { "year": "2008", "body": "Wendy ships the millionth marker. Featured on the Today Show with a class of pre-K painters.", "milestone": false } },
+        { "type": "timeline_step", "settings": { "year": "2015", "body": "Jess joins the business full-time after years of running e-commerce on the side.", "milestone": false } },
+        { "type": "timeline_step", "settings": { "year": "2022", "body": "Generational hand-off. Wendy retires; Jess & Mark take over operations and start work on the broader craft line.", "milestone": false } },
+        { "type": "timeline_step", "settings": { "year": "2026", "body": "The full craft closet launches direct on dotart.com — chunky crayons, watercolors, the works.", "milestone": true } },
+
+        { "type": "value", "settings": { "number": "01", "heading": "Easy enough for a toddler.", "body": "Every product gets tested with a real two-year-old before it ships. If they can't grip it, open it, or use it without our help — back to the drawing board." } },
+        { "type": "value", "settings": { "number": "02", "heading": "Clean enough for a parent.", "body": "Non-drip, non-toxic, washable, ASTM-certified. We don't ship anything that we wouldn't hand to our own kids and walk out of the room." } },
+        { "type": "value", "settings": { "number": "03", "heading": "Made in the USA, by us.", "body": "Almost everything we sell is made in San Clemente, California — by us, on machines we own, with materials sourced as close to home as we can get." } },
+        { "type": "value", "settings": { "number": "04", "heading": "Color is a conversation.", "body": "Every color we sell has a name — Piggy Pink, Tiger Tail Orange, Octopus Purple — because picking a color is the start of a story, not just a stroke." } },
+        { "type": "value", "settings": { "number": "05", "heading": "One product, done well.", "body": "We'd rather make eighteen excellent crayons than ninety mediocre ones. No fillers, no novelty, no shrinkflation. Just the thing." } },
+        { "type": "value", "settings": { "number": "06", "heading": "Mess is the point.", "body": "The whole brand is built on the idea that a little mess is good. We design for it. We expect it. We bought you the easier-to-clean version anyway." } },
+
+        { "type": "team_member", "settings": { "name": "Wendy", "role": "founder · still consulting", "bio": "Invented the non-drip tip in 1995. Officially retired in 2022, unofficially still in the office every Tuesday.", "accent_color": "pink" } },
+        { "type": "team_member", "settings": { "name": "Jess",  "role": "co-founder · ceo",            "bio": "Wendy's daughter. Took over operations in 2022. Spends most days arguing with sample packs of chunky crayons.", "accent_color": "blue" } },
+        { "type": "team_member", "settings": { "name": "Mark",  "role": "co-founder · operations",     "bio": "Jess's husband. Runs the warehouse and ships your bag. The reason your order leaves San Clemente in 1–2 days.", "accent_color": "yellow" } },
+        { "type": "team_member", "settings": { "name": "Renee", "role": "customer experience",         "bio": "The voice on the other end of every email. If you've ever returned a marker, you've already met her.", "accent_color": "green" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
