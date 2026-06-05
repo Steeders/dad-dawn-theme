@@ -139,32 +139,24 @@ a:hover {
   box-shadow: none !important;
 }
 
-/* ...then give Buy with Shop its own dark-purple "rising off the
-   page" shadow. Targeting the OUTER .shopify-payment-button
-   container — Shopify's runtime may override styles on the inner
-   button after it injects the iframe, so the outer wrapper is the
-   safest place to draw the shadow. */
-.shopify-payment-button {
+/* Purple "rising off the page" shadow — applied to the inner
+   __button so it only wraps the Buy with Shop button itself, not
+   the sibling "More payment options" link that also lives in the
+   .shopify-payment-button container. */
+.shopify-payment-button__button {
   position: relative;
   border-radius: var(--r-pill);
   box-shadow: 0 4px 0 0 #3D1FB5 !important;
   transition: box-shadow var(--dur-fast) var(--ease-out),
               transform var(--dur-fast) var(--ease-out);
 }
-.shopify-payment-button:hover {
+.shopify-payment-button__button:not([disabled]):hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 0 0 #3D1FB5 !important;
 }
-.shopify-payment-button:active {
+.shopify-payment-button__button:active {
   transform: translateY(0);
   box-shadow: 0 2px 0 0 #3D1FB5 !important;
-}
-/* Belt-and-suspenders: kill any shadow Shopify's runtime tries to set
-   on the inner button so we don't see a competing/red drop. */
-.shopify-payment-button__button,
-.shopify-payment-button__button--branded,
-.shopify-payment-button__button--unbranded {
-  box-shadow: none !important;
 }
 
 /* ============================================================
