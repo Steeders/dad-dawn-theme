@@ -139,44 +139,13 @@ a:hover {
   box-shadow: none !important;
 }
 
-/* Dark-purple shadow on the Shop Pay button so the lift effect on
-   hover reads as a brand-aligned 3D button. Note: Shop Pay's web
-   component (Shadow DOM) renders its own dark bottom edge for depth
-   that we cannot override from external CSS — visible as a thin
-   line below the button at rest. Our shadow stacks below it. */
-shop-pay-wallet-button {
-  display: block;
-  position: relative;
-  border-radius: var(--r-pill);
-  box-shadow: 0 4px 0 0 #3D1FB5 !important;
-  transition: box-shadow var(--dur-fast) var(--ease-out),
-              transform var(--dur-fast) var(--ease-out);
-}
-shop-pay-wallet-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 0 0 #3D1FB5 !important;
-}
-shop-pay-wallet-button:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 0 0 #3D1FB5 !important;
-}
-
-/* Defensive sweep: kill any pseudo-elements AND box-shadow on every
-   wrapper around Shop Pay. One of these is producing the mystery
-   red strip. */
-shop-pay-wallet-button::before,
-shop-pay-wallet-button::after,
-shopify-accelerated-checkout::before,
-shopify-accelerated-checkout::after,
-.shopify-payment-button::before,
-.shopify-payment-button::after {
-  display: none !important;
-  box-shadow: none !important;
-}
-shopify-accelerated-checkout,
-.shopify-payment-button {
-  box-shadow: none !important;
-}
+/* Buy with Shop — intentionally NOT styled. Shop Pay's web component
+   renders its own button design (Shadow DOM, brand-locked by Shopify).
+   The dark bottom "lip" you see on the rendered button is part of
+   Shop Pay's design and is not reachable from external CSS. Adding
+   our own shadow on top just stacked competing styling, so we leave
+   the stock Shop Pay button alone. Add to Cart still gets the full
+   brand treatment via .product-form__submit rules above. */
 
 /* ============================================================
    2. ANNOUNCEMENT BAR
