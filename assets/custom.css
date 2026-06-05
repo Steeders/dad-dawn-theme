@@ -130,15 +130,33 @@ a:hover {
   display: none !important;
 }
 
-/* Kill any drop shadow on Shop Pay and related payment buttons — they
-   inherit the customizer shadow but the brand-locked iframe makes it
-   look bleeding-red under the purple button. */
+/* Kill any drop shadow on the Shop Pay pseudo-elements first... */
 .shopify-payment-button__button::before,
 .shopify-payment-button__button--branded::before,
 .shopify-payment-button__button--unbranded::before,
 .shopify-payment-button [role="button"]::before {
   display: none !important;
   box-shadow: none !important;
+}
+
+/* ...then give Buy with Shop its own dark-purple "rising off the
+   page" shadow — same pattern as Add to Cart but matched to Shop
+   Pay's brand purple (#5A31F4 → darker for the shadow). The shadow
+   sits on the inner button element so it doesn't clip the iframe. */
+.shopify-payment-button__button {
+  position: relative;
+  border-radius: var(--r-pill);
+  box-shadow: 0 4px 0 0 #3D1FB5 !important;
+  transition: box-shadow var(--dur-fast) var(--ease-out),
+              transform var(--dur-fast) var(--ease-out);
+}
+.shopify-payment-button__button:not([disabled]):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 0 #3D1FB5 !important;
+}
+.shopify-payment-button__button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 0 0 #3D1FB5 !important;
 }
 
 /* ============================================================
