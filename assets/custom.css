@@ -693,13 +693,13 @@ shopify-accelerated-checkout,
   transform: translateY(0);
 }
 .product-form__submit:before {
-  box-shadow: 0 4px 0 0 #A4111D !important; /* color-mix(brand-red 70%, black) */
+  box-shadow: 0 4px 0 0 #FFEB3B !important; /* DEBUG: yellow to test if mystery red is from here */
 }
 .product-form__submit:not([disabled]):hover:before {
-  box-shadow: 0 6px 0 0 #A4111D !important;
+  box-shadow: 0 6px 0 0 #FFEB3B !important;
 }
 .product-form__submit:active:before {
-  box-shadow: 0 2px 0 0 #A4111D !important;
+  box-shadow: 0 2px 0 0 #FFEB3B !important;
 }
 
 /* Accordion / details rows (product description sections). */
