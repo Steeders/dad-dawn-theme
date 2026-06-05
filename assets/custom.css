@@ -45,6 +45,20 @@ h1, h2, h3, h4, h5, h6,
   text-wrap: balance;
 }
 
+/* Announcement bar — bump message size +20% for visibility.
+   Dawn h5 is 1.3rem desktop / 1.2rem mobile (13px / 12px); we go to
+   1.56rem / 1.45rem (~15.6px / ~14.5px). */
+.utility-bar .announcement-bar__message,
+.utility-bar .announcement-bar__message.h5 {
+  font-size: calc(var(--font-heading-scale) * 1.45rem);
+}
+@media only screen and (min-width: 750px) {
+  .utility-bar .announcement-bar__message,
+  .utility-bar .announcement-bar__message.h5 {
+    font-size: calc(var(--font-heading-scale) * 1.56rem);
+  }
+}
+
 /* Body copy in long-form areas — pretty wrap improves readability. */
 p {
   text-wrap: pretty;
