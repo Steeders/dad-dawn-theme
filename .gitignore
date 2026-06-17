@@ -8,3 +8,6 @@
 ehthumbs.db
 Thumbs.db
 .shopify
+
+# Local helper scripts (not part of the theme)
+push-theme.sh
