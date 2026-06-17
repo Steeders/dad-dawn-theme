@@ -21,44 +21,13 @@
     },
     "main-header": {
       "type": "dad-header",
+      "settings": {
+        "menu": "dad-main",
+        "mega_item": "Shop",
+        "enable_sticky": true,
+        "show_search": true
+      },
       "blocks": {
-        "col-dot-markers": {
-          "type": "shop_column",
-          "settings": {
-            "collection": "dot-markers-2",
-            "heading": "Dot Markers"
-          }
-        },
-        "col-books": {
-          "type": "shop_column",
-          "settings": {
-            "collection": "creative-activity-books-2",
-            "heading": "Activity Books"
-          }
-        },
-        "col-crayons": {
-          "type": "shop_column",
-          "settings": {
-            "collection": "crayons-coloring",
-            "heading": "Crayons & Coloring"
-          }
-        },
-        "shopby": {
-          "type": "shop_links",
-          "settings": {
-            "heading": "Shop by",
-            "link_1_label": "Best Sellers",
-            "link_1_url": "/collections/best-sellers",
-            "link_2_label": "Gift Bundles",
-            "link_2_url": "/collections/gift-bundles",
-            "link_3_label": "Gifts for Girls",
-            "link_3_url": "/collections/gifts-for-her",
-            "link_4_label": "Gifts for Boys",
-            "link_4_url": "/collections/gifts-for-him",
-            "link_5_label": "Shop All",
-            "link_5_url": "/collections/all"
-          }
-        },
         "promo": {
           "type": "shop_promo",
           "settings": {
@@ -68,30 +37,10 @@
             "button_label": "Shop best sellers",
             "button_url": "/collections/best-sellers"
           }
-        },
-        "res-about": {
-          "type": "resource_link",
-          "settings": {
-            "label": "About",
-            "url": "/pages/about"
-          }
-        },
-        "res-community": {
-          "type": "resource_link",
-          "settings": {
-            "label": "Community",
-            "url": "/pages/community"
-          }
         }
       },
       "block_order": [
-        "col-dot-markers",
-        "col-books",
-        "col-crayons",
-        "shopby",
-        "promo",
-        "res-about",
-        "res-community"
+        "promo"
       ]
     }
   },
