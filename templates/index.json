@@ -24,6 +24,17 @@
         "btn2_link": ""
       }
     },
+    "dad_category_tiles": {
+      "type": "dad-category-tiles",
+      "blocks": {
+        "tile-dot-markers": { "type": "tile", "settings": { "collection": "dot-markers-2", "heading": "Dot Markers" } },
+        "tile-watercolor": { "type": "tile", "settings": { "collection": "watercolor-collection", "heading": "Watercolor" } },
+        "tile-crayons": { "type": "tile", "settings": { "collection": "crayons-coloring", "heading": "Crayons" } },
+        "tile-activities": { "type": "tile", "settings": { "collection": "creative-activity-books-2", "heading": "Activities" } }
+      },
+      "block_order": ["tile-dot-markers", "tile-watercolor", "tile-crayons", "tile-activities"],
+      "settings": { "heading": "Shop by category", "columns_desktop": 4 }
+    },
     "rich_text": {
       "type": "rich-text",
       "blocks": {
@@ -191,6 +202,7 @@
   },
   "order": [
     "dad_hero",
+    "dad_category_tiles",
     "rich_text",
     "featured_collection",
     "collage",
