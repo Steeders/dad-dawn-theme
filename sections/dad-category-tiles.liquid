@@ -50,12 +50,10 @@
             {%- endif -%}
           </span>
           <span class="dad-cat__label">
-            <span class="dad-cat__text">
-              <span class="dad-cat__name">{{ tname }}</span>
-              {%- if block.settings.subtext != blank -%}<span class="dad-cat__sub">{{ block.settings.subtext }}</span>{%- endif -%}
-            </span>
+            <span class="dad-cat__name">{{ tname }}</span>
             <svg class="dad-cat__arrow" viewBox="0 0 16 16" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
           </span>
+          {%- if block.settings.subtext != blank -%}<span class="dad-cat__sub">{{ block.settings.subtext }}</span>{%- endif -%}
         </a>
       {%- endfor -%}
     </div>
@@ -69,15 +67,14 @@
 .dad-cats__title { font-family: var(--font-display); font-weight: 400; font-size: var(--fs-h2); color: var(--dad-ink); margin: 0; }
 .dad-cats__sub { font-family: var(--font-body); font-weight: 500; font-size: var(--fs-lead); color: var(--dad-ink-muted); margin: var(--s-2) 0 0; }
 .dad-cats__grid { display: grid; grid-template-columns: repeat(var(--cols, 4), minmax(0, 1fr)); gap: var(--s-6); }
-.dad-cat { display: flex; flex-direction: column; text-decoration: none; color: var(--dad-ink); }
+.dad-cat { display: flex; flex-direction: column; text-decoration: none; color: var(--dad-ink); text-align: center; }
 .dad-cat__media { display: block; overflow: hidden; border-radius: var(--r-lg); background: var(--dad-sky-tint); aspect-ratio: 4 / 5; box-shadow: var(--shadow-soft); }
 .dad-cat__img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform var(--dur-med) var(--ease-out); }
 .dad-cat:hover .dad-cat__img { transform: scale(1.04); }
-.dad-cat__label { margin-top: var(--s-3); display: flex; align-items: center; justify-content: space-between; gap: var(--s-3); }
-.dad-cat__text { display: flex; flex-direction: column; gap: 2px; }
+.dad-cat__label { margin-top: var(--s-3); display: flex; align-items: center; justify-content: center; gap: var(--s-2); }
 .dad-cat__name { font-family: var(--font-display); font-weight: 400; font-size: var(--fs-h3); line-height: var(--lh-snug); }
 .dad-cat:hover .dad-cat__name { color: var(--dad-brand-red); }
-.dad-cat__sub { font-family: var(--font-body); font-weight: 500; font-size: var(--fs-small); color: var(--dad-ink-muted); }
+.dad-cat__sub { display: block; font-family: var(--font-body); font-weight: 500; font-size: var(--fs-small); color: var(--dad-ink-muted); margin-top: 2px; }
 .dad-cat__arrow { flex: none; color: var(--dad-brand-red); transition: transform var(--dur-fast) var(--ease-out); }
 .dad-cat:hover .dad-cat__arrow { transform: translateX(4px); }
 @media screen and (max-width: 989px) { .dad-cats__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-5); } }

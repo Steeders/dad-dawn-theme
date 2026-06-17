@@ -27,7 +27,7 @@
     "dad_category_tiles": {
       "type": "dad-category-tiles",
       "blocks": {
-        "tile-dot-markers": { "type": "tile", "settings": { "collection": "dot-markers-2", "heading": "Dot Markers" } },
+        "tile-dot-markers": { "type": "tile", "settings": { "collection": "dot-markers-2", "heading": "Dot Markers", "image": "shopify://shop_images/DoaDot-DotMarkerEdits-8.jpg" } },
         "tile-watercolor": { "type": "tile", "settings": { "collection": "watercolor-collection", "heading": "Watercolor" } },
         "tile-crayons": { "type": "tile", "settings": { "collection": "crayons-coloring", "heading": "Crayons" } },
         "tile-activities": { "type": "tile", "settings": { "collection": "creative-activity-books-2", "heading": "Activities" } }
