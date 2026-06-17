@@ -27,13 +27,61 @@
     "dad_category_tiles": {
       "type": "dad-category-tiles",
       "blocks": {
-        "tile-dot-markers": { "type": "tile", "settings": { "collection": "dot-markers-2", "heading": "Dot Markers", "image": "shopify://shop_images/DoaDot-DotMarkerEdits-8.jpg" } },
-        "tile-watercolor": { "type": "tile", "settings": { "collection": "watercolor-collection", "heading": "Watercolor" } },
-        "tile-crayons": { "type": "tile", "settings": { "collection": "crayons-coloring", "heading": "Crayons" } },
-        "tile-activities": { "type": "tile", "settings": { "collection": "creative-activity-books-2", "heading": "Activities" } }
+        "tile-dot-markers": {
+          "type": "tile",
+          "settings": {
+            "collection": "dot-markers-2",
+            "image": "shopify://shop_images/DoaDot-DotMarkerEdits-8.jpg",
+            "heading": "Dot Markers",
+            "subtext": "",
+            "link": ""
+          }
+        },
+        "tile-watercolor": {
+          "type": "tile",
+          "settings": {
+            "collection": "watercolor-collection",
+            "image": "shopify://shop_images/2026-05-01_Do-a-Dot_batch1-95.webp",
+            "heading": "Watercolors",
+            "subtext": "",
+            "link": ""
+          }
+        },
+        "tile-crayons": {
+          "type": "tile",
+          "settings": {
+            "collection": "crayons-coloring",
+            "image": "shopify://shop_images/2026-05-01_Do-a-Dot_batch1-4.webp",
+            "heading": "Crayons",
+            "subtext": "",
+            "link": ""
+          }
+        },
+        "tile-activities": {
+          "type": "tile",
+          "settings": {
+            "collection": "creative-activity-books-2",
+            "image": "shopify://shop_images/DoaDot-DotMarkerEdits-36.webp",
+            "heading": "Activities",
+            "subtext": "",
+            "link": ""
+          }
+        }
       },
-      "block_order": ["tile-dot-markers", "tile-watercolor", "tile-crayons", "tile-activities"],
-      "settings": { "heading": "Shop by category", "columns_desktop": 4 }
+      "block_order": [
+        "tile-dot-markers",
+        "tile-watercolor",
+        "tile-crayons",
+        "tile-activities"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "columns_desktop": 4,
+        "color_scheme": "",
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
     },
     "rich_text": {
       "type": "rich-text",
