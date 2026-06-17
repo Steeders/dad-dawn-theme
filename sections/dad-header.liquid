@@ -1,33 +1,30 @@
 {%- comment -%}
   DAD CUSTOM HEADER — Do-A-Dot Art
-  Menu-driven header. Reads a native Shopify menu (section.settings.menu):
-    - Top-level item matching `mega_item` (default "Shop") renders as a
-      full-width mega menu. Its leaf children render as image cards (image
-      auto-resolved from the linked collection); a child that itself has
-      children renders as a text column (e.g. "Shop by").
-    - Any other top-level item with children renders as a dropdown (e.g.
-      "Resources" -> About / Community).
+  Menu-driven header (reads section.settings.menu). Graza-style mega menu:
+    - The top-level item matching `mega_item` (default "Shop") opens a
+      full-width mega menu. Its child GROUPS render as text-link columns,
+      EXCEPT the group matching `featured_group` (default "Featured"), which
+      renders as a row of image cards with captions (images auto-resolved
+      from each linked collection/product).
+    - Other top-level items with children render as a dropdown (Resources).
     - A leaf top-level item renders as a plain link.
-  The promo tile is a section block (menus can't carry promo content).
   New section — Dawn's stock header.liquid is untouched. Tokens: dad-tokens.css.
 {%- endcomment -%}
 
 {%- liquid
   assign main = linklists[section.settings.menu]
   assign mega_title = section.settings.mega_item | default: 'Shop'
-  assign shop_promo = section.blocks | where: 'type', 'shop_promo'
+  assign featured_title = section.settings.featured_group | default: 'Featured'
 -%}
 
 <dad-header class="dad-header" data-sticky="{{ section.settings.enable_sticky }}">
   <div class="dad-header__bar">
-    {%- comment -%} Mobile hamburger {%- endcomment -%}
     <button type="button" class="dad-header__icon dad-header__burger" aria-label="Open menu" aria-expanded="false" data-drawer-toggle>
       <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
         <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
       </svg>
     </button>
 
-    {%- comment -%} Logo {%- endcomment -%}
     <a href="{{ routes.root_url }}" class="dad-header__logo" aria-label="{{ shop.name | escape }} — home">
       {%- if section.settings.logo != blank -%}
         {{ section.settings.logo | image_url: width: 600 | image_tag:
@@ -39,7 +36,6 @@
       {%- endif -%}
     </a>
 
-    {%- comment -%} Desktop nav (menu-driven) {%- endcomment -%}
     <nav class="dad-header__nav" aria-label="Primary">
       {%- for link in main.links -%}
         {%- if link.title == mega_title and link.links.size > 0 -%}
@@ -50,74 +46,55 @@
             </button>
             <div class="dad-mega" id="dad-mega-shop" data-nav-panel hidden>
               <div class="dad-mega__inner">
-                <div class="dad-mega__grid">
-                  {%- for child in link.links -%}
-                    {%- if child.links.size > 0 -%}
-                      <div class="dad-mega__col dad-mega__col--links">
-                        <p class="dad-mega__col-title">{{ child.title }}</p>
-                        <ul class="dad-mega__sublist">
-                          {%- for sub in child.links -%}
-                            <li><a href="{{ sub.url }}">{{ sub.title }}</a></li>
+                <div class="dad-mega__layout">
+                  <div class="dad-mega__cols">
+                    {%- for group in link.links -%}
+                      {%- if group.title != featured_title and group.links.size > 0 -%}
+                        <div class="dad-mega__col">
+                          <p class="dad-mega__col-title">{{ group.title }}</p>
+                          <ul class="dad-mega__sublist">
+                            {%- for sub in group.links -%}
+                              <li><a href="{{ sub.url }}">{{ sub.title }}</a></li>
+                            {%- endfor -%}
+                          </ul>
+                        </div>
+                      {%- endif -%}
+                    {%- endfor -%}
+                  </div>
+
+                  {%- for group in link.links -%}
+                    {%- if group.title == featured_title and group.links.size > 0 -%}
+                      <div class="dad-mega__featured">
+                        <p class="dad-mega__col-title">{{ group.title }}</p>
+                        <div class="dad-mega__featured-row">
+                          {%- for item in group.links -%}
+                            {%- liquid
+                              assign fimg = null
+                              assign fobj = item.object
+                              if item.type == 'collection_link' and fobj != blank
+                                if fobj.image != blank
+                                  assign fimg = fobj.image
+                                elsif fobj.products.first != blank
+                                  assign fimg = fobj.products.first.featured_image
+                                endif
+                              elsif item.type == 'product_link' and fobj != blank
+                                assign fimg = fobj.featured_image
+                              endif
+                            -%}
+                            <a class="dad-mega__fcard" href="{{ item.url }}">
+                              <span class="dad-mega__fcard-media">
+                                {%- if fimg != blank -%}
+                                  {{ fimg | image_url: width: 360 | image_tag:
+                                    loading: 'lazy', widths: '160, 260, 360', sizes: '200px',
+                                    alt: item.title, class: 'dad-mega__fcard-img' }}
+                                {%- endif -%}
+                              </span>
+                              <span class="dad-mega__fcard-cap">{{ item.title }}</span>
+                            </a>
                           {%- endfor -%}
-                        </ul>
-                      </div>
-                    {%- else -%}
-                      {%- liquid
-                        assign card_img = null
-                        assign coll = child.object
-                        if child.type == 'collection_link' and coll != blank
-                          if coll.image != blank
-                            assign card_img = coll.image
-                          elsif coll.products.first != blank
-                            assign card_img = coll.products.first.featured_image
-                          endif
-                        endif
-                      -%}
-                      <div class="dad-mega__col">
-                        <a class="dad-mega__card" href="{{ child.url }}">
-                          <span class="dad-mega__card-media">
-                            {%- if card_img != blank -%}
-                              {{ card_img | image_url: width: 420 | image_tag:
-                                loading: 'lazy', widths: '180, 280, 420', sizes: '220px',
-                                alt: child.title, class: 'dad-mega__card-img' }}
-                            {%- endif -%}
-                          </span>
-                          <span class="dad-mega__card-heading">{{ child.title }}</span>
-                        </a>
+                        </div>
                       </div>
                     {%- endif -%}
-                  {%- endfor -%}
-
-                  {%- for block in shop_promo -%}
-                    {%- liquid
-                      assign promo_col = block.settings.collection
-                      assign promo_url = block.settings.button_url
-                      if promo_url == blank and promo_col != blank
-                        assign promo_url = promo_col.url
-                      endif
-                      if promo_url == blank
-                        assign promo_url = routes.all_products_collection_url
-                      endif
-                      assign promo_img = block.settings.image
-                      if promo_img == blank and promo_col != blank and promo_col.image != blank
-                        assign promo_img = promo_col.image
-                      endif
-                      if promo_img == blank and promo_col != blank and promo_col.products.first != blank
-                        assign promo_img = promo_col.products.first.featured_image
-                      endif
-                    -%}
-                    <a class="dad-mega__promo" href="{{ promo_url }}" {{ block.shopify_attributes }}>
-                      {%- if promo_img != blank -%}
-                        {{ promo_img | image_url: width: 600 | image_tag:
-                          loading: 'lazy', widths: '300, 460, 600', sizes: '320px',
-                          alt: block.settings.heading, class: 'dad-mega__promo-img' }}
-                      {%- endif -%}
-                      <span class="dad-mega__promo-body">
-                        {%- if block.settings.heading != blank -%}<span class="dad-mega__promo-heading">{{ block.settings.heading }}</span>{%- endif -%}
-                        {%- if block.settings.text != blank -%}<span class="dad-mega__promo-text">{{ block.settings.text }}</span>{%- endif -%}
-                        {%- if block.settings.button_label != blank -%}<span class="dad-mega__promo-btn">{{ block.settings.button_label }}</span>{%- endif -%}
-                      </span>
-                    </a>
                   {%- endfor -%}
                 </div>
               </div>
@@ -143,7 +120,6 @@
       {%- endfor -%}
     </nav>
 
-    {%- comment -%} Right-side icons {%- endcomment -%}
     <div class="dad-header__actions">
       {%- if section.settings.show_search -%}
         <a href="{{ routes.search_url }}" class="dad-header__icon" aria-label="Search">
@@ -213,28 +189,26 @@
 .dad-header__cart-count.is-empty { display: none; }
 .dad-header__burger { display: none; }
 
-/* Mega panel */
-.dad-mega { position: absolute; left: 0; right: 0; top: 100%; background: var(--dad-white); border-top: 1px solid var(--dad-rule); box-shadow: var(--shadow-soft); max-height: min(72vh, 560px); overflow-y: auto; overscroll-behavior: contain; }
+/* Mega panel — Graza layout: text columns + featured row */
+.dad-mega { position: absolute; left: 0; right: 0; top: 100%; background: var(--dad-white); border-top: 1px solid var(--dad-rule); box-shadow: var(--shadow-soft); max-height: min(72vh, 540px); overflow-y: auto; overscroll-behavior: contain; }
 .dad-mega[hidden], .dad-dropdown[hidden], .dad-drawer[hidden] { display: none; }
-.dad-mega__inner { max-width: 1180px; margin: 0 auto; padding: var(--s-6) var(--s-6) var(--s-8); }
-.dad-mega__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: var(--s-5) var(--s-6); align-items: start; }
-.dad-mega__col--links { padding-top: var(--s-1); }
-.dad-mega__card { display: flex; flex-direction: column; gap: var(--s-2); text-decoration: none; color: var(--dad-ink); }
-.dad-mega__card-media { display: block; overflow: hidden; border-radius: var(--r-md); background: var(--dad-sky-tint); height: clamp(120px, 11vw, 150px); }
-.dad-mega__card-img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform var(--dur-med) var(--ease-out); }
-.dad-mega__card:hover .dad-mega__card-img { transform: scale(1.05); }
-.dad-mega__card-heading { font-family: var(--font-display); font-size: var(--fs-h3); line-height: var(--lh-snug); }
-.dad-mega__card:hover .dad-mega__card-heading { color: var(--dad-brand-red); }
-.dad-mega__col-title { font-family: var(--font-body); font-weight: 700; text-transform: lowercase; color: var(--dad-ink-soft); font-size: var(--fs-small); letter-spacing: var(--tracking-allcaps); margin: 0 0 var(--s-3); }
-.dad-mega__sublist { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--s-2); }
-.dad-mega__sublist a { text-decoration: none; color: var(--dad-ink-muted); font-weight: 500; font-size: var(--fs-body); transition: color var(--dur-fast) var(--ease-out); }
+.dad-mega__inner { max-width: 1180px; margin: 0 auto; padding: var(--s-8) var(--s-6); }
+.dad-mega__layout { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--s-12); align-items: start; }
+.dad-mega__cols { display: grid; grid-template-columns: repeat(2, minmax(150px, max-content)); gap: var(--s-6) var(--s-10); }
+.dad-mega__col-title { font-family: var(--font-body); font-weight: 700; color: var(--dad-ink-soft); font-size: var(--fs-small); letter-spacing: var(--tracking-allcaps); text-transform: uppercase; margin: 0 0 var(--s-4); }
+.dad-mega__sublist { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--s-3); }
+.dad-mega__sublist a { text-decoration: none; color: var(--dad-ink); font-weight: 600; font-size: var(--fs-body); transition: color var(--dur-fast) var(--ease-out); }
 .dad-mega__sublist a:hover { color: var(--dad-brand-red); }
-.dad-mega__promo { display: flex; flex-direction: column; text-decoration: none; color: var(--dad-ink); background: var(--dad-yellow-tint); border-radius: var(--r-lg); overflow: hidden; }
-.dad-mega__promo-img { width: 100%; height: clamp(130px, 13vw, 180px); object-fit: cover; display: block; }
-.dad-mega__promo-body { display: flex; flex-direction: column; gap: var(--s-1); padding: var(--s-5); }
-.dad-mega__promo-heading { font-family: var(--font-display); font-size: var(--fs-h3); }
-.dad-mega__promo-text { color: var(--dad-ink-muted); font-size: var(--fs-small); }
-.dad-mega__promo-btn { margin-top: var(--s-2); align-self: flex-start; background: var(--dad-brand-red); color: #fff; font-weight: 700; padding: var(--s-2) var(--s-5); border-radius: var(--r-pill); font-size: var(--fs-small); }
+.dad-mega__featured-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: var(--s-5); }
+.dad-mega__fcard { display: flex; flex-direction: column; gap: var(--s-2); text-decoration: none; color: var(--dad-ink); text-align: center; }
+.dad-mega__fcard-media { display: block; overflow: hidden; border-radius: var(--r-md); background: var(--dad-sky-tint); height: clamp(110px, 10vw, 150px); }
+.dad-mega__fcard-img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform var(--dur-med) var(--ease-out); }
+.dad-mega__fcard:hover .dad-mega__fcard-img { transform: scale(1.05); }
+.dad-mega__fcard-cap { font-family: var(--font-display); font-size: var(--fs-h4); line-height: var(--lh-snug); }
+.dad-mega__fcard:hover .dad-mega__fcard-cap { color: var(--dad-brand-red); }
+@media screen and (max-width: 1040px) {
+  .dad-mega__layout { grid-template-columns: 1fr; gap: var(--s-8); }
+}
 
 /* Resources dropdown */
 .dad-dropdown { position: absolute; top: 100%; background: var(--dad-white); border: 1px solid var(--dad-rule); border-radius: var(--r-md); box-shadow: var(--shadow-soft); padding: var(--s-3); min-width: 200px; margin-top: -1px; }
@@ -332,23 +306,9 @@ if (!customElements.get('dad-header')) customElements.define('dad-header', DadHe
     { "type": "image_picker", "id": "logo", "label": "Logo" },
     { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu", "info": "Top-level items become nav links. The item named below becomes the mega menu." },
     { "type": "text", "id": "mega_item", "label": "Mega menu item (by title)", "default": "Shop" },
+    { "type": "text", "id": "featured_group", "label": "Featured group (by title)", "default": "Featured", "info": "Inside the mega item, this child group renders as image cards instead of a text column." },
     { "type": "checkbox", "id": "enable_sticky", "label": "Sticky header", "default": true },
     { "type": "checkbox", "id": "show_search", "label": "Show search icon", "default": true }
-  ],
-  "blocks": [
-    {
-      "type": "shop_promo",
-      "name": "Mega menu promo tile",
-      "limit": 1,
-      "settings": [
-        { "type": "collection", "id": "collection", "label": "Collection", "info": "Used for the link and image when those are left blank." },
-        { "type": "image_picker", "id": "image", "label": "Image (overrides collection image)" },
-        { "type": "text", "id": "heading", "label": "Heading" },
-        { "type": "text", "id": "text", "label": "Text" },
-        { "type": "text", "id": "button_label", "label": "Button label" },
-        { "type": "url", "id": "button_url", "label": "Button link" }
-      ]
-    }
   ]
 }
 {% endschema %}

@@ -29,24 +29,10 @@
     },
     "main-header": {
       "type": "dad-header",
-      "blocks": {
-        "promo": {
-          "type": "shop_promo",
-          "settings": {
-            "collection": "best-sellers",
-            "heading": "Best Sellers",
-            "text": "Our most-loved craft kits",
-            "button_label": "Shop best sellers",
-            "button_url": "/collections/best-sellers"
-          }
-        }
-      },
-      "block_order": [
-        "promo"
-      ],
       "settings": {
         "menu": "dad-main",
         "mega_item": "Shop",
+        "featured_group": "Featured",
         "enable_sticky": true,
         "show_search": true
       }
