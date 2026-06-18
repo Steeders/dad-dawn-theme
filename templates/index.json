@@ -114,6 +114,57 @@
         "padding_bottom": 0
       }
     },
+    "dad_why_dot": {
+      "type": "dad-why-dot",
+      "blocks": {
+        "promise-1": {
+          "type": "promise",
+          "settings": {
+            "dot_color": "yellow",
+            "title": "Mess-free, parent-proof",
+            "body": "Non-drip sponge tips & wash-out inks. Drop the marker — keep the rug."
+          }
+        },
+        "promise-2": {
+          "type": "promise",
+          "settings": {
+            "dot_color": "green",
+            "title": "Non-toxic. Made for ages 1+",
+            "body": "Pediatric-safe formulas. ASTM D-4236 certified. Tested by tiny hands."
+          }
+        },
+        "promise-3": {
+          "type": "promise",
+          "settings": {
+            "dot_color": "pink-small",
+            "title": "Built for chubby fingers",
+            "body": "Chunky barrels and grippy bodies sized for the smallest pincer grip."
+          }
+        },
+        "promise-4": {
+          "type": "promise",
+          "settings": {
+            "dot_color": "blue",
+            "title": "30 years of tiny artists",
+            "body": "American family business, dot by dot, since 1995. Still us, still here."
+          }
+        }
+      },
+      "block_order": [
+        "promise-1",
+        "promise-2",
+        "promise-3",
+        "promise-4"
+      ],
+      "settings": {
+        "eyebrow": "why do-a-dot",
+        "heading": "Why parents keep coming back.",
+        "columns": 4,
+        "color_scheme": "",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
     "featured_collection": {
       "type": "featured-collection",
       "disabled": true,
@@ -267,62 +318,11 @@
       ],
       "settings": {
         "eyebrow": "shop by craft",
-        "heading": "Pick a tool. Make a mess.",
+        "heading": "Pick a tool. Make a memory.",
         "layout": "feature",
         "color_scheme": "",
         "padding_top": 64,
         "padding_bottom": 64
-      }
-    },
-    "dad_why_dot": {
-      "type": "dad-why-dot",
-      "blocks": {
-        "promise-1": {
-          "type": "promise",
-          "settings": {
-            "dot_color": "yellow",
-            "title": "Mess-free, parent-proof",
-            "body": "Non-drip sponge tips & wash-out inks. Drop the marker — keep the rug."
-          }
-        },
-        "promise-2": {
-          "type": "promise",
-          "settings": {
-            "dot_color": "green",
-            "title": "Non-toxic. Made for ages 1+",
-            "body": "Pediatric-safe formulas. ASTM D-4236 certified. Tested by tiny hands."
-          }
-        },
-        "promise-3": {
-          "type": "promise",
-          "settings": {
-            "dot_color": "pink-small",
-            "title": "Built for chubby fingers",
-            "body": "Chunky barrels and grippy bodies sized for the smallest pincer grip."
-          }
-        },
-        "promise-4": {
-          "type": "promise",
-          "settings": {
-            "dot_color": "blue",
-            "title": "30 years of tiny artists",
-            "body": "American family business, dot by dot, since 1995. Still us, still here."
-          }
-        }
-      },
-      "block_order": [
-        "promise-1",
-        "promise-2",
-        "promise-3",
-        "promise-4"
-      ],
-      "settings": {
-        "eyebrow": "why do-a-dot",
-        "heading": "Why parents keep coming back.",
-        "columns": 4,
-        "color_scheme": "",
-        "padding_top": 80,
-        "padding_bottom": 80
       }
     }
   },
