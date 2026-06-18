@@ -191,6 +191,19 @@
     "dad_shop_by_craft": {
       "type": "dad-shop-by-craft",
       "blocks": {
+        "card-dot-markers": {
+          "type": "card",
+          "settings": {
+            "kicker": "classic",
+            "title": "Dot Markers",
+            "subtext": "A perfect fit for those little fingers.",
+            "collection": "dot-markers-2",
+            "link": "",
+            "cta_label": "shop dot markers",
+            "image": "shopify://shop_images/DoaDot-DotMarkerEdits-18.jpg",
+            "bg_color": "#e9f6fd"
+          }
+        },
         "card-crayons": {
           "type": "card",
           "settings": {
@@ -201,18 +214,6 @@
             "link": "",
             "cta_label": "shop chunky crayons",
             "bg_color": "#fde6f0"
-          }
-        },
-        "card-dot-markers": {
-          "type": "card",
-          "settings": {
-            "kicker": "classic",
-            "title": "Dot Markers",
-            "subtext": "",
-            "collection": "dot-markers-2",
-            "link": "",
-            "cta_label": "shop dot markers",
-            "bg_color": "#e9f6fd"
           }
         },
         "card-watercolors": {
@@ -253,8 +254,8 @@
         }
       },
       "block_order": [
-        "card-crayons",
         "card-dot-markers",
+        "card-crayons",
         "card-watercolors",
         "card-bundles",
         "card-extras"
