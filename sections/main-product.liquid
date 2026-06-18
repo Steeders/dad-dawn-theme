@@ -91,7 +91,21 @@
         >
           {%- assign product_form_id = 'product-form-' | append: section.id -%}
 
+          {%- comment -%}
+            dad seam: wrap the quantity + buy_buttons blocks in one flex row
+            so they render on a single line (styled in custom.css via
+            .dad-buybar). Flag-guarded so reordering/removing a block can
+            never emit unbalanced markup. theme-check's HTML parser can't
+            follow the conditional open/close across the flag, so disable
+            UnclosedHTMLElement for this block only (the div IS balanced at
+            runtime — verified in browser).
+          {%- endcomment -%}
+          {% # theme-check-disable UnclosedHTMLElement %}
           {%- for block in section.blocks -%}
+            {%- if block.type == 'quantity_selector' -%}
+              {%- assign dad_buybar_open = true -%}
+              <div class="dad-buybar">
+            {%- endif -%}
             {%- case block.type -%}
               {%- when '@app' -%}
                 {% render block %}
@@ -681,7 +695,13 @@
               {%- when 'icon-with-text' -%}
                 {% render 'icon-with-text', block: block %}
             {%- endcase -%}
+            {%- if block.type == 'buy_buttons' and dad_buybar_open -%}
+              </div>
+              {%- assign dad_buybar_open = false -%}
+            {%- endif -%}
           {%- endfor -%}
+          {%- if dad_buybar_open -%}</div>{%- endif -%}
+          {% # theme-check-enable UnclosedHTMLElement %}
           <a href="{{ product.url }}" class="link product__view-details animate-arrow">
             {{ 'products.product.view_full_details' | t }}
             {{- 'icon-arrow.svg' | inline_asset_content -}}

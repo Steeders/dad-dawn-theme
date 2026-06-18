@@ -39,7 +39,7 @@
                 autocomplete="email"
                 required
               >
-              <button type="submit" class="dad-mail__btn">{{ section.settings.button_label | default: 'join the club' }}</button>
+              <button type="submit" class="dad-mail__btn dad-btn--pop">{{ section.settings.button_label | default: 'join the club' }}</button>
             </div>
             {%- if form.errors -%}<p class="dad-mail__error">{{ form.errors | default_errors }}</p>{%- endif -%}
           {%- endif -%}
@@ -53,16 +53,17 @@
 
 {% stylesheet %}
 .dad-mail { padding-left: var(--s-5); padding-right: var(--s-5); }
-.dad-mail__card { max-width: 1100px; margin: 0 auto; border-radius: var(--r-xl); padding: var(--s-12) var(--s-12); display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-10); align-items: center; }
+.dad-mail__card { max-width: 1100px; margin: 0 auto; border: 1.5px solid var(--dad-ink); border-radius: var(--r-xl); padding: var(--s-12) var(--s-12); display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-10); align-items: center; }
 .dad-mail__title { font-family: var(--font-display); font-weight: 400; font-size: var(--fs-h2); line-height: var(--lh-tight); color: var(--dad-ink); margin: 0; }
 .dad-mail__body { font-family: var(--font-body); font-weight: 500; font-size: var(--fs-small); line-height: var(--lh-normal); color: var(--dad-ink); margin-top: var(--s-3); max-width: 42ch; }
 .dad-mail__body p { margin: 0; }
 
 .dad-mail__row { display: flex; gap: var(--s-2); align-items: stretch; }
-.dad-mail__input { flex: 1; min-width: 0; padding: 13px 16px; border: 1.5px solid var(--dad-rule); border-radius: var(--r-pill); background: var(--dad-white); font-family: var(--font-body); font-size: var(--fs-small); color: var(--dad-ink); }
+.dad-mail__input { flex: 1; min-width: 0; padding: 13px 16px; border: 1.5px solid var(--dad-ink); border-radius: var(--r-pill); background: var(--dad-white); font-family: var(--font-body); font-size: var(--fs-small); color: var(--dad-ink); }
 .dad-mail__input:focus { outline: none; box-shadow: var(--shadow-focus); border-color: var(--dad-hot-pink); }
-.dad-mail__btn { flex: none; padding: 13px 24px; border: 0; border-radius: var(--r-pill); background: var(--dad-brand-red); color: var(--dad-white); font-family: var(--font-body); font-weight: 700; font-size: var(--fs-small); cursor: pointer; transition: transform var(--dur-fast) var(--ease-out), filter var(--dur-fast) var(--ease-out); }
-.dad-mail__btn:hover { transform: translateY(-1px); filter: brightness(1.05); }
+/* Layout only — the visual treatment (fill, shadow, hover, press) comes
+   from the shared .dad-btn--pop standard in custom.css. */
+.dad-mail__btn { flex: none; padding: 13px 24px; border: 0; border-radius: var(--r-pill); font-family: var(--font-body); font-weight: 700; font-size: var(--fs-small); cursor: pointer; }
 .dad-mail__consent { font-family: var(--font-body); font-size: var(--fs-micro); color: var(--dad-ink-muted); margin: var(--s-3) 0 0; }
 .dad-mail__success { font-family: var(--font-body); font-weight: 700; color: var(--dad-ink); margin: 0; }
 .dad-mail__error { font-family: var(--font-body); font-size: var(--fs-micro); color: var(--dad-brand-red); margin: var(--s-2) 0 0; }

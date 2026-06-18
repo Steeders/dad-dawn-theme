@@ -1092,38 +1092,124 @@ a:hover {
   }
 }
 
-/* Add to Cart — the design's .btn.pop port verbatim.
-   Brand-red bg + matching darker-red hard-offset shadow (4px at
-   rest, 6px on hover). The button lifts 2px on hover (overriding
-   the global -1px) so the bottom of the shadow stays in place
-   while the "side" of the button grows from 4px to 6px tall.
-   That's the "rising off the page" effect.
+/* ============================================================
+   STANDARD PRIMARY BUTTON — .dad-btn--pop
+   ------------------------------------------------------------
+   The brand's primary CTA, ported from the design's .btn.pop:
+   brand-red fill + a deeper-red hard-offset shadow (4px at rest
+   → 6px on hover → 2px on press). On hover the button lifts 2px
+   while the shadow grows 2px, so the shadow's bottom edge stays
+   planted and the button "rises off the page".
 
-   Source: storefront.css lines 157-162 (.shop .btn.pop). */
+   THIS IS THE STANDARD. Any primary button across the site should
+   carry the `dad-btn--pop` class so every CTA looks identical.
+   Add to Cart (.product-form__submit) and the newsletter "join the
+   club" button (.dad-mail__btn) are aliased below to share these
+   exact rules.
+
+   Shadow colour derives from --accent via color-mix (no hardcoded
+   hex) and is held in --_pop-shadow so the offsets don't repeat it.
+   The !important on the shadow is required to beat Dawn's
+   customizer rule `.button:before { box-shadow: none !important }`.
+   Source: storefront.css (.shop .btn.pop). */
+.dad-btn--pop,
 .product-form__submit,
 .product-form__submit.button,
 .product-form__submit.button--primary {
+  --_pop-shadow: color-mix(in srgb, var(--accent) 70%, black);
+  position: relative;
+  /* own stacking context so the z-index:-1 shadow ::before stays behind
+     THIS button (not behind a coloured ancestor like the pink mail card).
+     Without this the rest-state shadow vanishes on tinted backgrounds and
+     only reappears on hover, when the transform creates a context. */
+  isolation: isolate;
   background: var(--accent);
   color: var(--fg-inverse);
   border-color: var(--accent);
+  transition: transform var(--dur-fast) var(--ease-out),
+              box-shadow var(--dur-fast) var(--ease-out);
 }
-.product-form__submit:hover,
-.product-form__submit.button:hover {
+.dad-btn--pop::before,
+.product-form__submit::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  box-shadow: 0 4px 0 0 var(--_pop-shadow) !important;
+  transition: box-shadow var(--dur-fast) var(--ease-out);
+}
+.dad-btn--pop:not([disabled]):hover,
+.product-form__submit:not([disabled]):hover {
   background: var(--accent);
   border-color: var(--accent);
   transform: translateY(-2px);
 }
+.dad-btn--pop:not([disabled]):hover::before,
+.product-form__submit:not([disabled]):hover::before {
+  box-shadow: 0 6px 0 0 var(--_pop-shadow) !important;
+}
+.dad-btn--pop:active,
 .product-form__submit:active {
   transform: translateY(0);
 }
-.product-form__submit:before {
-  box-shadow: 0 4px 0 0 #A4111D !important; /* color-mix(brand-red 70%, black) */
+.dad-btn--pop:active::before,
+.product-form__submit:active::before {
+  box-shadow: 0 2px 0 0 var(--_pop-shadow) !important;
 }
-.product-form__submit:not([disabled]):hover:before {
-  box-shadow: 0 6px 0 0 #A4111D !important;
-}
-.product-form__submit:active:before {
-  box-shadow: 0 2px 0 0 #A4111D !important;
+
+/* ── PDP: quantity + Add to Cart on one row ──────────────────────────
+   The quantity_selector and buy_buttons blocks are wrapped together in a
+   .dad-buybar flex row (see the guarded seam in main-product.liquid).
+   We deliberately do NOT flex .product__info-container itself — that kills
+   normal margin-collapsing and throws spacing off for every block in the
+   column (title, price, etc.). Scoping the flex to just these two leaves
+   the rest of the column pristine.
+   Both controls are ~48px tall; we bottom-align them so they read as two
+   matched pills, with the "quantity" label floating above the left one.
+   Desktop/tablet only; on mobile .dad-buybar is a plain block and the two
+   blocks stack as in stock Dawn. */
+@media (min-width: 750px) {
+  .dad-buybar {
+    display: flex;
+    align-items: flex-end;
+    column-gap: var(--s-4);
+  }
+  /* left: quantity pill hugs its content */
+  .dad-buybar > .product-form__quantity {
+    flex: 0 0 auto;
+    margin: 0;
+  }
+  /* right: buy-buttons block fills the remaining width */
+  .dad-buybar > :not(.product-form__quantity) {
+    flex: 1 1 0;
+    min-width: 0;
+    margin: 0;
+  }
+  .dad-buybar product-form,
+  .dad-buybar .product-form__buttons {
+    display: block;
+    width: 100%;
+  }
+  /* section-main-product.css sets `.product__info-container .product-form
+     { margin: 2.5rem 0 }` (specificity 0,2,0), adding 25px above+below the
+     form that would push the button out of line. Override with one extra
+     class of specificity — no !important needed. */
+  .product__info-container .dad-buybar .product-form {
+    margin: 0;
+  }
+  /* the submit button carries its own 10px bottom margin which, with its
+     margin-less ancestors, collapses out and lifts the button above the
+     pill — zero it inside the bar so the two pills line up exactly */
+  .product__info-container .dad-buybar .product-form__submit {
+    margin-bottom: 0;
+  }
+  /* drop the empty pickup-availability / script remnants that sit after
+     the form inside the buy_buttons block — otherwise they add trailing
+     height that would push the button up out of line with the pill */
+  .dad-buybar product-form ~ * {
+    display: none;
+  }
 }
 
 /* Accordion / details rows (product description sections). */
@@ -1213,12 +1299,11 @@ a:hover {
   background: var(--dad-ink);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
-.dad-footer__dot-strip span {
+.dad-footer__dot-strip img {
   display: inline-block;
-  width: var(--s, 26px);
-  height: var(--s, 26px);
-  border-radius: 50%;
-  background: var(--c);
+  width: var(--s, 30px);
+  height: var(--s, 30px);
+  object-fit: contain;
   transform: rotate(var(--r, 0deg)) translateY(var(--y, 0));
 }
 
