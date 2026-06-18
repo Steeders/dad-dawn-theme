@@ -1,11 +1,10 @@
 {%- comment -%}
   DAD CRAFT CLOSET — Do-A-Dot Art
   "Complete the craft closet" — product-card row fed by a collection.
-  Card: image + auto badge (compare-at savings, else "bestseller" tag, else
-  metafield custom.card_badge), title, optional subtitle (metafield
-  custom.card_subtitle), optional color swatches (metafield custom.card_swatches
-  = list.color), price, and a circular link to the product page.
-  New section — update-safe, tokens from dad-tokens.css.
+  Renders products through Dawn's shared `card-product` snippet so the cards
+  are identical to every other collection section (bordered card design,
+  quick-add, badges, etc.). Only the section header (eyebrow / heading /
+  shop-all) is custom. Update-safe; tokens from dad-tokens.css.
 {%- endcomment -%}
 
 {%- liquid
@@ -32,58 +31,31 @@
       {%- endif -%}
     </div>
 
-    <div class="dad-cl__grid" style="--cols: {{ section.settings.columns }};">
-      {%- for product in coll.products limit: limit -%}
-        {%- liquid
-          assign badge = product.metafields.custom.card_badge
-          if badge == blank
-            if product.compare_at_price > product.price
-              assign saved = product.compare_at_price | minus: product.price | money_without_trailing_zeros
-              assign badge = 'save ' | append: saved
-            elsif product.tags contains 'bestseller'
-              assign badge = 'bestseller'
-            endif
-          endif
-          assign subtitle = product.metafields.custom.card_subtitle
-          assign swatches = product.metafields.custom.card_swatches.value
-        -%}
-        <div class="dad-cl__card">
-          <a class="dad-cl__media" href="{{ product.url }}" aria-label="{{ product.title | escape }}">
-            {%- if badge != blank -%}<span class="dad-cl__badge">{{ badge }}</span>{%- endif -%}
-            {%- if product.featured_image != blank -%}
-              {{ product.featured_image | image_url: width: 700 | image_tag:
-                loading: 'lazy',
-                widths: '250, 350, 500, 700',
-                sizes: '(max-width: 749px) 60vw, 23vw',
-                class: 'dad-cl__img',
-                alt: product.featured_image.alt | default: product.title }}
-            {%- else -%}
-              {{ 'product-1' | placeholder_svg_tag: 'dad-cl__img' }}
-            {%- endif -%}
-          </a>
-          <div class="dad-cl__info">
-            <a class="dad-cl__name" href="{{ product.url }}">{{ product.title }}</a>
-            {%- if subtitle != blank -%}<p class="dad-cl__sub">{{ subtitle }}</p>{%- endif -%}
-            {%- if swatches != blank and swatches.size > 0 -%}
-              <span class="dad-cl__swatches">
-                {%- for c in swatches limit: 12 -%}<span class="dad-cl__dot" style="background: {{ c }};"></span>{%- endfor -%}
-              </span>
-            {%- endif -%}
-            <div class="dad-cl__buy">
-              <span class="dad-cl__price">
-                {%- if product.price_varies -%}{{ 'products.product.price.from_price_html' | t: price: product.price | money }}{%- else -%}{{ product.price | money }}{%- endif -%}
-                {%- if product.compare_at_price > product.price -%}<s class="dad-cl__was">{{ product.compare_at_price | money }}</s>{%- endif -%}
-              </span>
-              <a class="dad-cl__add" href="{{ product.url }}" aria-label="{{ 'products.product.choose_options' | t | default: 'View product' }} — {{ product.title | escape }}">
-                <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M8 3v10M3 8h10"/></svg>
-              </a>
-            </div>
-          </div>
-        </div>
-      {%- else -%}
-        <p class="dad-cl__empty">Select a collection in the theme editor to show products here.</p>
-      {%- endfor -%}
-    </div>
+    {%- if coll != blank and coll.products.size > 0 -%}
+      <ul
+        class="grid product-grid contains-card contains-card--product{% if settings.card_style == 'standard' %} contains-card--standard{% endif %} grid--{{ section.settings.columns }}-col-desktop grid--2-col-tablet-down"
+        role="list"
+      >
+        {%- assign skip_card_product_styles = false -%}
+        {%- for product in coll.products limit: limit -%}
+          <li class="grid__item">
+            {% render 'card-product',
+              card_product: product,
+              media_aspect_ratio: section.settings.image_ratio,
+              show_secondary_image: section.settings.show_secondary_image,
+              show_vendor: false,
+              show_rating: false,
+              skip_styles: skip_card_product_styles,
+              section_id: section.id,
+              quick_add: section.settings.quick_add
+            %}
+          </li>
+          {%- assign skip_card_product_styles = true -%}
+        {%- endfor -%}
+      </ul>
+    {%- else -%}
+      <p class="dad-cl__empty">Select a collection in the theme editor to show products here.</p>
+    {%- endif -%}
   </div>
 </div>
 
@@ -94,32 +66,12 @@
 .dad-cl__title { font-family: var(--font-display); font-weight: 400; font-size: var(--fs-h2); line-height: var(--lh-tight); color: var(--dad-ink); margin: var(--s-2) 0 0; }
 .dad-cl__shopall { flex: none; display: inline-flex; align-items: center; gap: var(--s-2); font-family: var(--font-body); font-weight: 700; font-size: var(--fs-small); color: var(--dad-ink); text-decoration: none; }
 .dad-cl__shopall:hover { color: var(--dad-hot-pink); }
-.dad-cl__grid { display: grid; grid-template-columns: repeat(var(--cols, 4), minmax(0, 1fr)); gap: var(--s-6); }
-
-.dad-cl__card { display: flex; flex-direction: column; }
-.dad-cl__media { position: relative; display: block; overflow: hidden; border-radius: var(--r-lg); background: var(--dad-cream); aspect-ratio: 1 / 1; box-shadow: var(--shadow-soft); }
-.dad-cl__img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform var(--dur-med) var(--ease-out); }
-.dad-cl__card:hover .dad-cl__img { transform: scale(1.04); }
-.dad-cl__badge { position: absolute; top: var(--s-3); left: var(--s-3); z-index: 1; padding: 5px 11px; border-radius: var(--r-pill); background: var(--dad-ink); color: var(--dad-cream); font-family: var(--font-body); font-weight: 700; font-size: var(--fs-micro); letter-spacing: 0.02em; }
-
-.dad-cl__info { padding-top: var(--s-3); }
-.dad-cl__name { display: block; font-family: var(--font-display); font-weight: 400; font-size: var(--fs-h4); line-height: var(--lh-snug); color: var(--dad-ink); text-decoration: none; }
-.dad-cl__card:hover .dad-cl__name { color: var(--dad-hot-pink); }
-.dad-cl__sub { font-family: var(--font-body); font-weight: 500; font-size: var(--fs-small); color: var(--dad-ink-muted); margin: 2px 0 0; }
-.dad-cl__swatches { display: inline-flex; flex-wrap: wrap; gap: 5px; margin-top: var(--s-3); }
-.dad-cl__dot { width: 12px; height: 12px; border-radius: var(--r-pill); box-shadow: var(--shadow-inset); }
-.dad-cl__buy { display: flex; align-items: center; justify-content: space-between; gap: var(--s-3); margin-top: var(--s-4); }
-.dad-cl__price { font-family: var(--font-body); font-weight: 700; font-size: var(--fs-body); color: var(--dad-ink); }
-.dad-cl__was { color: var(--dad-ink-soft); font-weight: 500; margin-left: 6px; }
-.dad-cl__add { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: var(--r-pill); background: var(--dad-ink); color: var(--dad-cream); text-decoration: none; transition: background var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out); }
-.dad-cl__add:hover { background: var(--dad-hot-pink); transform: scale(1.08); }
 .dad-cl__empty { color: var(--dad-ink-muted); font-family: var(--font-body); }
 
 .dad-eyebrow { display: inline-flex; align-items: center; gap: var(--s-2); font-family: var(--font-body); font-weight: 700; font-size: var(--fs-micro); letter-spacing: 0.04em; color: var(--dad-hot-pink); }
 .dad-eyebrow::before { content: ""; width: 7px; height: 7px; border-radius: var(--r-pill); background: currentColor; }
 
-@media screen and (max-width: 989px) { .dad-cl__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-5); } }
-@media screen and (max-width: 479px) { .dad-cl__grid { grid-template-columns: 1fr 1fr; gap: var(--s-4); } .dad-cl__title { font-size: var(--fs-h3); } }
+@media screen and (max-width: 479px) { .dad-cl__title { font-size: var(--fs-h3); } }
 {% endstylesheet %}
 
 {% schema %}
@@ -133,10 +85,19 @@
     { "type": "collection", "id": "collection", "label": "Collection" },
     { "type": "range", "id": "products_to_show", "min": 2, "max": 8, "step": 1, "label": "Products to show", "default": 4 },
     { "type": "range", "id": "columns", "min": 2, "max": 5, "step": 1, "label": "Columns (desktop)", "default": 4 },
+    { "type": "select", "id": "image_ratio", "label": "Image ratio", "default": "adapt", "options": [
+      { "value": "adapt", "label": "Adapt to image" },
+      { "value": "square", "label": "Square" },
+      { "value": "portrait", "label": "Portrait" }
+    ] },
+    { "type": "checkbox", "id": "show_secondary_image", "label": "Show second image on hover", "default": true },
+    { "type": "select", "id": "quick_add", "label": "Quick add", "default": "standard", "options": [
+      { "value": "none", "label": "None" },
+      { "value": "standard", "label": "Standard" },
+      { "value": "bulk", "label": "Bulk" }
+    ] },
     { "type": "text", "id": "shop_all_label", "label": "Shop-all label", "default": "shop all" },
     { "type": "url", "id": "shop_all_link", "label": "Shop-all link", "info": "Defaults to the collection URL." },
-    { "type": "header", "content": "Card badges & details" },
-    { "type": "paragraph", "content": "Badge auto-fills: shows savings when a product has a compare-at price, else \"bestseller\" for products tagged bestseller. Override per product with metafield custom.card_badge. Optional: custom.card_subtitle (text) and custom.card_swatches (color list)." },
     { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
     { "type": "range", "id": "padding_top", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Top padding", "default": 64 },
     { "type": "range", "id": "padding_bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Bottom padding", "default": 64 }
