@@ -83,84 +83,6 @@
         "padding_bottom": 56
       }
     },
-    "dad_color_conversation": {
-      "type": "dad-color-conversation",
-      "settings": {}
-    },
-    "dad_product_spotlight": {
-      "type": "dad-product-spotlight",
-      "settings": {}
-    },
-    "dad_craft_closet": {
-      "type": "dad-craft-closet",
-      "settings": {
-        "collection": "featured-products",
-        "products_to_show": 4,
-        "columns": 4
-      }
-    },
-    "dad_shop_by_craft": {
-      "type": "dad-shop-by-craft",
-      "blocks": {
-        "card-crayons": {
-          "type": "card",
-          "settings": {
-            "kicker": "new this season",
-            "title": "Chunky Crayons",
-            "subtext": "18 named colors. Built for the pincer grip.",
-            "collection": "crayons-coloring",
-            "cta_label": "shop chunky crayons",
-            "bg_color": "#fde6f0"
-          }
-        },
-        "card-dot-markers": {
-          "type": "card",
-          "settings": {
-            "kicker": "classic",
-            "title": "Dot Markers",
-            "collection": "dot-markers-2",
-            "cta_label": "shop dot markers",
-            "bg_color": "#e9f6fd"
-          }
-        },
-        "card-watercolors": {
-          "type": "card",
-          "settings": {
-            "kicker": "new",
-            "title": "Watercolors",
-            "collection": "watercolor-collection",
-            "cta_label": "shop watercolors",
-            "bg_color": "#fff3c2"
-          }
-        },
-        "card-bundles": {
-          "type": "card",
-          "settings": {
-            "kicker": "save up to $14",
-            "title": "Bundles",
-            "cta_label": "shop bundles",
-            "bg_color": "#e5f5dc"
-          }
-        },
-        "card-extras": {
-          "type": "card",
-          "settings": {
-            "kicker": "papers & accessories",
-            "title": "Extras",
-            "cta_label": "shop extras",
-            "bg_color": "#f1e3ef"
-          }
-        }
-      },
-      "block_order": [
-        "card-crayons",
-        "card-dot-markers",
-        "card-watercolors",
-        "card-bundles",
-        "card-extras"
-      ],
-      "settings": {}
-    },
     "rich_text": {
       "type": "rich-text",
       "blocks": {
@@ -219,6 +141,133 @@
         "padding_bottom": 36
       }
     },
+    "dad_color_conversation": {
+      "type": "dad-color-conversation",
+      "settings": {
+        "eyebrow": "conversation through color",
+        "heading": "Every color has a name. Every name starts a story.",
+        "body": "<p>Piggy Pink. Tiger Tail Orange. Octopus Purple. We name our colors after the world around your kid — so picking one is the start of a conversation, not just a stroke.</p>",
+        "cta_label": "see the full color story",
+        "cta_link": "",
+        "color_scheme": "",
+        "padding_top": 96,
+        "padding_bottom": 96
+      }
+    },
+    "dad_product_spotlight": {
+      "type": "dad-product-spotlight",
+      "settings": {
+        "eyebrow": "meet the chunky crayons",
+        "heading": "Meet the chunky crayon family.",
+        "body": "<p>Eighteen named colors — Piggy Pink, Lady Bug Red, Octopus Purple, Goldfish Gold. Built fat and grippy for the smallest pincer grip. Soy-wax based, non-toxic, won't snap in a tight little fist.</p>",
+        "btn1_label": "shop the crayon set",
+        "btn1_link": "",
+        "btn2_label": "watch the unboxing",
+        "btn2_link": "",
+        "image": "shopify://shop_images/2026-05-01_Do-a-Dot_batch1-4.webp",
+        "badge_text": "brand new!",
+        "panel_color": "#ec1b2a",
+        "image_position": "right",
+        "color_scheme": "",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "dad_craft_closet": {
+      "type": "dad-craft-closet",
+      "settings": {
+        "eyebrow": "pairs well with",
+        "heading": "Complete the craft closet.",
+        "collection": "featured-products",
+        "products_to_show": 4,
+        "columns": 4,
+        "shop_all_label": "shop all",
+        "shop_all_link": "",
+        "color_scheme": "",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    },
+    "dad_shop_by_craft": {
+      "type": "dad-shop-by-craft",
+      "blocks": {
+        "card-crayons": {
+          "type": "card",
+          "settings": {
+            "kicker": "new this season",
+            "title": "Chunky Crayons",
+            "subtext": "18 named colors. Built for the pincer grip.",
+            "collection": "crayons-coloring",
+            "link": "",
+            "cta_label": "shop chunky crayons",
+            "bg_color": "#fde6f0"
+          }
+        },
+        "card-dot-markers": {
+          "type": "card",
+          "settings": {
+            "kicker": "classic",
+            "title": "Dot Markers",
+            "subtext": "",
+            "collection": "dot-markers-2",
+            "link": "",
+            "cta_label": "shop dot markers",
+            "bg_color": "#e9f6fd"
+          }
+        },
+        "card-watercolors": {
+          "type": "card",
+          "settings": {
+            "kicker": "new",
+            "title": "Watercolors",
+            "subtext": "",
+            "collection": "watercolor-collection",
+            "link": "",
+            "cta_label": "shop watercolors",
+            "bg_color": "#fff3c2"
+          }
+        },
+        "card-bundles": {
+          "type": "card",
+          "settings": {
+            "kicker": "save up to $14",
+            "title": "Bundles",
+            "subtext": "",
+            "collection": "",
+            "link": "",
+            "cta_label": "shop bundles",
+            "bg_color": "#e5f5dc"
+          }
+        },
+        "card-extras": {
+          "type": "card",
+          "settings": {
+            "kicker": "papers & accessories",
+            "title": "Extras",
+            "subtext": "",
+            "collection": "",
+            "link": "",
+            "cta_label": "shop extras",
+            "bg_color": "#f1e3ef"
+          }
+        }
+      },
+      "block_order": [
+        "card-crayons",
+        "card-dot-markers",
+        "card-watercolors",
+        "card-bundles",
+        "card-extras"
+      ],
+      "settings": {
+        "eyebrow": "shop by craft",
+        "heading": "Pick a tool. Make a mess.",
+        "layout": "feature",
+        "color_scheme": "",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    },
     "dad_why_dot": {
       "type": "dad-why-dot",
       "blocks": {
@@ -261,7 +310,14 @@
         "promise-3",
         "promise-4"
       ],
-      "settings": {}
+      "settings": {
+        "eyebrow": "why do-a-dot",
+        "heading": "Why parents keep coming back.",
+        "columns": 4,
+        "color_scheme": "",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
     }
   },
   "order": [
