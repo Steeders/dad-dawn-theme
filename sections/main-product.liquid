@@ -78,7 +78,7 @@
       <div class="grid__item product__media-wrapper">
         {%- comment -%} Per-variant gallery when variant has custom.variant_images; else stock Dawn gallery {%- endcomment -%}
         {%- if product.selected_or_first_available_variant.metafields.custom.variant_images != blank -%}
-          {% render 'dad-variant-media-gallery', product: product, section_id: section.id %}
+          {% render 'dad-variant-media-gallery', product: product, section_id: section.id, sticky: section.settings.enable_sticky_info %}
           <script src="{{ 'dad-variant-gallery.js' | asset_url }}" defer="defer"></script>
         {%- else -%}
           {% render 'product-media-gallery', variant_images: variant_images %}

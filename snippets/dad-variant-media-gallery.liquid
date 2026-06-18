@@ -21,7 +21,7 @@
   assign images = current_variant.metafields.custom.variant_images.value
 -%}
 
-<dad-variant-gallery class="dad-vg" data-section-id="{{ section_id }}">
+<dad-variant-gallery class="dad-vg{% if sticky %} product__column-sticky{% endif %}" data-section-id="{{ section_id }}">
   <div data-vg-content>
     {%- if images != blank and images.size > 0 -%}
       <div class="dad-vg__main">
