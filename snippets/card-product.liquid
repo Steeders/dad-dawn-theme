@@ -160,6 +160,10 @@
               {{ card_product.title | escape }}
             </a>
           </h3>
+          {%- comment -%} dad: guarded — metafield-driven card subtext under title {%- endcomment -%}
+          {%- if card_product.metafields.custom.product_card_subtext != blank -%}
+            <p class="dad-card-subtext">{{ card_product.metafields.custom.product_card_subtext.value | escape }}</p>
+          {%- endif -%}
           <div class="card-information">
             {%- if show_vendor -%}
               <span class="visually-hidden">{{ 'accessibility.vendor' | t }}</span>
