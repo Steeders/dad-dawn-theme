@@ -261,10 +261,15 @@ a:hover {
   transform: translateY(-2px);
 }
 
-/* Card body — keep transparent ("flat" variant per design) by default;
-   Dawn's --card-color-background sometimes injects color, override. */
+/* Card body — bordered "solid" card: white surface, ink border, chunky
+   rounding, inset padding so the photo sits inside the frame. Applied
+   site-wide (PLP, featured-collection, search, related). */
 .card {
-  background: transparent;
+  background: var(--dad-white);
+  border: 1.5px solid var(--dad-ink);
+  border-radius: var(--r-lg);
+  padding: 12px;
+  overflow: hidden;
 }
 .card__inner {
   background: transparent;
@@ -328,6 +333,16 @@ a:hover {
   gap: 4px;
 }
 
+/* Metafield-driven subtext under the product title (custom.product_card_subtext). */
+.dad-card-subtext {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 1.3;
+  color: var(--dad-ink-muted);
+  margin: 2px 0 0;
+}
+
 /* --- Even card heights — push price/+ to bottom of every card --- */
 .product-grid .grid__item { display: flex; }
 .product-grid .grid__item > * { width: 100%; }
@@ -355,20 +370,33 @@ a:hover {
   flex-direction: column;
   flex: 1;
 }
-/* Price pinned to bottom + right-aligned so the price baseline always
-   lines up across the row regardless of title length. */
+/* Bottom row: price + quick-add share one midline. Both are pinned to
+   the card's bottom edge at the same height (32px), so their vertical
+   centers align exactly regardless of title/subtext length. */
 .card-wrapper .card__information .price,
 .card-wrapper .price {
-  margin-top: auto;
+  position: absolute;
+  left: 16px;
+  right: 60px; /* 16px button edge + 32px button + 12px gap */
+  bottom: 16px;
+  height: 32px; /* match the quick-add button */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
   text-align: right;
-  padding-right: 72px; /* 12px card edge + 44px button + 16px gap */
+}
+/* Reserve room so the absolutely-placed price/button row never overlaps copy. */
+.card-wrapper .card__content {
+  padding-bottom: 48px;
 }
 
 /* --- Round dark "+" quick-add button (anchored bottom-right) ---- */
 .card-wrapper .quick-add {
   position: absolute;
-  bottom: 12px;
-  right: 12px;
+  bottom: 16px;
+  right: 16px;
   z-index: 3;
   margin: 0;
   padding: 0;
@@ -376,8 +404,8 @@ a:hover {
 }
 .card-wrapper .quick-add__submit {
   position: relative;
-  width: 44px;
-  height: 44px;
+  width: 32px;
+  height: 32px;
   min-width: 0;
   min-height: 0;
   padding: 0;
@@ -402,7 +430,7 @@ a:hover {
   justify-content: center;
   color: var(--dad-white);
   font-family: var(--font-body);
-  font-size: 26px;
+  font-size: 20px;
   font-weight: 700;
   line-height: 1;
   background: transparent;
