@@ -167,6 +167,7 @@
         "image-with-text-1"
       ],
       "settings": {
+        "image": "shopify://shop_images/2026-05-01_Do-a-Dot_batch1-101.jpg",
         "height": "small",
         "desktop_image_width": "medium",
         "layout": "text_first",
