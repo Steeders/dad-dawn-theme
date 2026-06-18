@@ -5,6 +5,7 @@ This is the Shopify theme for **dotart.com**, forked from `Shopify/dawn` (v15.4.
 - **Fork:** `Steeders/dad-dawn-theme`
 - **Upstream:** `Shopify/dawn` (added as `upstream` remote — `git fetch upstream` to pull future Dawn updates)
 - **Live store:** dotart.com (unpublished theme during build phase)
+- **GitHub integration: LIVE (connected 2026-06-17).** `main` branch ↔ theme **`dad-dawn-theme/main`** (id **157094641896**, unpublished). This is the working/preview theme. Old dev theme `156830204136` is redundant (deletable). Live published theme = `140409831656` ("ZM | PDP Update"). **Workflow is now git-only — see Workflow section. Do NOT `shopify theme push`.**
 - **Design source:** `clients/do-a-dot/design/dad-dawn-theme-customization/` (Claude Design bundle, do not modify)
 
 ## Project context
@@ -91,15 +92,18 @@ The Claude Design bundle's Pass 4 ("Dawn module library") was built as a 1:1 han
 - Contact form → `sections/contact-form.liquid`
 - **Product spotlight (NEW)** → `blocks/product-spotlight.liquid` — one configurable block, two layouts (full-bleed + compact card) via a setting
 
-## Workflow
+## Workflow — git-only (GitHub integration is LIVE)
 
-**During the build:**
-1. Make changes locally on a feature branch.
-2. `shopify theme dev --store dotart.com` opens a live preview at `127.0.0.1:9292` (Chrome only — Safari hot-reload doesn't work).
-3. Iterate against the preview.
+**🚫 NEVER run `shopify theme push`.** The theme is GitHub-connected; pushing from the CLI bypasses git and overwrites the user's theme-editor content (the JSON config/template files). All theme updates flow through git.
+
+**The loop:**
+1. **`git pull --rebase origin main` FIRST** — every session and before any commit. The user edits in the Shopify theme editor; those edits auto-commit to `main` as `Update from Shopify...` bot commits. Rebasing absorbs them so you never clobber editor content.
+2. Make code changes locally (new `sections/`/`blocks/`/`assets/`; never stock Dawn files).
+3. Preview: `shopify theme dev --store do-a-dot-art.myshopify.com --theme 157094641896 --port <free>` (Chrome; theme dev serves local files against live data — reflects uncommitted edits).
 4. `shopify theme check` before committing.
-5. Push to `origin/<branch>` on GitHub.
-6. (Once GitHub integration is connected in Shopify admin) merge to `main` → Shopify auto-syncs to the connected unpublished theme.
+5. Commit, then `git push origin main` → Shopify auto-syncs into the connected theme. (Small changes go straight to `main`; use a feature branch + ff-merge for larger work.)
+
+**Which files are whose:** Code = `.liquid`/`.css`/`.js` (you own these via git). Content/settings = `config/settings_data.json`, `templates/*.json`, `sections/*-group.json` (the user owns these via the editor; they auto-commit back). When you must change a content JSON (e.g. add a section to `index.json`), pull-rebase first, edit minimally, push.
 
 **Important Shopify GitHub-integration quirks:**
 - The integration is **bidirectional and cannot be turned off.** Customizer edits in Shopify admin commit back to the connected branch as bot commits.
