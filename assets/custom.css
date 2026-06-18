@@ -307,21 +307,30 @@ a:hover {
   color: var(--accent);
 }
 
-/* Price — Dimbo for the regular price; ink-muted for compare-at. */
+/* Price — Dimbo (brand display) for BOTH the regular and sale price, so a
+   discounted card stays on-brand instead of falling back to Dawn's default
+   font on the sale price. The compare-at ("was") price is smaller, muted,
+   and uses a thin controlled strikethrough so it reads as secondary. */
 .price .price-item--regular,
-.price-item--regular {
+.price-item--regular,
+.price__sale .price-item--sale {
   font-family: var(--font-display);
   font-weight: 400;
   font-size: 18px;
-  color: var(--fg);
   letter-spacing: 0;
+}
+.price-item--regular {
+  color: var(--fg);
 }
 .price__sale .price-item--sale {
   color: var(--accent);
 }
 .price__sale .price-item--regular {
   color: var(--fg-soft);
+  font-size: 15px;
   text-decoration: line-through;
+  text-decoration-thickness: 1.5px;
+  text-decoration-color: var(--fg-soft);
 }
 
 /* Card information stack spacing. */
@@ -963,20 +972,29 @@ a:hover {
   border-radius: var(--r-sm);
 }
 
+/* Square clip box: the product packshots carry a lot of built-in
+   whitespace, so we zoom the image up inside an overflow-hidden frame to
+   crop that margin and make the product read bigger. All packshots have
+   ~the same padding, so a single scale works across variants. */
+.dad-variant-image-swatch__media {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: var(--r-sm);
+  background: var(--dad-white);
+}
 .dad-variant-image-swatch__img {
   display: block;
   width: 100%;
-  height: auto;
-  aspect-ratio: 1 / 1;
+  height: 100%;
   object-fit: contain;
-  border-radius: var(--r-sm);
-  background: var(--dad-white);
+  transform: scale(1.4);
 }
 .dad-variant-image-swatch__placeholder {
   display: block;
   width: 100%;
-  aspect-ratio: 1 / 1;
-  border-radius: var(--r-sm);
+  height: 100%;
   background: var(--dad-pink-tint);
 }
 

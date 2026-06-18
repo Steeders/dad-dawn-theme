@@ -49,20 +49,22 @@
                 data-option-value-id="{{ variant.id }}"
                 {% if variant == product.selected_or_first_available_variant %}checked{% endif %}
               >
-              {%- if variant.featured_image != blank -%}
-                {{
-                  variant.featured_image
-                  | image_url: width: 220
-                  | image_tag:
-                    width: 110,
-                    height: 110,
-                    alt: variant.title,
-                    loading: 'lazy',
-                    class: 'dad-variant-image-swatch__img'
-                }}
-              {%- else -%}
-                <span class="dad-variant-image-swatch__placeholder" aria-hidden="true"></span>
-              {%- endif -%}
+              <span class="dad-variant-image-swatch__media">
+                {%- if variant.featured_image != blank -%}
+                  {{
+                    variant.featured_image
+                    | image_url: width: 330
+                    | image_tag:
+                      width: 110,
+                      height: 110,
+                      alt: variant.title,
+                      loading: 'lazy',
+                      class: 'dad-variant-image-swatch__img'
+                  }}
+                {%- else -%}
+                  <span class="dad-variant-image-swatch__placeholder" aria-hidden="true"></span>
+                {%- endif -%}
+              </span>
               <span class="dad-variant-image-swatch__name">{{ variant.option1 }}</span>
               {%- unless variant.available -%}
                 <span class="dad-variant-image-swatch__badge">

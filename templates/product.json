@@ -144,42 +144,19 @@
         "padding_bottom": 12
       }
     },
-    "image-with-text": {
-      "type": "image-with-text",
-      "blocks": {
-        "image-with-text-0": {
-          "type": "heading",
-          "settings": {
-            "heading": "Image with text",
-            "heading_size": "h1"
-          }
-        },
-        "image-with-text-1": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
-            "text_style": "body"
-          }
-        }
-      },
-      "block_order": [
-        "image-with-text-0",
-        "image-with-text-1"
-      ],
+    "dad-image-story": {
+      "type": "dad-image-story",
       "settings": {
+        "eyebrow": "made for little hands",
+        "heading": "Big, mess-free fun for little hands",
+        "body": "<p>Do-A-Dot markers dab on bright, bold color — no brushes, no spills, no cleanup. Just pop the cap and let little artists dot, layer, and create, building fine-motor skills and confidence one happy color at a time.</p>",
+        "cta_label": "shop all",
+        "cta_link": "shopify://collections/all",
         "image": "shopify://shop_images/2026-05-01_Do-a-Dot_batch1-101.jpg",
-        "height": "small",
-        "desktop_image_width": "medium",
-        "layout": "text_first",
-        "image_behavior": "none",
-        "content_layout": "no-overlap",
-        "desktop_content_position": "top",
-        "desktop_content_alignment": "left",
-        "mobile_content_alignment": "left",
-        "section_color_scheme": "",
-        "color_scheme": "scheme-2",
-        "padding_top": 36,
-        "padding_bottom": 36
+        "image_side": "right",
+        "color_scheme": "scheme-1",
+        "padding_top": 64,
+        "padding_bottom": 64
       }
     },
     "multicolumn": {
@@ -246,7 +223,7 @@
   },
   "order": [
     "main",
-    "image-with-text",
+    "dad-image-story",
     "multicolumn",
     "related-products"
   ]
