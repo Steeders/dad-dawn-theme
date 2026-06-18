@@ -16,6 +16,7 @@
   - section_id: {String} The host section id (for variantChange targeting)
 {% endcomment %}
 
+DAD_MARKER_SNIPPET_B
 {%- liquid
   assign current_variant = product.selected_or_first_available_variant
   assign images = current_variant.metafields.custom.variant_images.value
