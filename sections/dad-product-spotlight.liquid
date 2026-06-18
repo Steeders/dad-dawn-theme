@@ -1,0 +1,120 @@
+{%- comment -%}
+  DAD PRODUCT SPOTLIGHT — Do-A-Dot Art
+  Full-bleed launch spotlight: colored panel (eyebrow / display heading / lede /
+  dual CTA) beside a product photo with a rotated "brand new!" sticker.
+  New section — update-safe. Drinks from dad-tokens.css. Panel color is a setting
+  so each launch can recolor it; eyebrow + sticker stay brand yellow.
+{%- endcomment -%}
+
+<div
+  class="dad-spot color-{{ section.settings.color_scheme }} dad-spot--img-{{ section.settings.image_position }}"
+  style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="dad-spot__inner" style="--dad-spot-bg: {{ section.settings.panel_color }};">
+    <div class="dad-spot__copy">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="dad-spot__eyebrow">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="dad-spot__title">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.body != blank -%}
+        <div class="dad-spot__body rte">{{ section.settings.body }}</div>
+      {%- endif -%}
+      {%- if section.settings.btn1_label != blank or section.settings.btn2_label != blank -%}
+        <div class="dad-spot__actions">
+          {%- if section.settings.btn1_label != blank -%}
+            <a class="dad-spot__btn dad-spot__btn--solid" href="{{ section.settings.btn1_link | default: '#' }}">
+              {{ section.settings.btn1_label }}
+              <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </a>
+          {%- endif -%}
+          {%- if section.settings.btn2_label != blank -%}
+            <a class="dad-spot__btn dad-spot__btn--ghost" href="{{ section.settings.btn2_link | default: '#' }}">
+              {{ section.settings.btn2_label }}
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="dad-spot__media">
+      {%- if section.settings.image != blank -%}
+        {{ section.settings.image | image_url: width: 1400 | image_tag:
+          loading: 'lazy',
+          widths: '400, 600, 800, 1000, 1200, 1400',
+          sizes: '(max-width: 989px) 100vw, 50vw',
+          class: 'dad-spot__img',
+          alt: section.settings.heading }}
+      {%- else -%}
+        {{ 'product-1' | placeholder_svg_tag: 'dad-spot__img dad-spot__img--placeholder' }}
+      {%- endif -%}
+      {%- if section.settings.badge_text != blank -%}
+        <span class="dad-spot__badge">{{ section.settings.badge_text }}</span>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+.dad-spot { padding-left: var(--s-5); padding-right: var(--s-5); }
+.dad-spot__inner {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+  background: var(--dad-spot-bg, var(--dad-brand-red));
+  border-radius: var(--r-xl); overflow: hidden;
+  color: var(--dad-cream); min-height: 480px;
+}
+.dad-spot--img-left .dad-spot__copy { order: 2; }
+.dad-spot--img-left .dad-spot__media { order: 1; }
+
+.dad-spot__copy { padding: var(--s-12); display: flex; flex-direction: column; justify-content: center; }
+.dad-spot__eyebrow { display: inline-flex; align-items: center; gap: var(--s-2); font-family: var(--font-body); font-weight: 700; font-size: var(--fs-micro); letter-spacing: var(--tracking-allcaps); color: var(--dad-yellow); }
+.dad-spot__eyebrow::before { content: ""; width: 7px; height: 7px; border-radius: var(--r-pill); background: var(--dad-yellow); }
+.dad-spot__title { font-family: var(--font-display); font-weight: 400; font-size: var(--fs-display); line-height: var(--lh-tight); color: var(--dad-cream); margin: var(--s-3) 0 var(--s-4); }
+.dad-spot__body { font-family: var(--font-body); font-weight: 500; font-size: var(--fs-lead); line-height: var(--lh-normal); color: var(--dad-cream); opacity: 0.92; max-width: 38ch; }
+.dad-spot__body p { margin: 0; }
+
+.dad-spot__actions { display: flex; flex-wrap: wrap; gap: var(--s-3); margin-top: var(--s-8); }
+.dad-spot__btn { display: inline-flex; align-items: center; gap: var(--s-2); padding: 14px 26px; border-radius: var(--r-pill); font-family: var(--font-body); font-weight: 700; font-size: var(--fs-small); text-decoration: none; border: 1.5px solid transparent; transition: transform var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out); }
+.dad-spot__btn--solid { background: var(--dad-cream); color: var(--dad-ink); border-color: var(--dad-cream); }
+.dad-spot__btn--solid:hover { transform: translateY(-2px); }
+.dad-spot__btn--ghost { background: transparent; color: var(--dad-cream); border-color: var(--dad-cream); }
+.dad-spot__btn--ghost:hover { background: var(--dad-cream); color: var(--dad-ink); }
+
+.dad-spot__media { position: relative; background: rgb(0 0 0 / 6%); min-height: 320px; }
+.dad-spot__img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.dad-spot__badge { position: absolute; top: var(--s-8); right: var(--s-8); background: var(--dad-yellow); color: var(--dad-ink); font-family: var(--font-display); font-size: var(--fs-h3); line-height: 1; letter-spacing: 0.01em; padding: var(--s-3) var(--s-5); border-radius: var(--r-pill); transform: rotate(-6deg); box-shadow: var(--shadow-soft); }
+
+@media screen and (max-width: 989px) {
+  .dad-spot__inner { grid-template-columns: 1fr; min-height: auto; border-radius: var(--r-lg); }
+  .dad-spot--img-left .dad-spot__copy, .dad-spot--img-left .dad-spot__media { order: initial; }
+  .dad-spot__media { order: -1; aspect-ratio: 4 / 3; min-height: 0; }
+  .dad-spot__copy { padding: var(--s-10) var(--s-8); }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "DAD product spotlight",
+  "tag": "section",
+  "class": "dad-product-spotlight-section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "meet the chunky crayons" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Meet the chunky crayon family." },
+    { "type": "richtext", "id": "body", "label": "Body", "default": "<p>Eighteen named colors — Piggy Pink, Lady Bug Red, Octopus Purple, Goldfish Gold. Built fat and grippy for the smallest pincer grip. Soy-wax based, non-toxic, won't snap in a tight little fist.</p>" },
+    { "type": "text", "id": "btn1_label", "label": "Primary button label", "default": "shop the crayon set" },
+    { "type": "url", "id": "btn1_link", "label": "Primary button link" },
+    { "type": "text", "id": "btn2_label", "label": "Secondary button label", "default": "watch the unboxing" },
+    { "type": "url", "id": "btn2_link", "label": "Secondary button link" },
+    { "type": "image_picker", "id": "image", "label": "Product image" },
+    { "type": "text", "id": "badge_text", "label": "Sticker badge", "default": "brand new!" },
+    { "type": "color", "id": "panel_color", "label": "Panel color", "default": "#EC1B2A" },
+    { "type": "select", "id": "image_position", "label": "Image position", "default": "right", "options": [ { "value": "left", "label": "Left" }, { "value": "right", "label": "Right" } ] },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Top padding", "default": 48 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Bottom padding", "default": 48 }
+  ],
+  "presets": [ { "name": "DAD product spotlight" } ]
+}
+{% endschema %}

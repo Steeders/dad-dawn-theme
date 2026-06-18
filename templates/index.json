@@ -87,6 +87,10 @@
       "type": "dad-color-conversation",
       "settings": {}
     },
+    "dad_product_spotlight": {
+      "type": "dad-product-spotlight",
+      "settings": {}
+    },
     "dad_craft_closet": {
       "type": "dad-craft-closet",
       "settings": {
@@ -95,20 +99,82 @@
         "columns": 4
       }
     },
+    "dad_shop_by_craft": {
+      "type": "dad-shop-by-craft",
+      "blocks": {
+        "card-crayons": {
+          "type": "card",
+          "settings": {
+            "kicker": "new this season",
+            "title": "Chunky Crayons",
+            "subtext": "18 named colors. Built for the pincer grip.",
+            "collection": "crayons-coloring",
+            "cta_label": "shop chunky crayons",
+            "bg_color": "#fde6f0"
+          }
+        },
+        "card-dot-markers": {
+          "type": "card",
+          "settings": {
+            "kicker": "classic",
+            "title": "Dot Markers",
+            "collection": "dot-markers-2",
+            "cta_label": "shop dot markers",
+            "bg_color": "#e9f6fd"
+          }
+        },
+        "card-watercolors": {
+          "type": "card",
+          "settings": {
+            "kicker": "new",
+            "title": "Watercolors",
+            "collection": "watercolor-collection",
+            "cta_label": "shop watercolors",
+            "bg_color": "#fff3c2"
+          }
+        },
+        "card-bundles": {
+          "type": "card",
+          "settings": {
+            "kicker": "save up to $14",
+            "title": "Bundles",
+            "cta_label": "shop bundles",
+            "bg_color": "#e5f5dc"
+          }
+        },
+        "card-extras": {
+          "type": "card",
+          "settings": {
+            "kicker": "papers & accessories",
+            "title": "Extras",
+            "cta_label": "shop extras",
+            "bg_color": "#f1e3ef"
+          }
+        }
+      },
+      "block_order": [
+        "card-crayons",
+        "card-dot-markers",
+        "card-watercolors",
+        "card-bundles",
+        "card-extras"
+      ],
+      "settings": {}
+    },
     "rich_text": {
       "type": "rich-text",
       "blocks": {
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "Talk about your brand",
-            "heading_size": "h1"
+            "heading": "Made by a family, for yours",
+            "heading_size": "h2"
           }
         },
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>"
+            "text": "<p>Do-A-Dot started thirty years ago with one simple idea: art should be easy, joyful, and totally mess-free for the littlest artists. Three decades later we're still a family company — now shipping the whole craft closet straight to your door. Markers that don't drip, watercolors that wash out, crayons made for chunky little grips. All of it made for little hands, and the big imaginations behind them.</p>"
           }
         }
       },
@@ -153,111 +219,49 @@
         "padding_bottom": 36
       }
     },
-    "collage": {
-      "type": "collage",
+    "dad_why_dot": {
+      "type": "dad-why-dot",
       "blocks": {
-        "collection-0": {
-          "type": "collection",
+        "promise-1": {
+          "type": "promise",
           "settings": {
-            "collection": ""
+            "dot_color": "yellow",
+            "title": "Mess-free, parent-proof",
+            "body": "Non-drip sponge tips & wash-out inks. Drop the marker — keep the rug."
           }
         },
-        "product": {
-          "type": "product",
+        "promise-2": {
+          "type": "promise",
           "settings": {
-            "product": "",
-            "second_image": false
+            "dot_color": "green",
+            "title": "Non-toxic. Made for ages 1+",
+            "body": "Pediatric-safe formulas. ASTM D-4236 certified. Tested by tiny hands."
           }
         },
-        "collection-1": {
-          "type": "collection",
+        "promise-3": {
+          "type": "promise",
           "settings": {
-            "collection": ""
+            "dot_color": "pink-small",
+            "title": "Built for chubby fingers",
+            "body": "Chunky barrels and grippy bodies sized for the smallest pincer grip."
+          }
+        },
+        "promise-4": {
+          "type": "promise",
+          "settings": {
+            "dot_color": "blue",
+            "title": "30 years of tiny artists",
+            "body": "American family business, dot by dot, since 1995. Still us, still here."
           }
         }
       },
       "block_order": [
-        "collection-0",
-        "product",
-        "collection-1"
+        "promise-1",
+        "promise-2",
+        "promise-3",
+        "promise-4"
       ],
-      "settings": {
-        "heading": "Multimedia collage",
-        "heading_size": "h2",
-        "desktop_layout": "left",
-        "mobile_layout": "collage",
-        "card_styles": "product-card-wrapper",
-        "color_scheme": "scheme-1",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
-    "video": {
-      "type": "video",
-      "settings": {
-        "heading": "",
-        "heading_size": "h1",
-        "enable_video_looping": false,
-        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
-        "description": "",
-        "full_width": false,
-        "color_scheme": "scheme-1",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
-    "multicolumn": {
-      "type": "multicolumn",
-      "blocks": {
-        "column1": {
-          "type": "column",
-          "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "column2": {
-          "type": "column",
-          "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "column3": {
-          "type": "column",
-          "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "column1",
-        "column2",
-        "column3"
-      ],
-      "settings": {
-        "title": "",
-        "heading_size": "h1",
-        "image_width": "third",
-        "image_ratio": "adapt",
-        "button_label": "",
-        "button_link": "",
-        "columns_desktop": 3,
-        "column_alignment": "center",
-        "background_style": "none",
-        "color_scheme": "scheme-1",
-        "columns_mobile": "1",
-        "swipe_on_mobile": false,
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
+      "settings": {}
     }
   },
   "order": [
@@ -266,9 +270,9 @@
     "rich_text",
     "featured_collection",
     "dad_color_conversation",
+    "dad_product_spotlight",
     "dad_craft_closet",
-    "collage",
-    "video",
-    "multicolumn"
+    "dad_shop_by_craft",
+    "dad_why_dot"
   ]
 }

@@ -1,0 +1,171 @@
+{%- comment -%}
+  DAD SHOP BY CRAFT — Do-A-Dot Art
+  Category grid: a large featured card + a grid of standard cards.
+  Every card is a BLOCK — fully editable in the theme editor (label, title,
+  subtext, collection/link, button, background color, and optional image).
+  Each card defaults to a solid color; add an image to give it the photo
+  treatment (image background + legible text panel), like the featured card.
+  New section — update-safe. Drinks from dad-tokens.css.
+{%- endcomment -%}
+
+<div
+  class="dad-craft color-{{ section.settings.color_scheme }}"
+  style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="dad-craft__inner">
+    {%- if section.settings.eyebrow != blank or section.settings.heading != blank -%}
+      <div class="dad-craft__head">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="dad-craft__eyebrow">{{ section.settings.eyebrow }}</span>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="dad-craft__heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="dad-craft__grid dad-craft__grid--{{ section.settings.layout }}">
+      {%- for block in section.blocks -%}
+        {%- assign has_image = false -%}
+        {%- if block.settings.image != blank -%}{%- assign has_image = true -%}{%- endif -%}
+        {%- assign card_url = block.settings.link -%}
+        {%- if card_url == blank and block.settings.collection != blank -%}
+          {%- assign card_url = block.settings.collection.url -%}
+        {%- endif -%}
+        <a
+          class="dad-craft__card{% if forloop.first and section.settings.layout == 'feature' %} dad-craft__card--featured{% endif %}{% if has_image %} dad-craft__card--has-image{% endif %}"
+          href="{{ card_url | default: '#' }}"
+          style="--card-bg: {{ block.settings.bg_color }};"
+          {{ block.shopify_attributes }}
+        >
+          {%- if has_image -%}
+            <div class="dad-craft__photo">
+              {{ block.settings.image | image_url: width: 1200 | image_tag:
+                loading: 'lazy',
+                widths: '300, 500, 700, 900, 1200',
+                sizes: '(max-width: 989px) 100vw, 40vw',
+                class: 'dad-craft__img',
+                alt: block.settings.title }}
+            </div>
+          {%- endif -%}
+          <div class="dad-craft__body">
+            {%- if block.settings.kicker != blank -%}
+              <span class="dad-craft__kicker">{{ block.settings.kicker }}</span>
+            {%- endif -%}
+            {%- if block.settings.title != blank -%}
+              <h3 class="dad-craft__title">{{ block.settings.title }}</h3>
+            {%- endif -%}
+            {%- if block.settings.subtext != blank -%}
+              <p class="dad-craft__subtext">{{ block.settings.subtext }}</p>
+            {%- endif -%}
+          </div>
+          {%- if block.settings.cta_label != blank -%}
+            <span class="dad-craft__cta">
+              {{ block.settings.cta_label }}
+              <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </span>
+          {%- endif -%}
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+.dad-craft { padding-left: var(--s-5); padding-right: var(--s-5); }
+.dad-craft__inner { max-width: 1200px; margin: 0 auto; }
+
+.dad-craft__head { margin-bottom: var(--s-8); }
+.dad-craft__eyebrow { display: inline-flex; align-items: center; gap: var(--s-2); font-family: var(--font-body); font-weight: 700; font-size: var(--fs-micro); letter-spacing: var(--tracking-allcaps); color: var(--dad-hot-pink); }
+.dad-craft__eyebrow::before { content: ""; width: 7px; height: 7px; border-radius: var(--r-pill); background: currentColor; }
+.dad-craft__heading { font-family: var(--font-display); font-weight: 400; font-size: var(--fs-h2); line-height: var(--lh-tight); color: var(--dad-ink); margin: var(--s-2) 0 0; }
+
+.dad-craft__grid { display: grid; gap: var(--s-5); }
+.dad-craft__grid--feature { grid-template-columns: 2fr 1fr 1fr; }
+.dad-craft__grid--feature .dad-craft__card--featured { grid-row: span 2; min-height: 500px; }
+.dad-craft__grid--even { grid-template-columns: repeat(4, 1fr); }
+
+.dad-craft__card {
+  position: relative; overflow: hidden;
+  border-radius: var(--r-lg); padding: var(--s-8);
+  display: flex; flex-direction: column; justify-content: space-between;
+  min-height: 240px; gap: var(--s-6);
+  text-decoration: none; color: var(--dad-ink);
+  border: 1px solid var(--border);
+  background: var(--card-bg, var(--dad-sky-tint));
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+.dad-craft__card:hover { transform: translateY(-3px); }
+
+.dad-craft__photo { position: absolute; inset: 0; z-index: 0; }
+.dad-craft__img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.dad-craft__card--has-image .dad-craft__photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgb(0 0 0 / 22%), transparent 45%); }
+
+.dad-craft__body { position: relative; z-index: 2; align-self: flex-start; display: flex; flex-direction: column; gap: var(--s-1); }
+.dad-craft__card--has-image .dad-craft__body { background: rgb(255 255 255 / 88%); padding: var(--s-4); border-radius: var(--r-md); }
+.dad-craft__kicker { font-family: var(--font-body); font-weight: 700; font-size: var(--fs-micro); color: var(--dad-ink-muted); text-transform: lowercase; letter-spacing: 0.04em; }
+.dad-craft__title { font-family: var(--font-display); font-weight: 400; font-size: var(--fs-h2); line-height: 1; margin: 0; color: var(--dad-ink); }
+.dad-craft__subtext { font-family: var(--font-body); font-weight: 500; font-size: var(--fs-small); color: var(--dad-ink-muted); margin: var(--s-1) 0 0; }
+
+.dad-craft__cta { position: relative; z-index: 2; align-self: flex-start; display: inline-flex; align-items: center; gap: var(--s-2); font-family: var(--font-body); font-weight: 700; font-size: var(--fs-small); color: var(--dad-ink); border-bottom: 1.5px solid var(--dad-ink); padding-bottom: 2px; }
+.dad-craft__card--has-image .dad-craft__cta { color: var(--dad-ink); text-shadow: 0 1px 2px rgb(255 255 255 / 60%); }
+
+@media screen and (max-width: 989px) {
+  .dad-craft__grid--feature, .dad-craft__grid--even { grid-template-columns: 1fr 1fr; }
+  .dad-craft__grid--feature .dad-craft__card--featured { grid-row: span 1; min-height: 320px; }
+}
+@media screen and (max-width: 749px) {
+  .dad-craft__grid--feature { grid-template-columns: 1fr; }
+  .dad-craft__grid--feature .dad-craft__card--featured { min-height: 240px; }
+  .dad-craft__card { min-height: 180px; padding: var(--s-6); }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "DAD shop by craft",
+  "tag": "section",
+  "class": "dad-shop-by-craft-section",
+  "max_blocks": 8,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "shop by craft" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Pick a tool. Make a mess." },
+    { "type": "select", "id": "layout", "label": "Layout", "default": "feature", "options": [
+      { "value": "feature", "label": "Featured + grid (first card large)" },
+      { "value": "even", "label": "Even grid (all equal)" }
+    ] },
+    { "type": "paragraph", "content": "In 'Featured + grid', the first card shows large — drag a card to the top to feature it. Add a Background image to any card for the photo treatment; leave it empty to use the Background color." },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Top padding", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Bottom padding", "default": 64 }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        { "type": "text", "id": "kicker", "label": "Label", "default": "classic" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Category" },
+        { "type": "text", "id": "subtext", "label": "Subtext (optional)" },
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "url", "id": "link", "label": "Custom link (overrides collection)" },
+        { "type": "text", "id": "cta_label", "label": "Button label", "default": "shop now" },
+        { "type": "image_picker", "id": "image", "label": "Background image (optional)" },
+        { "type": "color", "id": "bg_color", "label": "Background color", "default": "#e9f6fd" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DAD shop by craft",
+      "blocks": [
+        { "type": "card", "settings": { "kicker": "new this season", "title": "Chunky Crayons", "subtext": "18 named colors. Built for the pincer grip.", "cta_label": "shop chunky crayons", "bg_color": "#fde6f0" } },
+        { "type": "card", "settings": { "kicker": "classic", "title": "Dot Markers", "cta_label": "shop dot markers", "bg_color": "#e9f6fd" } },
+        { "type": "card", "settings": { "kicker": "new", "title": "Watercolors", "cta_label": "shop watercolors", "bg_color": "#fff3c2" } },
+        { "type": "card", "settings": { "kicker": "save up to $14", "title": "Bundles", "cta_label": "shop bundles", "bg_color": "#e5f5dc" } },
+        { "type": "card", "settings": { "kicker": "papers & accessories", "title": "Extras", "cta_label": "shop extras", "bg_color": "#f1e3ef" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

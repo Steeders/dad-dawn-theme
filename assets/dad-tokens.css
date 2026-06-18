@@ -31,6 +31,23 @@
   --dad-white:       #ffffff;
   --dad-black:       #000000;
 
+  /* Named-color swatch palette — the "conversation through color" system.
+     Display-tuned values used on the homepage color strip, the PDP color
+     picker, and the PDP color-story accordion. Keep names + values in sync
+     across those surfaces; this is the single source of truth. */
+  --dad-piggy-pink:        #f2b6c7;
+  --dad-flamingo-fuchsia:  #e94c93;
+  --dad-ladybug-red:       #e23a2e;
+  --dad-tiger-tail-orange: #ef6b22;
+  --dad-goldfish-gold:     #f5b62e;
+  --dad-froggy-green:      #6dbe4b;
+  --dad-dragonfly-teal:    #4ea693;
+  --dad-butterfly-blue:    #7ec0e8;
+  --dad-peacock-blue:      #2f56a5;
+  --dad-lavender-lullaby:  #b9a3d8;
+  --dad-octopus-purple:    #7e3a8a;
+  --dad-kitty-cat-black:   #2b2a2d;
+
   /* Soft, child-friendly tints for backgrounds & blocks. */
   --dad-cream:       #ffffff;
   --dad-sky-tint:    #e9f6fd;

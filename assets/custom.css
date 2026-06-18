@@ -3545,7 +3545,7 @@ a:hover {
 .dad-hero__btn--primary {
   background: var(--accent);
   color: var(--dad-white);
-  border-color: var(--dad-ink);
+  border-color: transparent;
   box-shadow: 0 4px 0 0 var(--dad-dark-red, #a4111d);
 }
 .dad-hero__btn--primary:hover {
