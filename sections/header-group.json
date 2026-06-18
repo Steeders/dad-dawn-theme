@@ -40,6 +40,7 @@
     "main-header": {
       "type": "dad-header",
       "settings": {
+        "logo": "shopify://shop_images/logo-da.png",
         "menu": "dad-main",
         "mega_item": "Shop",
         "featured_group": "Featured",
