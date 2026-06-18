@@ -370,13 +370,26 @@ a:hover {
   flex-direction: column;
   flex: 1;
 }
-/* Price pinned to bottom + right-aligned so the price baseline always
-   lines up across the row regardless of title length. */
+/* Bottom row: price + quick-add share one midline. Both are pinned to
+   the card's bottom edge at the same height (32px), so their vertical
+   centers align exactly regardless of title/subtext length. */
 .card-wrapper .card__information .price,
 .card-wrapper .price {
-  margin-top: auto;
+  position: absolute;
+  left: 16px;
+  right: 60px; /* 16px button edge + 32px button + 12px gap */
+  bottom: 16px;
+  height: 32px; /* match the quick-add button */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
   text-align: right;
-  padding-right: 52px; /* 16px card edge + 32px button + 4px gap */
+}
+/* Reserve room so the absolutely-placed price/button row never overlaps copy. */
+.card-wrapper .card__content {
+  padding-bottom: 48px;
 }
 
 /* --- Round dark "+" quick-add button (anchored bottom-right) ---- */
