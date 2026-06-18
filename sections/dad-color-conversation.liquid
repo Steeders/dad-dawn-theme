@@ -1,0 +1,87 @@
+{%- comment -%}
+  DAD COLOR CONVERSATION — Do-A-Dot Art
+  Image + text storytelling band (eyebrow / display heading / body / ghost CTA + photo).
+  New section — update-safe, tokens from dad-tokens.css.
+{%- endcomment -%}
+
+<div
+  class="dad-cc color-{{ section.settings.color_scheme }} dad-cc--img-{{ section.settings.image_position }}"
+  style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="dad-cc__inner">
+    <div class="dad-cc__copy">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="dad-eyebrow">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="dad-cc__title">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.body != blank -%}
+        <div class="dad-cc__body rte">{{ section.settings.body }}</div>
+      {%- endif -%}
+      {%- if section.settings.cta_label != blank -%}
+        <a class="dad-btn-ghost" href="{{ section.settings.cta_link | default: '#' }}">
+          {{ section.settings.cta_label }}
+          <svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </a>
+      {%- endif -%}
+    </div>
+    <div class="dad-cc__media">
+      {%- if section.settings.image != blank -%}
+        {{ section.settings.image | image_url: width: 1400 | image_tag:
+          loading: 'lazy',
+          widths: '400, 600, 800, 1000, 1200, 1400',
+          sizes: '(max-width: 989px) 92vw, 46vw',
+          class: 'dad-cc__img',
+          alt: section.settings.heading }}
+      {%- else -%}
+        {{ 'lifestyle-1' | placeholder_svg_tag: 'dad-cc__img dad-cc__img--placeholder' }}
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+.dad-cc { padding-left: var(--s-5); padding-right: var(--s-5); }
+.dad-cc__inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-12); align-items: center; }
+.dad-cc--img-left .dad-cc__copy { order: 2; }
+.dad-cc--img-left .dad-cc__media { order: 1; }
+.dad-cc__title { font-family: var(--font-display); font-weight: 400; font-size: var(--fs-h2); line-height: var(--lh-tight); color: var(--dad-ink); margin: var(--s-3) 0 0; }
+.dad-cc__body { font-family: var(--font-body); font-weight: 500; font-size: var(--fs-lead); line-height: var(--lh-normal); color: var(--dad-ink-muted); margin-top: var(--s-4); max-width: 46ch; }
+.dad-cc__body p { margin: 0 0 var(--s-3); }
+.dad-cc .dad-btn-ghost { margin-top: var(--s-6); }
+.dad-cc__media { border-radius: var(--r-xl); overflow: hidden; box-shadow: var(--shadow-soft); background: var(--dad-sky-tint); aspect-ratio: 5 / 4; }
+.dad-cc__img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.dad-eyebrow { display: inline-flex; align-items: center; gap: var(--s-2); font-family: var(--font-body); font-weight: 700; font-size: var(--fs-micro); letter-spacing: 0.04em; color: var(--dad-hot-pink); }
+.dad-eyebrow::before { content: ""; width: 7px; height: 7px; border-radius: var(--r-pill); background: currentColor; }
+.dad-btn-ghost { display: inline-flex; align-items: center; gap: var(--s-2); padding: 12px 22px; border: 1.5px solid var(--dad-ink); border-radius: var(--r-pill); font-family: var(--font-body); font-weight: 700; font-size: var(--fs-small); color: var(--dad-ink); text-decoration: none; background: transparent; transition: background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out); }
+.dad-btn-ghost:hover { background: var(--dad-ink); color: var(--dad-cream); }
+
+@media screen and (max-width: 989px) {
+  .dad-cc__inner { grid-template-columns: 1fr; gap: var(--s-8); }
+  .dad-cc--img-left .dad-cc__copy, .dad-cc--img-left .dad-cc__media { order: initial; }
+  .dad-cc__media { order: -1; }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "DAD color conversation",
+  "tag": "section",
+  "class": "dad-color-conversation-section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "conversation through color" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "The colors have names. So the talking starts at the box." },
+    { "type": "richtext", "id": "body", "label": "Body", "default": "<p>\"What color is the goldfish?\" is a better prompt than \"the orange one.\" Every Do-A-Dot color is named after something in your kid's world — animals, fruits, weather, moods — so picking a color becomes a conversation, not just a stroke.</p>" },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "see the full color story" },
+    { "type": "url", "id": "cta_link", "label": "Button link" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "select", "id": "image_position", "label": "Image position", "default": "right", "options": [ { "value": "left", "label": "Left" }, { "value": "right", "label": "Right" } ] },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Top padding", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Bottom padding", "default": 80 }
+  ],
+  "presets": [ { "name": "DAD color conversation" } ]
+}
+{% endschema %}

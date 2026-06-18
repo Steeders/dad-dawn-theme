@@ -1,0 +1,100 @@
+{%- comment -%}
+  DAD COLORFUL MAIL — Do-A-Dot Art
+  Newsletter capture card (pink). Renders a Klaviyo embedded form when a Form ID
+  is set; otherwise falls back to a native Shopify newsletter form so the section
+  always works. Placed in footer-group.json to appear above the footer on every page.
+  Klaviyo onsite script loads only when a Public API key (company ID) is provided
+  (skip it if the Klaviyo Shopify app already injects onsite site-wide).
+  New section — update-safe, tokens from dad-tokens.css.
+{%- endcomment -%}
+
+<div class="dad-mail color-{{ section.settings.color_scheme }}" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;">
+  <div class="dad-mail__card" style="background: {{ section.settings.card_background }};">
+    <div class="dad-mail__copy">
+      {%- if section.settings.heading != blank -%}<h2 class="dad-mail__title">{{ section.settings.heading }}</h2>{%- endif -%}
+      {%- if section.settings.body != blank -%}<div class="dad-mail__body rte">{{ section.settings.body }}</div>{%- endif -%}
+    </div>
+
+    <div class="dad-mail__form">
+      {%- if section.settings.klaviyo_form_id != blank -%}
+        <div class="klaviyo-form-{{ section.settings.klaviyo_form_id }}"></div>
+        {%- if section.settings.klaviyo_company_id != blank -%}
+          <script async src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id={{ section.settings.klaviyo_company_id }}"></script>
+        {%- endif -%}
+      {%- else -%}
+        {%- comment -%} Fallback: native Shopify newsletter signup until Klaviyo Form ID is set {%- endcomment -%}
+        {% form 'customer', class: 'dad-mail__native' %}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          {%- if form.posted_successfully? -%}
+            <p class="dad-mail__success">{{ 'newsletter.success' | t | default: "Thanks — check your inbox!" }}</p>
+          {%- else -%}
+            <div class="dad-mail__row">
+              <label class="visually-hidden" for="dad-mail-email">{{ 'newsletter.label' | t | default: 'Email' }}</label>
+              <input
+                id="dad-mail-email"
+                type="email"
+                name="contact[email]"
+                class="dad-mail__input"
+                placeholder="{{ section.settings.placeholder | default: 'you@household.com' | escape }}"
+                autocomplete="email"
+                required
+              >
+              <button type="submit" class="dad-mail__btn">{{ section.settings.button_label | default: 'join the club' }}</button>
+            </div>
+            {%- if form.errors -%}<p class="dad-mail__error">{{ form.errors | default_errors }}</p>{%- endif -%}
+          {%- endif -%}
+        {% endform %}
+      {%- endif -%}
+
+      {%- if section.settings.consent != blank -%}<p class="dad-mail__consent">{{ section.settings.consent }}</p>{%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+.dad-mail { padding-left: var(--s-5); padding-right: var(--s-5); }
+.dad-mail__card { max-width: 1100px; margin: 0 auto; border-radius: var(--r-xl); padding: var(--s-12) var(--s-12); display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-10); align-items: center; }
+.dad-mail__title { font-family: var(--font-display); font-weight: 400; font-size: var(--fs-h2); line-height: var(--lh-tight); color: var(--dad-ink); margin: 0; }
+.dad-mail__body { font-family: var(--font-body); font-weight: 500; font-size: var(--fs-small); line-height: var(--lh-normal); color: var(--dad-ink); margin-top: var(--s-3); max-width: 42ch; }
+.dad-mail__body p { margin: 0; }
+
+.dad-mail__row { display: flex; gap: var(--s-2); align-items: stretch; }
+.dad-mail__input { flex: 1; min-width: 0; padding: 13px 16px; border: 1.5px solid var(--dad-rule); border-radius: var(--r-pill); background: var(--dad-white); font-family: var(--font-body); font-size: var(--fs-small); color: var(--dad-ink); }
+.dad-mail__input:focus { outline: none; box-shadow: var(--shadow-focus); border-color: var(--dad-hot-pink); }
+.dad-mail__btn { flex: none; padding: 13px 24px; border: 0; border-radius: var(--r-pill); background: var(--dad-brand-red); color: var(--dad-white); font-family: var(--font-body); font-weight: 700; font-size: var(--fs-small); cursor: pointer; transition: transform var(--dur-fast) var(--ease-out), filter var(--dur-fast) var(--ease-out); }
+.dad-mail__btn:hover { transform: translateY(-1px); filter: brightness(1.05); }
+.dad-mail__consent { font-family: var(--font-body); font-size: var(--fs-micro); color: var(--dad-ink-muted); margin: var(--s-3) 0 0; }
+.dad-mail__success { font-family: var(--font-body); font-weight: 700; color: var(--dad-ink); margin: 0; }
+.dad-mail__error { font-family: var(--font-body); font-size: var(--fs-micro); color: var(--dad-brand-red); margin: var(--s-2) 0 0; }
+
+@media screen and (max-width: 749px) {
+  .dad-mail__card { grid-template-columns: 1fr; gap: var(--s-6); padding: var(--s-8) var(--s-6); }
+  .dad-mail__row { flex-direction: column; }
+  .dad-mail__btn { width: 100%; }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "DAD colorful mail",
+  "tag": "section",
+  "class": "dad-colorful-mail-section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Get colorful mail." },
+    { "type": "richtext", "id": "body", "label": "Body", "default": "<p>First dibs on new launches, color drops, and ideas for rainy-day projects. <strong>15% off your first order</strong> for joining.</p>" },
+    { "type": "header", "content": "Klaviyo" },
+    { "type": "text", "id": "klaviyo_form_id", "label": "Klaviyo Form ID", "info": "From your Klaviyo embedded form (the code after 'klaviyo-form-', e.g. RyT2Xq). Leave blank to use the fallback Shopify form." },
+    { "type": "text", "id": "klaviyo_company_id", "label": "Klaviyo Public API key (company ID)", "info": "Loads the Klaviyo onsite script. Leave blank if the Klaviyo Shopify app already adds onsite site-wide." },
+    { "type": "text", "id": "consent", "label": "Consent text", "default": "By signing up you agree to receive emails from Do-A-Dot Art. Unsubscribe anytime." },
+    { "type": "header", "content": "Fallback form (when no Klaviyo Form ID)" },
+    { "type": "text", "id": "placeholder", "label": "Email placeholder", "default": "you@household.com" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "join the club" },
+    { "type": "header", "content": "Appearance" },
+    { "type": "color", "id": "card_background", "label": "Card background", "default": "#fbe3ea" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Top padding", "default": 56 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Bottom padding", "default": 56 }
+  ],
+  "presets": [ { "name": "DAD colorful mail" } ]
+}
+{% endschema %}

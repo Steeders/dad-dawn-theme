@@ -83,6 +83,18 @@
         "padding_bottom": 56
       }
     },
+    "dad_color_conversation": {
+      "type": "dad-color-conversation",
+      "settings": {}
+    },
+    "dad_craft_closet": {
+      "type": "dad-craft-closet",
+      "settings": {
+        "collection": "featured-products",
+        "products_to_show": 4,
+        "columns": 4
+      }
+    },
     "rich_text": {
       "type": "rich-text",
       "blocks": {
@@ -253,6 +265,8 @@
     "dad_category_tiles",
     "rich_text",
     "featured_collection",
+    "dad_color_conversation",
+    "dad_craft_closet",
     "collage",
     "video",
     "multicolumn"

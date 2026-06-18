@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "name": "t:sections.footer.name",
   "type": "footer",
@@ -54,9 +63,14 @@
         "made_in_label": "made in the usa",
         "copyright": "© 1995–2026 Do-A-Dot Art, Inc. Made for little hands in San Clemente, CA."
       }
+    },
+    "colorful_mail": {
+      "type": "dad-colorful-mail",
+      "settings": {}
     }
   },
   "order": [
+    "colorful_mail",
     "footer"
   ]
 }
