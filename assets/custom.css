@@ -3575,18 +3575,23 @@ a:hover {
 
 .dad-vg__main {
   position: relative;
+  aspect-ratio: 1 / 1;
   border-radius: var(--r-lg, 18px);
   overflow: hidden;
-  background: var(--dad-white, #fff);
+  background: var(--dad-cream, #fff8e8);
   box-shadow: var(--shadow-soft);
 }
-.dad-vg__slide { display: none; }
+.dad-vg__slide {
+  position: absolute;
+  inset: 0;
+  display: none;
+}
 .dad-vg__slide.is-active { display: block; }
 .dad-vg__img {
   display: block;
   width: 100%;
-  height: auto;
-  border-radius: var(--r-lg, 18px);
+  height: 100%;
+  object-fit: contain;
 }
 
 .dad-vg__arrow {
