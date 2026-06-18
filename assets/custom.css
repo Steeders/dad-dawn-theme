@@ -3565,3 +3565,78 @@ a:hover {
   .dad-hero__actions { gap: 10px; }
   .dad-hero__btn { padding: 12px 20px; font-size: 14px; }
 }
+
+/* ============================================================
+   Variant media gallery (dad-variant-gallery.js + dad-variant-media-gallery.liquid)
+   Per-variant PDP image gallery driven by custom.variant_images.
+   ============================================================ */
+.dad-vg { display: block; }
+.dad-vg [data-vg-content] { display: flex; flex-direction: column; gap: var(--s-3, 12px); }
+
+.dad-vg__main {
+  position: relative;
+  border-radius: var(--r-lg, 18px);
+  overflow: hidden;
+  background: var(--dad-white, #fff);
+  box-shadow: var(--shadow-soft);
+}
+.dad-vg__slide { display: none; }
+.dad-vg__slide.is-active { display: block; }
+.dad-vg__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--r-lg, 18px);
+}
+
+.dad-vg__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: var(--r-pill, 999px);
+  background: var(--dad-white, #fff);
+  color: var(--dad-ink, #2b2a2d);
+  box-shadow: var(--shadow-soft);
+  cursor: pointer;
+  opacity: 0.92;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+.dad-vg__arrow:hover { opacity: 1; }
+.dad-vg__arrow .svg-wrapper { width: 16px; height: 16px; display: flex; }
+.dad-vg__arrow .svg-wrapper svg { width: 100%; height: 100%; }
+.dad-vg__arrow--prev { left: 12px; transform: translateY(-50%) rotate(90deg); }
+.dad-vg__arrow--next { right: 12px; transform: translateY(-50%) rotate(-90deg); }
+
+.dad-vg__thumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2, 8px);
+  margin: 0;
+  padding: 0;
+}
+.dad-vg__thumb {
+  display: block;
+  padding: 0;
+  width: 72px;
+  height: 72px;
+  border: 2px solid transparent;
+  border-radius: var(--r-sm, 10px);
+  overflow: hidden;
+  background: var(--dad-white, #fff);
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+.dad-vg__thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.dad-vg__thumb:hover { border-color: var(--dad-ink-soft, #b9b7bd); }
+.dad-vg__thumb.is-active { border-color: var(--accent, var(--dad-hot-pink, #df1883)); }
+.dad-vg__thumb:focus-visible { outline: none; box-shadow: var(--shadow-focus); }
+
+@media screen and (max-width: 749px) {
+  .dad-vg__thumb { width: 60px; height: 60px; }
+}

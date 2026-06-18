@@ -1,0 +1,83 @@
+{% comment %}
+  dad-variant-media-gallery
+
+  Per-variant image gallery driven by the variant metafield
+  `custom.variant_images` (list.file_reference -> images). Rendered in place of
+  Dawn's `product-media-gallery` when the selected variant has variant_images
+  (guarded in sections/main-product.liquid).
+
+  Only the SELECTED variant's images are rendered server-side. Variant switching
+  is handled by assets/dad-variant-gallery.js, which swaps this gallery's
+  [data-vg-content] using the section HTML Dawn already fetches on variant
+  change (PUB_SUB variantChange). No dependency on Dawn's media-gallery.js.
+
+  Accepts:
+  - product:    {Object} Product liquid object
+  - section_id: {String} The host section id (for variantChange targeting)
+{% endcomment %}
+
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign images = current_variant.metafields.custom.variant_images.value
+-%}
+
+<dad-variant-gallery class="dad-vg" data-section-id="{{ section_id }}">
+  <div data-vg-content>
+    {%- if images != blank and images.size > 0 -%}
+      <div class="dad-vg__main">
+        {%- for media_item in images -%}
+          <div
+            class="dad-vg__slide{% if forloop.first %} is-active{% endif %}"
+            data-vg-slide="{{ forloop.index0 }}"
+          >
+            {{
+              media_item
+              | image_url: width: 1500
+              | image_tag:
+                loading: forloop.first ? 'eager' : 'lazy',
+                sizes: '(min-width: 990px) 50vw, 100vw',
+                widths: '300, 500, 750, 1000, 1250, 1500',
+                class: 'dad-vg__img',
+                alt: media_item.alt
+            }}
+          </div>
+        {%- endfor -%}
+
+        {%- if images.size > 1 -%}
+          <button type="button" class="dad-vg__arrow dad-vg__arrow--prev" data-vg-prev aria-label="{{ 'general.slider.previous_slide' | t }}">
+            <span class="svg-wrapper">{{- 'icon-caret.svg' | inline_asset_content -}}</span>
+          </button>
+          <button type="button" class="dad-vg__arrow dad-vg__arrow--next" data-vg-next aria-label="{{ 'general.slider.next_slide' | t }}">
+            <span class="svg-wrapper">{{- 'icon-caret.svg' | inline_asset_content -}}</span>
+          </button>
+        {%- endif -%}
+      </div>
+
+      {%- if images.size > 1 -%}
+        <ul class="dad-vg__thumbs list-unstyled" role="list">
+          {%- for media_item in images -%}
+            <li>
+              <button
+                type="button"
+                class="dad-vg__thumb{% if forloop.first %} is-active{% endif %}"
+                data-vg-thumb="{{ forloop.index0 }}"
+                {% if forloop.first %}aria-current="true"{% endif %}
+                aria-label="{{ 'products.product.media.load_image' | t: index: forloop.index }}"
+              >
+                {{
+                  media_item
+                  | image_url: width: 200
+                  | image_tag:
+                    loading: 'lazy',
+                    sizes: '100px',
+                    widths: '100, 200',
+                    alt: media_item.alt
+                }}
+              </button>
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</dad-variant-gallery>
