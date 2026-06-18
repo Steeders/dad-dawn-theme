@@ -16,7 +16,6 @@
   - section_id: {String} The host section id (for variantChange targeting)
 {% endcomment %}
 
-DAD_MARKER_SNIPPET_B
 {%- liquid
   assign current_variant = product.selected_or_first_available_variant
   assign images = current_variant.metafields.custom.variant_images.value
@@ -27,6 +26,12 @@ DAD_MARKER_SNIPPET_B
     {%- if images != blank and images.size > 0 -%}
       <div class="dad-vg__main">
         {%- for media_item in images -%}
+          {%- liquid
+            assign img_loading = 'lazy'
+            if forloop.first
+              assign img_loading = 'eager'
+            endif
+          -%}
           <div
             class="dad-vg__slide{% if forloop.first %} is-active{% endif %}"
             data-vg-slide="{{ forloop.index0 }}"
@@ -35,7 +40,7 @@ DAD_MARKER_SNIPPET_B
               media_item
               | image_url: width: 1500
               | image_tag:
-                loading: forloop.first ? 'eager' : 'lazy',
+                loading: img_loading,
                 sizes: '(min-width: 990px) 50vw, 100vw',
                 widths: '300, 500, 750, 1000, 1250, 1500',
                 class: 'dad-vg__img',
