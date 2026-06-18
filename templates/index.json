@@ -104,6 +104,7 @@
         "heading",
         "text"
       ],
+      "disabled": true,
       "settings": {
         "desktop_content_position": "center",
         "content_alignment": "center",
@@ -115,6 +116,7 @@
     },
     "featured_collection": {
       "type": "featured-collection",
+      "disabled": true,
       "settings": {
         "collection": "featured-products",
         "products_to_show": 8,
@@ -181,6 +183,9 @@
         "collection": "featured-products",
         "products_to_show": 4,
         "columns": 4,
+        "image_ratio": "adapt",
+        "show_secondary_image": true,
+        "quick_add": "standard",
         "shop_all_label": "shop all",
         "shop_all_link": "",
         "color_scheme": "",
@@ -325,11 +330,11 @@
     "dad_hero",
     "dad_category_tiles",
     "rich_text",
+    "dad_why_dot",
     "featured_collection",
     "dad_color_conversation",
     "dad_product_spotlight",
     "dad_craft_closet",
-    "dad_shop_by_craft",
-    "dad_why_dot"
+    "dad_shop_by_craft"
   ]
 }
