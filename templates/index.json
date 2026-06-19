@@ -20,8 +20,8 @@
         "lede": "Markers, watercolors, and chunky crayons — the whole craft closet, shipped direct from the family that's been making mess-free art easier for thirty years.",
         "btn1_label": "shop all",
         "btn1_link": "shopify://collections/all",
-        "btn2_label": "meet the colors",
-        "btn2_link": "shopify://pages/color-story"
+        "btn2_label": "Shop best sellers",
+        "btn2_link": "shopify://collections/best-sellers"
       }
     },
     "dad_category_tiles": {
@@ -226,24 +226,6 @@
         "padding_bottom": 96
       }
     },
-    "dad_craft_closet": {
-      "type": "dad-craft-closet",
-      "settings": {
-        "eyebrow": "pairs well with",
-        "heading": "Complete the craft closet.",
-        "collection": "featured-products",
-        "products_to_show": 4,
-        "columns": 4,
-        "image_ratio": "adapt",
-        "show_secondary_image": true,
-        "quick_add": "standard",
-        "shop_all_label": "shop all",
-        "shop_all_link": "shopify://collections/all",
-        "color_scheme": "",
-        "padding_top": 64,
-        "padding_bottom": 64
-      }
-    },
     "dad_shop_by_craft": {
       "type": "dad-shop-by-craft",
       "blocks": {
@@ -320,6 +302,24 @@
         "eyebrow": "shop by craft",
         "heading": "Pick a tool. Make a memory.",
         "layout": "feature",
+        "color_scheme": "",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    },
+    "dad_craft_closet": {
+      "type": "dad-craft-closet",
+      "settings": {
+        "eyebrow": "pairs well with",
+        "heading": "Complete the craft closet.",
+        "collection": "featured-products",
+        "products_to_show": 4,
+        "columns": 4,
+        "image_ratio": "adapt",
+        "show_secondary_image": true,
+        "quick_add": "standard",
+        "shop_all_label": "shop all",
+        "shop_all_link": "shopify://collections/all",
         "color_scheme": "",
         "padding_top": 64,
         "padding_bottom": 64
