@@ -55,7 +55,7 @@
               {%- if section.settings.help_phone != blank -%}
                 <strong>{{ section.settings.help_phone }}</strong>
               {%- endif -%}
-              {%- if section.settings.help_phone != blank and section.settings.help_email != blank -%} · {%- endif -%}
+              {%- if section.settings.help_phone != blank and section.settings.help_email != blank -%}<span class="dad-footer__help-sep" aria-hidden="true">·</span>{%- endif -%}
               {%- if section.settings.help_email != blank -%}
                 <a href="mailto:{{ section.settings.help_email }}">{{ section.settings.help_email }}</a>
               {%- endif -%}
@@ -170,7 +170,7 @@
       "type": "text",
       "id": "help_phone",
       "label": "Phone",
-      "default": "949-DOT-ARTS"
+      "default": "800-436-8278"
     },
     {
       "type": "text",
