@@ -98,9 +98,9 @@
         "collapsible-row-3": {
           "type": "collapsible_tab",
           "settings": {
-            "heading": "Care Instructions",
+            "heading": "Details & Safety",
             "icon": "heart",
-            "content": "",
+            "content": "{{ product.metafields.custom.details_and_safety | metafield_tag }}",
             "page": ""
           }
         },

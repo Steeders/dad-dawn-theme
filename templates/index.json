@@ -194,19 +194,6 @@
         "padding_bottom": 36
       }
     },
-    "dad_color_conversation": {
-      "type": "dad-color-conversation",
-      "settings": {
-        "eyebrow": "conversation through color",
-        "heading": "Every color has a name. Every name starts a story.",
-        "body": "<p>Piggy Pink. Tiger Tail Orange. Octopus Purple. We name our colors after the world around your kid — so picking one is the start of a conversation, not just a stroke.</p>",
-        "cta_label": "see the full color story",
-        "cta_link": "",
-        "color_scheme": "",
-        "padding_top": 96,
-        "padding_bottom": 96
-      }
-    },
     "dad_product_spotlight": {
       "type": "dad-product-spotlight",
       "settings": {
@@ -224,6 +211,19 @@
         "color_scheme": "",
         "padding_top": 48,
         "padding_bottom": 48
+      }
+    },
+    "dad_color_conversation": {
+      "type": "dad-color-conversation",
+      "settings": {
+        "eyebrow": "conversation through color",
+        "heading": "Every color has a name. Every name starts a story.",
+        "body": "<p>Piggy Pink. Tiger Tail Orange. Octopus Purple. We name our colors after the world around your kid — so picking one is the start of a conversation, not just a stroke.</p>",
+        "cta_label": "see the full color story",
+        "cta_link": "",
+        "color_scheme": "",
+        "padding_top": 96,
+        "padding_bottom": 96
       }
     },
     "dad_craft_closet": {
@@ -332,9 +332,9 @@
     "rich_text",
     "dad_why_dot",
     "featured_collection",
-    "dad_color_conversation",
     "dad_product_spotlight",
-    "dad_craft_closet",
-    "dad_shop_by_craft"
+    "dad_color_conversation",
+    "dad_shop_by_craft",
+    "dad_craft_closet"
   ]
 }
