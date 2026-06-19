@@ -99,7 +99,7 @@ The Claude Design bundle's Pass 4 ("Dawn module library") was built as a 1:1 han
 **The loop:**
 1. **`git pull --rebase origin main` FIRST** — every session and before any commit. The user edits in the Shopify theme editor; those edits auto-commit to `main` as `Update from Shopify...` bot commits. Rebasing absorbs them so you never clobber editor content.
 2. Make code changes locally (new `sections/`/`blocks/`/`assets/`; never stock Dawn files).
-3. Preview: `shopify theme dev --store do-a-dot-art.myshopify.com --theme 157094641896 --port <free>` (Chrome; theme dev serves local files against live data — reflects uncommitted edits).
+3. Preview: `shopify theme dev --store do-a-dot-art.myshopify.com --port <free>` — **NO `--theme` flag.** This spins up a private, hidden, per-session development theme (auto-deleted after 7 days). 🚫 NEVER pass `--theme 157094641896` (the GitHub-connected theme): every local save uploads to it and the bidirectional integration auto-commits to `main` → goes live, bypassing branch isolation. (theme dev serves local files against live data — reflects uncommitted edits.)
 4. `shopify theme check` before committing.
 5. Commit, then `git push origin main` → Shopify auto-syncs into the connected theme. (Small changes go straight to `main`; use a feature branch + ff-merge for larger work.)
 

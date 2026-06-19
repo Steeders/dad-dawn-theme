@@ -21,7 +21,7 @@
         "btn1_label": "shop all",
         "btn1_link": "shopify://collections/all",
         "btn2_label": "meet the colors",
-        "btn2_link": ""
+        "btn2_link": "shopify://pages/color-story"
       }
     },
     "dad_category_tiles": {
@@ -201,8 +201,8 @@
         "heading": "Meet the chunky crayon family.",
         "body": "<p>Eighteen named colors — Piggy Pink, Lady Bug Red, Octopus Purple, Goldfish Gold. Built fat and grippy for the smallest pincer grip. Soy-wax based, non-toxic, won't snap in a tight little fist.</p>",
         "btn1_label": "shop the crayon set",
-        "btn1_link": "",
-        "btn2_label": "watch the unboxing",
+        "btn1_link": "shopify://collections/crayons-coloring",
+        "btn2_label": "",
         "btn2_link": "",
         "image": "shopify://shop_images/2026-05-01_Do-a-Dot_batch1-4.webp",
         "badge_text": "brand new!",
@@ -220,7 +220,7 @@
         "heading": "Every color has a name. Every name starts a story.",
         "body": "<p>Piggy Pink. Tiger Tail Orange. Octopus Purple. We name our colors after the world around your kid — so picking one is the start of a conversation, not just a stroke.</p>",
         "cta_label": "see the full color story",
-        "cta_link": "",
+        "cta_link": "shopify://pages/color-story",
         "color_scheme": "",
         "padding_top": 96,
         "padding_bottom": 96
@@ -238,7 +238,7 @@
         "show_secondary_image": true,
         "quick_add": "standard",
         "shop_all_label": "shop all",
-        "shop_all_link": "",
+        "shop_all_link": "shopify://collections/all",
         "color_scheme": "",
         "padding_top": 64,
         "padding_bottom": 64
@@ -290,7 +290,7 @@
             "kicker": "save up to $14",
             "title": "Bundles",
             "subtext": "",
-            "collection": "",
+            "collection": "gift-bundles",
             "link": "",
             "cta_label": "shop bundles",
             "bg_color": "#e5f5dc"
@@ -302,7 +302,7 @@
             "kicker": "papers & accessories",
             "title": "Extras",
             "subtext": "",
-            "collection": "",
+            "collection": "extras",
             "link": "",
             "cta_label": "shop extras",
             "bg_color": "#f1e3ef"
