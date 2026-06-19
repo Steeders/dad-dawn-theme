@@ -27,10 +27,10 @@
 
     <a href="{{ routes.root_url }}" class="dad-header__logo" aria-label="{{ shop.name | escape }} — home">
       {%- if section.settings.logo != blank -%}
-        {{ section.settings.logo | image_url: width: 600 | image_tag:
-          loading: 'eager', widths: '200, 300, 400, 600',
-          sizes: '(max-width: 749px) 140px, 200px', alt: shop.name,
-          class: 'dad-header__logo-img', style: 'max-width: 100%; width: auto;' }}
+        {{ section.settings.logo | image_url: width: 700 | image_tag:
+          loading: 'eager', widths: '250, 350, 500, 700',
+          sizes: '250px', alt: shop.name,
+          class: 'dad-header__logo-img', style: 'max-width: 100%; width: auto; height: auto;' }}
       {%- else -%}
         <span class="dad-header__logo-text">{{ shop.name }}</span>
       {%- endif -%}
@@ -174,7 +174,7 @@
 .dad-header__bar { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: var(--s-4); padding: var(--s-4) var(--s-5); max-width: 1400px; margin: 0 auto; }
 .dad-header__logo { justify-self: start; display: inline-flex; align-items: center; text-decoration: none; }
 .dad-header__logo-text { font-family: var(--font-display); font-size: var(--fs-h3); color: var(--dad-ink); }
-.dad-header__logo-img { display: block; max-height: 34px; width: auto; }
+.dad-header__logo-img { display: block; max-height: 27px; width: auto; height: auto; }
 .dad-header__nav { justify-self: center; display: flex; align-items: center; gap: var(--s-6); }
 .dad-header__nav-item { position: static; }
 .dad-header__nav-link { display: inline-flex; align-items: center; gap: 6px; background: none; border: 0; cursor: pointer; font-family: var(--font-body); font-weight: 700; font-size: var(--fs-h4); color: var(--dad-ink); padding: var(--s-2) var(--s-1); text-decoration: none; transition: color var(--dur-fast) var(--ease-out); }
