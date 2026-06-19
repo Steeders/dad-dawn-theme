@@ -904,6 +904,25 @@ a:hover {
   border: 0;
   padding: 0;
   margin: 0 0 var(--s-6);
+  /* A <fieldset> defaults to min-width:min-content, so the non-wrapping mobile
+     slider stretches the field — and the whole page — wider than the viewport
+     (you could pinch-zoom out, the slides overlapped, and the buttons centered
+     over a doubled width). Pinning to 0 keeps the scroll inside .slider and the
+     container at device width, so the 2-up cards size correctly with a peek. */
+  min-width: 0;
+}
+/* Dawn's .product-form__input sets min-width:fit-content (section-main-product.css),
+   which is what actually stretches the field. Beat it with the combined class. */
+.product-form__input.dad-variant-image-swatches {
+  min-width: 0;
+}
+.dad-variant-swatch-slider {
+  display: block;
+}
+.dad-variant-swatch-slider,
+.dad-variant-image-swatches__grid {
+  min-width: 0;
+  max-width: 100%;
 }
 .dad-variant-image-swatches .form__label {
   font-family: var(--font-body);
@@ -921,15 +940,16 @@ a:hover {
   text-transform: none;
   letter-spacing: 0;
 }
-.dad-variant-image-swatches__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-  gap: var(--s-3);
-}
+/* The swatch list is a Dawn slider-component <ul> (markup in
+   dad-variant-image-swatches.liquid). Layout comes from Dawn's own classes:
+   .grid/.grid--*-col-* for the desktop grid, .slider.slider--mobile + grid--peek
+   for the mobile scroll-snap slider, all driven by component-slider.css. We
+   only style the cards here. */
 
 /* Individual swatch — a clickable label that wraps the radio. */
 .dad-variant-image-swatch {
   position: relative;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -952,8 +972,9 @@ a:hover {
   border-color: var(--border-strong);
 }
 .dad-variant-image-swatch.is-selected {
+  border-width: 2px;
   border-color: var(--accent);
-  box-shadow: 0 0 0 2px var(--accent);
+  box-shadow: none;
 }
 .dad-variant-image-swatch.is-unavailable {
   opacity: 0.55;
@@ -1022,6 +1043,32 @@ a:hover {
   border-radius: var(--r-pill);
   background: var(--fg);
   color: var(--fg-inverse);
+}
+
+/* Variant swatch slider — Dawn's slider-component handles the mobile
+   scroll-snap, peek, and the centered prev / counter / next button row
+   (component-slider.css); Dawn auto-hides the buttons on desktop where it
+   reverts to a 3-col grid. Just a light brand touch on the counter here. */
+.dad-variant-swatch-slider__buttons .slider-counter {
+  font-family: var(--font-body);
+  font-weight: 700;
+  color: var(--fg);
+}
+
+/* Mobile sizing: Dawn's grid--peek packs 2-col cards tight (width:50% - gap -
+   3rem, content-box) which makes our bordered cards read as overlapping. For
+   this slider only, make the slides a touch smaller with a clear gap so they
+   don't crowd and more of the next card peeks. Specificity (0,4,0) beats
+   Dawn's grid--peek rules without !important. */
+@media screen and (max-width: 749px) {
+  .dad-variant-swatch-slider .grid--peek {
+    column-gap: var(--s-3);
+  }
+  .dad-variant-swatch-slider .grid--peek .grid__item.slider__slide {
+    box-sizing: border-box;
+    width: 40%;
+    min-width: 0;
+  }
 }
 
 /* Variant pickers (pill style) — when the customizer is set to "pills". */
