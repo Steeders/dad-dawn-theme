@@ -1,0 +1,45 @@
+{%- comment -%}
+  DAD PACK COLORS — Do-A-Dot Art
+  Shows the colors included in the selected variant (pack) as solid dots +
+  name labels, between the price and the quantity/Add-to-Cart row.
+  Data is two variant metafields (custom.pack_color_hex : list.color and
+  custom.pack_color_name : list.text), editable in the admin. Self-guards:
+  renders nothing unless the current variant has pack_color_hex set, so it's
+  inert on every other product. Updates on variant change via the global
+  subscribe / PUB_SUB_EVENTS (assets/dad-pack-colors.js) — same mechanism as
+  the variant gallery.
+
+  Accepts: product, section_id
+{%- endcomment -%}
+{%- assign cur = product.selected_or_first_available_variant -%}
+{%- if cur.metafields.custom.pack_color_hex.value != blank -%}
+  <dad-pack-colors class="dad-pack-colors" data-section-id="{{ section_id }}">
+    <script type="application/json" class="dad-pack-colors__data">
+      {
+      {%- for v in product.variants -%}
+        {%- assign vhex = v.metafields.custom.pack_color_hex.value -%}
+        {%- assign vname = v.metafields.custom.pack_color_name.value -%}
+        {%- if vhex != blank -%}
+          "{{ v.id }}": [
+          {%- for hx in vhex -%}
+            {"n": {{ vname[forloop.index0] | json }}, "h": "{{ hx }}"}{% unless forloop.last %},{% endunless %}
+          {%- endfor -%}
+          ]{% unless forloop.last %},{% endunless %}
+        {%- endif -%}
+      {%- endfor -%}
+      }
+    </script>
+    <span class="dad-pack-colors__label">Colors in this pack</span>
+    <ul class="dad-pack-colors__list">
+      {%- assign chex = cur.metafields.custom.pack_color_hex.value -%}
+      {%- assign cname = cur.metafields.custom.pack_color_name.value -%}
+      {%- for hx in chex -%}
+        <li class="dad-pc__item">
+          <span class="dad-pc__dot" style="background: {{ hx }};"></span>
+          <span class="dad-pc__name">{{ cname[forloop.index0] }}</span>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </dad-pack-colors>
+  <script src="{{ 'dad-pack-colors.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}

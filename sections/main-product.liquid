@@ -104,6 +104,7 @@
           {%- for block in section.blocks -%}
             {%- if block.type == 'quantity_selector' -%}
               {%- assign dad_buybar_open = true -%}
+              {% render 'dad-pack-colors', product: product, section_id: section.id %}
               <div class="dad-buybar">
             {%- endif -%}
             {%- case block.type -%}

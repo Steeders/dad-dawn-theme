@@ -1230,6 +1230,52 @@ a:hover {
   }
 }
 
+/* PDP: "colors in this pack" strip — dots + name labels, between price and
+   the buy bar. Driven by the custom.pack_color_hex / pack_color_name variant
+   metafields via snippets/dad-pack-colors.liquid + assets/dad-pack-colors.js
+   (updates on variant change). Renders only for products that have the data. */
+.dad-pack-colors {
+  display: block;
+  margin: 0 0 var(--s-5);
+}
+.dad-pack-colors[hidden] {
+  display: none;
+}
+.dad-pack-colors__label {
+  display: block;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--fs-small);
+  color: var(--dad-ink-muted);
+  margin-bottom: var(--s-3);
+}
+.dad-pack-colors__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2) var(--s-4);
+}
+.dad-pc__item {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+.dad-pc__dot {
+  width: 18px;
+  height: 18px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--border);
+  flex: none;
+}
+.dad-pc__name {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: var(--fs-small);
+  color: var(--dad-ink);
+}
+
 /* Accordion / details rows (product description sections). */
 .product__accordion details,
 .accordion details {
