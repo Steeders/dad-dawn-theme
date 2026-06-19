@@ -70,7 +70,7 @@
           "type": "collapsible_tab",
           "disabled": true,
           "settings": {
-            "heading": "Materials",
+            "heading": "What's Included",
             "icon": "leather",
             "content": "",
             "page": ""
@@ -87,11 +87,10 @@
         },
         "collapsible-row-2": {
           "type": "collapsible_tab",
-          "disabled": true,
           "settings": {
-            "heading": "Dimensions",
-            "icon": "ruler",
-            "content": "",
+            "heading": "Why Parents & Teachers Love Them",
+            "icon": "heart",
+            "content": "{{ product.metafields.custom.why_parents_teachers_love_them | metafield_tag }}",
             "page": ""
           }
         },
@@ -99,7 +98,7 @@
           "type": "collapsible_tab",
           "settings": {
             "heading": "Details & Safety",
-            "icon": "heart",
+            "icon": "eye",
             "content": "{{ product.metafields.custom.details_and_safety | metafield_tag }}",
             "page": ""
           }
