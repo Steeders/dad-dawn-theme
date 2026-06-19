@@ -303,8 +303,11 @@ a:hover {
   text-decoration: none;
   text-wrap: balance;
 }
-.card__heading > a:hover {
+.card__heading > a:hover,
+.card .card__heading > a:hover,
+.card-information .card__heading > a:hover {
   color: var(--accent);
+  text-decoration: none;
 }
 
 /* Price — Dimbo (brand display) for BOTH the regular and sale price, so a
@@ -582,13 +585,11 @@ a:hover {
   justify-content: center;
   transition: background 0.15s ease;
 }
-.facets-vertical .facet-checkbox > input[type='checkbox']:checked ~ *,
 .facets-vertical .facet-checkbox:has(input:checked)::before {
-  background: var(--dad-ink);
-  background-image: linear-gradient(var(--dad-ink), var(--dad-ink)),
-    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='20 6 9 17 4 12'/></svg>");
-  background-blend-mode: normal;
-  background-size: cover, 12px 12px;
+  background-color: var(--accent);
+  border-color: var(--accent);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='20 6 9 17 4 12'/></svg>");
+  background-size: 12px 12px;
   background-position: center;
   background-repeat: no-repeat;
 }
@@ -600,8 +601,68 @@ a:hover {
   font-weight: 600;
 }
 
+/* --- Color-family facet → compact dot grid ------------------
+   custom.color_family is a list.single_line_text_field filter (text is
+   the only metafield type Shopify lets you filter on). Its values are a
+   CONTROLLED set of 10 family names, so we render each as a brand-hex
+   dot here — Shopify can't carry the color on a text filter, so the
+   theme owns it. Scoped by the filter's input name (filter.p.m.custom.
+   color_family) so no other facet is touched. If a family is added,
+   add its name + hex below. */
+.facets-vertical .facets__list--vertical:has(input[name*='color_family']) {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px 10px;
+  margin-top: 8px;
+  justify-items: center;
+}
+.facets-vertical .facets__list--vertical:has(input[name*='color_family']) .facets__item {
+  margin: 0;
+}
+.facets-vertical .facet-checkbox:has(input[name*='color_family']) {
+  padding: 0;
+  gap: 0;
+  justify-content: center;
+}
+/* hide the family-name text + count — dots only */
+.facets-vertical .facet-checkbox:has(input[name*='color_family']) .facet-checkbox__text {
+  display: none;
+}
+/* turn the square checkbox pseudo into a round color dot with the brand ink border */
+.facets-vertical .facet-checkbox:has(input[name*='color_family'])::before {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1.5px solid var(--dad-ink);
+  background-image: none;
+}
+/* selected dot — cream gap + ink ring */
+.facets-vertical .facet-checkbox:has(input[name*='color_family']:checked)::before {
+  box-shadow: 0 0 0 2px var(--dad-cream), 0 0 0 4px var(--dad-ink);
+}
+/* per-family fill — value attribute is the family name; ink border kept from rule above */
+.facets-vertical .facet-checkbox:has(input[name*='color_family'][value='Hot Pink'])::before { background-color: #df1883; }
+.facets-vertical .facet-checkbox:has(input[name*='color_family'][value='Red'])::before { background-color: #ee2c39; }
+.facets-vertical .facet-checkbox:has(input[name*='color_family'][value='Orange'])::before { background-color: #f89a30; }
+.facets-vertical .facet-checkbox:has(input[name*='color_family'][value='Yellow'])::before { background-color: #ffd241; }
+.facets-vertical .facet-checkbox:has(input[name*='color_family'][value='Green'])::before { background-color: #6dbe4b; }
+.facets-vertical .facet-checkbox:has(input[name*='color_family'][value='Teal'])::before { background-color: #009491; }
+.facets-vertical .facet-checkbox:has(input[name*='color_family'][value='Blue'])::before { background-color: #51c8ed; }
+.facets-vertical .facet-checkbox:has(input[name*='color_family'][value='Deep Blue'])::before { background-color: #2f56a5; }
+.facets-vertical .facet-checkbox:has(input[name*='color_family'][value='Purple'])::before { background-color: #a55b96; }
+.facets-vertical .facet-checkbox:has(input[name*='color_family'][value='Ink'])::before { background-color: #2b2a2d; }
+
 /* --- Active-filter chips ------------------------------------ */
-.active-facets__button,
+/* Dawn nests .active-facets__button-inner inside .active-facets__button.
+   Style only the inner as the pill; strip the outer so we don't get a
+   double border. */
+.active-facets__button {
+  display: inline-flex;
+  padding: 0;
+  border: none;
+  background: none;
+  border-radius: var(--r-pill);
+}
 .active-facets__button-inner {
   display: inline-flex;
   align-items: center;

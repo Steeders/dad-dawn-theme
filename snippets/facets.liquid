@@ -129,7 +129,8 @@
                     id="Details-{{ filter.param_name | escape }}-{{ section.id }}"
                     class="{% if filter_type == 'horizontal' %}disclosure-has-popup facets__disclosure{% else %} facets__disclosure-vertical{% endif %} js-filter"
                     data-index="{{ forloop.index }}"
-                    {% if filter_type == 'vertical' and forloop.index == 1 %}
+                    {%- comment -%} dad: open all vertical filters by default (Dawn stock opens only the first) {%- endcomment -%}
+                    {% if filter_type == 'vertical' %}
                       open
                     {% endif %}
                   >
@@ -300,7 +301,8 @@
                     id="Details-{{ filter.param_name | escape }}-{{ section.id }}"
                     class="{% if filter_type == 'horizontal' %}disclosure-has-popup facets__disclosure{% else %} facets__disclosure-vertical{% endif %} js-filter"
                     data-index="{{ forloop.index }}"
-                    {% if filter_type == 'vertical' and forloop.index == 1 %}
+                    {%- comment -%} dad: open all vertical filters by default (Dawn stock opens only the first) {%- endcomment -%}
+                    {% if filter_type == 'vertical' %}
                       open
                     {% endif %}
                   >
