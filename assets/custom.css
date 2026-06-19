@@ -1266,7 +1266,7 @@ a:hover {
   width: 18px;
   height: 18px;
   border-radius: var(--r-pill);
-  border: 1px solid var(--border);
+  border: 1.5px solid var(--dad-ink);
   flex: none;
 }
 .dad-pc__name {
@@ -3821,4 +3821,256 @@ a:hover {
 
 @media screen and (max-width: 749px) {
   .dad-vg__thumb { width: 60px; height: 60px; }
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   Judge.me product reviews — brand restyle (classic jdgm- widget).
+   Light-DOM widget, so theme CSS reaches every node. Scoped under
+   #judgeme_product_reviews and !important'd only where Judge.me's own
+   stylesheet fights back. Class-based rules survive the widget's AJAX
+   repaints (pagination / sort), so injected review cards inherit them.
+   Maps the stock "Customer Reviews" block onto the PDP review mock:
+   eyebrow + big headline, stacked average, pill histogram, and
+   bordered review cards with avatar-first headers.
+   ────────────────────────────────────────────────────────────────── */
+#judgeme_product_reviews .jdgm-rev-widg {
+  font-family: var(--font-body);
+  color: var(--dad-ink);
+}
+
+/* — Header: eyebrow + headline share a row with the write-review pill;
+     the summary + histogram drop to a full-width row beneath them. — */
+#judgeme_product_reviews .jdgm-rev-widg__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--s-4) var(--s-6);
+  padding-bottom: var(--s-6);
+  border-bottom: 1.5px solid var(--dad-rule);
+  margin-bottom: var(--s-8);
+  text-align: left;
+}
+#judgeme_product_reviews .jdgm-rev-widg__title {
+  order: 1;
+  flex: 1 1 auto;
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--fs-display);
+  line-height: 1.05;
+  color: var(--dad-ink);
+  text-transform: none;
+  text-align: left;
+}
+#judgeme_product_reviews .jdgm-rev-widg__title::before {
+  content: "\25CF  parent reviews";
+  display: block;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--fs-small);
+  letter-spacing: 0.04em;
+  color: var(--dad-red);
+  text-transform: lowercase;
+  margin-bottom: var(--s-3);
+}
+/* write-a-review ghost pill, pinned to the top-right of the header */
+#judgeme_product_reviews .jdgm-form-wrapper { order: 2; margin: 0; }
+#judgeme_product_reviews .jdgm-write-rev-link {
+  display: inline-block;
+  background: var(--bg-elev) !important;
+  color: var(--dad-ink) !important;
+  border: 1.5px solid var(--dad-ink) !important;
+  border-radius: var(--r-pill) !important;
+  padding: var(--s-3) var(--s-6) !important;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--fs-small);
+  text-transform: lowercase;
+  text-decoration: none;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+#judgeme_product_reviews .jdgm-write-rev-link:hover {
+  background: var(--dad-ink) !important;
+  color: var(--dad-white) !important;
+}
+/* full-width row carrying the average summary (left) + histogram (right) */
+#judgeme_product_reviews .jdgm-row-stars {
+  order: 3;
+  flex: 1 1 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-8);
+}
+
+/* — Summary: stacked big average number / stars / count — */
+#judgeme_product_reviews .jdgm-rev-widg__summary { flex: 0 0 auto; margin: 0; }
+#judgeme_product_reviews .jdgm-rev-widg__summary-stars {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-2);
+}
+#judgeme_product_reviews .jdgm-rev-widg__summary-average,
+#judgeme_product_reviews .jdgm-rev-widg__summary-average a {
+  order: -1;
+  flex: 1 1 100%;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--fs-display);
+  line-height: 1;
+  color: var(--dad-ink) !important;
+  text-decoration: none !important;
+  margin-bottom: var(--s-2);
+}
+#judgeme_product_reviews .jdgm-rev-widg__summary-stars .jdgm-star { font-size: 1.4em; }
+#judgeme_product_reviews .jdgm-rev-widg__summary-text {
+  margin-top: var(--s-3);
+  font-size: var(--fs-small);
+  color: var(--dad-ink-muted);
+}
+
+/* — Histogram: thin pink pill bars with right-aligned counts — */
+#judgeme_product_reviews .jdgm-histogram { flex: 1 1 320px; display: block; margin: 0; }
+#judgeme_product_reviews .jdgm-histogram__row {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  margin-bottom: var(--s-2);
+}
+#judgeme_product_reviews .jdgm-histogram__star { flex: 0 0 auto; white-space: nowrap; }
+#judgeme_product_reviews .jdgm-histogram__star .jdgm-star { font-size: 0.9em; }
+#judgeme_product_reviews .jdgm-histogram__bar {
+  flex: 1 1 auto;
+  height: var(--s-2);
+  background: color-mix(in srgb, var(--dad-pink) 22%, white) !important;
+  border-radius: var(--r-pill) !important;
+  overflow: hidden;
+}
+#judgeme_product_reviews .jdgm-histogram__bar-content {
+  height: 100%;
+  background: var(--dad-hot-pink) !important;
+  border-radius: var(--r-pill);
+}
+#judgeme_product_reviews .jdgm-histogram__frequency {
+  flex: 0 0 auto;
+  min-width: 2.5em;
+  text-align: right;
+  font-size: var(--fs-small);
+  color: var(--dad-ink-muted);
+}
+
+/* — Review cards: bordered, rounded, avatar-first header, date top-right — */
+#judgeme_product_reviews .jdgm-rev-widg__reviews {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-5);
+}
+#judgeme_product_reviews .jdgm-rev {
+  border: 1.5px solid var(--dad-rule) !important;
+  border-radius: var(--r-lg);
+  background: var(--bg-elev);
+  padding: var(--s-6);
+  margin: 0 !important;
+}
+#judgeme_product_reviews .jdgm-rev__br { display: none !important; }
+#judgeme_product_reviews .jdgm-rev__header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--s-3);
+  position: relative;
+  padding-right: var(--s-12);
+}
+#judgeme_product_reviews .jdgm-row-profile {
+  order: 1;
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  margin: 0;
+}
+#judgeme_product_reviews .jdgm-row-rating { order: 2; margin: 0; }
+#judgeme_product_reviews .jdgm-row-extra { order: 3; margin: 0; }
+/* product link + empty rows the mock omits — collapse so they don't pad the card */
+#judgeme_product_reviews .jdgm-row-product { display: none !important; }
+#judgeme_product_reviews .jdgm-row-extra:empty,
+#judgeme_product_reviews .jdgm-rev__custom-form:empty { display: none !important; }
+#judgeme_product_reviews .jdgm-rev__timestamp {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: var(--fs-small);
+  color: var(--dad-ink-soft);
+}
+#judgeme_product_reviews .jdgm-rev__icon {
+  width: var(--s-10);
+  height: var(--s-10);
+  border-radius: var(--r-pill);
+  background: color-mix(in srgb, var(--dad-pink) 25%, white) !important;
+  color: var(--dad-ink) !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-weight: 700;
+  flex: 0 0 auto;
+}
+#judgeme_product_reviews .jdgm-rev__author {
+  font-family: var(--font-body);
+  font-weight: 700;
+  color: var(--dad-ink);
+}
+#judgeme_product_reviews .jdgm-rev__buyer-badge,
+#judgeme_product_reviews .jdgm-rev__location {
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+  font-size: var(--fs-small);
+  font-weight: 500;
+  color: var(--dad-ink-muted) !important;
+}
+#judgeme_product_reviews .jdgm-rev__content { margin-top: var(--s-2); }
+#judgeme_product_reviews .jdgm-rev__title {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--fs-h3);
+  line-height: 1.15;
+  color: var(--dad-ink);
+  margin-bottom: var(--s-2);
+}
+#judgeme_product_reviews .jdgm-rev__body {
+  font-size: var(--fs-body);
+  line-height: 1.55;
+  color: var(--dad-ink);
+}
+/* hide stock clutter the mock omits (helpful/share votes, transparency note) */
+#judgeme_product_reviews .jdgm-rev__actions,
+#judgeme_product_reviews .jdgm-rev__transparency-badge-wrapper { display: none !important; }
+
+/* — Pagination: centered ghost pills — */
+#judgeme_product_reviews .jdgm-paginate {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+  margin-top: var(--s-8);
+}
+#judgeme_product_reviews .jdgm-paginate__page,
+#judgeme_product_reviews .jdgm-paginate__next-page,
+#judgeme_product_reviews .jdgm-paginate__prev-page,
+#judgeme_product_reviews .jdgm-paginate__last-page,
+#judgeme_product_reviews .jdgm-paginate__first-page {
+  border: 1.5px solid var(--dad-rule) !important;
+  border-radius: var(--r-pill) !important;
+  padding: var(--s-2) var(--s-4) !important;
+  color: var(--dad-ink) !important;
+  font-weight: 700;
+  text-decoration: none !important;
+}
+#judgeme_product_reviews .jdgm-paginate__page.jdgm-curr-page {
+  background: var(--dad-ink) !important;
+  color: var(--dad-white) !important;
+  border-color: var(--dad-ink) !important;
 }
