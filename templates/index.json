@@ -49,6 +49,7 @@
         },
         "tile-crayons": {
           "type": "tile",
+          "disabled": true,
           "settings": {
             "collection": "crayons-coloring",
             "image": "shopify://shop_images/2026-05-01_Do-a-Dot_batch1-4.webp",
@@ -196,6 +197,7 @@
     },
     "dad_product_spotlight": {
       "type": "dad-product-spotlight",
+      "disabled": true,
       "settings": {
         "eyebrow": "meet the chunky crayons",
         "heading": "Meet the chunky crayon family.",
@@ -206,6 +208,25 @@
         "btn2_link": "",
         "image": "shopify://shop_images/2026-05-01_Do-a-Dot_batch1-4.webp",
         "badge_text": "brand new!",
+        "panel_color": "#ec1b2a",
+        "image_position": "right",
+        "color_scheme": "",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "dad_product_spotlight_jTmhWt": {
+      "type": "dad-product-spotlight",
+      "settings": {
+        "eyebrow": "meet the chunky crayons",
+        "heading": "The Marker That Started It All",
+        "body": "<p>The original dot marker made with little chubby fingers in mind. Helping children explore their creativity. Perfect for kids 3+. Comes in 11 different color packs.</p>",
+        "btn1_label": "shop the dot marker",
+        "btn1_link": "shopify://products/do-a-dot-art-dot-markers",
+        "btn2_label": "",
+        "btn2_link": "",
+        "image": "shopify://shop_images/DoaDot-DotMarkerEdits-18.jpg",
+        "badge_text": "best seller!",
         "panel_color": "#ec1b2a",
         "image_position": "right",
         "color_scheme": "",
@@ -333,6 +354,7 @@
     "dad_why_dot",
     "featured_collection",
     "dad_product_spotlight",
+    "dad_product_spotlight_jTmhWt",
     "dad_color_conversation",
     "dad_shop_by_craft",
     "dad_craft_closet"
