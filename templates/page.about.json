@@ -45,9 +45,9 @@
           "settings": {
             "eyebrow": "how it started",
             "heading": "One mom. One ruined rug. One sponge.",
-            "body": "<p>In the fall of 1995, our founder Wendy was trying to find a marker her two-year-old daughter could actually use. Every marker on the shelf either bled through paper, leaked all over fingers, or rolled off the table and onto the rug. (One did all three.)</p><p>She started experimenting in the kitchen — borrowing the sponge-tip mechanism from a different industry entirely — until she landed on something that wouldn't drip, wouldn't roll, and could survive a tight little fist. She named it Do-A-Dot. It was meant to be a one-off Christmas gift.</p><p>Twelve months later, every Crate & Barrel in the Midwest was carrying them.</p>",
+            "body": "<p>In the fall of 1995, our founder Tina was trying to find a marker her two-year-old daughter could actually use. Every marker on the shelf either bled through paper, leaked all over fingers, or rolled off the table and onto the rug. (One did all three.)</p><p>She started experimenting in the kitchen — borrowing the sponge-tip mechanism from a different industry entirely — until she landed on something that wouldn't drip, wouldn't roll, and could survive a tight little fist. She named it Do-A-Dot. It was meant to be a one-off Christmas gift.</p><p>Twelve months later, every Crate & Barrel in the Midwest was carrying them.</p>",
             "pullquote": "I just wanted a marker that didn't ruin the rug.",
-            "pullquote_attribution": "— Wendy, founder · 1995",
+            "pullquote_attribution": "— Tina, founder · 1995",
             "reverse": false
           }
         },
@@ -56,9 +56,9 @@
           "settings": {
             "eyebrow": "how it's going",
             "heading": "Same family. Same idea. New craft closet.",
-            "body": "<p>Thirty years later, Wendy's daughter Jess and her husband Mark are running the business. They've spent the last few years working on something Wendy always wanted to do but never quite got to: <em>going beyond just markers</em>.</p><p>In 2026 we launched the first of those new tools — chunky crayons sized for the pincer grip, mess-free watercolor pans, a heavyweight pad that doesn't bleed through. All on the same idea Wendy started with: <em>easy enough for a toddler, clean enough for a parent</em>.</p><p>We still make almost everything in San Clemente. We still answer the customer-service email ourselves. The rugs, mostly, have been spared.</p>",
+            "body": "<p>Thirty years later, Tina's daughter Tiffany and her husband Jesse are running the business. They've spent the last few years working on something Tina always wanted to do but never quite got to: <em>going beyond just markers</em>.</p><p>In 2026 we launched the first of those new tools — chunky crayons sized for the pincer grip, mess-free watercolor pans, a heavyweight pad that doesn't bleed through. All on the same idea Tina started with: <em>easy enough for a toddler, clean enough for a parent</em>.</p><p>We still make almost everything in San Clemente. We still answer the customer-service email ourselves. The rugs, mostly, have been spared.</p>",
             "pullquote": "My mom started it on a kitchen table. We're trying to do her proud.",
-            "pullquote_attribution": "— Jess & Mark · today",
+            "pullquote_attribution": "— Jess & Tiffany · today",
             "reverse": true
           }
         },
@@ -66,7 +66,7 @@
           "type": "timeline_step",
           "settings": {
             "year": "1995",
-            "body": "Wendy invents the non-drip sponge tip in her kitchen. First retail order: 144 markers to a craft store in San Diego.",
+            "body": "Tina invents the non-drip sponge tip in her kitchen. First retail order: 144 markers to a craft store in San Diego.",
             "milestone": true
           }
         },
@@ -82,7 +82,7 @@
           "type": "timeline_step",
           "settings": {
             "year": "2008",
-            "body": "Wendy ships the millionth marker. Featured on the Today Show with a class of pre-K painters.",
+            "body": "Tina ships the millionth marker. Featured on the Today Show with a class of pre-K painters.",
             "milestone": false
           }
         },
@@ -98,7 +98,7 @@
           "type": "timeline_step",
           "settings": {
             "year": "2022",
-            "body": "Generational hand-off. Wendy retires; Jess & Mark take over operations and start work on the broader craft line.",
+            "body": "Generational hand-off. Tina retires; Jess & Mark take over operations and start work on the broader craft line.",
             "milestone": false
           }
         },
@@ -161,7 +161,7 @@
         "team-1": {
           "type": "team_member",
           "settings": {
-            "name": "Wendy",
+            "name": "Tina",
             "role": "founder · still consulting",
             "bio": "Invented the non-drip tip in 1995. Officially retired in 2022, unofficially still in the office every Tuesday.",
             "accent_color": "pink"
@@ -170,18 +170,18 @@
         "team-2": {
           "type": "team_member",
           "settings": {
-            "name": "Jess",
+            "name": "Tiffany",
             "role": "co-founder · ceo",
-            "bio": "Wendy's daughter. Took over operations in 2022. Spends most days arguing with sample packs of chunky crayons.",
+            "bio": "Tina's daughter. Took over operations in 2022. Spends most days arguing with sample packs of chunky crayons.",
             "accent_color": "blue"
           }
         },
         "team-3": {
           "type": "team_member",
           "settings": {
-            "name": "Mark",
+            "name": "Jesse",
             "role": "co-founder · operations",
-            "bio": "Jess's husband. Runs the warehouse and ships your bag. The reason your order leaves San Clemente in 1–2 days.",
+            "bio": "Tiffany's husband. Runs marketing and the warehouse. The reason your order leaves San Clemente in 1–2 days.",
             "accent_color": "yellow"
           }
         },
@@ -219,7 +219,27 @@
         "team-3",
         "team-4"
       ],
-      "settings": {}
+      "settings": {
+        "hero_eyebrow": "our story",
+        "hero_heading": "A kitchen-table experiment,",
+        "hero_heading_accent": "thirty years in.",
+        "hero_lede": "Do-A-Dot started in 1995 when a mom in San Clemente, California invented a non-drip marker for her two-year-old. Three decades later — still the same family, still the same idea: art should be easy enough for a toddler and clean enough for a parent.",
+        "hero_image": "shopify://shop_images/About_Our-Story.jpg",
+        "timeline_heading": "Thirty years, dot by dot.",
+        "timeline_lede": "A short walk through the milestones that got us here.",
+        "values_heading": "What we still believe.",
+        "team_eyebrow": "the people doing it",
+        "team_heading": "Meet the family.",
+        "team_subhead": "nine of us, two dogs, one cat named Crayon.",
+        "cta_eyebrow": "get colorful",
+        "cta_heading": "Ready to make the",
+        "cta_heading_accent": "happiest kind of mess?",
+        "cta_body": "Markers, watercolors, chunky crayons — the whole craft closet, shipped direct from us to your front door.",
+        "cta_btn1_label": "shop all",
+        "cta_btn1_link": "",
+        "cta_btn2_label": "see the color story",
+        "cta_btn2_link": ""
+      }
     }
   },
   "order": [
