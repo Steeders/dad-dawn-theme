@@ -41,6 +41,17 @@
           "type": "tile",
           "settings": {
             "collection": "watercolor-collection",
+            "image": "shopify://shop_images/Rainbowbright1.jpg",
+            "heading": "Watercolors",
+            "subtext": "",
+            "link": ""
+          }
+        },
+        "tile_6rGYRG": {
+          "type": "tile",
+          "disabled": true,
+          "settings": {
+            "collection": "watercolor-collection",
             "image": "shopify://shop_images/2026-05-01_Do-a-Dot_batch1-95.webp",
             "heading": "Watercolors",
             "subtext": "",
@@ -54,6 +65,17 @@
             "collection": "crayons-coloring",
             "image": "shopify://shop_images/2026-05-01_Do-a-Dot_batch1-4.webp",
             "heading": "Crayons",
+            "subtext": "",
+            "link": ""
+          }
+        },
+        "tile_VEmwMK": {
+          "type": "tile",
+          "disabled": true,
+          "settings": {
+            "collection": "crayons-coloring",
+            "image": "shopify://shop_images/2026-05-01_Do-a-Dot_batch1-4.webp",
+            "heading": "",
             "subtext": "",
             "link": ""
           }
@@ -72,7 +94,9 @@
       "block_order": [
         "tile-dot-markers",
         "tile-watercolor",
+        "tile_6rGYRG",
         "tile-crayons",
+        "tile_VEmwMK",
         "tile-activities"
       ],
       "settings": {
