@@ -245,6 +245,50 @@ class DadHeader extends HTMLElement {
     this.items = Array.from(this.querySelectorAll('[data-nav-item]'));
     this.closeTimer = null;
     this.init();
+    this.initCartCount();
+    this.initCartDrawer();
+  }
+  initCartDrawer() {
+    const cartLink = this.querySelector('.dad-header__cart');
+    const drawer = document.querySelector('cart-drawer');
+    if (!cartLink || !drawer) return;
+    cartLink.setAttribute('role', 'button');
+    cartLink.setAttribute('aria-haspopup', 'dialog');
+    cartLink.addEventListener('click', (event) => {
+      if (typeof drawer.open !== 'function') return;
+      event.preventDefault();
+      drawer.open(cartLink);
+    });
+    cartLink.addEventListener('keydown', (event) => {
+      if (event.code.toUpperCase() !== 'SPACE' || typeof drawer.open !== 'function') return;
+      event.preventDefault();
+      drawer.open(cartLink);
+    });
+  }
+  initCartCount() {
+    this.cartCountEl = this.querySelector('[data-cart-count]');
+    if (!this.cartCountEl) return;
+    const start = () => {
+      if (typeof subscribe !== 'function' || typeof PUB_SUB_EVENTS === 'undefined') return false;
+      subscribe(PUB_SUB_EVENTS.cartUpdate, (event) => {
+        const count = event && event.cartData && typeof event.cartData.item_count === 'number'
+          ? event.cartData.item_count
+          : null;
+        if (count !== null) return this.renderCartCount(count);
+        return fetch(`${window.routes && window.routes.cart_url ? window.routes.cart_url : '/cart'}.js`)
+          .then((res) => res.json())
+          .then((cart) => this.renderCartCount(cart.item_count))
+          .catch(() => {});
+      });
+      return true;
+    };
+    // pubsub.js may execute after this section's compiled script; DOMContentLoaded
+    // fires only once every deferred script has run, so retry there.
+    if (!start()) document.addEventListener('DOMContentLoaded', start, { once: true });
+  }
+  renderCartCount(count) {
+    this.cartCountEl.textContent = count;
+    this.cartCountEl.classList.toggle('is-empty', count === 0);
   }
   init() {
     this.items.forEach((item) => {
