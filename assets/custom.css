@@ -4186,3 +4186,43 @@ a:hover {
   color: var(--dad-white) !important;
   border-color: var(--dad-ink) !important;
 }
+
+/* ============================================================
+   FREE SHIPPING PROGRESS BAR — cart drawer + cart page
+   Spec from Claude Design bundle (.ship-progress, storefront.css)
+   ============================================================ */
+.dad-ship-progress {
+  padding: 18px 28px;
+  border-bottom: 1px solid var(--dad-rule);
+  background: var(--dad-white);
+}
+.dad-ship-progress__label {
+  margin: 0 0 10px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: var(--lh-snug);
+  color: var(--dad-ink);
+}
+.dad-ship-progress__label strong { color: var(--accent); }
+.dad-ship-progress__track {
+  height: 8px;
+  border-radius: var(--r-pill);
+  background: var(--dad-pink-tint);
+  overflow: hidden;
+}
+.dad-ship-progress__fill {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+  border-radius: var(--r-pill);
+  transition: width var(--dur-med) var(--ease-out);
+}
+/* Cart page variant: sits above the line-item table inside the page
+   width, so drop the drawer's edge-to-edge padding + rule */
+.dad-ship-progress--page {
+  padding: 0 0 4px;
+  border-bottom: 0;
+  margin-bottom: var(--s-6);
+  max-width: 480px;
+}

@@ -1435,6 +1435,13 @@
         "default": false
       },
       {
+        "type": "number",
+        "id": "free_shipping_threshold",
+        "label": "Free shipping threshold",
+        "info": "Order total (in store currency) that unlocks free shipping. Must match the free shipping rate in Settings > Shipping and delivery. Set to 0 to hide the progress bar.",
+        "default": 55
+      },
+      {
         "type": "header",
         "content": "t:settings_schema.cart.settings.cart_drawer.header"
       },
