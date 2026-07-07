@@ -1,0 +1,73 @@
+{
+  "sections": {
+    "downloads": {
+      "type": "dad-printables-month",
+      "blocks": {
+        "p-0": {
+          "type": "printable",
+          "settings": {
+            "title": "Mothers Day Card V.3",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Mothers_Day_Card_V.3.jpg?v=1679963724",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Mothers_Day_Card_V.3.pdf?v=1679963723"
+          }
+        },
+        "p-2": {
+          "type": "printable",
+          "settings": {
+            "title": "Flower Bouquet",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Flower_Bouquet.jpg?v=1678154818%20alt=",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Flower_Bouquet.pdf?v=1678154818"
+          }
+        },
+        "p-4": {
+          "type": "printable",
+          "settings": {
+            "title": "Hyacinth Printable Pdf",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Hyacinth_Printable_JPG.jpg?v=1695323610?v=1678154818%20alt=",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Hyacinth_Printable_PDF.pdf?v=1695323256?v=1678154818"
+          }
+        },
+        "p-6": {
+          "type": "printable",
+          "settings": {
+            "title": "Mothers Day Card",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Mothers_Day_Card.jpg?v=1678154818",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Mothers_Day_Card.pdf?v=1678154818"
+          }
+        },
+        "p-8": {
+          "type": "printable",
+          "settings": {
+            "title": "Stained Glass Butterfly",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Stained_Glass_Butterfly.jpg?v=1679880205",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Stained_Glass_Butterfly.pdf?v=1679880204"
+          }
+        },
+        "p-10": {
+          "type": "printable",
+          "settings": {
+            "title": "Butterfly Pdf",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Butterfly_JPG.jpg?v=1695323610?v=1679880205",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Butterfly_PDF.pdf?v=1695323258?v=1679880204"
+          }
+        }
+      },
+      "block_order": [
+        "p-0",
+        "p-2",
+        "p-4",
+        "p-6",
+        "p-8",
+        "p-10"
+      ],
+      "settings": {
+        "heading": "May printables",
+        "lede": "Click any image to download the PDF — then print, dot, done.",
+        "back_link": "/pages/download-free-printables"
+      }
+    }
+  },
+  "order": [
+    "downloads"
+  ]
+}

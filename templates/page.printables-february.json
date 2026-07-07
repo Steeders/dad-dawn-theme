@@ -1,0 +1,109 @@
+{
+  "sections": {
+    "downloads": {
+      "type": "dad-printables-month",
+      "blocks": {
+        "p-0": {
+          "type": "printable",
+          "settings": {
+            "title": "Bemyvalentine",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/BeMyValentine.jpg?v=1675473430",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/BeMyValentine.pdf?v=1675473392"
+          }
+        },
+        "p-2": {
+          "type": "printable",
+          "settings": {
+            "title": "Kitten",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Kitten.jpg?v=1675473430",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Kitten.pdf?v=1675473392"
+          }
+        },
+        "p-4": {
+          "type": "printable",
+          "settings": {
+            "title": "Puppy",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Puppy.jpg?v=1675473430",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Puppy.pdf?v=1675473392"
+          }
+        },
+        "p-6": {
+          "type": "printable",
+          "settings": {
+            "title": "Teddybear",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/TeddyBear.jpg?v=1675473430",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/TeddyBear.pdf?v=1675473391"
+          }
+        },
+        "p-8": {
+          "type": "printable",
+          "settings": {
+            "title": "Valentines",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Valentines.jpg?v=1675473429",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Valentines.pdf?v=1675473393"
+          }
+        },
+        "p-10": {
+          "type": "printable",
+          "settings": {
+            "title": "Lil Hearts",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Lil_Hearts.jpg?v=1678152554",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Lil_Hearts.pdf?v=1678152554"
+          }
+        },
+        "p-12": {
+          "type": "printable",
+          "settings": {
+            "title": "Bemyvalentine 2",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/BeMyValentine_2.jpg?v=1675473430",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/BeMyValentine_2.pdf?v=1675473393"
+          }
+        },
+        "p-14": {
+          "type": "printable",
+          "settings": {
+            "title": "Lovebugs",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Lovebugs.jpg?v=1675473429",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Lovebugs.pdf?v=1675473393"
+          }
+        },
+        "p-16": {
+          "type": "printable",
+          "settings": {
+            "title": "Leap Year 1",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Leap_Year_1_conv_1.png?v=1711596250",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Leap_Year_1.pdf?v=1711596590"
+          }
+        },
+        "p-18": {
+          "type": "printable",
+          "settings": {
+            "title": "Teddy Valentine 2",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Teddy_Valentine_2_002_conv_1.png?v=1711596294",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Teddy_Valentine_2.pdf?v=1711596326"
+          }
+        }
+      },
+      "block_order": [
+        "p-0",
+        "p-2",
+        "p-4",
+        "p-6",
+        "p-8",
+        "p-10",
+        "p-12",
+        "p-14",
+        "p-16",
+        "p-18"
+      ],
+      "settings": {
+        "heading": "February printables",
+        "lede": "Click any image to download the PDF — then print, dot, done.",
+        "back_link": "/pages/download-free-printables"
+      }
+    }
+  },
+  "order": [
+    "downloads"
+  ]
+}

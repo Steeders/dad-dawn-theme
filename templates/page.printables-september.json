@@ -1,0 +1,64 @@
+{
+  "sections": {
+    "downloads": {
+      "type": "dad-printables-month",
+      "blocks": {
+        "p-0": {
+          "type": "printable",
+          "settings": {
+            "title": "Dino 1",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Dino_1.jpg?v=1679880701",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Dino_1.pdf?v=1679880701"
+          }
+        },
+        "p-2": {
+          "type": "printable",
+          "settings": {
+            "title": "Papa 51Ac3743 D959 42D0 B4Bd 29Eb628780C3",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Papa.jpg?v=1675470437",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Papa_51ac3743-d959-42d0-b4bd-29eb628780c3.pdf?v=1675470443"
+          }
+        },
+        "p-4": {
+          "type": "printable",
+          "settings": {
+            "title": "Nana Ebc98336 9902 47Ba B8C0 8C2A5F75F065",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Nana.jpg?v=1675470436",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Nana_ebc98336-9902-47ba-b8c0-8c2a5f75f065.pdf?v=1675470443"
+          }
+        },
+        "p-6": {
+          "type": "printable",
+          "settings": {
+            "title": "Dino 2",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Dino_2.jpg?v=1679880701",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Dino_2.pdf?v=1679880701"
+          }
+        },
+        "p-8": {
+          "type": "printable",
+          "settings": {
+            "title": "Artboard",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Artboard.jpg?v=1679965304",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Artboard.pdf?v=1679965303"
+          }
+        }
+      },
+      "block_order": [
+        "p-0",
+        "p-2",
+        "p-4",
+        "p-6",
+        "p-8"
+      ],
+      "settings": {
+        "heading": "September printables",
+        "lede": "Click any image to download the PDF — then print, dot, done.",
+        "back_link": "/pages/download-free-printables"
+      }
+    }
+  },
+  "order": [
+    "downloads"
+  ]
+}

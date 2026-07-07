@@ -1,0 +1,64 @@
+{
+  "sections": {
+    "downloads": {
+      "type": "dad-printables-month",
+      "blocks": {
+        "p-0": {
+          "type": "printable",
+          "settings": {
+            "title": "Star Border",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Star_Border.jpg?v=1679965601",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Star_Border.pdf?v=1679965600"
+          }
+        },
+        "p-2": {
+          "type": "printable",
+          "settings": {
+            "title": "Sun Border",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Sun_Border.jpg?v=1679965601",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Sun_Border.pdf?v=1679965599"
+          }
+        },
+        "p-4": {
+          "type": "printable",
+          "settings": {
+            "title": "Anchor Border",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Anchor_Border.jpg?v=1679965602",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Anchor_Border.pdf?v=1679965599"
+          }
+        },
+        "p-6": {
+          "type": "printable",
+          "settings": {
+            "title": "Sailboat",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Sailboat.jpg?v=1679965601",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Sailboat.pdf?v=1679965600"
+          }
+        },
+        "p-8": {
+          "type": "printable",
+          "settings": {
+            "title": "July Star Garland Pdf",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/JULY_Star_Garland_JPG.jpg?v=1695323610?v=1679965601",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/JULY_Star_Garland_PDF.pdf?v=1695323241?v=1679965600"
+          }
+        }
+      },
+      "block_order": [
+        "p-0",
+        "p-2",
+        "p-4",
+        "p-6",
+        "p-8"
+      ],
+      "settings": {
+        "heading": "July printables",
+        "lede": "Click any image to download the PDF — then print, dot, done.",
+        "back_link": "/pages/download-free-printables"
+      }
+    }
+  },
+  "order": [
+    "downloads"
+  ]
+}

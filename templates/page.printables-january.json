@@ -1,0 +1,82 @@
+{
+  "sections": {
+    "downloads": {
+      "type": "dad-printables-month",
+      "blocks": {
+        "p-0": {
+          "type": "printable",
+          "settings": {
+            "title": "Snowman",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Snowman.jpg?v=1675474330",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Snowman.pdf?v=1675474225"
+          }
+        },
+        "p-2": {
+          "type": "printable",
+          "settings": {
+            "title": "Penguin Printable 1",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Penguin.jpg?v=1675474330",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Penguin_Printable_1.pdf?v=1705094216"
+          }
+        },
+        "p-4": {
+          "type": "printable",
+          "settings": {
+            "title": "Snowflake",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Snowflake.jpg?v=1675474330",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Snowflake.pdf?v=1675474225"
+          }
+        },
+        "p-6": {
+          "type": "printable",
+          "settings": {
+            "title": "Mittens",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Mittens.jpg?v=1675474330",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Mittens.pdf?v=1675474225"
+          }
+        },
+        "p-8": {
+          "type": "printable",
+          "settings": {
+            "title": "My First Chore Chart",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/My_First_Chore_Chart.jpg?v=16754704380",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/My_First_Chore_Chart.pdf?v=1675470430"
+          }
+        },
+        "p-10": {
+          "type": "printable",
+          "settings": {
+            "title": "Elephant Based On Elmer Pdf",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Elephant_Based_on_Elmer_PNG.png?v=1707969076",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Elephant_Based_on_Elmer_PDF.pdf?v=1707969075"
+          }
+        },
+        "p-12": {
+          "type": "printable",
+          "settings": {
+            "title": "Snowman Printables 1",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Snowman_Printables_PNG.png?v=1707782625",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Snowman_Printables_1.pdf?v=1707782473"
+          }
+        }
+      },
+      "block_order": [
+        "p-0",
+        "p-2",
+        "p-4",
+        "p-6",
+        "p-8",
+        "p-10",
+        "p-12"
+      ],
+      "settings": {
+        "heading": "January printables",
+        "lede": "Click any image to download the PDF — then print, dot, done.",
+        "back_link": "/pages/download-free-printables"
+      }
+    }
+  },
+  "order": [
+    "downloads"
+  ]
+}

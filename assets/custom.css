@@ -4226,3 +4226,225 @@ a:hover {
   margin-bottom: var(--s-6);
   max-width: 480px;
 }
+
+/* ============================================================
+   FREE PRINTABLES — gate, archive grid, monthly downloads
+   Aesthetic per Jesse: black + red, match the site (2026-07-07)
+   ============================================================ */
+
+/* — Gate — */
+.dad-print-gate {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: var(--s-16) var(--s-5);
+}
+.dad-print-gate__card {
+  background: var(--dad-white);
+  border: 2px solid var(--dad-ink);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-pop);
+  overflow: hidden;
+  text-align: center;
+}
+.dad-print-gate__media img { width: 100%; height: auto; display: block; }
+.dad-print-gate__body { padding: var(--s-10) var(--s-8); }
+.dad-print-gate__heading {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--fs-h2);
+  line-height: var(--lh-snug);
+  color: var(--dad-ink);
+  margin: var(--s-2) 0 var(--s-3);
+  text-wrap: balance;
+}
+.dad-print-gate__text {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  font-weight: 500;
+  color: var(--dad-ink-muted);
+  margin-bottom: var(--s-6);
+}
+.dad-print-gate__row { display: flex; gap: var(--s-2); }
+.dad-print-gate__input {
+  flex: 1;
+  min-width: 0;
+  height: 52px;
+  padding: 0 var(--s-4);
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--dad-ink);
+  background: var(--dad-white);
+  border: 2px solid var(--dad-ink);
+  border-radius: var(--r-pill);
+}
+.dad-print-gate__input:focus { outline: none; box-shadow: var(--shadow-focus); }
+.dad-print-gate__btn {
+  height: 52px;
+  padding: 0 var(--s-6);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  font-weight: 700;
+  text-transform: lowercase;
+  color: var(--dad-white);
+  background: var(--accent);
+  border: 0;
+  border-radius: var(--r-pill);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform var(--dur-fast) var(--ease-bounce), background var(--dur-fast) var(--ease-out);
+}
+.dad-print-gate__btn:hover { transform: translateY(-2px); background: var(--dad-red); }
+.dad-print-gate__btn:disabled { opacity: 0.7; cursor: wait; transform: none; }
+.dad-print-gate__error {
+  margin: var(--s-3) 0 0;
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--accent);
+}
+.dad-print-gate__fine {
+  margin: var(--s-4) 0 0;
+  font-family: var(--font-body);
+  font-size: var(--fs-micro);
+  font-weight: 500;
+  color: var(--fg-soft);
+}
+@media screen and (max-width: 599px) {
+  .dad-print-gate__row { flex-direction: column; }
+  .dad-print-gate__btn { width: 100%; }
+}
+
+/* — Archive month grid — */
+.dad-print-archive {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: var(--s-12) var(--s-5) var(--s-20);
+}
+.dad-print-archive__head { text-align: center; margin-bottom: var(--s-10); }
+.dad-print-archive__heading {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--fs-display);
+  color: var(--dad-ink);
+  margin: var(--s-2) 0 var(--s-3);
+}
+.dad-print-archive__lede {
+  font-family: var(--font-body);
+  font-size: var(--fs-lead);
+  font-weight: 500;
+  color: var(--dad-ink-muted);
+  max-width: 48ch;
+  margin: 0 auto;
+}
+.dad-print-archive__grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--s-6);
+}
+.dad-print-archive__tile {
+  display: block;
+  text-decoration: none;
+  text-align: center;
+  border-radius: var(--r-md);
+  transition: transform var(--dur-med) var(--ease-bounce);
+}
+.dad-print-archive__thumb {
+  display: block;
+  border-radius: var(--r-md);
+  overflow: hidden;
+  border: 2px solid transparent;
+  transition: border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-med) var(--ease-out);
+}
+.dad-print-archive__thumb img { width: 100%; height: auto; display: block; }
+.dad-print-archive__label {
+  display: inline-block;
+  margin-top: var(--s-3);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  font-weight: 700;
+  text-transform: lowercase;
+  color: var(--dad-ink);
+}
+.dad-print-archive__tile:hover { transform: translateY(-6px) scale(1.03); }
+.dad-print-archive__tile:hover .dad-print-archive__thumb {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-card);
+}
+.dad-print-archive__tile:hover .dad-print-archive__label { color: var(--accent); }
+@media screen and (max-width: 899px) { .dad-print-archive__grid { grid-template-columns: repeat(3, 1fr); } }
+@media screen and (max-width: 599px) { .dad-print-archive__grid { grid-template-columns: repeat(2, 1fr); gap: var(--s-4); } }
+
+/* — Monthly downloads — */
+.dad-print-month {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: var(--s-12) var(--s-5) var(--s-20);
+}
+.dad-print-month__head { text-align: center; margin-bottom: var(--s-10); }
+.dad-print-month__back {
+  display: inline-block;
+  margin-bottom: var(--s-4);
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
+  font-weight: 700;
+  text-transform: lowercase;
+  color: var(--dad-ink);
+  text-decoration: none;
+  border-bottom: 2px solid var(--dad-rule);
+}
+.dad-print-month__back:hover { color: var(--accent); border-color: var(--accent); }
+.dad-print-month__heading {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--fs-display);
+  color: var(--dad-ink);
+  margin: 0 0 var(--s-3);
+}
+.dad-print-month__lede {
+  font-family: var(--font-body);
+  font-size: var(--fs-lead);
+  font-weight: 500;
+  color: var(--dad-ink-muted);
+}
+.dad-print-month__grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--s-6);
+}
+.dad-print-month__card {
+  display: block;
+  text-decoration: none;
+  text-align: center;
+  transition: transform var(--dur-med) var(--ease-bounce);
+}
+.dad-print-month__thumb {
+  display: block;
+  border: 2px solid var(--dad-rule);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  background: var(--dad-white);
+  transition: border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-med) var(--ease-out);
+}
+.dad-print-month__thumb img { width: 100%; height: auto; display: block; }
+.dad-print-month__dl {
+  display: inline-block;
+  margin-top: var(--s-2);
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
+  font-weight: 700;
+  text-transform: lowercase;
+  color: var(--dad-ink-muted);
+}
+.dad-print-month__card:hover { transform: translateY(-4px); }
+.dad-print-month__card:hover .dad-print-month__thumb { border-color: var(--accent); box-shadow: var(--shadow-card); }
+.dad-print-month__card:hover .dad-print-month__dl { color: var(--accent); }
+.dad-print-month__foot { text-align: center; margin-top: var(--s-12); }
+@media screen and (max-width: 899px) { .dad-print-month__grid { grid-template-columns: repeat(3, 1fr); } }
+@media screen and (max-width: 599px) { .dad-print-month__grid { grid-template-columns: repeat(2, 1fr); gap: var(--s-4); } }

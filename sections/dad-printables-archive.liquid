@@ -1,0 +1,62 @@
+{%- comment -%}
+  Do-A-Dot printables archive — the "pick a month" grid. Each block is a
+  month tile (image + label + link to that month's printables page).
+  Tile images are the original dot-art month graphics from the old site.
+{%- endcomment -%}
+
+<section class="dad-print-archive">
+  <header class="dad-print-archive__head">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="dad-eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+    <h1 class="dad-print-archive__heading">{{ section.settings.heading }}</h1>
+    {%- if section.settings.lede != blank -%}
+      <p class="dad-print-archive__lede">{{ section.settings.lede }}</p>
+    {%- endif -%}
+  </header>
+
+  <ul class="dad-print-archive__grid" role="list">
+    {%- for block in section.blocks -%}
+      <li class="dad-print-archive__item" {{ block.shopify_attributes }}>
+        <a href="{{ block.settings.link }}" class="dad-print-archive__tile">
+          <span class="dad-print-archive__thumb">
+            <img
+              src="{{ block.settings.image_url }}"
+              alt="{{ block.settings.label | escape }} printables"
+              loading="{% if forloop.index > 4 %}lazy{% else %}eager{% endif %}"
+              width="400"
+              height="400"
+            >
+          </span>
+          <span class="dad-print-archive__label">{{ block.settings.label }} <span aria-hidden="true">→</span></span>
+        </a>
+      </li>
+    {%- endfor -%}
+  </ul>
+</section>
+
+{% schema %}
+{
+  "name": "DAD Printables Archive",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "free printable archive" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Pick a month, print, dot." },
+    { "type": "text", "id": "lede", "label": "Lede", "default": "Every month has a stack of free dot-art printables. Click a month to see them all." }
+  ],
+  "blocks": [
+    {
+      "type": "month",
+      "name": "Month tile",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Month label" },
+        { "type": "url", "id": "link", "label": "Month page" },
+        { "type": "text", "id": "image_url", "label": "Tile image URL" }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [{ "name": "DAD Printables Archive" }]
+}
+{% endschema %}

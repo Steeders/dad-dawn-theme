@@ -1,0 +1,128 @@
+{%- comment -%}
+  Do-A-Dot free printables email gate. Native form that subscribes the
+  email to a Klaviyo list via Klaviyo's client subscription API, then
+  redirects to the printables archive page. No Klaviyo form embed —
+  design lives in the theme, list/company ids are section settings.
+{%- endcomment -%}
+
+<section class="dad-print-gate">
+  <div class="dad-print-gate__card">
+    {%- if section.settings.image != blank -%}
+      <div class="dad-print-gate__media">
+        {{ section.settings.image | image_url: width: 1200 | image_tag: widths: '600, 900, 1200', alt: section.settings.heading }}
+      </div>
+    {%- endif -%}
+    <div class="dad-print-gate__body">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="dad-eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      <h1 class="dad-print-gate__heading">{{ section.settings.heading }}</h1>
+      {%- if section.settings.body != blank -%}
+        <div class="dad-print-gate__text">{{ section.settings.body }}</div>
+      {%- endif -%}
+
+      <form
+        class="dad-print-gate__form"
+        data-dad-printables-form
+        data-company-id="{{ section.settings.klaviyo_company_id | escape }}"
+        data-list-id="{{ section.settings.klaviyo_list_id | escape }}"
+        data-redirect-url="{{ section.settings.redirect_page | default: '/pages/download-free-printables' }}"
+        novalidate
+      >
+        <div class="dad-print-gate__row">
+          <input
+            type="email"
+            name="email"
+            class="dad-print-gate__input"
+            placeholder="{{ section.settings.placeholder | default: 'your email' }}"
+            aria-label="Email"
+            autocomplete="email"
+            required
+          >
+          <button type="submit" class="dad-print-gate__btn">
+            <span class="dad-print-gate__btn-label">{{ section.settings.button_label | default: 'get my printables' }}</span>
+            <span class="dad-print-gate__btn-busy" hidden>sending…</span>
+          </button>
+        </div>
+        <p class="dad-print-gate__error" role="alert" hidden>Hmm, that didn't work — double-check your email and try again.</p>
+        {%- if section.settings.fine_print != blank -%}
+          <p class="dad-print-gate__fine">{{ section.settings.fine_print }}</p>
+        {%- endif -%}
+      </form>
+    </div>
+  </div>
+</section>
+
+{% javascript %}
+  document.querySelectorAll('[data-dad-printables-form]').forEach((form) => {
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const emailInput = form.querySelector('input[name="email"]');
+      const error = form.querySelector('.dad-print-gate__error');
+      const btn = form.querySelector('button[type="submit"]');
+      const email = (emailInput.value || '').trim();
+      error.hidden = true;
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        error.hidden = false;
+        emailInput.focus();
+        return;
+      }
+      btn.disabled = true;
+      btn.querySelector('.dad-print-gate__btn-label').hidden = true;
+      btn.querySelector('.dad-print-gate__btn-busy').hidden = false;
+      try {
+        const res = await fetch(
+          'https://a.klaviyo.com/client/subscriptions/?company_id=' + encodeURIComponent(form.dataset.companyId),
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', revision: '2025-04-15' },
+            body: JSON.stringify({
+              data: {
+                type: 'subscription',
+                attributes: {
+                  custom_source: 'Free Printables Gate',
+                  profile: { data: { type: 'profile', attributes: { email: email } } },
+                },
+                relationships: { list: { data: { type: 'list', id: form.dataset.listId } } },
+              },
+            }),
+          }
+        );
+        if (!res.ok) throw new Error('subscribe failed: ' + res.status);
+        try {
+          sessionStorage.setItem('dadPrintablesUnlocked', '1');
+        } catch (e) {
+          /* storage unavailable — redirect regardless */
+        }
+        window.location.assign(form.dataset.redirectUrl);
+      } catch (e) {
+        error.hidden = false;
+        btn.disabled = false;
+        btn.querySelector('.dad-print-gate__btn-label').hidden = false;
+        btn.querySelector('.dad-print-gate__btn-busy').hidden = true;
+      }
+    });
+  });
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "DAD Printables Gate",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "free printables" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "A new free printable, every other Friday." },
+    { "type": "richtext", "id": "body", "label": "Body" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "placeholder", "label": "Email placeholder", "default": "your email" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "get my printables" },
+    { "type": "text", "id": "fine_print", "label": "Fine print", "default": "We'll email you a fresh printable every other Friday. Unsubscribe anytime." },
+    { "type": "header", "content": "Klaviyo" },
+    { "type": "text", "id": "klaviyo_company_id", "label": "Klaviyo public API key (company id)", "default": "RizdDa" },
+    { "type": "text", "id": "klaviyo_list_id", "label": "Klaviyo list id", "default": "TYvDQN", "info": "Free Printables Signups list" },
+    { "type": "url", "id": "redirect_page", "label": "Redirect to after signup", "info": "Defaults to /pages/download-free-printables" }
+  ],
+  "presets": [{ "name": "DAD Printables Gate" }]
+}
+{% endschema %}

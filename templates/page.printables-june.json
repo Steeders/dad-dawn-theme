@@ -1,0 +1,100 @@
+{
+  "sections": {
+    "downloads": {
+      "type": "dad-printables-month",
+      "blocks": {
+        "p-0": {
+          "type": "printable",
+          "settings": {
+            "title": "I Heart Dad Card",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/I_Heart_Dad_Card.jpg?v=1678155225",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/I_Heart_Dad_Card.pdf?v=1678155224"
+          }
+        },
+        "p-2": {
+          "type": "printable",
+          "settings": {
+            "title": "Neck Tie",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Neck_Tie.jpg?v=1678155225",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Neck_Tie.pdf?v=1678155225"
+          }
+        },
+        "p-4": {
+          "type": "printable",
+          "settings": {
+            "title": "Grandpa Neck Tie",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Grandpa_Neck_Tie.jpg?v=1678155226",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Grandpa_Neck_Tie.pdf?v=1678155224"
+          }
+        },
+        "p-6": {
+          "type": "printable",
+          "settings": {
+            "title": "June Super Dad Pdf",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/JUNE_Super-Dad_JPG.jpg?v=1695323610?v=1678155226",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/JUNE_Super-Dad_PDF.pdf?v=1695323252?v=1678155224"
+          }
+        },
+        "p-8": {
+          "type": "printable",
+          "settings": {
+            "title": "June Superhero Mask Pdf",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/JUNE_Superhero_Mask_JPG.jpg?v=1695323610?v=1678155226",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/JUNE_Superhero_Mask_PDF.pdf?v=1695323249?v=1678155224"
+          }
+        },
+        "p-10": {
+          "type": "printable",
+          "settings": {
+            "title": "Paw Border",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Paw_Border.jpg?v=1679880349",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Paw_Border.pdf?v=1679880349"
+          }
+        },
+        "p-12": {
+          "type": "printable",
+          "settings": {
+            "title": "Dog Border",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Dog_Border.jpg?v=1679880349",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Dog_Border.pdf?v=1679880349"
+          }
+        },
+        "p-14": {
+          "type": "printable",
+          "settings": {
+            "title": "Stained Glass Heart",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Stained_Glass_Heart.jpg?v=1679880349",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Stained_Glass_Heart.pdf?v=1679880349"
+          }
+        },
+        "p-16": {
+          "type": "printable",
+          "settings": {
+            "title": "Firetrucks",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Firetrucks.jpg?v=1679880701",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Firetrucks.pdf?v=1679880701"
+          }
+        }
+      },
+      "block_order": [
+        "p-0",
+        "p-2",
+        "p-4",
+        "p-6",
+        "p-8",
+        "p-10",
+        "p-12",
+        "p-14",
+        "p-16"
+      ],
+      "settings": {
+        "heading": "June printables",
+        "lede": "Click any image to download the PDF — then print, dot, done.",
+        "back_link": "/pages/download-free-printables"
+      }
+    }
+  },
+  "order": [
+    "downloads"
+  ]
+}

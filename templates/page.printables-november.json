@@ -1,0 +1,73 @@
+{
+  "sections": {
+    "downloads": {
+      "type": "dad-printables-month",
+      "blocks": {
+        "p-0": {
+          "type": "printable",
+          "settings": {
+            "title": "Thankful Acorns",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Thankful_Acorns.jpg?v=1675472627",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Thankful_Acorns.pdf?v=1675472599"
+          }
+        },
+        "p-2": {
+          "type": "printable",
+          "settings": {
+            "title": "Fall Leaves",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Fall_Leaves.jpg?v=1675472627",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Fall_Leaves.pdf?v=1675472599"
+          }
+        },
+        "p-4": {
+          "type": "printable",
+          "settings": {
+            "title": "Fall Leaves 2",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Fall_Leaves_2.jpg?v=1675472627",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Fall_Leaves_2.pdf?v=1675472599"
+          }
+        },
+        "p-6": {
+          "type": "printable",
+          "settings": {
+            "title": "Turkey",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Turkey.jpg?v=1675472627",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Turkey.pdf?v=1675472599"
+          }
+        },
+        "p-fix-0": {
+          "type": "printable",
+          "settings": {
+            "title": "Fox",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Fox.jpg?v=1696880786",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Fox_1_1_1.pdf?v=1701732917"
+          }
+        },
+        "p-fix-1": {
+          "type": "printable",
+          "settings": {
+            "title": "Owl",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Owl.jpg?v=1696880786",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Owl_1_1.pdf?v=1701732917"
+          }
+        }
+      },
+      "block_order": [
+        "p-0",
+        "p-2",
+        "p-4",
+        "p-6",
+        "p-fix-0",
+        "p-fix-1"
+      ],
+      "settings": {
+        "heading": "November printables",
+        "lede": "Click any image to download the PDF — then print, dot, done.",
+        "back_link": "/pages/download-free-printables"
+      }
+    }
+  },
+  "order": [
+    "downloads"
+  ]
+}

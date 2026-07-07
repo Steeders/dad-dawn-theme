@@ -1,0 +1,136 @@
+{
+  "sections": {
+    "downloads": {
+      "type": "dad-printables-month",
+      "blocks": {
+        "p-0": {
+          "type": "printable",
+          "settings": {
+            "title": "Christmas Tree",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Christmas_Tree.jpg?v=1675456876",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Christmas_Tree.pdf?v=1675456871"
+          }
+        },
+        "p-2": {
+          "type": "printable",
+          "settings": {
+            "title": "Menorah With Candles",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Menorah_With_Candles-page-001.jpg?v=1679881342",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Menorah_With_Candles.pdf?v=1679881341"
+          }
+        },
+        "p-5": {
+          "type": "printable",
+          "settings": {
+            "title": "Lettertosanta",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Letter_To_Santa.jpg?v=1675456757",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/LetterToSanta.pdf?v=1675456767"
+          }
+        },
+        "p-7": {
+          "type": "printable",
+          "settings": {
+            "title": "Christmas Stocking",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Christmas_Stocking.jpg?v=1678158180",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Christmas_Stocking.pdf?v=1678158179"
+          }
+        },
+        "p-10": {
+          "type": "printable",
+          "settings": {
+            "title": "Tree Border",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Tree_Border.jpg?v=1678158180",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Tree_Border.pdf?v=1678158179"
+          }
+        },
+        "p-12": {
+          "type": "printable",
+          "settings": {
+            "title": "Hanukkah Border",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Hanukkah_Border.jpg?v=1678158180",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Hanukkah_Border.pdf?v=1678158179"
+          }
+        },
+        "p-14": {
+          "type": "printable",
+          "settings": {
+            "title": "2023 Review Pdf",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/2023_Year_in_Review.png?v=1703703852",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/2023_Review_PDF.pdf?v=1704297520"
+          }
+        },
+        "p-16": {
+          "type": "printable",
+          "settings": {
+            "title": "Menorah",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Menorah.jpg?v=1675456133",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Menorah.pdf?v=1675456197"
+          }
+        },
+        "p-18": {
+          "type": "printable",
+          "settings": {
+            "title": "2023 Menorah",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/2023_Menorah.png?v=1703703921",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/2023_Menorah.pdf?v=1703704007"
+          }
+        },
+        "p-20": {
+          "type": "printable",
+          "settings": {
+            "title": "Countdown To Christmas Lights",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Countdown_to_Christmas_Lights.png?v=1703703890",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Countdown_to_Christmas_Lights.pdf?v=1703703962"
+          }
+        },
+        "p-22": {
+          "type": "printable",
+          "settings": {
+            "title": "Star Of David Dreidel",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Star-of-David_V.2_Dreidel.png?v=1704383407",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Star-of-David_Dreidel.pdf?v=1704383434"
+          }
+        },
+        "p-fix-0": {
+          "type": "printable",
+          "settings": {
+            "title": "Christmas List",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Christmas_List_2_conv_1.png?v=1701732668",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Christmas_List_2.pdf?v=1701732656"
+          }
+        },
+        "p-fix-1": {
+          "type": "printable",
+          "settings": {
+            "title": "Gingerbread Man",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Gingerbread_Man.jpg?v=1678158180",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Gingerbread_Man.pdf?v=1678158179"
+          }
+        }
+      },
+      "block_order": [
+        "p-0",
+        "p-2",
+        "p-5",
+        "p-7",
+        "p-10",
+        "p-12",
+        "p-14",
+        "p-16",
+        "p-18",
+        "p-20",
+        "p-22",
+        "p-fix-0",
+        "p-fix-1"
+      ],
+      "settings": {
+        "heading": "December printables",
+        "lede": "Click any image to download the PDF — then print, dot, done.",
+        "back_link": "/pages/download-free-printables"
+      }
+    }
+  },
+  "order": [
+    "downloads"
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "sections": {
+    "downloads": {
+      "type": "dad-printables-month",
+      "blocks": {
+        "p-0": {
+          "type": "printable",
+          "settings": {
+            "title": "Sport Border",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Sport_Border.jpg?v=1679964743",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Sport_Border.pdf?v=1679964741"
+          }
+        },
+        "p-2": {
+          "type": "printable",
+          "settings": {
+            "title": "Back To School Placemat",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Back_to_School_Placemat.jpg?v=1675470438",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Back_to_School_Placemat.pdf?v=1675470443"
+          }
+        },
+        "p-4": {
+          "type": "printable",
+          "settings": {
+            "title": "Visor",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Visor.jpg?v=1679964743",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Visor.pdf?v=1679964741"
+          }
+        },
+        "p-6": {
+          "type": "printable",
+          "settings": {
+            "title": "Fish In Sea",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Fish_in_Sea.jpg?v=1679964744",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Fish_in_Sea.pdf?v=1679964741"
+          }
+        }
+      },
+      "block_order": [
+        "p-0",
+        "p-2",
+        "p-4",
+        "p-6"
+      ],
+      "settings": {
+        "heading": "August printables",
+        "lede": "Click any image to download the PDF — then print, dot, done.",
+        "back_link": "/pages/download-free-printables"
+      }
+    }
+  },
+  "order": [
+    "downloads"
+  ]
+}

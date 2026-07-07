@@ -1,0 +1,100 @@
+{
+  "sections": {
+    "downloads": {
+      "type": "dad-printables-month",
+      "blocks": {
+        "p-0": {
+          "type": "printable",
+          "settings": {
+            "title": "Largeeasteregg",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/LargeEasterEgg.jpg?v=1678153711",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/LargeEasterEgg.pdf?v=1678153709"
+          }
+        },
+        "p-2": {
+          "type": "printable",
+          "settings": {
+            "title": "Bunny With Carrot",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Bunny_with_Carrot.jpg?v=1678153712",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Bunny_with_Carrot.pdf?v=1678153708"
+          }
+        },
+        "p-4": {
+          "type": "printable",
+          "settings": {
+            "title": "Funnybunnypuppets",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/FunnyBunnyPuppets.jpg?v=1678153711",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/FunnyBunnyPuppets.pdf?v=1678153710"
+          }
+        },
+        "p-6": {
+          "type": "printable",
+          "settings": {
+            "title": "Egggarland",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/EggGarland.jpg?v=1678153712",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/EggGarland.pdf?v=1678153711"
+          }
+        },
+        "p-8": {
+          "type": "printable",
+          "settings": {
+            "title": "Bunny Silhouette",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Bunny_Silhouette.jpg?v=1679879872",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Bunny_Silhouette.pdf?v=1679879873"
+          }
+        },
+        "p-10": {
+          "type": "printable",
+          "settings": {
+            "title": "Egg Garland",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Egg_Garland.jpg?v=1679879873",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Egg_Garland.pdf?v=1679879873"
+          }
+        },
+        "p-12": {
+          "type": "printable",
+          "settings": {
+            "title": "Easter Frame",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Easter_Frame.jpg?v=1679879873",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Easter_Frame.pdf?v=1679879873"
+          }
+        },
+        "p-14": {
+          "type": "printable",
+          "settings": {
+            "title": "Easter Eggs",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Easter_Eggs.jpg?v=1678153712",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Easter_Eggs.pdf?v=1678153709"
+          }
+        },
+        "p-16": {
+          "type": "printable",
+          "settings": {
+            "title": "Chickeastercard",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/ChickEasterCard.jpg?v=1678153711",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/ChickEasterCard.pdf?v=1678153709"
+          }
+        }
+      },
+      "block_order": [
+        "p-0",
+        "p-2",
+        "p-4",
+        "p-6",
+        "p-8",
+        "p-10",
+        "p-12",
+        "p-14",
+        "p-16"
+      ],
+      "settings": {
+        "heading": "April printables",
+        "lede": "Click any image to download the PDF — then print, dot, done.",
+        "back_link": "/pages/download-free-printables"
+      }
+    }
+  },
+  "order": [
+    "downloads"
+  ]
+}

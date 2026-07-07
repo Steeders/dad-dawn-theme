@@ -1,0 +1,109 @@
+{
+  "sections": {
+    "downloads": {
+      "type": "dad-printables-month",
+      "blocks": {
+        "p-0": {
+          "type": "printable",
+          "settings": {
+            "title": "Pumpkin",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Pumpkin.jpg?v=1678156572",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Pumpkin.pdf?v=1678156570"
+          }
+        },
+        "p-2": {
+          "type": "printable",
+          "settings": {
+            "title": "Pumpkins",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Pumpkins.jpg?v=1675469197",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Pumpkins.pdf?v=1675469190"
+          }
+        },
+        "p-4": {
+          "type": "printable",
+          "settings": {
+            "title": "Ghosts",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Ghosts.jpg?v=1675469197",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Ghosts.pdf?v=1675469190"
+          }
+        },
+        "p-6": {
+          "type": "printable",
+          "settings": {
+            "title": "Candy Corn",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Candy_Corn.jpg?v=1675469197",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Candy_Corn.pdf?v=1675469190"
+          }
+        },
+        "p-8": {
+          "type": "printable",
+          "settings": {
+            "title": "Halloween Friends",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Halloween_Friends.jpg?v=1675469197",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Halloween_Friends.pdf?v=1675469190"
+          }
+        },
+        "p-10": {
+          "type": "printable",
+          "settings": {
+            "title": "Halloweencat",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/HalloweenCat.jpg?v=1678156572",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/HalloweenCat.pdf?v=1678156571"
+          }
+        },
+        "p-12": {
+          "type": "printable",
+          "settings": {
+            "title": "Pumpkin Border",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Pumpkin_Border.jpg?v=1678156572",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Pumpkin_Border.pdf?v=1678156571"
+          }
+        },
+        "p-14": {
+          "type": "printable",
+          "settings": {
+            "title": "Pirate",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Pirate.jpg?v=1678156572",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Pirate.pdf?v=1678156571"
+          }
+        },
+        "p-16": {
+          "type": "printable",
+          "settings": {
+            "title": "Frankenstein",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Frankenstein.jpg?v=1679880985",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Frankenstein.pdf?v=1679880984"
+          }
+        },
+        "p-18": {
+          "type": "printable",
+          "settings": {
+            "title": "Spider",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Spider.jpg?v=1679880985",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Spider.pdf?v=1679880984"
+          }
+        }
+      },
+      "block_order": [
+        "p-0",
+        "p-2",
+        "p-4",
+        "p-6",
+        "p-8",
+        "p-10",
+        "p-12",
+        "p-14",
+        "p-16",
+        "p-18"
+      ],
+      "settings": {
+        "heading": "October printables",
+        "lede": "Click any image to download the PDF — then print, dot, done.",
+        "back_link": "/pages/download-free-printables"
+      }
+    }
+  },
+  "order": [
+    "downloads"
+  ]
+}

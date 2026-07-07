@@ -1,0 +1,127 @@
+{
+  "sections": {
+    "archive": {
+      "type": "dad-printables-archive",
+      "blocks": {
+        "month-january": {
+          "type": "month",
+          "settings": {
+            "label": "january",
+            "link": "/pages/january-printables",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/JANUARY.png"
+          }
+        },
+        "month-february": {
+          "type": "month",
+          "settings": {
+            "label": "february",
+            "link": "/pages/february-printables",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/FEBRUARY.png"
+          }
+        },
+        "month-march": {
+          "type": "month",
+          "settings": {
+            "label": "march",
+            "link": "/pages/march-printables",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/MARCH.png"
+          }
+        },
+        "month-april": {
+          "type": "month",
+          "settings": {
+            "label": "april",
+            "link": "/pages/april-printables",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/APRIL.png"
+          }
+        },
+        "month-may": {
+          "type": "month",
+          "settings": {
+            "label": "may",
+            "link": "/pages/may-printables",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/MAY.png"
+          }
+        },
+        "month-june": {
+          "type": "month",
+          "settings": {
+            "label": "june",
+            "link": "/pages/june-printables",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/JUNE.png"
+          }
+        },
+        "month-july": {
+          "type": "month",
+          "settings": {
+            "label": "july",
+            "link": "/pages/july-printables",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/JULY.png"
+          }
+        },
+        "month-august": {
+          "type": "month",
+          "settings": {
+            "label": "august",
+            "link": "/pages/august-printables",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/AUGUST.png"
+          }
+        },
+        "month-september": {
+          "type": "month",
+          "settings": {
+            "label": "september",
+            "link": "/pages/september-printables",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/SEPTEMBER.png"
+          }
+        },
+        "month-october": {
+          "type": "month",
+          "settings": {
+            "label": "october",
+            "link": "/pages/october-printables",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/OCTOBER.png"
+          }
+        },
+        "month-november": {
+          "type": "month",
+          "settings": {
+            "label": "november",
+            "link": "/pages/november-printables",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/NOVEMBER.png"
+          }
+        },
+        "month-december": {
+          "type": "month",
+          "settings": {
+            "label": "december",
+            "link": "/pages/december-printables",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/DECEMBER.png"
+          }
+        }
+      },
+      "block_order": [
+        "month-january",
+        "month-february",
+        "month-march",
+        "month-april",
+        "month-may",
+        "month-june",
+        "month-july",
+        "month-august",
+        "month-september",
+        "month-october",
+        "month-november",
+        "month-december"
+      ],
+      "settings": {
+        "eyebrow": "free printable archive",
+        "heading": "Pick a month, print, dot.",
+        "lede": "Every month has a stack of free dot-art printables. Click a month to see them all."
+      }
+    }
+  },
+  "order": [
+    "archive"
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "sections": {
+    "downloads": {
+      "type": "dad-printables-month",
+      "blocks": {
+        "p-0": {
+          "type": "printable",
+          "settings": {
+            "title": "Followtherainbow",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/FollowTheRainbow.jpg?v=1678153106",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/FollowTheRainbow.pdf?v=1678153104"
+          }
+        },
+        "p-2": {
+          "type": "printable",
+          "settings": {
+            "title": "Happy St. Patricks Day",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Happy_St._Patricks_Day.jpg?v=1678153106",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Happy_St._Patricks_Day.pdf?v=1678153105"
+          }
+        },
+        "p-4": {
+          "type": "printable",
+          "settings": {
+            "title": "Shamrockpinwheel",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/ShamrockPinwheel.jpg?v=1678153106",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/ShamrockPinwheel.pdf?v=1678153105"
+          }
+        },
+        "p-6": {
+          "type": "printable",
+          "settings": {
+            "title": "Shamrockdoodles",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/ShamrockDoodles.jpg?v=1678153106",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/ShamrockDoodles.pdf?v=1678153106"
+          }
+        },
+        "p-8": {
+          "type": "printable",
+          "settings": {
+            "title": "Happy Clover",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Happy_Clover.jpg?v=1679879317",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Happy_Clover.pdf?v=1679879317"
+          }
+        },
+        "p-10": {
+          "type": "printable",
+          "settings": {
+            "title": "Penny Stack",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Penny_Stack.jpg?v=1679879317",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Penny_Stack.pdf?v=1679879318"
+          }
+        },
+        "p-12": {
+          "type": "printable",
+          "settings": {
+            "title": "Rainbow",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Rainbow.jpg?v=1679879318",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/Rainbow.pdf?v=1679879318"
+          }
+        },
+        "p-14": {
+          "type": "printable",
+          "settings": {
+            "title": "St. Patricks Day 1 3",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/St._Patricks_Day_1_3_conv_1.png?v=1711596265",
+            "pdf_url": "https://cdn.shopify.com/s/files/1/0645/9342/8712/files/St._Patricks_Day_1_3.pdf?v=1711596827"
+          }
+        }
+      },
+      "block_order": [
+        "p-0",
+        "p-2",
+        "p-4",
+        "p-6",
+        "p-8",
+        "p-10",
+        "p-12",
+        "p-14"
+      ],
+      "settings": {
+        "heading": "March printables",
+        "lede": "Click any image to download the PDF — then print, dot, done.",
+        "back_link": "/pages/download-free-printables"
+      }
+    }
+  },
+  "order": [
+    "downloads"
+  ]
+}

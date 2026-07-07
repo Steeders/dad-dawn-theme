@@ -1,0 +1,63 @@
+{%- comment -%}
+  Do-A-Dot monthly printables — grid of downloadable PDFs. Each block is
+  one printable: preview image + PDF URL (files live in Shopify Files).
+{%- endcomment -%}
+
+<section class="dad-print-month">
+  <header class="dad-print-month__head">
+    <a class="dad-print-month__back" href="{{ section.settings.back_link | default: '/pages/download-free-printables' }}">← all months</a>
+    <h1 class="dad-print-month__heading">{{ section.settings.heading }}</h1>
+    {%- if section.settings.lede != blank -%}
+      <p class="dad-print-month__lede">{{ section.settings.lede }}</p>
+    {%- endif -%}
+  </header>
+
+  <ul class="dad-print-month__grid" role="list">
+    {%- for block in section.blocks -%}
+      <li class="dad-print-month__item" {{ block.shopify_attributes }}>
+        <a href="{{ block.settings.pdf_url }}" class="dad-print-month__card" target="_blank" rel="noopener" download>
+          <span class="dad-print-month__thumb">
+            <img
+              src="{{ block.settings.image_url }}"
+              alt="{{ block.settings.title | default: 'Printable' | escape }}"
+              loading="{% if forloop.index > 8 %}lazy{% else %}eager{% endif %}"
+              width="400"
+              height="500"
+            >
+          </span>
+          <span class="dad-print-month__dl">download pdf ↓</span>
+        </a>
+      </li>
+    {%- endfor -%}
+  </ul>
+
+  <footer class="dad-print-month__foot">
+    <a class="dad-print-month__back" href="{{ section.settings.back_link | default: '/pages/download-free-printables' }}">← back to all months</a>
+  </footer>
+</section>
+
+{% schema %}
+{
+  "name": "DAD Printables Month",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading" },
+    { "type": "text", "id": "lede", "label": "Lede", "default": "Click any image to download the PDF — then print, dot, done." },
+    { "type": "url", "id": "back_link", "label": "Back link", "info": "Defaults to /pages/download-free-printables" }
+  ],
+  "blocks": [
+    {
+      "type": "printable",
+      "name": "Printable",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title (for alt text)" },
+        { "type": "text", "id": "image_url", "label": "Preview image URL" },
+        { "type": "text", "id": "pdf_url", "label": "PDF URL" }
+      ]
+    }
+  ],
+  "max_blocks": 40,
+  "presets": [{ "name": "DAD Printables Month" }]
+}
+{% endschema %}
