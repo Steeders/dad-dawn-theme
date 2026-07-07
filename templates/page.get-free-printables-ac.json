@@ -4,11 +4,11 @@
       "type": "dad-printables-gate",
       "settings": {
         "eyebrow": "free printables",
-        "heading": "A new free printable, every other Friday.",
-        "body": "<p>Teachers, room moms, rainy-day heroes — sign up and get instant access to our full archive of dot-art printables, plus a brand-new one in your inbox every other Friday.</p>",
+        "heading": "Free printables for every month of the year.",
+        "body": "<p>Teachers, room moms, rainy-day heroes: sign up and get instant access to our full archive of dot-art printables, plus new ones as we release them.</p>",
         "placeholder": "your email",
         "button_label": "get my printables",
-        "fine_print": "We'll email you a fresh printable every other Friday. Unsubscribe anytime.",
+        "fine_print": "We'll email you new printables as they drop. Unsubscribe anytime.",
         "klaviyo_company_id": "RizdDa",
         "klaviyo_list_id": "TYvDQN",
         "redirect_page": "/pages/download-free-printables"
