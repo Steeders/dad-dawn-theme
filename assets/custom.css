@@ -4423,9 +4423,12 @@ a:hover {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--s-6);
+  columns: 4;
+  column-gap: var(--s-6);
+}
+.dad-print-month__item {
+  break-inside: avoid;
+  margin-bottom: var(--s-6);
 }
 .dad-print-month__card {
   display: block;
@@ -4455,5 +4458,8 @@ a:hover {
 .dad-print-month__card:hover .dad-print-month__thumb { border-color: var(--accent); box-shadow: var(--shadow-card); }
 .dad-print-month__card:hover .dad-print-month__dl { color: var(--accent); }
 .dad-print-month__foot { text-align: center; margin-top: var(--s-12); }
-@media screen and (max-width: 899px) { .dad-print-month__grid { grid-template-columns: repeat(3, 1fr); } }
-@media screen and (max-width: 599px) { .dad-print-month__grid { grid-template-columns: repeat(2, 1fr); gap: var(--s-4); } }
+@media screen and (max-width: 899px) { .dad-print-month__grid { columns: 3; } }
+@media screen and (max-width: 599px) {
+  .dad-print-month__grid { columns: 2; column-gap: var(--s-4); }
+  .dad-print-month__item { margin-bottom: var(--s-4); }
+}
