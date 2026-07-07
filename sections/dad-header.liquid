@@ -25,7 +25,7 @@
       </svg>
     </button>
 
-    <a href="{{ routes.root_url }}" class="dad-header__logo" aria-label="{{ shop.name | escape }} — home">
+    <a href="{{ routes.root_url }}" class="dad-header__logo" aria-label="{{ shop.name | escape }} home">
       {%- if section.settings.logo != blank -%}
         {{ section.settings.logo | image_url: width: 700 | image_tag:
           loading: 'eager', widths: '250, 350, 500, 700',
