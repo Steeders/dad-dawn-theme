@@ -15,39 +15,39 @@
         "stat-1": {
           "type": "stat",
           "settings": {
-            "number": "30",
-            "label": "years of mess-free art, in business since 1995"
+            "number": "37",
+            "label": "years of mess-free art — and counting"
           }
         },
         "stat-2": {
           "type": "stat",
           "settings": {
-            "number": "12M+",
-            "label": "markers in the wild — and counting"
+            "number": "3–103",
+            "label": "the ages we make art for"
           }
         },
         "stat-3": {
           "type": "stat",
           "settings": {
             "number": "100%",
-            "label": "family-owned, second generation running it"
+            "label": "family-owned and family-run"
           }
         },
         "stat-4": {
           "type": "stat",
           "settings": {
             "number": "USA",
-            "label": "made in San Clemente, California since day one"
+            "label": "our dot markers are made in the usa"
           }
         },
         "story-1": {
           "type": "story_row",
           "settings": {
             "eyebrow": "how it started",
-            "heading": "One mom. One ruined rug. One sponge.",
-            "body": "<p>In the fall of 1995, our founder Tina was trying to find a marker her two-year-old daughter could actually use. Every marker on the shelf either bled through paper, leaked all over fingers, or rolled off the table and onto the rug. (One did all three.)</p><p>She started experimenting in the kitchen — borrowing the sponge-tip mechanism from a different industry entirely — until she landed on something that wouldn't drip, wouldn't roll, and could survive a tight little fist. She named it Do-A-Dot. It was meant to be a one-off Christmas gift.</p><p>Twelve months later, every Crate & Barrel in the Midwest was carrying them.</p>",
-            "pullquote": "I just wanted a marker that didn't ruin the rug.",
-            "pullquote_attribution": "— Tina, founder · 1995",
+            "heading": "One teacher. Every color of imagination.",
+            "body": "<p>The sky can be bubblegum colored and horses can be bluish-orangey-green. For kids, imagination comes in all sorts of colors — most of which aren't in a box set.</p><p>Thirty-seven years ago, Tina — an enterprising full-time mom and part-time preschool teacher — never shied away from getting out the paints and messy art materials. But she noticed that when it came to creative playtime, she was the exception, not the rule. So she invented a new, mess-free way for kids to dip into all the colors of their imagination: a special dot paint applicator.</p><p>Children could layer and blend colors like never before — fill big spaces, make shapes, create textures. Kids loved the new art medium. Parents and teachers loved the finished projects, and the easy setup and cleanup even more.</p>",
+            "pullquote": "We help kids create their own colors, so they can express themselves freely.",
+            "pullquote_attribution": "— the Do-A-Dot Art! story",
             "reverse": false
           }
         },
@@ -55,58 +55,42 @@
           "type": "story_row",
           "settings": {
             "eyebrow": "how it's going",
-            "heading": "Same family. Same idea. New craft closet.",
-            "body": "<p>Thirty years later, Tina's daughter Tiffany and her husband Jesse are running the business. They've spent the last few years working on something Tina always wanted to do but never quite got to: <em>going beyond just markers</em>.</p><p>In 2026 we launched the first of those new tools — chunky crayons sized for the pincer grip, mess-free watercolor pans, a heavyweight pad that doesn't bleed through. All on the same idea Tina started with: <em>easy enough for a toddler, clean enough for a parent</em>.</p><p>We still make almost everything in San Clemente. We still answer the customer-service email ourselves. The rugs, mostly, have been spared.</p>",
-            "pullquote": "My mom started it on a kitchen table. We're trying to do her proud.",
-            "pullquote_attribution": "— Jess & Tiffany · today",
+            "heading": "Same family. Same idea. A bigger craft closet.",
+            "body": "<p>Tina didn't let her idea live only within the walls of her preschool. Along with her husband Rob, she built the original dot art marker from a creative tool for kids into an educational staple used in classrooms everywhere — and to this day, mess-free painting for kids is revolutionary.</p><p>Do-A-Dot Art! is still a family-run business, with the second generation carrying it forward. In 2026 the craft closet is growing — chunky crayons, mess-free watercolors, and more new tools, all built on the same idea Tina started with.</p><p>And we're proud of how our sets come together: assembled with love and care by a dedicated team at a special-needs work center whose work ethic and attention to detail set the standard.</p>",
+            "pullquote": "Together, let's add more color to our world.",
+            "pullquote_attribution": "— the Do-A-Dot Art! family",
             "reverse": true
           }
         },
         "tl-1": {
           "type": "timeline_step",
           "settings": {
-            "year": "1995",
-            "body": "Tina invents the non-drip sponge tip in her kitchen. First retail order: 144 markers to a craft store in San Diego.",
+            "year": "late '80s",
+            "body": "Tina — full-time mom, part-time preschool teacher — invents the dot paint applicator so kids can create mess-free.",
             "milestone": true
           }
         },
         "tl-2": {
           "type": "timeline_step",
           "settings": {
-            "year": "2001",
-            "body": "Walmart picks up Do-A-Dot Rainbow. The factory expands to a 6,000 sq-ft space.",
+            "year": "the '90s",
+            "body": "Tina and her husband Rob build the original dot art marker into a family business, one classroom and craft store at a time.",
             "milestone": false
           }
         },
         "tl-3": {
           "type": "timeline_step",
           "settings": {
-            "year": "2008",
-            "body": "Tina ships the millionth marker. Featured on the Today Show with a class of pre-K painters.",
+            "year": "the 2000s",
+            "body": "Do-A-Dot Art! grows from a creative toy into an educational tool, loved by teachers and parents across the country.",
             "milestone": false
           }
         },
         "tl-4": {
           "type": "timeline_step",
           "settings": {
-            "year": "2015",
-            "body": "Jess joins the business full-time after years of running e-commerce on the side.",
-            "milestone": false
-          }
-        },
-        "tl-5": {
-          "type": "timeline_step",
-          "settings": {
-            "year": "2022",
-            "body": "Generational hand-off. Tina retires; Jess & Mark take over operations and start work on the broader craft line.",
-            "milestone": false
-          }
-        },
-        "tl-6": {
-          "type": "timeline_step",
-          "settings": {
-            "year": "2026",
-            "body": "The full craft closet launches direct on dotart.com — chunky crayons, watercolors, the works.",
+            "year": "today",
+            "body": "The second generation carries it forward — and the craft closet expands with chunky crayons, watercolors, and more launching in 2026.",
             "milestone": true
           }
         },
@@ -114,24 +98,24 @@
           "type": "value",
           "settings": {
             "number": "01",
-            "heading": "Easy enough for a toddler.",
-            "body": "Every product gets tested with a real two-year-old before it ships. If they can't grip it, open it, or use it without our help — back to the drawing board."
+            "heading": "Mess-free is the point.",
+            "body": "Tina loved messy art — she just knew most homes and classrooms couldn't. Dot markers give kids all the color with none of the cleanup."
           }
         },
         "val-2": {
           "type": "value",
           "settings": {
             "number": "02",
-            "heading": "Clean enough for a parent.",
-            "body": "Non-drip, non-toxic, washable, ASTM-certified. We don't ship anything that we wouldn't hand to our own kids and walk out of the room."
+            "heading": "Safe enough for your little ones.",
+            "body": "Non-toxic, washable, ASTM-certified. When it comes to safety we hold ourselves to the highest standards, because we think of your little ones as our own."
           }
         },
         "val-3": {
           "type": "value",
           "settings": {
             "number": "03",
-            "heading": "Made in the USA, by us.",
-            "body": "Almost everything we sell is made in San Clemente, California — by us, on machines we own, with materials sourced as close to home as we can get."
+            "heading": "Made with pride in the USA.",
+            "body": "Our dot markers are made in the USA, and our paint sets are assembled by a dedicated team at a special-needs work center — craftsmanship we're proud of."
           }
         },
         "val-4": {
@@ -146,24 +130,24 @@
           "type": "value",
           "settings": {
             "number": "05",
-            "heading": "One product, done well.",
-            "body": "We'd rather make eighteen excellent crayons than ninety mediocre ones. No fillers, no novelty, no shrinkflation. Just the thing."
+            "heading": "Raising free thinkers.",
+            "body": "We want children to make their own choices, think creatively, and feel confident. Through art, kids build a love of learning, discovering, and creating that lasts a lifetime."
           }
         },
         "val-6": {
           "type": "value",
           "settings": {
             "number": "06",
-            "heading": "Mess is the point.",
-            "body": "The whole brand is built on the idea that a little mess is good. We design for it. We expect it. We bought you the easier-to-clean version anyway."
+            "heading": "Imagination first.",
+            "body": "Building forts from couch cushions, castles from sand, stories from the clouds — imagination is what transforms a plain sheet of paper into a masterpiece."
           }
         },
         "team-1": {
           "type": "team_member",
           "settings": {
             "name": "Tina",
-            "role": "founder · still consulting",
-            "bio": "Invented the non-drip tip in 1995. Officially retired in 2022, unofficially still in the office every Tuesday.",
+            "role": "founder · ceo",
+            "bio": "The mom and preschool teacher who invented the original dot art marker — and built it into a family business with her husband Rob.",
             "accent_color": "pink"
           }
         },
@@ -171,8 +155,8 @@
           "type": "team_member",
           "settings": {
             "name": "Tiffany",
-            "role": "co-founder · ceo",
-            "bio": "Tina's daughter. Took over operations in 2022. Spends most days arguing with sample packs of chunky crayons.",
+            "role": "second generation",
+            "bio": "Carrying the family business forward — and the voice behind our how-to videos.",
             "accent_color": "blue"
           }
         },
@@ -180,18 +164,9 @@
           "type": "team_member",
           "settings": {
             "name": "Jesse",
-            "role": "co-founder · operations",
-            "bio": "Tiffany's husband. Runs marketing and the warehouse. The reason your order leaves San Clemente in 1–2 days.",
+            "role": "second generation · creative",
+            "bio": "Runs the photo shoots, the campaigns, and the craft closet's next chapter.",
             "accent_color": "yellow"
-          }
-        },
-        "team-4": {
-          "type": "team_member",
-          "settings": {
-            "name": "Renee",
-            "role": "customer experience",
-            "bio": "The voice on the other end of every email. If you've ever returned a marker, you've already met her.",
-            "accent_color": "green"
           }
         }
       },
@@ -206,8 +181,6 @@
         "tl-2",
         "tl-3",
         "tl-4",
-        "tl-5",
-        "tl-6",
         "val-1",
         "val-2",
         "val-3",
@@ -216,24 +189,23 @@
         "val-6",
         "team-1",
         "team-2",
-        "team-3",
-        "team-4"
+        "team-3"
       ],
       "settings": {
         "hero_eyebrow": "our story",
-        "hero_heading": "A kitchen-table experiment,",
-        "hero_heading_accent": "thirty years in.",
-        "hero_lede": "Do-A-Dot started in 1995 when a mom in San Clemente, California invented a non-drip marker for her two-year-old. Three decades later — still the same family, still the same idea: art should be easy enough for a toddler and clean enough for a parent.",
+        "hero_heading": "A preschool teacher's idea,",
+        "hero_heading_accent": "37 years in.",
+        "hero_lede": "Do-A-Dot Art! began when Tina — a full-time mom and part-time preschool teacher — invented a mess-free way for kids to dip into every color of their imagination. Nearly four decades later, we're still the same family with the same idea: give children the freedom to create, without the cleanup.",
         "hero_image": "shopify://shop_images/About_Our-Story.jpg",
-        "timeline_heading": "Thirty years, dot by dot.",
+        "timeline_heading": "Nearly four decades, dot by dot.",
         "timeline_lede": "A short walk through the milestones that got us here.",
         "values_heading": "What we still believe.",
         "team_eyebrow": "the people doing it",
         "team_heading": "Meet the family.",
-        "team_subhead": "nine of us, two dogs, one cat named Crayon.",
+        "team_subhead": "the family behind the dots",
         "cta_eyebrow": "get colorful",
-        "cta_heading": "Ready to make the",
-        "cta_heading_accent": "happiest kind of mess?",
+        "cta_heading": "Ready to add more",
+        "cta_heading_accent": "color to your world?",
         "cta_body": "Markers, watercolors, chunky crayons — the whole craft closet, shipped direct from us to your front door.",
         "cta_btn1_label": "shop all",
         "cta_btn1_link": "",
