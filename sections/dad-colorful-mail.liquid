@@ -26,7 +26,7 @@
         {% form 'customer', class: 'dad-mail__native' %}
           <input type="hidden" name="contact[tags]" value="newsletter">
           {%- if form.posted_successfully? -%}
-            <p class="dad-mail__success">{{ 'newsletter.success' | t | default: "Thanks — check your inbox!" }}</p>
+            <p class="dad-mail__success">{{ 'newsletter.success' | t | default: "Thanks! Check your inbox." }}</p>
           {%- else -%}
             <div class="dad-mail__row">
               <label class="visually-hidden" for="dad-mail-email">{{ 'newsletter.label' | t | default: 'Email' }}</label>

@@ -17,7 +17,7 @@
         "eyebrow": "the whole craft closet",
         "heading": "Made for little hands. Loved by",
         "script_accent": "big imaginations.",
-        "lede": "Markers, watercolors, and chunky crayons — the whole craft closet, shipped direct from the family that's been making mess-free art easier for thirty years.",
+        "lede": "Markers, watercolors, and chunky crayons: the whole craft closet, shipped direct from the family that's been making mess-free art easier for thirty years.",
         "btn1_label": "shop all",
         "btn1_link": "shopify://collections/all",
         "btn2_label": "Shop best sellers",
@@ -121,7 +121,7 @@
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>Do-A-Dot started thirty years ago with one simple idea: art should be easy, joyful, and totally mess-free for the littlest artists. Three decades later we're still a family company — now shipping the whole craft closet straight to your door. Markers that don't drip, watercolors that wash out, crayons made for chunky little grips. All of it made for little hands, and the big imaginations behind them.</p>"
+            "text": "<p>Do-A-Dot started thirty years ago with one simple idea: art should be easy, joyful, and totally mess-free for the littlest artists. Three decades later we're still a family company, now shipping the whole craft closet straight to your door. Markers that don't drip, watercolors that wash out, crayons made for chunky little grips. All of it made for little hands, and the big imaginations behind them.</p>"
           }
         }
       },
@@ -147,7 +147,7 @@
           "settings": {
             "dot_color": "yellow",
             "title": "Mess-free, parent-proof",
-            "body": "Non-drip sponge tips & wash-out inks. Drop the marker — keep the rug."
+            "body": "Non-drip sponge tips & wash-out inks. Drop the marker, keep the rug."
           }
         },
         "promise-2": {
@@ -225,7 +225,7 @@
       "settings": {
         "eyebrow": "meet the chunky crayons",
         "heading": "Meet the chunky crayon family.",
-        "body": "<p>Eighteen named colors — Piggy Pink, Lady Bug Red, Octopus Purple, Goldfish Gold. Built fat and grippy for the smallest pincer grip. Soy-wax based, non-toxic, won't snap in a tight little fist.</p>",
+        "body": "<p>Eighteen named colors: Piggy Pink, Lady Bug Red, Octopus Purple, Goldfish Gold. Built fat and grippy for the smallest pincer grip. Soy-wax based, non-toxic, won't snap in a tight little fist.</p>",
         "btn1_label": "shop the crayon set",
         "btn1_link": "shopify://collections/crayons-coloring",
         "btn2_label": "",
@@ -263,7 +263,7 @@
       "settings": {
         "eyebrow": "conversation through color",
         "heading": "Every color has a name. Every name starts a story.",
-        "body": "<p>Piggy Pink. Tiger Tail Orange. Octopus Purple. We name our colors after the world around your kid — so picking one is the start of a conversation, not just a stroke.</p>",
+        "body": "<p>Piggy Pink. Tiger Tail Orange. Octopus Purple. We name our colors after the world around your kid, so picking one is the start of a conversation, not just a stroke.</p>",
         "cta_label": "see the full color story",
         "cta_link": "shopify://pages/color-story",
         "color_scheme": "",
