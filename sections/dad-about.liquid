@@ -93,7 +93,7 @@
         {%- if section.settings.timeline_lede != blank -%}
           <p class="dad-about__lede">{{ section.settings.timeline_lede }}</p>
         {%- endif -%}
-        <div class="dad-about__timeline-track">
+        <div class="dad-about__timeline-track" style="--tl-cols: {{ timeline_blocks.size }};">
           {%- for block in timeline_blocks -%}
             <div class="dad-about__tl-step{% if block.settings.milestone %} is-milestone{% endif %}" {{ block.shopify_attributes }}>
               <div class="dad-about__tl-marker">{% if block.settings.milestone %}★{% else %}·{% endif %}</div>
@@ -141,7 +141,7 @@
             <span class="dad-about__team-subhead">{{ section.settings.team_subhead }}</span>
           {%- endif -%}
         </div>
-        <div class="dad-about__team-grid">
+        <div class="dad-about__team-grid" style="--team-cols: {{ team_blocks.size }};">
           {%- for block in team_blocks -%}
             <div class="dad-about__member" {{ block.shopify_attributes }}>
               <div class="dad-about__member-photo dad-about__member-photo--{{ block.settings.accent_color }}">

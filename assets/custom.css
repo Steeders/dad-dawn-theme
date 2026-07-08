@@ -2525,7 +2525,7 @@ a:hover {
 .dad-about__timeline-track {
   position: relative;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(var(--tl-cols, 6), 1fr);
   gap: 24px;
 }
 .dad-about__timeline-track::before {
@@ -2652,7 +2652,7 @@ a:hover {
 }
 .dad-about__team-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(var(--team-cols, 3), 1fr);
   gap: 32px;
 }
 .dad-about__member-photo {
