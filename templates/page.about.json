@@ -23,7 +23,7 @@
           "type": "stat",
           "settings": {
             "number": "3–103",
-            "label": "the ages we make art for"
+            "label": "we make art materials for ages 3-103"
           }
         },
         "stat-3": {
@@ -44,7 +44,7 @@
           "type": "story_row",
           "settings": {
             "eyebrow": "how it started",
-            "heading": "One teacher. Every color of imagination.",
+            "heading": "One Small Classroom, One Big Idea",
             "body": "<p>The sky can be bubblegum colored and horses can be bluish-orangey-green. For kids, imagination comes in all sorts of colors — most of which aren't in a box set.</p><p>Thirty-seven years ago, Tina — an enterprising full-time mom and part-time preschool teacher — never shied away from getting out the paints and messy art materials. But she noticed that when it came to creative playtime, she was the exception, not the rule. So she invented a new, mess-free way for kids to dip into all the colors of their imagination: a special dot paint applicator.</p><p>Children could layer and blend colors like never before — fill big spaces, make shapes, create textures. Kids loved the new art medium. Parents and teachers loved the finished projects, and the easy setup and cleanup even more.</p>",
             "pullquote": "We help kids create their own colors, so they can express themselves freely.",
             "pullquote_attribution": "— the Do-A-Dot Art! story",
@@ -99,7 +99,7 @@
           "settings": {
             "number": "01",
             "heading": "Mess-free is the point.",
-            "body": "Tina loved messy art — she just knew most homes and classrooms couldn't. Dot markers give kids all the color with none of the cleanup."
+            "body": "Tina believed in the magic of messy art, but knew that real homes and classrooms needed simplicity. Dot markers deliver bold, vibrant colors without the cleanup."
           }
         },
         "val-2": {
@@ -123,7 +123,7 @@
           "settings": {
             "number": "04",
             "heading": "Color is a conversation.",
-            "body": "Every color we sell has a name — Piggy Pink, Tiger Tail Orange, Octopus Purple — because picking a color is the start of a story, not just a stroke."
+            "body": "Every color we sell has a name — Piggy Pink, Tiger Tail Orange, Canary Yellow — because picking a color is the start of a story, not just a stroke."
           }
         },
         "val-5": {
@@ -147,7 +147,7 @@
           "settings": {
             "name": "Tina",
             "role": "founder · ceo",
-            "bio": "The mom and preschool teacher who invented the original dot art marker — and built it into a family business with her husband Rob.",
+            "bio": "Inventor of the original Dot Art Marker, lifelong educator, and the heart behind Do-A-Dot Art! Nearly four decades later, she's still creating, innovating, and reminding us that every masterpiece begins with a little dot!",
             "accent_color": "pink"
           }
         },
@@ -155,8 +155,8 @@
           "type": "team_member",
           "settings": {
             "name": "Tiffany",
-            "role": "second generation",
-            "bio": "Carrying the family business forward — and the voice behind our how-to videos.",
+            "role": "second generation · president",
+            "bio": "Leading the family business into its next chapter of craft closet essentials with a passion for creativity, product development, and inspiring children and families to create together. She's also the voice behind all of our how-to videos!",
             "accent_color": "blue"
           }
         },
@@ -164,8 +164,8 @@
           "type": "team_member",
           "settings": {
             "name": "Jesse",
-            "role": "second generation · creative",
-            "bio": "Runs the photo shoots, the campaigns, and the craft closet's next chapter.",
+            "role": "second generation · chief tinkerer",
+            "bio": "Creating all the artwork, developing new products, sourcing materials, and somehow keeping the day-to-day moving forward. There's usually paint involved!",
             "accent_color": "yellow"
           }
         }
