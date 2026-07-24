@@ -1,0 +1,125 @@
+{% comment %}
+  Renders a single-variant product card for collection grids (B4B-style "variant explosion").
+  One card per variant; links to the PDP with the variant preselected (?variant=).
+  Reuses Dawn card CSS classes so existing card styles apply.
+
+  Accepts:
+  - card_product: {Object} Product Liquid object (required)
+  - card_variant: {Object} ProductVariant Liquid object (required)
+  - media_aspect_ratio: {String} "square" | "portrait" | "adapt" (optional, default square)
+  - image_shape: {String} Dawn image mask (optional)
+  - lazy_load: {Boolean} default true
+  - section_id: {String} owning section id (for unique ids)
+
+  Image source priority: variant metafield custom.variant_images[0] -> variant.featured_media -> product.featured_media
+  Usage: {% render 'dad-variant-card', card_product: product, card_variant: variant, section_id: section.id %}
+{% endcomment %}
+{%- if card_product and card_variant -%}
+  {%- liquid
+    assign vimages = card_variant.metafields.custom.variant_images.value
+    assign vimg = vimages.first
+    if vimg == blank
+      assign vimg = card_variant.featured_media
+    endif
+    if vimg == blank
+      assign vimg = card_product.featured_media
+    endif
+
+    assign ratio = 1
+    if vimg and media_aspect_ratio == 'portrait'
+      assign ratio = 0.8
+    elsif vimg and media_aspect_ratio == 'adapt'
+      assign ratio = vimg.aspect_ratio
+    endif
+    if ratio == 0 or ratio == null
+      assign ratio = 1
+    endif
+
+    assign card_uid = section_id | append: '-' | append: card_variant.id
+    assign variant_url = card_product.url | append: '?variant=' | append: card_variant.id
+    assign img_loading = 'lazy'
+    if lazy_load == false
+      assign img_loading = 'eager'
+    endif
+  -%}
+  <div class="card-wrapper product-card-wrapper underline-links-hover">
+    <div
+      class="
+        card card--{{ settings.card_style }}
+        {% if vimg %} card--media{% else %} card--text{% endif %}
+        {% if settings.card_style == 'card' %} color-{{ settings.card_color_scheme }} gradient{% endif %}
+        {% if image_shape and image_shape != 'default' %} card--shape{% endif %}
+        card--extend-height
+      "
+      style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
+    >
+      <div
+        class="card__inner {% if settings.card_style == 'standard' %}color-{{ settings.card_color_scheme }} gradient{% endif %}{% if vimg or settings.card_style == 'standard' %} ratio{% endif %}"
+        style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
+      >
+        {%- if vimg -%}
+          <div class="card__media{% if image_shape and image_shape != 'default' %} shape--{{ image_shape }} color-{{ settings.card_color_scheme }} gradient{% endif %}">
+            <div class="media media--transparent media--hover-effect">
+              {{
+                vimg
+                | image_url: width: 533
+                | image_tag:
+                  loading: img_loading,
+                  widths: '165, 360, 533, 720, 940, 1066',
+                  sizes: '(min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)',
+                  class: 'motion-reduce',
+                  alt: card_variant.title
+              }}
+            </div>
+          </div>
+        {%- endif -%}
+        <div class="card__content">
+          <div class="card__information">
+            <h3 class="card__heading{% if vimg or settings.card_style == 'standard' %} h5{% endif %}">
+              <a href="{{ variant_url }}" id="CardLink-{{ card_uid }}" class="full-unstyled-link">
+                {{ card_variant.title | escape }}
+              </a>
+            </h3>
+          </div>
+          <div class="card__badge {{ settings.badge_position }}">
+            {%- if card_variant.available == false -%}
+              <span class="badge badge--bottom-left color-{{ settings.sold_out_badge_color_scheme }}">
+                {{- 'products.product.sold_out' | t -}}
+              </span>
+            {%- elsif card_variant.compare_at_price > card_variant.price -%}
+              <span class="badge badge--bottom-left color-{{ settings.sale_badge_color_scheme }}">
+                {{- 'products.product.on_sale' | t -}}
+              </span>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+      <div class="card__content">
+        <div class="card__information">
+          <h3 class="card__heading h5">
+            <a href="{{ variant_url }}" class="full-unstyled-link" aria-labelledby="CardLink-{{ card_uid }}">
+              {{ card_variant.title | escape }}
+            </a>
+          </h3>
+          <div class="card-information">
+            <div class="price{% if card_variant.compare_at_price > card_variant.price %} price--on-sale{% endif %}">
+              <div class="price__container">
+                <div class="price__regular">
+                  <span class="price-item price-item--regular">{{ card_variant.price | money }}</span>
+                </div>
+                <div class="price__sale">
+                  {%- if card_variant.compare_at_price > card_variant.price -%}
+                    <span class="price-item price-item--regular">
+                      <s>{{ card_variant.compare_at_price | money }}</s>
+                    </span>
+                    <span class="price-item price-item--sale price-item--last">{{ card_variant.price | money }}</span>
+                  {%- endif -%}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{%- endif -%}
