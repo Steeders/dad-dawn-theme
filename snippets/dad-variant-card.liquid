@@ -25,6 +25,11 @@
       assign vimg = card_product.featured_media
     endif
 
+    assign vimg_hover = null
+    for vg_hover_img in vimages offset: 1 limit: 1
+      assign vimg_hover = vg_hover_img
+    endfor
+
     assign ratio = 1
     if vimg and media_aspect_ratio == 'portrait'
       assign ratio = 0.8
@@ -70,6 +75,18 @@
                   class: 'motion-reduce',
                   alt: card_variant.title
               }}
+              {%- if show_secondary_image and vimg_hover and vimg_hover != blank -%}
+                {{
+                  vimg_hover
+                  | image_url: width: 533
+                  | image_tag:
+                    loading: 'lazy',
+                    widths: '165, 360, 533, 720, 940, 1066',
+                    sizes: '(min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)',
+                    class: 'motion-reduce',
+                    alt: card_variant.title
+                }}
+              {%- endif -%}
             </div>
           </div>
         {%- endif -%}
