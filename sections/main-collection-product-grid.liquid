@@ -38,8 +38,10 @@
 
 <div class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}">
   {%- paginate collection.products by section.settings.products_per_page -%}
+    {%- comment -%} dad: curated collections (custom.featured_variants) render an explicit ordered variant list and hide the no-op filters/sort {%- endcomment -%}
+    {%- assign dad_featured = collection.metafields.custom.featured_variants.value -%}
     {% comment %} Sort is the first tabbable element when filter type is vertical {% endcomment %}
-    {%- if section.settings.enable_sorting and section.settings.filter_type == 'vertical' -%}
+    {%- if section.settings.enable_sorting and section.settings.filter_type == 'vertical' and dad_featured == blank -%}
       <facet-filters-form class="facets facets-vertical-sort page-width small-hide">
         <form class="facets-vertical-form" id="FacetSortForm">
           <div class="facet-filters sorting caption">
@@ -101,6 +103,7 @@
       {{ 'component-facets.css' | asset_url | stylesheet_tag }}
       <script src="{{ 'facets.js' | asset_url }}" defer="defer"></script>
       {%- if section.settings.enable_filtering or section.settings.enable_sorting -%}
+        {%- if dad_featured == blank -%}
         <aside
           aria-labelledby="verticalTitle"
           class="facets-wrapper{% unless section.settings.enable_filtering %} facets-wrapper--no-filters{% endunless %}{% if section.settings.filter_type != 'vertical' %} page-width{% endif %}"
@@ -115,6 +118,7 @@
             paginate: paginate
           %}
         </aside>
+        {%- endif -%}
       {%- endif -%}
 
       <div
@@ -124,7 +128,7 @@
           data-cascade
         {% endif %}
       >
-        {%- if collection.products.size == 0 -%}
+        {%- if collection.products.size == 0 and dad_featured == blank -%}
           <div class="collection collection--empty page-width" id="product-grid" data-id="{{ section.id }}">
             <div class="loading-overlay gradient"></div>
             <div class="title-wrapper center">
@@ -153,6 +157,30 @@
               "
             >
               {% assign skip_card_product_styles = false %}
+              {%- if dad_featured != blank and dad_featured.size > 0 -%}
+                {%- comment -%} dad: curated collection — render the explicit ordered variant list {%- endcomment -%}
+                {%- for dad_fv in dad_featured -%}
+                  {%- assign fv_lazy = false -%}
+                  {%- if forloop.index > 2 -%}{%- assign fv_lazy = true -%}{%- endif -%}
+                  <li
+                    class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                    {% if settings.animations_reveal_on_scroll %}
+                      data-cascade
+                      style="--animation-order: {{ forloop.index }};"
+                    {% endif %}
+                  >
+                    {% render 'dad-variant-card',
+                      card_product: dad_fv.product,
+                      card_variant: dad_fv,
+                      media_aspect_ratio: section.settings.image_ratio,
+                      image_shape: section.settings.image_shape,
+                      show_secondary_image: section.settings.show_secondary_image,
+                      lazy_load: fv_lazy,
+                      section_id: section.id
+                    %}
+                  </li>
+                {%- endfor -%}
+              {%- else -%}
               {%- for product in collection.products -%}
                 {% assign lazy_load = false %}
                 {%- if forloop.index > 2 -%}
@@ -203,6 +231,7 @@
                   {%- assign skip_card_product_styles = true -%}
                 {%- endif -%}
               {%- endfor -%}
+              {%- endif -%}
             </ul>
 
             {%- if paginate.pages > 1 -%}
