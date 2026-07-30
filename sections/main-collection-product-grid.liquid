@@ -156,27 +156,64 @@
             >
               {% assign skip_card_product_styles = false %}
               {%- if dad_featured != blank and dad_featured.size > 0 -%}
-                {%- comment -%} dad: curated collection — render the explicit ordered variant list {%- endcomment -%}
+                {%- comment -%} dad: curated collection — render the explicit ordered variant list, honoring active filters (product type, age range, price) {%- endcomment -%}
+                {%- assign fv_types = '' -%}
+                {%- assign fv_ages = '' -%}
+                {%- assign fv_pmin = null -%}
+                {%- assign fv_pmax = null -%}
+                {%- for f in collection.filters -%}
+                  {%- if f.type == 'price_range' -%}
+                    {%- if f.min_value.value != blank -%}{%- assign fv_pmin = f.min_value.value -%}{%- endif -%}
+                    {%- if f.max_value.value != blank -%}{%- assign fv_pmax = f.max_value.value -%}{%- endif -%}
+                  {%- else -%}
+                    {%- for av in f.active_values -%}
+                      {%- if f.param_name == 'filter.p.product_type' -%}
+                        {%- assign fv_types = fv_types | append: '||' | append: av.value | append: '||' -%}
+                      {%- elsif f.param_name == 'filter.p.m.custom.age_range' -%}
+                        {%- assign fv_ages = fv_ages | append: '||' | append: av.value | append: '||' -%}
+                      {%- endif -%}
+                    {%- endfor -%}
+                  {%- endif -%}
+                {%- endfor -%}
+                {%- assign fv_shown = 0 -%}
                 {%- for dad_fv in dad_featured -%}
-                  {%- assign fv_lazy = false -%}
-                  {%- if forloop.index > 2 -%}{%- assign fv_lazy = true -%}{%- endif -%}
-                  <li
-                    class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-                    {% if settings.animations_reveal_on_scroll %}
-                      data-cascade
-                      style="--animation-order: {{ forloop.index }};"
-                    {% endif %}
-                  >
-                    {% render 'dad-variant-card',
-                      card_product: dad_fv.product,
-                      card_variant: dad_fv,
-                      media_aspect_ratio: section.settings.image_ratio,
-                      image_shape: section.settings.image_shape,
-                      show_secondary_image: section.settings.show_secondary_image,
-                      lazy_load: fv_lazy,
-                      section_id: section.id
-                    %}
-                  </li>
+                  {%- assign fv_ok = true -%}
+                  {%- if fv_types != blank -%}
+                    {%- assign fv_tk = '||' | append: dad_fv.product.type | append: '||' -%}
+                    {%- unless fv_types contains fv_tk -%}{%- assign fv_ok = false -%}{%- endunless -%}
+                  {%- endif -%}
+                  {%- if fv_ok and fv_ages != blank -%}
+                    {%- assign fv_amatch = false -%}
+                    {%- for a in dad_fv.product.metafields.custom.age_range.value -%}
+                      {%- assign fv_ak = '||' | append: a | append: '||' -%}
+                      {%- if fv_ages contains fv_ak -%}{%- assign fv_amatch = true -%}{%- endif -%}
+                    {%- endfor -%}
+                    {%- unless fv_amatch -%}{%- assign fv_ok = false -%}{%- endunless -%}
+                  {%- endif -%}
+                  {%- if fv_ok and fv_pmin != null and dad_fv.price < fv_pmin -%}{%- assign fv_ok = false -%}{%- endif -%}
+                  {%- if fv_ok and fv_pmax != null and dad_fv.price > fv_pmax -%}{%- assign fv_ok = false -%}{%- endif -%}
+                  {%- if fv_ok -%}
+                    {%- assign fv_shown = fv_shown | plus: 1 -%}
+                    {%- assign fv_lazy = false -%}
+                    {%- if fv_shown > 2 -%}{%- assign fv_lazy = true -%}{%- endif -%}
+                    <li
+                      class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                      {% if settings.animations_reveal_on_scroll %}
+                        data-cascade
+                        style="--animation-order: {{ fv_shown }};"
+                      {% endif %}
+                    >
+                      {% render 'dad-variant-card',
+                        card_product: dad_fv.product,
+                        card_variant: dad_fv,
+                        media_aspect_ratio: section.settings.image_ratio,
+                        image_shape: section.settings.image_shape,
+                        show_secondary_image: section.settings.show_secondary_image,
+                        lazy_load: fv_lazy,
+                        section_id: section.id
+                      %}
+                    </li>
+                  {%- endif -%}
                 {%- endfor -%}
               {%- else -%}
               {%- for product in collection.products -%}
