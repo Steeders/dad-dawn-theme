@@ -60,7 +60,6 @@
         },
         "tile-crayons": {
           "type": "tile",
-          "disabled": true,
           "settings": {
             "collection": "crayons-coloring",
             "image": "shopify://shop_images/2026-05-01_Do-a-Dot_batch1-4.webp",
