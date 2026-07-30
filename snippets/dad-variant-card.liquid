@@ -42,6 +42,15 @@
 
     assign card_uid = section_id | append: '-' | append: card_variant.id
     assign variant_url = card_product.url | append: '?variant=' | append: card_variant.id
+
+    comment
+      Card label: variant option value for multi-variant products; full product title
+      for single-variant products (whose variant title is just "Default Title").
+    endcomment
+    assign card_title = card_variant.title
+    if card_product.has_only_default_variant
+      assign card_title = card_product.title
+    endif
     assign img_loading = 'lazy'
     if lazy_load == false
       assign img_loading = 'eager'
@@ -73,7 +82,7 @@
                   widths: '165, 360, 533, 720, 940, 1066',
                   sizes: '(min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)',
                   class: 'motion-reduce',
-                  alt: card_variant.title
+                  alt: card_title
               }}
               {%- if show_secondary_image and vimg_hover and vimg_hover != blank -%}
                 {{
@@ -84,7 +93,7 @@
                     widths: '165, 360, 533, 720, 940, 1066',
                     sizes: '(min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)',
                     class: 'motion-reduce',
-                    alt: card_variant.title
+                    alt: card_title
                 }}
               {%- endif -%}
             </div>
@@ -94,7 +103,7 @@
           <div class="card__information">
             <h3 class="card__heading{% if vimg or settings.card_style == 'standard' %} h5{% endif %}">
               <a href="{{ variant_url }}" id="CardLink-{{ card_uid }}" class="full-unstyled-link">
-                {{ card_variant.title | escape }}
+                {{ card_title | escape }}
               </a>
             </h3>
           </div>
@@ -115,7 +124,7 @@
         <div class="card__information">
           <h3 class="card__heading h5">
             <a href="{{ variant_url }}" class="full-unstyled-link" aria-labelledby="CardLink-{{ card_uid }}">
-              {{ card_variant.title | escape }}
+              {{ card_title | escape }}
             </a>
           </h3>
           <div class="card-information">
