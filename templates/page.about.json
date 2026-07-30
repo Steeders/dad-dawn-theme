@@ -144,6 +144,7 @@
         },
         "team-1": {
           "type": "team_member",
+          "disabled": true,
           "settings": {
             "name": "Tina",
             "role": "founder · ceo",
@@ -153,6 +154,7 @@
         },
         "team-2": {
           "type": "team_member",
+          "disabled": true,
           "settings": {
             "name": "Tiffany",
             "role": "second generation · art director",
@@ -162,6 +164,7 @@
         },
         "team-3": {
           "type": "team_member",
+          "disabled": true,
           "settings": {
             "name": "Jesse",
             "role": "second generation · chief tinkerer",
@@ -195,7 +198,7 @@
       "settings": {
         "hero_eyebrow": "our story",
         "hero_heading": "A preschool teacher's idea,",
-        "hero_heading_accent": "37 years in.",
+        "hero_heading_accent": "38 years in.",
         "hero_lede": "Do-A-Dot Art! began when Tina — a full-time mom and part-time preschool teacher — invented a mess-free way for kids to dip into every color of their imagination. Nearly four decades later, we're still the same family with the same idea: give children the freedom to create, without the cleanup.",
         "hero_image": "shopify://shop_images/About_Our-Story.jpg",
         "timeline_heading": "Nearly four decades, dot by dot.",
