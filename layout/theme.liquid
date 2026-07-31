@@ -409,5 +409,15 @@
     {%- if settings.cart_type == 'drawer' -%}
       <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
+
+    {%- if settings.free_gift_threshold > 0 and settings.free_gift_variant_id != blank -%}
+      <script>
+        window.dadFreeGift = {
+          variantId: {{ settings.free_gift_variant_id | json }},
+          thresholdCents: {{ settings.free_gift_threshold | times: 100 }},
+        };
+      </script>
+      <script src="{{ 'dad-free-gift.js' | asset_url }}" defer="defer"></script>
+    {%- endif -%}
   </body>
 </html>

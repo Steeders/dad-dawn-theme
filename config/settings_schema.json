@@ -1442,6 +1442,26 @@
         "default": 55
       },
       {
+        "type": "number",
+        "id": "free_gift_threshold",
+        "label": "Free gift threshold",
+        "info": "Order total (in store currency) that unlocks the free gift. Must match the automatic Buy X Get Y discount in Discounts. Set to 0 to disable the gift tier.",
+        "default": 75
+      },
+      {
+        "type": "text",
+        "id": "free_gift_variant_id",
+        "label": "Free gift variant ID",
+        "info": "Numeric variant ID of the gift product. Must match the \"customer gets\" variant on the automatic Buy X Get Y discount."
+      },
+      {
+        "type": "text",
+        "id": "free_gift_label",
+        "label": "Free gift name",
+        "info": "How the gift is described in the cart progress bar.",
+        "default": "FREE Discovering My World book"
+      },
+      {
         "type": "header",
         "content": "t:settings_schema.cart.settings.cart_drawer.header"
       },

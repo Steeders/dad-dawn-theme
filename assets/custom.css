@@ -4206,17 +4206,35 @@ a:hover {
 }
 .dad-ship-progress__label strong { color: var(--accent); }
 .dad-ship-progress__track {
+  position: relative;
   height: 8px;
   border-radius: var(--r-pill);
   background: var(--dad-pink-tint);
-  overflow: hidden;
 }
 .dad-ship-progress__fill {
   display: block;
   height: 100%;
+  max-width: 100%;
   background: var(--accent);
   border-radius: var(--r-pill);
   transition: width var(--dur-med) var(--ease-out);
+}
+/* Tier marker on the track: free-shipping milestone when a gift tier extends
+   the bar past it. Fills in with the accent color once the tier is hit. */
+.dad-ship-progress__milestone {
+  position: absolute;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: var(--dad-white);
+  border: 2px solid var(--dad-pink-tint);
+  transition: border-color var(--dur-med) var(--ease-out), background var(--dur-med) var(--ease-out);
+}
+.dad-ship-progress__milestone--hit {
+  background: var(--accent);
+  border-color: var(--accent);
 }
 /* Cart page variant: sits above the line-item table inside the page
    width, so drop the drawer's edge-to-edge padding + rule */

@@ -1,10 +1,17 @@
 {%- comment -%}
-  Do-A-Dot free shipping progress bar — rendered at the top of the cart
+  Do-A-Dot tiered rewards progress bar — rendered at the top of the cart
   drawer and cart page. Both re-render via the Section Rendering API on
   cart changes, so the bar stays current without extra JS.
 
-  The threshold lives in theme settings (Cart group) and must match the
-  free shipping rate in Settings > Shipping and delivery. Set to 0 to hide.
+  Tier 1: free shipping   (settings.free_shipping_threshold — must match the
+          FREESHIPPING automatic discount minimum. Set to 0 to hide the bar.)
+  Tier 2: free gift       (settings.free_gift_threshold — must match the
+          "Free Gift" Buy X Get Y automatic discount. Set to 0 for a
+          single-tier shipping-only bar. The gift itself is auto-added /
+          removed by assets/dad-free-gift.js.)
+
+  The gift line (property _dad_free_gift) is excluded from progress math so
+  the gift can never unlock itself.
 
   Usage:
   {% render 'dad-free-shipping-bar' %}
@@ -13,22 +20,47 @@
 
 {%- liquid
   assign dad_fs_threshold = settings.free_shipping_threshold | default: 55 | times: 100
+  assign dad_fg_threshold = settings.free_gift_threshold | default: 0 | times: 100
+  assign dad_fg_label = settings.free_gift_label | default: 'free gift'
+
+  assign dad_cart_total = cart.total_price
+  for item in cart.items
+    if item.properties['_dad_free_gift']
+      assign dad_cart_total = dad_cart_total | minus: item.final_line_price
+    endif
+  endfor
+
+  if dad_fg_threshold > dad_fs_threshold
+    assign dad_bar_max = dad_fg_threshold
+  else
+    assign dad_bar_max = dad_fs_threshold
+    assign dad_fg_threshold = 0
+  endif
 -%}
 {%- if cart != empty and dad_fs_threshold > 0 -%}
   {%- liquid
-    assign dad_fs_remaining = dad_fs_threshold | minus: cart.total_price
-    assign dad_fs_progress = cart.total_price | times: 100.0 | divided_by: dad_fs_threshold | at_most: 100 | round
+    assign dad_fs_remaining = dad_fs_threshold | minus: dad_cart_total
+    assign dad_fg_remaining = dad_fg_threshold | minus: dad_cart_total
+    assign dad_progress = dad_cart_total | times: 100.0 | divided_by: dad_bar_max | at_most: 100 | round
+    assign dad_fs_mark = dad_fs_threshold | times: 100.0 | divided_by: dad_bar_max | round
   -%}
   <div class="dad-ship-progress{% if context == 'page' %} dad-ship-progress--page{% endif %}" role="status">
     {%- if dad_fs_remaining > 0 -%}
       <p class="dad-ship-progress__label">
-        You're <strong>{{ dad_fs_remaining | money_without_trailing_zeros }} away</strong> from free shipping
+        You're <strong>{{ dad_fs_remaining | money_without_trailing_zeros }} away</strong> from free shipping{% if dad_fg_threshold > 0 %} &middot; {{ dad_fg_label }} at {{ dad_fg_threshold | money_without_trailing_zeros }}{% endif %}
       </p>
+    {%- elsif dad_fg_threshold > 0 and dad_fg_remaining > 0 -%}
+      <p class="dad-ship-progress__label">&#127881; free shipping unlocked &middot; <strong>{{ dad_fg_remaining | money_without_trailing_zeros }} away</strong> from your {{ dad_fg_label }}</p>
+    {%- elsif dad_fg_threshold > 0 -%}
+      <p class="dad-ship-progress__label">&#127881; you've unlocked <strong>free shipping + your {{ dad_fg_label }}</strong></p>
     {%- else -%}
       <p class="dad-ship-progress__label">&#127881; you've unlocked <strong>free shipping</strong></p>
     {%- endif -%}
     <div class="dad-ship-progress__track">
-      <span class="dad-ship-progress__fill" style="width: {{ dad_fs_progress }}%"></span>
+      <span class="dad-ship-progress__fill" style="width: {{ dad_progress }}%"></span>
+      {%- if dad_fg_threshold > 0 -%}
+        <span class="dad-ship-progress__milestone{% if dad_fs_remaining <= 0 %} dad-ship-progress__milestone--hit{% endif %}" style="left: {{ dad_fs_mark }}%" aria-hidden="true"></span>
+      {%- endif -%}
     </div>
   </div>
 {%- endif -%}
