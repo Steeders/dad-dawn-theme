@@ -17,7 +17,7 @@
         "announcement-bar-0": {
           "type": "announcement",
           "settings": {
-            "text": "Free Shipping on orders over $55",
+            "text": "Free Shipping on orders over $50",
             "link": ""
           }
         }
