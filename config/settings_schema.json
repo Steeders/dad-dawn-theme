@@ -1459,7 +1459,7 @@
         "id": "free_gift_label",
         "label": "Free gift name",
         "info": "How the gift is described in the cart progress bar.",
-        "default": "FREE Discovering My World book"
+        "default": "FREE coloring book"
       },
       {
         "type": "header",
