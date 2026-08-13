@@ -7,7 +7,20 @@
   {%- if section.settings.min_height_desktop -%}--dad-hero-min-h-desktop: {{ section.settings.min_height_desktop }}px;{%- endif -%}
 ">
   <div class="dad-hero__photo">
-    {%- if section.settings.image != blank -%}
+    {%- if section.settings.media_type == 'video' -%}
+      {%- if section.settings.video != null -%}
+        {{ section.settings.video | video_tag:
+          image_size: '1600x',
+          autoplay: true,
+          loop: true,
+          muted: true,
+          controls: false,
+          playsinline: true
+        }}
+      {%- else -%}
+        <div class="dad-hero__photo-placeholder">Upload a hero video in the customizer</div>
+      {%- endif -%}
+    {%- elsif section.settings.image != blank -%}
       {{ section.settings.image | image_url: width: 2400 | image_tag:
         loading: 'eager',
         widths: '600,900,1200,1600,2000,2400',
@@ -62,10 +75,27 @@
   "class": "dad-hero-wrapper",
   "settings": [
     {
+      "type": "select",
+      "id": "media_type",
+      "label": "Background media",
+      "options": [
+        { "value": "image", "label": "Image" },
+        { "value": "video", "label": "Video" }
+      ],
+      "default": "image",
+      "info": "Video plays muted, looped, full-bleed — like a moving background photo."
+    },
+    {
       "type": "image_picker",
       "id": "image",
       "label": "Background image",
-      "info": "Lifestyle photo, full-bleed. Recommend 2400px wide."
+      "info": "Lifestyle photo, full-bleed. Recommend 2400px wide. Used when Background media is set to Image."
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Background video",
+      "info": "Shopify-hosted video. Used when Background media is set to Video."
     },
     {
       "type": "range",
