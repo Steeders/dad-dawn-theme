@@ -3857,6 +3857,18 @@ a:hover {
 }
 
 /* ============================================================
+   Facet count hidden (snippets/facets.liquid — guarded stock edit)
+   Consolidated products (one product, many variants) made the
+   per-type "(1)" filter count read as "we only have one of these,"
+   which is misleading. The count text is aria-hidden already (screen
+   readers get the accessible product_count string separately), so
+   hiding it visually loses no information.
+   ============================================================ */
+.dad-facet-count {
+  display: none;
+}
+
+/* ============================================================
    Variant card subtitle (snippets/dad-variant-card.liquid)
    Smaller variant label under the bigger product-name heading on
    exploded per-variant collection grid cards.
