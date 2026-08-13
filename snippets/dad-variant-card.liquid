@@ -44,12 +44,19 @@
     assign variant_url = card_product.url | append: '?variant=' | append: card_variant.id
 
     comment
-      Card label: variant option value for multi-variant products; full product title
-      for single-variant products (whose variant title is just "Default Title").
+      Card title: always the parent product name (e.g. "Dot Markers"), so shoppers
+      can tell what family a card belongs to. Card subtitle: the variant option value
+      (e.g. "Rainbow - 6 Pack"), shown smaller underneath — blank for single-variant
+      products, whose variant title is just "Default Title".
     endcomment
-    assign card_title = card_variant.title
-    if card_product.has_only_default_variant
-      assign card_title = card_product.title
+    assign card_title = card_product.title
+    assign card_subtitle = ''
+    unless card_product.has_only_default_variant
+      assign card_subtitle = card_variant.title
+    endunless
+    assign card_alt = card_title
+    if card_subtitle != blank
+      assign card_alt = card_title | append: ' — ' | append: card_subtitle
     endif
     assign img_loading = 'lazy'
     if lazy_load == false
@@ -82,7 +89,7 @@
                   widths: '165, 360, 533, 720, 940, 1066',
                   sizes: '(min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)',
                   class: 'motion-reduce',
-                  alt: card_title
+                  alt: card_alt
               }}
               {%- if show_secondary_image and vimg_hover and vimg_hover != blank -%}
                 {{
@@ -93,7 +100,7 @@
                     widths: '165, 360, 533, 720, 940, 1066',
                     sizes: '(min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)',
                     class: 'motion-reduce',
-                    alt: card_title
+                    alt: card_alt
                 }}
               {%- endif -%}
             </div>
@@ -106,6 +113,9 @@
                 {{ card_title | escape }}
               </a>
             </h3>
+            {%- if card_subtitle != blank -%}
+              <p class="dad-variant-card__subtitle">{{ card_subtitle | escape }}</p>
+            {%- endif -%}
           </div>
           <div class="card__badge {{ settings.badge_position }}">
             {%- if card_variant.available == false -%}
@@ -127,6 +137,9 @@
               {{ card_title | escape }}
             </a>
           </h3>
+          {%- if card_subtitle != blank -%}
+            <p class="dad-variant-card__subtitle">{{ card_subtitle | escape }}</p>
+          {%- endif -%}
           <div class="card-information">
             <div class="price{% if card_variant.compare_at_price > card_variant.price %} price--on-sale{% endif %}">
               <div class="price__container">
