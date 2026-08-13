@@ -3857,6 +3857,20 @@ a:hover {
 }
 
 /* ============================================================
+   Variant card subtitle (snippets/dad-variant-card.liquid)
+   Smaller variant label under the bigger product-name heading on
+   exploded per-variant collection grid cards.
+   ============================================================ */
+.dad-variant-card__subtitle {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--dad-ink);
+}
+
+/* ============================================================
    Variant media gallery (dad-variant-gallery.js + dad-variant-media-gallery.liquid)
    Per-variant PDP image gallery driven by custom.variant_images.
    ============================================================ */
