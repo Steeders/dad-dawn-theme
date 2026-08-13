@@ -14,6 +14,13 @@
     "announcement-bar": {
       "type": "announcement-bar",
       "blocks": {
+        "announcement_ML8GYN": {
+          "type": "announcement",
+          "settings": {
+            "text": "Get Back To School With Our Best Sellers",
+            "link": "shopify://collections/best-sellers"
+          }
+        },
         "announcement-bar-0": {
           "type": "announcement",
           "settings": {
@@ -23,6 +30,7 @@
         }
       },
       "block_order": [
+        "announcement_ML8GYN",
         "announcement-bar-0"
       ],
       "settings": {
