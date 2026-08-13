@@ -121,6 +121,10 @@
     "cart_type": "drawer",
     "show_vendor": false,
     "show_cart_note": false,
+    "free_shipping_threshold": 50,
+    "free_gift_threshold": 75,
+    "free_gift_variant_id": "48655676178664",
+    "free_gift_label": "FREE coloring book",
     "cart_drawer_collection": "",
     "sections": {
       "main-password-header": {
@@ -176,15 +180,18 @@
         "type": "shopify://apps/inbox/blocks/chat/841fc607-4181-4ad1-842d-e24d7f8bad6b",
         "disabled": false,
         "settings": {
+          "greeting_message": "",
           "button_color": "#000000",
-          "secondary_color": "#FFFFFF",
-          "ternary_color": "#6A6A6A",
           "button_icon": "chat_bubble",
           "button_text": "chat_with_us",
           "button_horizontal_position": "bottom_right",
-          "button_vertical_position": "lowest",
-          "greeting_message": ""
+          "button_vertical_position": "lowest"
         }
+      },
+      "17676059084223943535": {
+        "type": "shopify://apps/triplewhale/blocks/triple_pixel_snippet/483d496b-3f1a-4609-aea7-8eee3b6b7a2a",
+        "disabled": false,
+        "settings": {}
       }
     },
     "color_schemes": {
@@ -243,11 +250,7 @@
           "shadow": "#000000"
         }
       }
-    },
-    "free_shipping_threshold": 50,
-    "free_gift_threshold": 75,
-    "free_gift_variant_id": "48655676178664",
-    "free_gift_label": "FREE coloring book"
+    }
   },
   "presets": {
     "Default": {
