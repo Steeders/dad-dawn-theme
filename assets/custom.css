@@ -3689,7 +3689,8 @@ a:hover {
   inset: 0;
   z-index: 0;
 }
-.dad-hero__photo img {
+.dad-hero__photo img,
+.dad-hero__photo video {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -3713,14 +3714,14 @@ a:hover {
   z-index: 1;
   min-height: var(--dad-hero-min-h-desktop, 720px);
   display: flex;
-  align-items: center;
+  align-items: var(--dad-hero-card-align, center);
   padding-top: 80px;
   padding-bottom: 80px;
 }
 .dad-hero__card {
   max-width: 620px;
   padding: 56px 64px;
-  background: rgba(255, 255, 255, 0.88);
+  background: rgba(255, 255, 255, var(--dad-hero-card-opacity, 0.88));
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border-radius: 32px;
@@ -3847,8 +3848,8 @@ a:hover {
   .dad-hero__lede { font-size: 16px; }
 }
 @media screen and (max-width: 567px) {
-  .dad-hero { min-height: 480px; }
-  .dad-hero__inner { min-height: 480px; padding-top: 40px; padding-bottom: 40px; }
+  .dad-hero { min-height: var(--dad-hero-min-h-mobile, 480px); }
+  .dad-hero__inner { min-height: var(--dad-hero-min-h-mobile, 480px); padding-top: 40px; padding-bottom: 40px; }
   .dad-hero__card { padding: 28px 22px; border-radius: 22px; }
   .dad-hero__heading { font-size: 38px; }
   .dad-hero__actions { gap: 10px; }

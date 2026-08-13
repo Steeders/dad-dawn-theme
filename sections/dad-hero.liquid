@@ -5,9 +5,25 @@
 
 <section class="dad-hero" style="
   {%- if section.settings.min_height_desktop -%}--dad-hero-min-h-desktop: {{ section.settings.min_height_desktop }}px;{%- endif -%}
+  {%- if section.settings.min_height_mobile -%}--dad-hero-min-h-mobile: {{ section.settings.min_height_mobile }}px;{%- endif -%}
+  --dad-hero-card-opacity: {{ section.settings.card_bg_opacity | default: 88 | divided_by: 100.0 }};
+  --dad-hero-card-align: {{ section.settings.card_position | default: 'center' }};
 ">
   <div class="dad-hero__photo">
-    {%- if section.settings.image != blank -%}
+    {%- if section.settings.media_type == 'video' -%}
+      {%- if section.settings.video != null -%}
+        {{ section.settings.video | video_tag:
+          image_size: '1600x',
+          autoplay: true,
+          loop: true,
+          muted: true,
+          controls: false,
+          playsinline: true
+        }}
+      {%- else -%}
+        <div class="dad-hero__photo-placeholder">Upload a hero video in the customizer</div>
+      {%- endif -%}
+    {%- elsif section.settings.image != blank -%}
       {{ section.settings.image | image_url: width: 2400 | image_tag:
         loading: 'eager',
         widths: '600,900,1200,1600,2000,2400',
@@ -62,20 +78,73 @@
   "class": "dad-hero-wrapper",
   "settings": [
     {
+      "type": "select",
+      "id": "media_type",
+      "label": "Background media",
+      "options": [
+        { "value": "image", "label": "Image" },
+        { "value": "video", "label": "Video" }
+      ],
+      "default": "image",
+      "info": "Video plays muted, looped, full-bleed — like a moving background photo."
+    },
+    {
       "type": "image_picker",
       "id": "image",
       "label": "Background image",
-      "info": "Lifestyle photo, full-bleed. Recommend 2400px wide."
+      "info": "Lifestyle photo, full-bleed. Recommend 2400px wide. Used when Background media is set to Image."
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Background video",
+      "info": "Shopify-hosted video. Used when Background media is set to Video."
     },
     {
       "type": "range",
       "id": "min_height_desktop",
       "label": "Minimum height (desktop)",
-      "min": 480,
+      "min": 360,
       "max": 900,
       "step": 20,
       "default": 720,
       "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "min_height_mobile",
+      "label": "Minimum height (mobile)",
+      "min": 320,
+      "max": 700,
+      "step": 20,
+      "default": 480,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Card appearance"
+    },
+    {
+      "type": "range",
+      "id": "card_bg_opacity",
+      "label": "Card background opacity",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 88,
+      "unit": "%",
+      "info": "0 removes the white card background entirely, leaving just the text over the media."
+    },
+    {
+      "type": "select",
+      "id": "card_position",
+      "label": "Card vertical position",
+      "options": [
+        { "value": "flex-start", "label": "Top" },
+        { "value": "center", "label": "Center" },
+        { "value": "flex-end", "label": "Bottom" }
+      ],
+      "default": "center"
     },
     {
       "type": "header",

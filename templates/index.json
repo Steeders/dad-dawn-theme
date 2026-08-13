@@ -11,9 +11,14 @@
   "sections": {
     "dad_hero": {
       "type": "dad-hero",
+      "disabled": true,
       "settings": {
+        "media_type": "image",
         "image": "shopify://shop_images/2026-05-01_Do-a-Dot_batch1-101.jpg",
         "min_height_desktop": 720,
+        "min_height_mobile": 480,
+        "card_bg_opacity": 88,
+        "card_position": "center",
         "eyebrow": "the whole craft closet",
         "heading": "Made for little hands. Loved by",
         "script_accent": "big imaginations.",
@@ -22,6 +27,25 @@
         "btn1_link": "shopify://collections/all",
         "btn2_label": "Shop best sellers",
         "btn2_link": "shopify://collections/best-sellers"
+      }
+    },
+    "dad_hero_promo": {
+      "type": "dad-hero",
+      "settings": {
+        "media_type": "video",
+        "video": "shopify://files/videos/back-to-school-kid-nametag-timelapse.mov",
+        "min_height_desktop": 420,
+        "min_height_mobile": 500,
+        "card_bg_opacity": 40,
+        "card_position": "center",
+        "eyebrow": "It's that time of year",
+        "heading": "Ready, set,",
+        "script_accent": "back to school.",
+        "lede": "Restock your craft closet and get those little ones ready for their first day!",
+        "btn1_label": "shop all",
+        "btn1_link": "shopify://collections/all",
+        "btn2_label": "",
+        "btn2_link": ""
       }
     },
     "dad_category_tiles": {
@@ -372,6 +396,7 @@
   },
   "order": [
     "dad_hero",
+    "dad_hero_promo",
     "dad_category_tiles",
     "rich_text",
     "dad_why_dot",
