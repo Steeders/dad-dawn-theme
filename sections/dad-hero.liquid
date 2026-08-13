@@ -5,6 +5,9 @@
 
 <section class="dad-hero" style="
   {%- if section.settings.min_height_desktop -%}--dad-hero-min-h-desktop: {{ section.settings.min_height_desktop }}px;{%- endif -%}
+  {%- if section.settings.min_height_mobile -%}--dad-hero-min-h-mobile: {{ section.settings.min_height_mobile }}px;{%- endif -%}
+  --dad-hero-card-opacity: {{ section.settings.card_bg_opacity | default: 88 | divided_by: 100.0 }};
+  --dad-hero-card-align: {{ section.settings.card_position | default: 'center' }};
 ">
   <div class="dad-hero__photo">
     {%- if section.settings.media_type == 'video' -%}
@@ -101,11 +104,47 @@
       "type": "range",
       "id": "min_height_desktop",
       "label": "Minimum height (desktop)",
-      "min": 480,
+      "min": 360,
       "max": 900,
       "step": 20,
       "default": 720,
       "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "min_height_mobile",
+      "label": "Minimum height (mobile)",
+      "min": 320,
+      "max": 700,
+      "step": 20,
+      "default": 480,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Card appearance"
+    },
+    {
+      "type": "range",
+      "id": "card_bg_opacity",
+      "label": "Card background opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 88,
+      "unit": "%",
+      "info": "0 removes the white card background entirely, leaving just the text over the media."
+    },
+    {
+      "type": "select",
+      "id": "card_position",
+      "label": "Card vertical position",
+      "options": [
+        { "value": "flex-start", "label": "Top" },
+        { "value": "center", "label": "Center" },
+        { "value": "flex-end", "label": "Bottom" }
+      ],
+      "default": "center"
     },
     {
       "type": "header",
