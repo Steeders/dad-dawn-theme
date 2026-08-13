@@ -30,7 +30,7 @@
       "type": "dad-hero",
       "settings": {
         "media_type": "video",
-        "video": "shopify://shop_images/back-to-school-kid-nametag-timelapse.mov",
+        "video": "gid://shopify/Video/40268503777512",
         "min_height_desktop": 720,
         "eyebrow": "PLACEHOLDER — back to school",
         "heading": "Ready, set,",
