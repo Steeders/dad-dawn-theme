@@ -183,9 +183,10 @@ class CartItems extends HTMLElement {
           if (cartDrawerWrapper) cartDrawerWrapper.classList.toggle('is-empty', parsedState.item_count === 0);
 
           this.getSectionsToRender().forEach((section) => {
-            const elementToReplace =
-              document.getElementById(section.id).querySelector(section.selector) ||
-              document.getElementById(section.id);
+            const sectionElement = document.getElementById(section.id);
+            // dad-header has no #cart-icon-bubble; skip sections missing from the page
+            if (!sectionElement) return;
+            const elementToReplace = sectionElement.querySelector(section.selector) || sectionElement;
             elementToReplace.innerHTML = this.getSectionInnerHTML(
               parsedState.sections[section.section],
               section.selector
