@@ -3909,6 +3909,13 @@ a:hover {
   height: 100%;
   object-fit: contain;
 }
+.dad-vg__video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: var(--dad-ink, #2b2a2d);
+}
 
 .dad-vg__arrow {
   position: absolute;
@@ -3942,6 +3949,7 @@ a:hover {
   padding: 0;
 }
 .dad-vg__thumb {
+  position: relative;
   display: block;
   padding: 0;
   width: 72px;
@@ -3954,6 +3962,20 @@ a:hover {
   transition: border-color 0.15s ease;
 }
 .dad-vg__thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.dad-vg__thumb-play {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--dad-white, #fff);
+  pointer-events: none;
+}
+.dad-vg__thumb-play svg {
+  width: 22px;
+  height: 22px;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
+}
 .dad-vg__thumb:hover { border-color: var(--dad-ink-soft, #b9b7bd); }
 .dad-vg__thumb.is-active { border-color: var(--accent, var(--dad-hot-pink, #df1883)); }
 .dad-vg__thumb:focus-visible { outline: none; box-shadow: var(--shadow-focus); }

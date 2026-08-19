@@ -53,7 +53,10 @@ if (!customElements.get('dad-variant-gallery')) {
         if (!this.slides.length) return;
         this.index = (i + this.slides.length) % this.slides.length;
 
-        this.slides.forEach((slide, idx) => slide.classList.toggle('is-active', idx === this.index));
+        this.slides.forEach((slide, idx) => {
+          slide.classList.toggle('is-active', idx === this.index);
+          if (idx !== this.index) slide.querySelectorAll('video').forEach((video) => video.pause());
+        });
         this.thumbs.forEach((thumb, idx) => {
           const active = idx === this.index;
           thumb.classList.toggle('is-active', active);

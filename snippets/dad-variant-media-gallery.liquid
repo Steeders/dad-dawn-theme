@@ -36,16 +36,27 @@
             class="dad-vg__slide{% if forloop.first %} is-active{% endif %}"
             data-vg-slide="{{ forloop.index0 }}"
           >
-            {{
-              media_item
-              | image_url: width: 1500
-              | image_tag:
-                loading: img_loading,
-                sizes: '(min-width: 990px) 50vw, 100vw',
-                widths: '300, 500, 750, 1000, 1250, 1500',
-                class: 'dad-vg__img',
-                alt: media_item.alt
-            }}
+            {%- if media_item.media_type == 'video' -%}
+              {{
+                media_item
+                | video_tag:
+                  image_size: '1500x',
+                  controls: true,
+                  preload: 'metadata',
+                  class: 'dad-vg__video'
+              }}
+            {%- else -%}
+              {{
+                media_item
+                | image_url: width: 1500
+                | image_tag:
+                  loading: img_loading,
+                  sizes: '(min-width: 990px) 50vw, 100vw',
+                  widths: '300, 500, 750, 1000, 1250, 1500',
+                  class: 'dad-vg__img',
+                  alt: media_item.alt
+              }}
+            {%- endif -%}
           </div>
         {%- endfor -%}
 
@@ -70,15 +81,28 @@
                 {% if forloop.first %}aria-current="true"{% endif %}
                 aria-label="{{ 'products.product.media.load_image' | t: index: forloop.index }}"
               >
-                {{
-                  media_item
-                  | image_url: width: 200
-                  | image_tag:
-                    loading: 'lazy',
-                    sizes: '100px',
-                    widths: '100, 200',
-                    alt: media_item.alt
-                }}
+                {%- if media_item.media_type == 'video' -%}
+                  {{
+                    media_item.preview_image
+                    | image_url: width: 200
+                    | image_tag:
+                      loading: 'lazy',
+                      sizes: '100px',
+                      widths: '100, 200',
+                      alt: media_item.alt
+                  }}
+                  <span class="dad-vg__thumb-play">{{- 'icon-play.svg' | inline_asset_content -}}</span>
+                {%- else -%}
+                  {{
+                    media_item
+                    | image_url: width: 200
+                    | image_tag:
+                      loading: 'lazy',
+                      sizes: '100px',
+                      widths: '100, 200',
+                      alt: media_item.alt
+                  }}
+                {%- endif -%}
               </button>
             </li>
           {%- endfor -%}
