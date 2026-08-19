@@ -4215,61 +4215,234 @@ a:hover {
 }
 
 /* ============================================================
-   FREE SHIPPING PROGRESS BAR — cart drawer + cart page
-   Spec from Claude Design bundle (.ship-progress, storefront.css)
+   TIERED REWARDS BAR — cart drawer + cart page
+   Renders snippets/dad-free-shipping-bar.liquid. Every reward tier
+   gets a labelled node on the track, and the fill is brand red on a
+   pink tint. Deliberately ONE colour: a multi-hue ramp reads as a
+   bad-to-good scale (air-quality index), which is the wrong meaning
+   for a reward ladder — an early cart isn't "bad".
+   Progress arrives as --dad-rw-progress, node position as --dad-rw-pos.
    ============================================================ */
-.dad-ship-progress {
-  padding: 18px 28px;
+.dad-rewards {
+  padding: 18px 28px 16px;
   border-bottom: 1px solid var(--dad-rule);
   background: var(--dad-white);
 }
-.dad-ship-progress__label {
-  margin: 0 0 10px;
+.dad-rewards__msg {
+  margin: 0 0 14px;
   font-family: var(--font-body);
   font-size: 13px;
   font-weight: 600;
   line-height: var(--lh-snug);
   color: var(--dad-ink);
+  text-wrap: pretty;
 }
-.dad-ship-progress__label strong { color: var(--accent); }
-.dad-ship-progress__track {
+.dad-rewards__msg strong { color: var(--accent); }
+.dad-rewards--complete .dad-rewards__msg strong { color: var(--dad-dark-green); }
+
+/* Meter: track is 10px tall, labels hang into the bottom padding. */
+.dad-rewards__meter {
   position: relative;
-  height: 8px;
+  padding-bottom: 40px;
+}
+.dad-rewards__track {
+  position: relative;
+  height: 10px;
   border-radius: var(--r-pill);
   background: var(--dad-pink-tint);
 }
-.dad-ship-progress__fill {
-  display: block;
-  height: 100%;
+.dad-rewards__fill {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: var(--dad-rw-progress, 0%);
   max-width: 100%;
   background: var(--accent);
   border-radius: var(--r-pill);
   transition: width var(--dur-med) var(--ease-out);
 }
-/* Tier marker on the track: free-shipping milestone when a gift tier extends
-   the bar past it. Fills in with the accent color once the tier is hit. */
-.dad-ship-progress__milestone {
+
+/* Tier nodes overlay the track box exactly. */
+.dad-rewards__tiers {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.dad-rewards__tier {
   position: absolute;
   top: 50%;
-  width: 14px;
-  height: 14px;
+  left: var(--dad-rw-pos, 100%);
+  width: 0;
+}
+.dad-rewards__node {
+  position: absolute;
+  top: 0;
+  left: 0;
   transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   background: var(--dad-white);
-  border: 2px solid var(--dad-pink-tint);
-  transition: border-color var(--dur-med) var(--ease-out), background var(--dur-med) var(--ease-out);
+  border: 2.5px solid var(--dad-rule);
+  color: var(--dad-white);
+  transition: background var(--dur-med) var(--ease-out),
+              border-color var(--dur-med) var(--ease-out),
+              box-shadow var(--dur-fast) var(--ease-out);
 }
-.dad-ship-progress__milestone--hit {
+.dad-rewards__check {
+  width: 12px;
+  height: 12px;
+  display: block;
+}
+/* Cleared tier: solid brand red, matching the fill it sits on. */
+.dad-rewards__tier.is-hit .dad-rewards__node {
   background: var(--accent);
   border-color: var(--accent);
 }
+/* The tier being worked toward: outlined in brand red with a soft halo. */
+.dad-rewards__tier.is-next .dad-rewards__node {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(236, 27, 42, 0.14);
+}
+
+/* Threshold + reward name, centred under each node. */
+.dad-rewards__labels {
+  position: absolute;
+  top: 15px;
+  left: 0;
+  transform: translateX(-50%);
+  width: 88px;
+  text-align: center;
+}
+.dad-rewards__amt,
+.dad-rewards__name {
+  display: block;
+  font-family: var(--font-body);
+  line-height: 1.15;
+}
+.dad-rewards__amt {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--dad-ink-soft);
+}
+.dad-rewards__name {
+  margin-top: 1px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--dad-ink-soft);
+}
+.dad-rewards__tier.is-hit .dad-rewards__amt,
+.dad-rewards__tier.is-hit .dad-rewards__name { color: var(--dad-ink-muted); }
+.dad-rewards__tier.is-next .dad-rewards__amt { color: var(--dad-ink); }
+.dad-rewards__tier.is-next .dad-rewards__name { color: var(--accent); }
+/* Three tiers in a ~340px drawer bring the last two labels close together.
+   Tighten the type and stop pulling the final label all the way back, so the
+   two clear each other; the overhang lands in the drawer's side padding. */
+.dad-rewards__tiers:has(> :nth-child(3)) .dad-rewards__labels { width: 74px; }
+.dad-rewards__tiers:has(> :nth-child(3)) .dad-rewards__amt { font-size: 11px; }
+.dad-rewards__tiers:has(> :nth-child(3)) .dad-rewards__name { font-size: 10px; }
+.dad-rewards__tiers:has(> :nth-child(3)) .dad-rewards__tier--last .dad-rewards__labels {
+  transform: translateX(-82%);
+}
+
+/* Final tier sits at 100%, so pull its label back inside the track. */
+.dad-rewards__tier--last .dad-rewards__labels {
+  transform: translateX(-100%);
+  text-align: right;
+  padding-right: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dad-rewards__fill,
+  .dad-rewards__node { transition: none; }
+}
+
 /* Cart page variant: sits above the line-item table inside the page
    width, so drop the drawer's edge-to-edge padding + rule */
-.dad-ship-progress--page {
+.dad-rewards--page {
   padding: 0 0 4px;
   border-bottom: 0;
   margin-bottom: var(--s-6);
   max-width: 480px;
+}
+
+/* ============================================================
+   FREE GIFT CART LINE — drawer + cart page
+   The auto-added gift line (property `_dad_free_gift*`, managed by
+   assets/dad-free-gift.js) reads as a plain product row otherwise.
+   Tint it, pill it, and let the price cell tell the truth about what
+   the discount actually took off.
+   ============================================================ */
+.dad-gift-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 5px;
+  padding: 3px 9px;
+  border-radius: var(--r-pill);
+  background: var(--accent);
+  color: var(--dad-white);
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: var(--tracking-allcaps);
+  text-transform: uppercase;
+}
+.dad-gift-note {
+  margin: 3px 0 0;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--dad-dark-green);
+}
+
+/* Drawer + cart-page mobile: .cart-item is a grid, so the row itself
+   can carry the card. */
+.dad-cart-item--gift {
+  background: var(--dad-yellow-tint);
+  border: 2px solid var(--dad-goldfish-gold);
+  border-radius: 14px;
+  padding: 14px;
+}
+.cart-drawer .dad-cart-item--gift {
+  border-bottom: 2px solid var(--dad-goldfish-gold);
+  margin: 4px 0;
+}
+
+/* Cart page desktop: .cart-item becomes a table-row, which can't take a
+   border-radius, so the cells carry the card instead. */
+@media screen and (min-width: 750px) {
+  #main-cart-items .dad-cart-item--gift {
+    background: none;
+    border: 0;
+    padding: 0;
+  }
+  #main-cart-items .dad-cart-item--gift > td {
+    background: var(--dad-yellow-tint);
+    border-top: 2px solid var(--dad-goldfish-gold);
+    border-bottom: 2px solid var(--dad-goldfish-gold);
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+  #main-cart-items .dad-cart-item--gift > td:first-child {
+    border-left: 2px solid var(--dad-goldfish-gold);
+    border-radius: 14px 0 0 14px;
+    padding-left: 1.5rem;
+  }
+  #main-cart-items .dad-cart-item--gift > td:last-child {
+    border-right: 2px solid var(--dad-goldfish-gold);
+    border-radius: 0 14px 14px 0;
+    padding-right: 1.5rem;
+  }
 }
 
 /* ============================================================

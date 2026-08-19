@@ -3,15 +3,33 @@
   drawer and cart page. Both re-render via the Section Rendering API on
   cart changes, so the bar stays current without extra JS.
 
-  Tier 1: free shipping   (settings.free_shipping_threshold — must match the
-          FREESHIPPING automatic discount minimum. Set to 0 to hide the bar.)
-  Tier 2: free gift       (settings.free_gift_threshold — must match the
-          "Free Gift" Buy X Get Y automatic discount. Set to 0 for a
-          single-tier shipping-only bar. The gift itself is auto-added /
-          removed by assets/dad-free-gift.js.)
+  Every reward tier gets its own node ON the track, labelled with its
+  threshold and what it unlocks, so the customer can see the whole ladder
+  to the top tier instead of just one distance-to-go number.
 
-  The gift line (property _dad_free_gift) is excluded from progress math so
-  the gift can never unlock itself.
+  Tiers (all thresholds are theme settings, in store currency):
+    1. free shipping  — settings.free_shipping_threshold. Must match the free
+       shipping rate in Settings > Shipping and delivery. Set to 0 to hide
+       the bar entirely.
+    2. free gift      — settings.free_gift_threshold + free_gift_label. Must
+       match the automatic Buy X Get Y discount. Set to 0 to disable.
+    3. free gift 2    — settings.free_gift_2_threshold + free_gift_2_label.
+       Off by default; set a threshold to light up a third node.
+
+  Gift lines are auto-added / removed by assets/dad-free-gift.js and tagged
+  with a property starting `_dad_free_gift` (underscore prefix = hidden in
+  Dawn's cart templates). Those lines are excluded from the progress math so
+  a gift can never unlock itself or the next tier.
+
+  Thresholds must ASCEND. A tier whose threshold is not greater than the
+  previous kept tier's is ignored rather than reordered, so a mis-typed
+  setting degrades to fewer nodes instead of a scrambled bar.
+
+  Node spacing is EVEN, not proportional to value: tier k of n sits at
+  k/n of the track. The fill interpolates within the current segment. Real
+  thresholds are rarely evenly spaced ($50 / $75 would cram both nodes into
+  the right third of a proportional bar), and even spacing reads as "2 of 3
+  rewards claimed", which is what the bar is for.
 
   Usage:
   {% render 'dad-free-shipping-bar' %}
@@ -19,48 +37,182 @@
 {%- endcomment -%}
 
 {%- liquid
-  assign dad_fs_threshold = settings.free_shipping_threshold | default: 55 | times: 100
-  assign dad_fg_threshold = settings.free_gift_threshold | default: 0 | times: 100
-  assign dad_fg_label = settings.free_gift_label | default: 'free gift'
+  assign dad_ship_amt = settings.free_shipping_threshold | default: 0 | times: 100
+  assign dad_gift1_amt = settings.free_gift_threshold | default: 0 | times: 100
+  assign dad_gift2_amt = settings.free_gift_2_threshold | default: 0 | times: 100
+  assign dad_gift1_label = settings.free_gift_label | default: 'free gift'
+  assign dad_gift2_label = settings.free_gift_2_label | default: 'free gift'
 
+  comment
+    Tuples are packed as `cents~label~kind` and joined with `|`, so strip both
+    delimiters out of merchant-entered labels first.
+  endcomment
+  assign dad_gift1_label = dad_gift1_label | replace: '~', '' | replace: '|', ''
+  assign dad_gift2_label = dad_gift2_label | replace: '~', '' | replace: '|', ''
+
+  assign dad_tier_str = ''
+  assign dad_prev_amt = 0
+  if dad_ship_amt > dad_prev_amt
+    assign dad_tier_str = dad_tier_str | append: dad_ship_amt | append: '~Free shipping~ship|'
+    assign dad_prev_amt = dad_ship_amt
+  endif
+  if dad_gift1_amt > dad_prev_amt
+    assign dad_tier_str = dad_tier_str | append: dad_gift1_amt | append: '~' | append: dad_gift1_label | append: '~gift|'
+    assign dad_prev_amt = dad_gift1_amt
+  endif
+  if dad_gift2_amt > dad_prev_amt
+    assign dad_tier_str = dad_tier_str | append: dad_gift2_amt | append: '~' | append: dad_gift2_label | append: '~gift|'
+    assign dad_prev_amt = dad_gift2_amt
+  endif
+  assign dad_tiers = dad_tier_str | split: '|'
+  assign dad_tier_count = dad_tiers | size
+
+  comment
+    Cart total excluding every auto-added gift line.
+  endcomment
   assign dad_cart_total = cart.total_price
   for item in cart.items
-    if item.properties['_dad_free_gift']
-      assign dad_cart_total = dad_cart_total | minus: item.final_line_price
-    endif
+    for prop in item.properties
+      if prop.last != blank
+        assign dad_prop_key = prop.first
+        if dad_prop_key contains '_dad_free_gift'
+          assign dad_cart_total = dad_cart_total | minus: item.final_line_price
+          break
+        endif
+      endif
+    endfor
   endfor
-
-  if dad_fg_threshold > dad_fs_threshold
-    assign dad_bar_max = dad_fg_threshold
-  else
-    assign dad_bar_max = dad_fs_threshold
-    assign dad_fg_threshold = 0
+  if dad_cart_total < 0
+    assign dad_cart_total = 0
   endif
 -%}
-{%- if cart != empty and dad_fs_threshold > 0 -%}
+
+{%- if cart != empty and dad_tier_count > 0 -%}
   {%- liquid
-    assign dad_fs_remaining = dad_fs_threshold | minus: dad_cart_total
-    assign dad_fg_remaining = dad_fg_threshold | minus: dad_cart_total
-    assign dad_progress = dad_cart_total | times: 100.0 | divided_by: dad_bar_max | at_most: 100 | round
-    assign dad_fs_mark = dad_fs_threshold | times: 100.0 | divided_by: dad_bar_max | round
+    comment
+      Progress: full segments for every cleared tier, then a linear
+      interpolation across the segment the cart is currently inside.
+    endcomment
+    assign dad_progress = 0
+    assign dad_seg_lo = 0
+    assign dad_hit_count = 0
+    assign dad_last_hit_label = ''
+    assign dad_next_amt = 0
+    assign dad_next_label = ''
+    assign dad_next_kind = ''
+    assign dad_unlocked_text = ''
+
+    for tier in dad_tiers
+      assign dad_parts = tier | split: '~'
+      assign dad_seg_hi = dad_parts[0] | plus: 0
+      assign dad_tier_label = dad_parts[1]
+      assign dad_tier_kind = dad_parts[2]
+
+      if dad_cart_total >= dad_seg_hi
+        assign dad_progress = forloop.index | times: 100.0 | divided_by: dad_tier_count
+        assign dad_hit_count = forloop.index
+        assign dad_last_hit_label = dad_tier_label
+        if dad_tier_kind == 'ship'
+          assign dad_frag = 'free shipping'
+        else
+          assign dad_frag = 'your ' | append: dad_tier_label
+        endif
+        if dad_unlocked_text == blank
+          assign dad_unlocked_text = dad_frag
+        else
+          assign dad_unlocked_text = dad_unlocked_text | append: ' + ' | append: dad_frag
+        endif
+      else
+        if dad_cart_total > dad_seg_lo
+          assign dad_seg_num = dad_cart_total | minus: dad_seg_lo | times: 100.0
+          assign dad_seg_den = dad_seg_hi | minus: dad_seg_lo | times: dad_tier_count
+          assign dad_seg_part = dad_seg_num | divided_by: dad_seg_den
+          assign dad_seg_base = forloop.index0 | times: 100.0 | divided_by: dad_tier_count
+          assign dad_progress = dad_seg_base | plus: dad_seg_part
+        endif
+        assign dad_next_amt = dad_seg_hi
+        assign dad_next_label = dad_tier_label
+        assign dad_next_kind = dad_tier_kind
+        break
+      endif
+      assign dad_seg_lo = dad_seg_hi
+    endfor
+
+    comment
+      Hold the fill just short of the end until the top tier actually clears,
+      so a $74.99 cart can't round up to a full-looking bar next to an
+      unfilled final node.
+    endcomment
+    assign dad_progress = dad_progress | at_least: 0 | at_most: 100 | round: 1
+    if dad_next_amt > 0
+      assign dad_progress = dad_progress | at_most: 99
+    endif
+    assign dad_remaining = dad_next_amt | minus: dad_cart_total
   -%}
-  <div class="dad-ship-progress{% if context == 'page' %} dad-ship-progress--page{% endif %}" role="status">
-    {%- if dad_fs_remaining > 0 -%}
-      <p class="dad-ship-progress__label">
-        You're <strong>{{ dad_fs_remaining | money_without_trailing_zeros }} away</strong> from free shipping{% if dad_fg_threshold > 0 %} &middot; {{ dad_fg_label }} at {{ dad_fg_threshold | money_without_trailing_zeros }}{% endif %}
-      </p>
-    {%- elsif dad_fg_threshold > 0 and dad_fg_remaining > 0 -%}
-      <p class="dad-ship-progress__label">&#127881; free shipping unlocked &middot; <strong>{{ dad_fg_remaining | money_without_trailing_zeros }} away</strong> from your {{ dad_fg_label }}</p>
-    {%- elsif dad_fg_threshold > 0 -%}
-      <p class="dad-ship-progress__label">&#127881; you've unlocked <strong>free shipping + your {{ dad_fg_label }}</strong></p>
-    {%- else -%}
-      <p class="dad-ship-progress__label">&#127881; you've unlocked <strong>free shipping</strong></p>
-    {%- endif -%}
-    <div class="dad-ship-progress__track">
-      <span class="dad-ship-progress__fill" style="width: {{ dad_progress }}%"></span>
-      {%- if dad_fg_threshold > 0 -%}
-        <span class="dad-ship-progress__milestone{% if dad_fs_remaining <= 0 %} dad-ship-progress__milestone--hit{% endif %}" style="left: {{ dad_fs_mark }}%" aria-hidden="true"></span>
+  <div
+    class="dad-rewards{% if context == 'page' %} dad-rewards--page{% endif %}{% if dad_next_amt == 0 %} dad-rewards--complete{% endif %}"
+    style="--dad-rw-progress: {{ dad_progress }}%;"
+  >
+    <p class="dad-rewards__msg" role="status">
+      {%- if dad_next_amt > 0 -%}
+        {%- if dad_hit_count > 0 -%}
+          &#127881; {{ dad_last_hit_label }} unlocked.
+        {%- endif -%}
+        You're <strong>{{ dad_remaining | money_without_trailing_zeros }} away</strong>
+        {%- if dad_next_kind == 'ship' %} from free shipping{% else %} from your {{ dad_next_label }}{% endif -%}
+      {%- else -%}
+        &#127881; you've unlocked <strong>{{ dad_unlocked_text }}</strong>
       {%- endif -%}
+    </p>
+
+    <div class="dad-rewards__meter">
+      <div class="dad-rewards__track" aria-hidden="true">
+        <span class="dad-rewards__fill"></span>
+      </div>
+      <ol class="dad-rewards__tiers">
+        {%- for tier in dad_tiers -%}
+          {%- liquid
+            assign dad_parts = tier | split: '~'
+            assign dad_node_amt = dad_parts[0] | plus: 0
+            assign dad_node_label = dad_parts[1]
+            assign dad_node_kind = dad_parts[2]
+            assign dad_node_pos = forloop.index | times: 100.0 | divided_by: dad_tier_count | round: 2
+            assign dad_node_hit = false
+            if dad_cart_total >= dad_node_amt
+              assign dad_node_hit = true
+            endif
+
+            comment
+              Node labels drop a leading "FREE" from the gift name. The threshold
+              sitting right above it already says the reward is free, and the
+              shorter name is what keeps three labels from colliding in a phone
+              width drawer. The full name is still used in the sentence above.
+            endcomment
+            if dad_node_kind == 'gift'
+              assign dad_node_label = dad_node_label | remove_first: 'FREE ' | remove_first: 'Free ' | remove_first: 'free '
+              assign dad_label_head = dad_node_label | slice: 0, 1 | upcase
+              assign dad_label_tail = dad_node_label | slice: 1, 200
+              assign dad_node_label = dad_label_head | append: dad_label_tail
+            endif
+          -%}
+          <li
+            class="dad-rewards__tier{% if forloop.last %} dad-rewards__tier--last{% endif %}{% if dad_node_hit %} is-hit{% elsif dad_node_amt == dad_next_amt %} is-next{% endif %}"
+            style="--dad-rw-pos: {{ dad_node_pos }}%;"
+          >
+            <span class="dad-rewards__node" aria-hidden="true">
+              {%- if dad_node_hit -%}
+                <svg class="dad-rewards__check" viewBox="0 0 12 12" fill="none" focusable="false">
+                  <path d="M2 6.2 4.6 8.8 10 3.4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              {%- endif -%}
+            </span>
+            <span class="dad-rewards__labels">
+              <span class="dad-rewards__amt">{{ dad_node_amt | money_without_trailing_zeros }}</span>
+              <span class="dad-rewards__name">{{ dad_node_label }}</span>
+            </span>
+          </li>
+        {%- endfor -%}
+      </ol>
     </div>
   </div>
 {%- endif -%}

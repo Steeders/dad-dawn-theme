@@ -121,7 +121,7 @@
     "cart_type": "drawer",
     "show_vendor": false,
     "show_cart_note": false,
-    "free_shipping_threshold": 50,
+    "free_shipping_threshold": 55,
     "free_gift_threshold": 75,
     "free_gift_variant_id": "48655676178664",
     "free_gift_label": "FREE coloring book",
