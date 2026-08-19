@@ -3895,7 +3895,6 @@ a:hover {
   border-radius: var(--r-lg, 18px);
   overflow: hidden;
   background: var(--dad-cream, #fff8e8);
-  box-shadow: var(--shadow-soft);
 }
 .dad-vg__slide {
   position: absolute;
@@ -3914,7 +3913,25 @@ a:hover {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  background: var(--dad-ink, #2b2a2d);
+}
+.dad-vg__deferred {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.dad-vg__deferred .deferred-media__poster {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.dad-vg__deferred .deferred-media__poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .dad-vg__arrow {

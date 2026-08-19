@@ -37,14 +37,37 @@
             data-vg-slide="{{ forloop.index0 }}"
           >
             {%- if media_item.media_type == 'video' -%}
-              {{
-                media_item
-                | video_tag:
-                  image_size: '1500x',
-                  controls: true,
-                  preload: 'metadata',
-                  class: 'dad-vg__video'
-              }}
+              <deferred-media class="deferred-media dad-vg__deferred" data-media-id="{{ media_item.id }}">
+                <button id="Deferred-Poster-DadVg-{{ media_item.id }}" class="deferred-media__poster" type="button">
+                  <span class="deferred-media__poster-button motion-reduce">
+                    <span class="visually-hidden">{{ 'products.product.media.play_video' | t }}</span>
+                    <span class="svg-wrapper">
+                      {{- 'icon-play.svg' | inline_asset_content -}}
+                    </span>
+                  </span>
+                  {{
+                    media_item.preview_image
+                    | image_url: width: 1500
+                    | image_tag:
+                      loading: img_loading,
+                      sizes: '(min-width: 990px) 50vw, 100vw',
+                      widths: '300, 500, 750, 1000, 1250, 1500',
+                      class: 'dad-vg__img',
+                      alt: media_item.alt
+                  }}
+                </button>
+                <template>
+                  {{
+                    media_item
+                    | video_tag:
+                      image_size: '2048x',
+                      autoplay: true,
+                      controls: true,
+                      preload: 'none',
+                      class: 'dad-vg__video'
+                  }}
+                </template>
+              </deferred-media>
             {%- else -%}
               {{
                 media_item
