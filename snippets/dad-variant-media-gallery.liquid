@@ -57,15 +57,33 @@
                   }}
                 </button>
                 <template>
-                  {{
-                    media_item
-                    | video_tag:
-                      image_size: '2048x',
-                      autoplay: true,
-                      controls: true,
-                      preload: 'none',
-                      class: 'dad-vg__video'
-                  }}
+                  {%- comment -%}
+                    Manual <video> instead of video_tag so browsers that can't
+                    play HLS (Chrome/Firefox) fall through to the 720p MP4
+                    rather than the 7.2Mbps 1080p one — ~40% lighter, looks
+                    identical at gallery size. Safari picks the adaptive HLS.
+                  {%- endcomment -%}
+                  <video
+                    class="dad-vg__video"
+                    controls
+                    autoplay
+                    playsinline
+                    preload="none"
+                    poster="{{ media_item.preview_image | image_url: width: 1500 }}"
+                    aria-label="{{ media_item.alt | escape }}"
+                  >
+                    {%- for source in media_item.sources -%}
+                      {%- if source.format == 'm3u8' -%}
+                        <source src="{{ source.url }}" type="{{ source.mime_type }}">
+                      {%- endif -%}
+                    {%- endfor -%}
+                    {%- assign mp4_sources = media_item.sources | where: 'format', 'mp4' | sort: 'height' -%}
+                    {%- for source in mp4_sources -%}
+                      {%- if source.height >= 720 or forloop.last -%}
+                        <source src="{{ source.url }}" type="{{ source.mime_type }}">
+                      {%- endif -%}
+                    {%- endfor -%}
+                  </video>
                 </template>
               </deferred-media>
             {%- else -%}
