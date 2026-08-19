@@ -77,9 +77,20 @@
                         <source src="{{ source.url }}" type="{{ source.mime_type }}">
                       {%- endif -%}
                     {%- endfor -%}
-                    {%- assign mp4_sources = media_item.sources | where: 'format', 'mp4' | sort: 'height' -%}
-                    {%- for source in mp4_sources -%}
-                      {%- if source.height >= 720 or forloop.last -%}
+                    {%- comment -%}
+                      Liquid only exposes the top (1080p/7.2Mbps) MP4, but
+                      Shopify's transcode ladder is fixed — the 720p/4.5Mbps
+                      rendition lives at the same URL with the label swapped.
+                      Emit it first (guarded on the known label) so non-HLS
+                      browsers pick the lighter file; 1080p stays as fallback.
+                    {%- endcomment -%}
+                    {%- assign rendered_mp4 = '' -%}
+                    {%- for source in media_item.sources -%}
+                      {%- if source.format == 'mp4' and source.url != rendered_mp4 -%}
+                        {%- assign rendered_mp4 = source.url -%}
+                        {%- if source.url contains 'HD-1080p-7.2Mbps' -%}
+                          <source src="{{ source.url | replace: 'HD-1080p-7.2Mbps', 'HD-720p-4.5Mbps' }}" type="video/mp4">
+                        {%- endif -%}
                         <source src="{{ source.url }}" type="{{ source.mime_type }}">
                       {%- endif -%}
                     {%- endfor -%}
