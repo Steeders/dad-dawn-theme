@@ -1462,6 +1462,26 @@
         "default": "FREE coloring book"
       },
       {
+        "type": "number",
+        "id": "free_gift_2_threshold",
+        "label": "Second free gift threshold",
+        "info": "Optional third tier. Order total that unlocks a second free gift. Must be HIGHER than the first gift threshold and match its own automatic Buy X Get Y discount. Leave at 0 to keep the rewards bar at two tiers.",
+        "default": 0
+      },
+      {
+        "type": "text",
+        "id": "free_gift_2_variant_id",
+        "label": "Second free gift variant ID",
+        "info": "Numeric variant ID of the second gift. Must match the \"customer gets\" variant on its automatic Buy X Get Y discount."
+      },
+      {
+        "type": "text",
+        "id": "free_gift_2_label",
+        "label": "Second free gift name",
+        "info": "How the second gift is described in the cart rewards bar.",
+        "default": "FREE sticker pack"
+      },
+      {
         "type": "header",
         "content": "t:settings_schema.cart.settings.cart_drawer.header"
       },

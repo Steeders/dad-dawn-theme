@@ -286,6 +286,8 @@
     "cart": {
       "title": "Your cart",
       "caption": "Cart items",
+      "dad_free_gift_badge": "Free gift",
+      "dad_free_gift_note": "Free with your order",
       "remove_title": "Remove {{ title }}",
       "estimated_total": "Estimated total",
       "new_estimated_total": "New estimated total",

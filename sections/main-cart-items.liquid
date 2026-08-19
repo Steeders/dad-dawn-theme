@@ -80,8 +80,22 @@
 
               <tbody>
                 {%- for item in cart.items -%}
+                  {%- comment -%}
+                    Auto-added free-gift lines (see assets/dad-free-gift.js) are
+                    tagged with a `_dad_free_gift*` property. Flag them so the row
+                    reads as a gift rather than a normal purchase.
+                  {%- endcomment -%}
+                  {%- liquid
+                    assign dad_is_gift = false
+                    for prop in item.properties
+                      if prop.last != blank and prop.first contains '_dad_free_gift'
+                        assign dad_is_gift = true
+                        break
+                      endif
+                    endfor
+                  -%}
                   <tr
-                    class="cart-item {% if item.parent_relationship.parent != null %}cart-item__nested-line{% endif %}"
+                    class="cart-item {% if item.parent_relationship.parent != null %}cart-item__nested-line{% endif %}{% if dad_is_gift %} dad-cart-item--gift{% endif %}"
                     id="CartItem-{{ item.index | plus: 1 }}"
                     {% if item.parent_relationship.parent != null %}
                       aria-label="{{- 'products.product.nested_label' | t: title: item.product.title, parent_title: item.parent_relationship.parent.title | escape -}}"
@@ -109,6 +123,10 @@
                         <p class="caption-with-letter-spacing">{{ item.product.vendor }}</p>
                       {%- endif -%}
 
+                      {%- if dad_is_gift -%}
+                        <span class="dad-gift-pill">{{ 'sections.cart.dad_free_gift_badge' | t }}</span>
+                      {%- endif -%}
+
                       <a href="{{ item.url }}" class="cart-item__name h4 break">{{ item.product.title | escape }}</a>
 
                       {%- if item.original_price != item.final_price -%}
@@ -130,6 +148,10 @@
                         <div class="product-option">
                           {{ item.original_price | money }}
                         </div>
+                      {%- endif -%}
+
+                      {%- if dad_is_gift -%}
+                        <p class="dad-gift-note">{{ 'sections.cart.dad_free_gift_note' | t }}</p>
                       {%- endif -%}
 
                       {%- if item.product.has_only_default_variant == false

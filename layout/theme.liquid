@@ -410,11 +410,38 @@
       <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
 
-    {%- if settings.free_gift_threshold > 0 and settings.free_gift_variant_id != blank -%}
+    {%- comment -%}
+      Free-gift tiers for assets/dad-free-gift.js. Each configured tier gets its
+      own cart-line property so tiers can unlock independently; the first keeps
+      the original `_dad_free_gift` key so carts created before the second tier
+      existed still resolve. Thresholds must ascend (snippets/dad-free-shipping-bar
+      ignores an out-of-order tier), and each needs its own automatic Buy X Get Y
+      discount in admin: this script only manages the line, never the price.
+    {%- endcomment -%}
+    {%- liquid
+      assign dad_gift_tier_count = 0
+      if settings.free_gift_threshold > 0 and settings.free_gift_variant_id != blank
+        assign dad_gift_tier_count = 1
+      endif
+      if dad_gift_tier_count == 1 and settings.free_gift_2_threshold > settings.free_gift_threshold and settings.free_gift_2_variant_id != blank
+        assign dad_gift_tier_count = 2
+      endif
+    -%}
+    {%- if dad_gift_tier_count > 0 -%}
       <script>
         window.dadFreeGift = {
-          variantId: {{ settings.free_gift_variant_id | json }},
-          thresholdCents: {{ settings.free_gift_threshold | times: 100 }},
+          tiers: [
+            {
+              prop: '_dad_free_gift',
+              variantId: {{ settings.free_gift_variant_id | json }},
+              thresholdCents: {{ settings.free_gift_threshold | times: 100 }}
+            }{% if dad_gift_tier_count > 1 %},
+            {
+              prop: '_dad_free_gift_2',
+              variantId: {{ settings.free_gift_2_variant_id | json }},
+              thresholdCents: {{ settings.free_gift_2_threshold | times: 100 }}
+            }{% endif %}
+          ]
         };
       </script>
       <script src="{{ 'dad-free-gift.js' | asset_url }}" defer="defer"></script>
