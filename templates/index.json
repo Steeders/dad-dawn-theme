@@ -22,7 +22,7 @@
         "eyebrow": "the whole craft closet",
         "heading": "Made for little hands. Loved by",
         "script_accent": "big imaginations.",
-        "lede": "Markers, watercolors, and chunky crayons: the whole craft closet, shipped direct from the family that's been making mess-free art easier for over 35 years.",
+        "lede": "Markers, watercolors, and chunky crayons: the whole craft closet, shipped direct from the family that's been making mess-free art easier for nearly four decades.",
         "btn1_label": "shop all",
         "btn1_link": "shopify://collections/all",
         "btn2_label": "Shop best sellers",
@@ -144,7 +144,7 @@
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>Do-A-Dot started over 35 years ago with one simple idea: art should be easy, joyful, and totally mess-free for the littlest artists. All these years later we're still a family company, now shipping the whole craft closet straight to your door. Markers that don't drip, watercolors that wash out, crayons made for chunky little grips. All of it made for little hands, and the big imaginations behind them.</p>"
+            "text": "<p>Do-A-Dot started nearly four decades ago with one simple idea: art should be easy, joyful, and totally mess-free for the littlest artists. All these years later we're still a family company, now shipping the whole craft closet straight to your door. Markers that don't drip, watercolors that wash out, crayons made for chunky little grips. All of it made for little hands, and the big imaginations behind them.</p>"
           }
         }
       },
@@ -193,7 +193,7 @@
           "type": "promise",
           "settings": {
             "dot_color": "blue",
-            "title": "35+ years of tiny artists",
+            "title": "Nearly four decades of tiny artists",
             "body": "American family business, dot by dot, since 1989. Still us, still here."
           }
         }
