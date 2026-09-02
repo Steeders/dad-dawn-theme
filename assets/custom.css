@@ -4007,6 +4007,115 @@ a:hover {
   .dad-vg__thumb { width: 60px; height: 60px; }
 }
 
+/* — Lightbox. Zoom pill in the slide corner; image slides also open on
+     click (video posters keep their inline play). The overlay clones the
+     active slide into a full-viewport stage — see dad-variant-gallery.js. — */
+.dad-vg__slide > .dad-vg__img { cursor: zoom-in; }
+.dad-vg__zoom {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: var(--r-pill, 999px);
+  background: var(--dad-white, #fff);
+  color: var(--dad-ink, #2b2a2d);
+  box-shadow: var(--shadow-soft);
+  cursor: zoom-in;
+  opacity: 0.92;
+  transition: opacity 0.15s ease;
+}
+.dad-vg__zoom:hover { opacity: 1; }
+.dad-vg__zoom:focus-visible { outline: none; box-shadow: var(--shadow-focus); }
+.dad-vg__zoom .svg-wrapper { width: 18px; height: 18px; display: flex; }
+.dad-vg__zoom .svg-wrapper svg { width: 100%; height: 100%; }
+
+.dad-vg-lightbox {
+  position: fixed;
+  inset: 0;
+  /* Above the cart drawer (1000) and Judge.me's tab/form (1041/1050). */
+  z-index: 1100;
+  display: flex;
+  background: rgba(43, 42, 45, 0.92);
+}
+.dad-vg-lightbox[hidden] { display: none; }
+.dad-vg-lightbox__dialog {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  outline: none;
+}
+.dad-vg-lightbox__stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: var(--s-16, 64px) var(--s-20, 80px);
+  box-sizing: border-box;
+}
+.dad-vg-lightbox__media {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: var(--r-lg, 18px);
+  background: var(--dad-white, #fff);
+}
+video.dad-vg-lightbox__media { width: 100%; }
+
+.dad-vg-lightbox__close,
+.dad-vg-lightbox__arrow {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: var(--r-pill, 999px);
+  background: var(--dad-white, #fff);
+  color: var(--dad-ink, #2b2a2d);
+  box-shadow: var(--shadow-soft);
+  cursor: pointer;
+  opacity: 0.92;
+  transition: opacity 0.15s ease;
+}
+.dad-vg-lightbox__close:hover,
+.dad-vg-lightbox__arrow:hover { opacity: 1; }
+.dad-vg-lightbox__close:focus-visible,
+.dad-vg-lightbox__arrow:focus-visible { outline: none; box-shadow: var(--shadow-focus); }
+.dad-vg-lightbox__close .svg-wrapper,
+.dad-vg-lightbox__arrow .svg-wrapper { width: 16px; height: 16px; display: flex; }
+.dad-vg-lightbox__close .svg-wrapper svg,
+.dad-vg-lightbox__arrow .svg-wrapper svg { width: 100%; height: 100%; }
+.dad-vg-lightbox__close { top: var(--s-4, 16px); right: var(--s-4, 16px); }
+.dad-vg-lightbox__arrow { top: 50%; }
+.dad-vg-lightbox__arrow--prev { left: var(--s-4, 16px); transform: translateY(-50%) rotate(90deg); }
+.dad-vg-lightbox__arrow--next { right: var(--s-4, 16px); transform: translateY(-50%) rotate(-90deg); }
+.dad-vg-lightbox__arrow[hidden] { display: none; }
+
+@media screen and (max-width: 749px) {
+  .dad-vg-lightbox__stage { padding: var(--s-16, 64px) var(--s-3, 12px); }
+  .dad-vg-lightbox__media { border-radius: var(--r-sm, 10px); }
+  .dad-vg-lightbox__close,
+  .dad-vg-lightbox__arrow { width: 40px; height: 40px; }
+  /* Bottom offset clears the Shopify Inbox chat bubble, which pins itself
+     bottom-right at a z-index nothing in the theme should try to beat. */
+  .dad-vg-lightbox__arrow { top: auto; bottom: var(--s-24, 96px); transform: none; }
+  .dad-vg-lightbox__arrow--prev { left: var(--s-3, 12px); transform: rotate(90deg); }
+  .dad-vg-lightbox__arrow--next { right: var(--s-3, 12px); transform: rotate(-90deg); }
+}
+
 /* ──────────────────────────────────────────────────────────────────
    Judge.me product reviews — brand restyle (classic jdgm- widget).
    Light-DOM widget, so theme CSS reaches every node. Scoped under

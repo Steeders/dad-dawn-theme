@@ -35,6 +35,7 @@
           <div
             class="dad-vg__slide{% if forloop.first %} is-active{% endif %}"
             data-vg-slide="{{ forloop.index0 }}"
+            {%- if media_item.media_type != 'video' %} data-vg-full="{{ media_item | image_url: width: 2400 }}"{% endif %}
           >
             {%- if media_item.media_type == 'video' -%}
               <deferred-media class="deferred-media dad-vg__deferred" data-media-id="{{ media_item.id }}">
@@ -112,6 +113,17 @@
           </div>
         {%- endfor -%}
 
+        <button
+          type="button"
+          class="dad-vg__zoom"
+          data-vg-zoom
+          aria-haspopup="dialog"
+          data-label="{{ 'products.product.media.open_media' | t: index: '%d' }}"
+          aria-label="{{ 'products.product.media.open_media' | t: index: 1 }}"
+        >
+          <span class="svg-wrapper">{{- 'icon-zoom.svg' | inline_asset_content -}}</span>
+        </button>
+
         {%- if images.size > 1 -%}
           <button type="button" class="dad-vg__arrow dad-vg__arrow--prev" data-vg-prev aria-label="{{ 'general.slider.previous_slide' | t }}">
             <span class="svg-wrapper">{{- 'icon-caret.svg' | inline_asset_content -}}</span>
@@ -162,4 +174,32 @@
       {%- endif -%}
     {%- endif -%}
   </div>
+
+  {%- comment -%}
+    Lightbox shell. Sits outside [data-vg-content] so it survives variant
+    swaps; the active slide is cloned into the stage at open time by
+    assets/dad-variant-gallery.js. Dawn's product-media-modal can't serve
+    this gallery — it iterates product.media, and variant_images are file
+    references that never appear there.
+  {%- endcomment -%}
+  <dad-vg-lightbox class="dad-vg-lightbox" hidden>
+    <div
+      class="dad-vg-lightbox__dialog"
+      role="dialog"
+      aria-modal="true"
+      aria-label="{{ 'products.modal.label' | t }}"
+      tabindex="-1"
+    >
+      <button type="button" class="dad-vg-lightbox__close" data-vg-lb-close aria-label="{{ 'accessibility.close' | t }}">
+        <span class="svg-wrapper">{{- 'icon-close.svg' | inline_asset_content -}}</span>
+      </button>
+      <button type="button" class="dad-vg-lightbox__arrow dad-vg-lightbox__arrow--prev" data-vg-lb-prev aria-label="{{ 'general.slider.previous_slide' | t }}">
+        <span class="svg-wrapper">{{- 'icon-caret.svg' | inline_asset_content -}}</span>
+      </button>
+      <div class="dad-vg-lightbox__stage" data-vg-lb-stage></div>
+      <button type="button" class="dad-vg-lightbox__arrow dad-vg-lightbox__arrow--next" data-vg-lb-next aria-label="{{ 'general.slider.next_slide' | t }}">
+        <span class="svg-wrapper">{{- 'icon-caret.svg' | inline_asset_content -}}</span>
+      </button>
+    </div>
+  </dad-vg-lightbox>
 </dad-variant-gallery>
