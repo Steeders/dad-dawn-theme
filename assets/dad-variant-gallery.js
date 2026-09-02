@@ -131,6 +131,8 @@ if (!customElements.get('dad-vg-lightbox')) {
       constructor() {
         super();
         this.onKeydown = this.onKeydown.bind(this);
+        this.preloaded = new Set();
+        this.renderToken = 0;
       }
 
       connectedCallback() {
@@ -202,17 +204,87 @@ if (!customElements.get('dad-vg-lightbox')) {
         } else {
           const img = slide.querySelector('img');
           if (!img) return;
+          // Keep srcset/sizes so the clone resolves to the rendition the
+          // gallery has already decoded — it paints from cache on the same
+          // frame. Swapping straight to the 2400px file left the stage empty
+          // for the length of a fresh download on every step.
           media = img.cloneNode(false);
-          ['srcset', 'sizes', 'loading', 'width', 'height', 'class'].forEach((attr) => media.removeAttribute(attr));
-          if (slide.dataset.vgFull) media.src = slide.dataset.vgFull;
+          ['loading', 'width', 'height', 'class'].forEach((attr) => media.removeAttribute(attr));
         }
         media.classList.add('dad-vg-lightbox__media');
-        this.stage.replaceChildren(media);
 
+        const token = ++this.renderToken;
         const multi = this.gallery.slides.length > 1;
         this.arrows.forEach((arrow) => (arrow.hidden = !multi));
+        this.preloadNeighbours();
 
-        if (media.tagName === 'VIDEO') media.play().catch(() => {});
+        const commit = () => {
+          if (token !== this.renderToken) return;
+          this.stage.replaceChildren(media);
+          if (media.tagName === 'VIDEO') {
+            media.play().catch(() => {});
+          } else {
+            this.upgrade(media, slide.dataset.vgFull, token);
+          }
+        };
+
+        // Video has a poster, so it can land immediately. An image that isn't
+        // already decoded (unviewed slides are lazy-loaded inside display:none,
+        // so they never fetched) would paint as a blank stage — hold the
+        // current picture until the incoming one is ready, capped so a slow
+        // network can't make the arrows feel dead.
+        if (media.tagName === 'VIDEO' || (media.complete && media.naturalWidth > 0)) {
+          commit();
+          return;
+        }
+        let done = false;
+        const go = () => {
+          if (done) return;
+          done = true;
+          commit();
+        };
+        (media.decode ? media.decode() : Promise.resolve()).then(go, go);
+        window.setTimeout(go, 1500);
+      }
+
+      // Fetch the full-res file off-screen, then point the on-screen <img> at
+      // it. An <img> keeps its current pixels until the new src has decoded,
+      // so the upgrade is invisible rather than a flash to blank.
+      upgrade(media, url, token) {
+        if (!url) return;
+        const probe = new Image();
+        probe.src = url;
+        const swap = () => {
+          if (token !== this.renderToken || !media.isConnected) return;
+          media.removeAttribute('srcset');
+          media.removeAttribute('sizes');
+          media.src = url;
+        };
+        (probe.decode ? probe.decode() : Promise.resolve()).then(swap, swap);
+      }
+
+      // Warm both renditions of the two neighbouring slides: the gallery-size
+      // one the stage paints first, and the full-res one it upgrades to.
+      preloadNeighbours() {
+        const slides = this.gallery.slides;
+        const n = slides.length;
+        if (n < 2) return;
+        [this.gallery.index + 1, this.gallery.index - 1].forEach((i) => {
+          const slide = slides[(i + n) % n];
+          const img = slide.querySelector(':scope > img');
+          if (img && !this.preloaded.has(img)) {
+            this.preloaded.add(img);
+            const warm = new Image();
+            if (img.sizes) warm.sizes = img.sizes;
+            if (img.srcset) warm.srcset = img.srcset;
+            warm.src = img.src;
+          }
+          const url = slide.dataset.vgFull;
+          if (url && !this.preloaded.has(url)) {
+            this.preloaded.add(url);
+            new Image().src = url;
+          }
+        });
       }
     }
   );
