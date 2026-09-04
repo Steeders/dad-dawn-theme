@@ -25,9 +25,18 @@
       assign vimg = card_product.featured_media
     endif
 
+    comment
+      Hover image: the first non-video entry after the main one. variant_images
+      keeps the product video at position 2 so it is the second PDP slide, but a
+      video renders as its poster frame here — and the poster is the same file on
+      every variant, so every card hovered to an identical thumbnail. Skip videos.
+    endcomment
     assign vimg_hover = null
-    for vg_hover_img in vimages offset: 1 limit: 1
-      assign vimg_hover = vg_hover_img
+    for vg_hover_img in vimages offset: 1
+      unless vg_hover_img.media_type == 'video'
+        assign vimg_hover = vg_hover_img
+        break
+      endunless
     endfor
 
     assign ratio = 1
