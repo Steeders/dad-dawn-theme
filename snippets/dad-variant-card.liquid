@@ -17,7 +17,18 @@
 {%- if card_product and card_variant -%}
   {%- liquid
     assign vimages = card_variant.metafields.custom.variant_images.value
-    assign vimg = vimages.first
+
+    comment
+      Read the first entry with a loop, not `vimages.first`. On a variant
+      metafield reached through a collection loop, `.first` comes back blank
+      even though the list iterates fine — so `.first` silently fell through to
+      the fallback below and every card showed variant.image (the sealed box)
+      instead of variant_images[0].
+    endcomment
+    assign vimg = null
+    for vg_main_img in vimages limit: 1
+      assign vimg = vg_main_img
+    endfor
     if vimg == blank
       assign vimg = card_variant.featured_media
     endif
