@@ -13,9 +13,56 @@
         "klaviyo_list_id": "TYvDQN",
         "redirect_page": "/pages/download-free-printables"
       }
+    },
+    "howto": {
+      "type": "dad-howto-videos",
+      "blocks": {
+        "dot-markers": {
+          "type": "video_card",
+          "settings": {
+            "video": "shopify://files/videos/dotMarkers_shortVersion.mp4",
+            "title": "Dot Markers",
+            "text": "Six washable colors, no brushes and no cups. Just press and dot.",
+            "product": "do-a-dot-art-dot-markers",
+            "link_label": "shop dot markers"
+          }
+        },
+        "block-crayons": {
+          "type": "video_card",
+          "settings": {
+            "video": "shopify://files/videos/BlockCrayons.mp4",
+            "title": "Beeswax Block Crayons",
+            "text": "Chunky blocks made for little hands. Stack them, rub them, layer them.",
+            "product": "beeswax-crayons",
+            "link_label": "shop block crayons"
+          }
+        },
+        "watercolor-crayons": {
+          "type": "video_card",
+          "settings": {
+            "video": "shopify://files/videos/RainbowBright.mp4",
+            "title": "Watercolor Crayons",
+            "text": "Color it on, brush water over the top, and watch it turn into paint.",
+            "product": "watercolor-crayons",
+            "link_label": "shop watercolor crayons"
+          }
+        }
+      },
+      "block_order": [
+        "dot-markers",
+        "block-crayons",
+        "watercolor-crayons"
+      ],
+      "settings": {
+        "eyebrow": "tips & tricks",
+        "heading": "How to use every Do-A-Dot",
+        "body": "<p>Short videos showing what each one does and how to get the most out of it.</p>",
+        "columns": "3"
+      }
     }
   },
   "order": [
-    "gate"
+    "gate",
+    "howto"
   ]
 }

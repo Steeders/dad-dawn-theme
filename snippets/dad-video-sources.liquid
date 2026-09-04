@@ -1,0 +1,30 @@
+{%- comment -%}
+  Emits <source> elements for a Shopify-hosted video, cheapest playable first.
+
+  Safari picks the adaptive HLS. Chrome and Firefox can't play HLS, so they
+  fall to the first MP4 — and Liquid only exposes the top 1080p/7.2Mbps
+  rendition. Shopify's transcode ladder is fixed, so the 720p/4.5Mbps file
+  sits at the same URL with the label swapped; emit that first (guarded on
+  the known label) and keep 1080p as the fallback. ~40% lighter, identical
+  at the sizes we render.
+
+  Accepts:
+  - dad_video: {Object} a video media object
+
+  Usage: {% render 'dad-video-sources', dad_video: block.settings.video %}
+{%- endcomment -%}
+{%- for source in dad_video.sources -%}
+  {%- if source.format == 'm3u8' -%}
+    <source src="{{ source.url }}" type="{{ source.mime_type }}">
+  {%- endif -%}
+{%- endfor -%}
+{%- assign dad_rendered_mp4 = '' -%}
+{%- for source in dad_video.sources -%}
+  {%- if source.format == 'mp4' and source.url != dad_rendered_mp4 -%}
+    {%- assign dad_rendered_mp4 = source.url -%}
+    {%- if source.url contains 'HD-1080p-7.2Mbps' -%}
+      <source src="{{ source.url | replace: 'HD-1080p-7.2Mbps', 'HD-720p-4.5Mbps' }}" type="video/mp4">
+    {%- endif -%}
+    <source src="{{ source.url }}" type="{{ source.mime_type }}">
+  {%- endif -%}
+{%- endfor -%}

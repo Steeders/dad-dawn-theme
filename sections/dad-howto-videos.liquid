@@ -1,0 +1,167 @@
+{%- comment -%}
+  DAD How-To Videos — a grid of product tutorial videos, each with an optional
+  quiet link through to its product.
+
+  Lives on both printables pages: the gate at /pages/get-free-printables (where
+  the packaging QR codes land) and the archive at /pages/download-free-printables.
+  Safe to drop on any other page too.
+
+  Videos are deferred — only a poster image loads until someone clicks — so a
+  page with a dozen tutorials still costs one lazy image each.
+{%- endcomment -%}
+
+{{ 'component-deferred-media.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign cards = section.blocks | where: 'type', 'video_card'
+  assign has_head = false
+  if section.settings.eyebrow != blank or section.settings.heading != blank or section.settings.body != blank
+    assign has_head = true
+  endif
+-%}
+
+{%- if cards.size > 0 or has_head -%}
+  <section class="dad-howto" style="--dad-howto-cols: {{ section.settings.columns }};">
+    {%- if has_head -%}
+      <header class="dad-howto__head">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="dad-eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="dad-howto__heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.body != blank -%}
+          <div class="dad-howto__intro">{{ section.settings.body }}</div>
+        {%- endif -%}
+      </header>
+    {%- endif -%}
+
+    {%- if cards.size > 0 -%}
+      <ul class="dad-howto__grid" role="list">
+        {%- for block in cards -%}
+          {%- liquid
+            assign vid = block.settings.video
+            assign poster = block.settings.poster
+            if poster == blank and vid != blank
+              assign poster = vid.preview_image
+            endif
+            assign card_title = block.settings.title
+            if card_title == blank and block.settings.product != blank
+              assign card_title = block.settings.product.title
+            endif
+          -%}
+          <li class="dad-howto__card" {{ block.shopify_attributes }}>
+            {%- if vid != blank -%}
+              <deferred-media class="deferred-media dad-howto__media">
+                <button
+                  id="Deferred-Poster-{{ section.id }}-{{ block.id }}"
+                  class="deferred-media__poster"
+                  type="button"
+                  aria-label="{{ 'products.product.media.play_video' | t }}{% if card_title != blank %} — {{ card_title | escape }}{% endif %}"
+                >
+                  <span class="deferred-media__poster-button motion-reduce">
+                    <span class="svg-wrapper">{{- 'icon-play.svg' | inline_asset_content -}}</span>
+                  </span>
+                  {%- if poster != blank -%}
+                    {{
+                      poster
+                      | image_url: width: 1000
+                      | image_tag:
+                        loading: 'lazy',
+                        widths: '300, 500, 700, 1000',
+                        sizes: '(min-width: 990px) 33vw, (min-width: 750px) 50vw, 100vw',
+                        class: 'dad-howto__img',
+                        alt: ''
+                    }}
+                  {%- endif -%}
+                </button>
+                <template>
+                  <video
+                    class="dad-howto__video"
+                    controls
+                    autoplay
+                    playsinline
+                    preload="none"
+                    poster="{{ poster | image_url: width: 1000 }}"
+                    aria-label="{{ card_title | escape }}"
+                  >
+                    {% render 'dad-video-sources', dad_video: vid %}
+                  </video>
+                </template>
+              </deferred-media>
+            {%- elsif poster != blank -%}
+              <div class="dad-howto__media">
+                {{ poster | image_url: width: 1000 | image_tag: loading: 'lazy', class: 'dad-howto__img', alt: '' }}
+              </div>
+            {%- endif -%}
+
+            <div class="dad-howto__body">
+              {%- if card_title != blank -%}
+                <h3 class="dad-howto__title">{{ card_title | escape }}</h3>
+              {%- endif -%}
+              {%- if block.settings.text != blank -%}
+                <p class="dad-howto__text">{{ block.settings.text | escape }}</p>
+              {%- endif -%}
+              {%- if block.settings.product != blank -%}
+                <a class="dad-howto__link" href="{{ block.settings.product.url }}">
+                  {{ block.settings.link_label | default: 'shop it' }}
+                  <span class="dad-howto__arrow" aria-hidden="true">&rarr;</span>
+                </a>
+              {%- endif -%}
+            </div>
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "DAD How-To Videos",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "tips & tricks" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "How to use every Do-A-Dot" },
+    { "type": "richtext", "id": "body", "label": "Body" },
+    {
+      "type": "select",
+      "id": "columns",
+      "label": "Columns on desktop",
+      "options": [
+        { "value": "2", "label": "2" },
+        { "value": "3", "label": "3" },
+        { "value": "4", "label": "4" }
+      ],
+      "default": "3"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "video_card",
+      "name": "Video",
+      "settings": [
+        { "type": "video", "id": "video", "label": "Video" },
+        {
+          "type": "image_picker",
+          "id": "poster",
+          "label": "Custom poster image",
+          "info": "Optional. Defaults to the video's own poster frame."
+        },
+        { "type": "text", "id": "title", "label": "Title", "info": "Defaults to the linked product's title." },
+        { "type": "text", "id": "text", "label": "Short description" },
+        { "type": "product", "id": "product", "label": "Shop link" },
+        { "type": "text", "id": "link_label", "label": "Link label", "default": "shop it" }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "DAD How-To Videos",
+      "blocks": [{ "type": "video_card" }, { "type": "video_card" }, { "type": "video_card" }]
+    }
+  ]
+}
+{% endschema %}
