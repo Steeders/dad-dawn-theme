@@ -5,7 +5,7 @@
       "settings": {
         "eyebrow": "free printables",
         "heading": "Free printables for every month of the year.",
-        "body": "<p>Teachers, room moms, rainy-day heroes: sign up and get instant access to our full archive of dot-art printables, plus new ones as we release them.</p>",
+        "body": "<p>Teachers, room moms, rainy-day heroes: the whole archive, plus every new one as we release them.</p>",
         "placeholder": "your email",
         "button_label": "get my printables",
         "fine_print": "We'll email you new printables as they drop. Unsubscribe anytime.",
@@ -56,7 +56,7 @@
       "settings": {
         "eyebrow": "tips & tricks",
         "heading": "How to use every Do-A-Dot",
-        "body": "<p>Short videos showing what each one does and how to get the most out of it.</p>",
+        "body": "<p>One short video per product.</p>",
         "columns": "3"
       }
     }

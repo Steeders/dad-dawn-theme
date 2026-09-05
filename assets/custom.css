@@ -4608,7 +4608,7 @@ video.dad-vg-lightbox__media { width: 100%; }
 .dad-print-gate {
   max-width: 640px;
   margin: 0 auto;
-  padding: var(--s-16) var(--s-5);
+  padding: var(--s-12) var(--s-5);
 }
 .dad-print-gate__card {
   background: var(--dad-white);
@@ -4692,8 +4692,16 @@ video.dad-vg-lightbox__media { width: 100%; }
   color: var(--fg-soft);
 }
 @media screen and (max-width: 599px) {
+  /* Tighter on mobile so the how-to videos below break the fold and people
+     know to keep scrolling. */
+  .dad-print-gate { padding: var(--s-4) var(--s-4); }
+  .dad-print-gate__body { padding: var(--s-5) var(--s-5); }
   .dad-print-gate__row { flex-direction: column; }
   .dad-print-gate__btn { width: 100%; }
+  /* flex:1 was written for the desktop row. Once the row becomes a column,
+     the main axis is vertical, so flex-basis:0 collapsed the input to its
+     24px content height and height:52px never got a look in. */
+  .dad-print-gate__input { flex: none; }
 }
 
 /* — Archive month grid — */
@@ -4844,14 +4852,11 @@ video.dad-vg-lightbox__media { width: 100%; }
   margin: 0 auto;
   padding: var(--s-12) var(--s-5);
 }
+/* Only size and spacing — the global .dad-eyebrow token supplies the weight,
+   accent color and the dot, and its inline-flex is what gives the dot a box. */
 .dad-howto .dad-eyebrow {
-  display: inline-block;
-  font-family: var(--font-body);
-  font-size: var(--fs-micro);
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: lowercase;
-  color: var(--dad-ink-muted);
+  font-size: var(--fs-body);
+  letter-spacing: 0.04em;
   margin: 0 0 var(--s-2);
 }
 .dad-howto__head {
@@ -4964,6 +4969,12 @@ video.dad-vg-lightbox__media { width: 100%; }
 }
 .dad-howto__link:hover .dad-howto__arrow { transform: translateX(3px); }
 
+@media screen and (max-width: 599px) {
+  /* Pull the section up under the gate card so the heading, and the top of
+     the first video, land above the fold. */
+  .dad-howto { padding: var(--s-5) var(--s-5) var(--s-10); }
+  .dad-howto__head { margin-bottom: var(--s-5); }
+}
 @media screen and (min-width: 750px) {
   .dad-howto__grid { grid-template-columns: repeat(2, 1fr); }
 }
