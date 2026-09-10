@@ -1,8 +1,10 @@
 {%- comment -%}
-  Do-A-Dot free printables email gate. Native form that subscribes the
-  email to a Klaviyo list via Klaviyo's client subscription API, then
-  redirects to the printables archive page. No Klaviyo form embed;
-  design lives in the theme, list/company ids are section settings.
+  Do-A-Dot free printables email gate.
+  Preferred path: a Klaviyo embedded form (klaviyo_form_id) so signups enter
+  the welcome series and show up in Klaviyo form analytics like the footer.
+  On submit the theme also adds the email to the Free Printables list and
+  redirects to the archive. Fallback (no form id, or Klaviyo blocked): the
+  native form below subscribes straight to the Free Printables list.
 {%- endcomment -%}
 
 <section class="dad-print-gate">
@@ -21,13 +23,29 @@
         <div class="dad-print-gate__text">{{ section.settings.body }}</div>
       {%- endif -%}
 
+      {%- liquid
+        assign redirect_url = section.settings.redirect_page | default: '/pages/download-free-printables'
+        assign form_id = section.settings.klaviyo_form_id | strip
+      -%}
+      {%- if form_id != blank -%}
+        <div
+          class="klaviyo-form-{{ form_id }} dad-print-gate__klaviyo"
+          data-dad-printables-klaviyo
+          data-form-id="{{ form_id }}"
+          data-company-id="{{ section.settings.klaviyo_company_id | escape }}"
+          data-list-id="{{ section.settings.klaviyo_list_id | escape }}"
+          data-redirect-url="{{ redirect_url }}"
+        ></div>
+      {%- endif -%}
+
       <form
         class="dad-print-gate__form"
         data-dad-printables-form
         data-company-id="{{ section.settings.klaviyo_company_id | escape }}"
         data-list-id="{{ section.settings.klaviyo_list_id | escape }}"
-        data-redirect-url="{{ section.settings.redirect_page | default: '/pages/download-free-printables' }}"
+        data-redirect-url="{{ redirect_url }}"
         novalidate
+        {% if form_id != blank %}hidden{% endif %}
       >
         <div class="dad-print-gate__row">
           <input
@@ -54,6 +72,59 @@
 </section>
 
 {% javascript %}
+  // Klaviyo embed path. The form itself subscribes to the welcome list and
+  // redirects; here we (a) mirror the email into the Free Printables list so
+  // that list stays the printables audience, (b) remember the unlock, and
+  // (c) fall back to the native form if Klaviyo never renders (blocked).
+  document.querySelectorAll('[data-dad-printables-klaviyo]').forEach((mount) => {
+    const native = mount.parentElement.querySelector('[data-dad-printables-form]');
+    const formId = mount.dataset.formId;
+
+    window.addEventListener('klaviyoForms', (event) => {
+      const d = event.detail || {};
+      if (d.formId !== formId) return;
+      if (d.type === 'submit') {
+        const email = d.metaData && d.metaData.$email;
+        try {
+          sessionStorage.setItem('dadPrintablesUnlocked', '1');
+        } catch (e) {
+          /* storage unavailable */
+        }
+        if (email && mount.dataset.listId) {
+          fetch(
+            'https://a.klaviyo.com/client/subscriptions/?company_id=' + encodeURIComponent(mount.dataset.companyId),
+            {
+              method: 'POST',
+              keepalive: true,
+              headers: { 'Content-Type': 'application/json', revision: '2025-04-15' },
+              body: JSON.stringify({
+                data: {
+                  type: 'subscription',
+                  attributes: {
+                    custom_source: 'Free Printables Gate',
+                    profile: { data: { type: 'profile', attributes: { email: email } } },
+                  },
+                  relationships: { list: { data: { type: 'list', id: mount.dataset.listId } } },
+                },
+              }),
+            }
+          ).catch(() => {});
+        }
+        // The form's own redirect action normally wins; this covers the case
+        // where it doesn't fire.
+        setTimeout(() => window.location.assign(mount.dataset.redirectUrl), 1500);
+      }
+    });
+
+    // Klaviyo blocked or the form unpublished: show the native form instead.
+    setTimeout(() => {
+      if (!mount.children.length && native) {
+        mount.hidden = true;
+        native.hidden = false;
+      }
+    }, 3000);
+  });
+
   document.querySelectorAll('[data-dad-printables-form]').forEach((form) => {
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
@@ -119,8 +190,9 @@
     { "type": "text", "id": "button_label", "label": "Button label", "default": "get my printables" },
     { "type": "text", "id": "fine_print", "label": "Fine print", "default": "We'll email you new printables as they drop. Unsubscribe anytime." },
     { "type": "header", "content": "Klaviyo" },
+    { "type": "text", "id": "klaviyo_form_id", "label": "Klaviyo embedded form ID", "info": "The code after 'klaviyo-form-' on a LIVE embed form. When set, signups go through this form (welcome series + form analytics). Leave blank to use the native form below." },
     { "type": "text", "id": "klaviyo_company_id", "label": "Klaviyo public API key (company id)", "default": "RizdDa" },
-    { "type": "text", "id": "klaviyo_list_id", "label": "Klaviyo list id", "default": "TYvDQN", "info": "Free Printables Signups list" },
+    { "type": "text", "id": "klaviyo_list_id", "label": "Klaviyo list id", "default": "TYvDQN", "info": "Free Printables Signups list. Also mirrored on embed-form submits." },
     { "type": "url", "id": "redirect_page", "label": "Redirect to after signup", "info": "Defaults to /pages/download-free-printables" }
   ],
   "presets": [{ "name": "DAD Printables Gate" }]

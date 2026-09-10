@@ -11,7 +11,8 @@
         "fine_print": "We'll email you new printables as they drop. Unsubscribe anytime.",
         "klaviyo_company_id": "RizdDa",
         "klaviyo_list_id": "TYvDQN",
-        "redirect_page": "/pages/download-free-printables"
+        "redirect_page": "/pages/download-free-printables",
+        "klaviyo_form_id": "V59jft"
       }
     },
     "howto": {

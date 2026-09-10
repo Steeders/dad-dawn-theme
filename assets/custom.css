@@ -4637,6 +4637,10 @@ video.dad-vg-lightbox__media { width: 100%; }
   margin-bottom: var(--s-6);
 }
 .dad-print-gate__row { display: flex; gap: var(--s-2); }
+/* Klaviyo embed mount. The form brings its own input/button styling; this
+   just keeps it flush inside the card like the native row. */
+.dad-print-gate__klaviyo { margin: 0 auto; max-width: 480px; text-align: left; }
+.dad-print-gate__klaviyo[hidden] { display: none; }
 .dad-print-gate__input {
   flex: 1;
   min-width: 0;
