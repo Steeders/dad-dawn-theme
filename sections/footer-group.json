@@ -67,6 +67,7 @@
     "colorful_mail": {
       "type": "dad-colorful-mail",
       "settings": {
+        "body": "<p>First dibs on new launches, color drops, and ideas for rainy-day projects. <strong>10% off your first order</strong> for joining.</p>",
         "klaviyo_form_id": "VGQzXB"
       }
     }
