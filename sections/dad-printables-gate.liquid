@@ -5,6 +5,9 @@
   On submit the theme also adds the email to the Free Printables list and
   redirects to the archive. Fallback (no form id, or Klaviyo blocked): the
   native form below subscribes straight to the Free Printables list.
+  Either path also subscribes to the welcome list (klaviyo_welcome_list_id)
+  so printables signups enter the welcome series instead of dead-ending on a
+  list whose own flow is off.
 {%- endcomment -%}
 
 <section class="dad-print-gate">
@@ -34,6 +37,7 @@
           data-form-id="{{ form_id }}"
           data-company-id="{{ section.settings.klaviyo_company_id | escape }}"
           data-list-id="{{ section.settings.klaviyo_list_id | escape }}"
+          data-welcome-list-id="{{ section.settings.klaviyo_welcome_list_id | escape }}"
           data-redirect-url="{{ redirect_url }}"
         ></div>
       {%- endif -%}
@@ -43,6 +47,7 @@
         data-dad-printables-form
         data-company-id="{{ section.settings.klaviyo_company_id | escape }}"
         data-list-id="{{ section.settings.klaviyo_list_id | escape }}"
+        data-welcome-list-id="{{ section.settings.klaviyo_welcome_list_id | escape }}"
         data-redirect-url="{{ redirect_url }}"
         novalidate
         {% if form_id != blank %}hidden{% endif %}
@@ -72,6 +77,27 @@
 </section>
 
 {% javascript %}
+  // One client-API subscribe. Used for both the printables list and the
+  // welcome list, so a printables signup enters the welcome series too.
+  function dadPrintablesSubscribe(companyId, listId, email, opts) {
+    if (!listId || !email) return Promise.resolve(null);
+    return fetch('https://a.klaviyo.com/client/subscriptions/?company_id=' + encodeURIComponent(companyId), {
+      method: 'POST',
+      keepalive: !!(opts && opts.keepalive),
+      headers: { 'Content-Type': 'application/json', revision: '2025-04-15' },
+      body: JSON.stringify({
+        data: {
+          type: 'subscription',
+          attributes: {
+            custom_source: 'Free Printables Gate',
+            profile: { data: { type: 'profile', attributes: { email: email } } },
+          },
+          relationships: { list: { data: { type: 'list', id: listId } } },
+        },
+      }),
+    });
+  }
+
   // Klaviyo embed path. The form itself subscribes to the welcome list and
   // redirects; here we (a) mirror the email into the Free Printables list so
   // that list stays the printables audience, (b) remember the unlock, and
@@ -90,25 +116,13 @@
         } catch (e) {
           /* storage unavailable */
         }
-        if (email && mount.dataset.listId) {
-          fetch(
-            'https://a.klaviyo.com/client/subscriptions/?company_id=' + encodeURIComponent(mount.dataset.companyId),
-            {
-              method: 'POST',
-              keepalive: true,
-              headers: { 'Content-Type': 'application/json', revision: '2025-04-15' },
-              body: JSON.stringify({
-                data: {
-                  type: 'subscription',
-                  attributes: {
-                    custom_source: 'Free Printables Gate',
-                    profile: { data: { type: 'profile', attributes: { email: email } } },
-                  },
-                  relationships: { list: { data: { type: 'list', id: mount.dataset.listId } } },
-                },
-              }),
-            }
-          ).catch(() => {});
+        if (email) {
+          dadPrintablesSubscribe(mount.dataset.companyId, mount.dataset.listId, email, {
+            keepalive: true,
+          }).catch(() => {});
+          dadPrintablesSubscribe(mount.dataset.companyId, mount.dataset.welcomeListId, email, {
+            keepalive: true,
+          }).catch(() => {});
         }
         // The form's own redirect action normally wins; this covers the case
         // where it doesn't fire.
@@ -142,24 +156,13 @@
       btn.querySelector('.dad-print-gate__btn-label').hidden = true;
       btn.querySelector('.dad-print-gate__btn-busy').hidden = false;
       try {
-        const res = await fetch(
-          'https://a.klaviyo.com/client/subscriptions/?company_id=' + encodeURIComponent(form.dataset.companyId),
-          {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', revision: '2025-04-15' },
-            body: JSON.stringify({
-              data: {
-                type: 'subscription',
-                attributes: {
-                  custom_source: 'Free Printables Gate',
-                  profile: { data: { type: 'profile', attributes: { email: email } } },
-                },
-                relationships: { list: { data: { type: 'list', id: form.dataset.listId } } },
-              },
-            }),
-          }
-        );
-        if (!res.ok) throw new Error('subscribe failed: ' + res.status);
+        // Welcome list is fire-and-forget: a failure there must not block the
+        // printables unlock, which is what the visitor was actually promised.
+        dadPrintablesSubscribe(form.dataset.companyId, form.dataset.welcomeListId, email, {
+          keepalive: true,
+        }).catch(() => {});
+        const res = await dadPrintablesSubscribe(form.dataset.companyId, form.dataset.listId, email);
+        if (!res || !res.ok) throw new Error('subscribe failed: ' + (res && res.status));
         try {
           sessionStorage.setItem('dadPrintablesUnlocked', '1');
         } catch (e) {
@@ -193,6 +196,7 @@
     { "type": "text", "id": "klaviyo_form_id", "label": "Klaviyo embedded form ID", "info": "The code after 'klaviyo-form-' on a LIVE embed form. When set, signups go through this form (welcome series + form analytics). Leave blank to use the native form below." },
     { "type": "text", "id": "klaviyo_company_id", "label": "Klaviyo public API key (company id)", "default": "RizdDa" },
     { "type": "text", "id": "klaviyo_list_id", "label": "Klaviyo list id", "default": "TYvDQN", "info": "Free Printables Signups list. Also mirrored on embed-form submits." },
+    { "type": "text", "id": "klaviyo_welcome_list_id", "label": "Klaviyo welcome list id", "default": "SfHcwp", "info": "Signups are added here too so they enter the welcome series (RAb5tu). Clear this to stop enrolling printables signups in the welcome series." },
     { "type": "url", "id": "redirect_page", "label": "Redirect to after signup", "info": "Defaults to /pages/download-free-printables" }
   ],
   "presets": [{ "name": "DAD Printables Gate" }]
