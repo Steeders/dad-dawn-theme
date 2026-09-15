@@ -57,7 +57,7 @@
                   id="Deferred-Poster-{{ section.id }}-{{ block.id }}"
                   class="deferred-media__poster"
                   type="button"
-                  aria-label="{{ 'products.product.media.play_video' | t }}{% if card_title != blank %} — {{ card_title | escape }}{% endif %}"
+                  aria-label="{{ 'products.product.media.play_video' | t }}{% if card_title != blank %}, {{ card_title | escape }}{% endif %}"
                 >
                   <span class="deferred-media__poster-button motion-reduce">
                     <span class="svg-wrapper">{{- 'icon-play.svg' | inline_asset_content -}}</span>

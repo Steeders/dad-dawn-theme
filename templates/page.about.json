@@ -16,13 +16,13 @@
           "type": "stat",
           "settings": {
             "number": "37",
-            "label": "years of mess-free art — and counting"
+            "label": "years of mess-free art and counting"
           }
         },
         "stat-2": {
           "type": "stat",
           "settings": {
-            "number": "3–103",
+            "number": "3-103",
             "label": "we make art materials for ages 3-103"
           }
         },
@@ -45,9 +45,9 @@
           "settings": {
             "eyebrow": "how it started",
             "heading": "One Small Classroom, One Big Idea",
-            "body": "<p>The sky can be bubblegum colored and horses can be bluish-orangey-green. For kids, imagination comes in all sorts of colors — most of which aren't in a box set.</p><p>Thirty-seven years ago, Tina — an enterprising full-time mom and part-time preschool teacher — never shied away from getting out the paints and messy art materials. But she noticed that when it came to creative playtime, she was the exception, not the rule. So she invented a new, mess-free way for kids to dip into all the colors of their imagination: a special dot paint applicator.</p><p>Children could layer and blend colors like never before — fill big spaces, make shapes, create textures. Kids loved the new art medium. Parents and teachers loved the finished projects, and the easy setup and cleanup even more.</p>",
+            "body": "<p>The sky can be bubblegum colored and horses can be bluish-orangey-green. For kids, imagination comes in all sorts of colors, most of which aren't in a box set.</p><p>Thirty-seven years ago, Tina, an enterprising full-time mom and part-time preschool teacher, never shied away from getting out the paints and messy art materials. But she noticed that when it came to creative playtime, she was the exception, not the rule. So she invented a new, mess-free way for kids to dip into all the colors of their imagination: a special dot paint applicator.</p><p>Children could layer and blend colors like never before: fill big spaces, make shapes, create textures. Kids loved the new art medium. Parents and teachers loved the finished projects, and the easy setup and cleanup even more.</p>",
             "pullquote": "We help kids create their own colors, so they can express themselves freely.",
-            "pullquote_attribution": "— the Do-A-Dot Art! story",
+            "pullquote_attribution": "the Do-A-Dot Art! story",
             "reverse": false
           }
         },
@@ -56,9 +56,9 @@
           "settings": {
             "eyebrow": "how it's going",
             "heading": "Same family. Same idea. A bigger craft closet.",
-            "body": "<p>Tina didn't let her idea live only within the walls of her preschool. Along with her husband Rob, she built the original dot art marker from a creative tool for kids into an educational staple used in classrooms everywhere — and to this day, mess-free painting for kids is revolutionary.</p><p>Do-A-Dot Art! is still a family-run business, with the second generation carrying it forward. In 2026 the craft closet is growing — chunky crayons, mess-free watercolors, and more new tools, all built on the same idea Tina started with.</p><p>And we're proud of how our sets come together: assembled with love and care by a dedicated team at a special-needs work center whose work ethic and attention to detail set the standard.</p>",
+            "body": "<p>Tina didn't let her idea live only within the walls of her preschool. Along with her husband Rob, she built the original dot art marker from a creative tool for kids into an educational staple used in classrooms everywhere, and to this day, mess-free painting for kids is revolutionary.</p><p>Do-A-Dot Art! is still a family-run business, with the second generation carrying it forward. In 2026 the craft closet is growing: chunky crayons, mess-free watercolors, and more new tools, all built on the same idea Tina started with.</p><p>And we're proud of how our sets come together: assembled with love and care by a dedicated team at a special-needs work center whose work ethic and attention to detail set the standard.</p>",
             "pullquote": "Together, let's add more color to our world.",
-            "pullquote_attribution": "— the Do-A-Dot Art! family",
+            "pullquote_attribution": "the Do-A-Dot Art! family",
             "reverse": true
           }
         },
@@ -66,7 +66,7 @@
           "type": "timeline_step",
           "settings": {
             "year": "late '80s",
-            "body": "Tina — full-time mom, part-time preschool teacher — invents the dot paint applicator so kids can create mess-free.",
+            "body": "Tina, a full-time mom and part-time preschool teacher, invents the dot paint applicator so kids can create mess-free.",
             "milestone": true
           }
         },
@@ -90,7 +90,7 @@
           "type": "timeline_step",
           "settings": {
             "year": "today",
-            "body": "The second generation carries it forward — and the craft closet expands with chunky crayons, watercolors, and more launching in 2026.",
+            "body": "The second generation carries it forward, and the craft closet expands with chunky crayons, watercolors, and more launching in 2026.",
             "milestone": true
           }
         },
@@ -115,7 +115,7 @@
           "settings": {
             "number": "03",
             "heading": "Made with pride in the USA.",
-            "body": "Our dot markers are made in the USA, and our paint sets are assembled by a dedicated team at a special-needs work center — craftsmanship we're proud of."
+            "body": "Our dot markers are made in the USA, and our paint sets are assembled by a dedicated team at a special-needs work center. Craftsmanship we're proud of."
           }
         },
         "val-4": {
@@ -123,7 +123,7 @@
           "settings": {
             "number": "04",
             "heading": "Color is a conversation.",
-            "body": "Every color we sell has a name — Piggy Pink, Tiger Tail Orange, Canary Yellow — because picking a color is the start of a story, not just a stroke."
+            "body": "Every color we sell has a name: Piggy Pink, Tiger Tail Orange, Canary Yellow. Picking a color is the start of a story, not just a stroke."
           }
         },
         "val-5": {
@@ -139,7 +139,7 @@
           "settings": {
             "number": "06",
             "heading": "Imagination first.",
-            "body": "Building forts from couch cushions, castles from sand, stories from the clouds — imagination is what transforms a plain sheet of paper into a masterpiece."
+            "body": "Building forts from couch cushions, castles from sand, stories from the clouds. Imagination is what transforms a plain sheet of paper into a masterpiece."
           }
         },
         "team-1": {
@@ -199,7 +199,7 @@
         "hero_eyebrow": "our story",
         "hero_heading": "A preschool teacher's idea,",
         "hero_heading_accent": "38 years in.",
-        "hero_lede": "Do-A-Dot Art! began when Tina — a full-time mom and part-time preschool teacher — invented a mess-free way for kids to dip into every color of their imagination. Nearly four decades later, we're still the same family with the same idea: give children the freedom to create, without the cleanup.",
+        "hero_lede": "Do-A-Dot Art! began when Tina, a full-time mom and part-time preschool teacher, invented a mess-free way for kids to dip into every color of their imagination. Nearly four decades later, we're still the same family with the same idea: give children the freedom to create, without the cleanup.",
         "hero_image": "shopify://shop_images/About_Our-Story.jpg",
         "timeline_heading": "Nearly four decades, dot by dot.",
         "timeline_lede": "A short walk through the milestones that got us here.",
@@ -210,7 +210,7 @@
         "cta_eyebrow": "get colorful",
         "cta_heading": "Ready to add more",
         "cta_heading_accent": "color to your world?",
-        "cta_body": "Markers, watercolors, chunky crayons — the whole craft closet, shipped direct from us to your front door.",
+        "cta_body": "Markers, watercolors, chunky crayons: the whole craft closet, shipped direct from us to your front door.",
         "cta_btn1_label": "shop all",
         "cta_btn1_link": "",
         "cta_btn2_label": "see the color story",

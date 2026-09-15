@@ -76,7 +76,7 @@
     endunless
     assign card_alt = card_title
     if card_subtitle != blank
-      assign card_alt = card_title | append: ' — ' | append: card_subtitle
+      assign card_alt = card_title | append: ', ' | append: card_subtitle
     endif
     assign img_loading = 'lazy'
     if lazy_load == false
