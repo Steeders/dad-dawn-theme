@@ -11,7 +11,6 @@
   "sections": {
     "dad_hero": {
       "type": "dad-hero",
-      "disabled": true,
       "settings": {
         "media_type": "image",
         "image": "shopify://shop_images/2026-05-01_Do-a-Dot_batch1-101.jpg",
@@ -31,6 +30,7 @@
     },
     "dad_hero_promo": {
       "type": "dad-hero",
+      "disabled": true,
       "settings": {
         "media_type": "video",
         "video": "shopify://files/videos/back-to-school-kid-nametag-timelapse.mov",
