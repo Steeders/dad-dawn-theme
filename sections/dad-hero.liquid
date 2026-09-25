@@ -3,11 +3,12 @@
   layout="image" (full-bleed lifestyle photo + frosted-white copy card).
 {%- endcomment -%}
 
-<section class="dad-hero" style="
+<section class="dad-hero{% if section.settings.mobile_layout != 'overlay' %} dad-hero--stack-mobile{% endif %}" style="
   {%- if section.settings.min_height_desktop -%}--dad-hero-min-h-desktop: {{ section.settings.min_height_desktop }}px;{%- endif -%}
   {%- if section.settings.min_height_mobile -%}--dad-hero-min-h-mobile: {{ section.settings.min_height_mobile }}px;{%- endif -%}
   --dad-hero-card-opacity: {{ section.settings.card_bg_opacity | default: 88 | divided_by: 100.0 }};
   --dad-hero-card-align: {{ section.settings.card_position | default: 'center' }};
+  --dad-hero-mobile-ratio: {{ section.settings.mobile_image_ratio | default: '5 / 4' }};
 ">
   <div class="dad-hero__photo">
     {%- if section.settings.media_type == 'video' -%}
@@ -24,12 +25,33 @@
         <div class="dad-hero__photo-placeholder">Upload a hero video in the customizer</div>
       {%- endif -%}
     {%- elsif section.settings.image != blank -%}
+      {%- liquid
+        assign hero_alt = section.settings.image.alt | default: section.settings.heading | escape
+        assign desktop_class = ''
+        assign desktop_sizes = '100vw'
+        if section.settings.mobile_image != blank
+          assign desktop_class = 'dad-hero__img--desktop'
+          assign desktop_sizes = '(max-width: 989px) 1px, 100vw'
+          assign mobile_alt = section.settings.mobile_image.alt | default: hero_alt
+        endif
+      -%}
       {{ section.settings.image | image_url: width: 2400 | image_tag:
         loading: 'eager',
+        fetchpriority: 'high',
         widths: '600,900,1200,1600,2000,2400',
-        sizes: '100vw',
-        alt: section.settings.image.alt | default: section.settings.heading | escape
+        sizes: desktop_sizes,
+        class: desktop_class,
+        alt: hero_alt
       }}
+      {%- if section.settings.mobile_image != blank -%}
+        {{ section.settings.mobile_image | image_url: width: 1600 | image_tag:
+          loading: 'eager',
+          widths: '600,900,1200,1600',
+          sizes: '(max-width: 989px) 100vw, 1px',
+          class: 'dad-hero__img--mobile',
+          alt: mobile_alt
+        }}
+      {%- endif -%}
     {%- else -%}
       <div class="dad-hero__photo-placeholder">Upload a hero image in the customizer</div>
     {%- endif -%}
@@ -119,6 +141,41 @@
       "step": 20,
       "default": 480,
       "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "type": "select",
+      "id": "mobile_layout",
+      "label": "Mobile layout",
+      "options": [
+        { "value": "stack", "label": "Photo on top, text below" },
+        { "value": "overlay", "label": "Text card over photo" }
+      ],
+      "default": "stack",
+      "info": "Photo on top keeps the kids visible on phones."
+    },
+    {
+      "type": "select",
+      "id": "mobile_image_ratio",
+      "label": "Mobile photo shape",
+      "options": [
+        { "value": "1 / 1", "label": "Square" },
+        { "value": "5 / 4", "label": "Slightly wide (5:4)" },
+        { "value": "4 / 3", "label": "Wide (4:3)" },
+        { "value": "3 / 2", "label": "Extra wide (3:2)" },
+        { "value": "4 / 5", "label": "Tall (4:5)" }
+      ],
+      "default": "5 / 4",
+      "info": "Only used with Photo on top. Set the image's focal point so the crop keeps the kids and product in frame."
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile image (optional)",
+      "info": "A different crop or photo for phones. Leave empty to reuse the background image."
     },
     {
       "type": "header",
