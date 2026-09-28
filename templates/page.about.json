@@ -37,7 +37,7 @@
           "type": "stat",
           "settings": {
             "number": "USA",
-            "label": "our dot markers are made in the usa"
+            "label": "our dot markers and activity books are made in the usa"
           }
         },
         "story-1": {
@@ -45,7 +45,7 @@
           "settings": {
             "eyebrow": "how it started",
             "heading": "One Small Classroom, One Big Idea",
-            "body": "<p>The sky can be bubblegum colored and horses can be bluish-orangey-green. For kids, imagination comes in all sorts of colors, most of which aren't in a box set.</p><p>Thirty-seven years ago, Tina, an enterprising full-time mom and part-time preschool teacher, never shied away from getting out the paints and messy art materials. But she noticed that when it came to creative playtime, she was the exception, not the rule. So she invented a new, mess-free way for kids to dip into all the colors of their imagination: a special dot paint applicator.</p><p>Children could layer and blend colors like never before: fill big spaces, make shapes, create textures. Kids loved the new art medium. Parents and teachers loved the finished projects, and the easy setup and cleanup even more.</p>",
+            "body": "<p>The sky can be bubblegum colored and horses can be bluish-orangey-green. For kids, imagination comes in all sorts of colors, most of which aren't in a box set.</p><p>Before she was a teacher, Tina worked in medical sales. One of the products she sold came in a little bottle with a dab-on tip. Years later, as a mom running her own preschool, she set up learning centers where kids could explore on their own, and she wanted art in them every single day. Paint made that hard. Between the cups, the brushes, and the cleanup, it just didn't come out every day.</p><p>So Tina called the company she used to work for and asked for some of those bottles. She had an idea. They became the first dot markers, and suddenly her preschoolers could dot, layer, and blend color all by themselves.</p><p>Before long, parents were asking about the waterfall of artwork coming home every day. Then they asked if they could buy a set of their own.</p>",
             "pullquote": "We help kids create their own colors, so they can express themselves freely.",
             "pullquote_attribution": "the Do-A-Dot Art! story",
             "reverse": false
@@ -56,7 +56,7 @@
           "settings": {
             "eyebrow": "how it's going",
             "heading": "Same family. Same idea. A bigger craft closet.",
-            "body": "<p>Tina didn't let her idea live only within the walls of her preschool. Along with her husband Rob, she built the original dot art marker from a creative tool for kids into an educational staple used in classrooms everywhere, and to this day, mess-free painting for kids is revolutionary.</p><p>Do-A-Dot Art! is still a family-run business, with the second generation carrying it forward. In 2026 the craft closet is growing: chunky crayons, mess-free watercolors, and more new tools, all built on the same idea Tina started with.</p><p>And we're proud of how our sets come together: assembled with love and care by a dedicated team at a special-needs work center whose work ethic and attention to detail set the standard.</p>",
+            "body": "<p>Tina told her husband Rob she thought she might have a winner. A few years later she took the leap, and Do-A-Dot Art! grew from one classroom into preschools, kindergartens, and homes across the country. Their daughter Tiffany grew up in it, packing boxes in the garage when she was 12.</p><p>Today Tiffany and her husband Jesse run the business as the second generation, and Tina is still the head honcho. Parents who dotted their way through preschool are now buying dot markers for their own kids.</p><p>Our dot markers and activity books are still made in our family's factory in Montana. Our newer tools, like beeswax crayons and watercolors, are made overseas so they stay affordable for families, with the same layered learning in every one. And our paint sets are assembled with love and care by a dedicated team at a special-needs work center.</p>",
             "pullquote": "Together, let's add more color to our world.",
             "pullquote_attribution": "the Do-A-Dot Art! family",
             "reverse": true
@@ -66,23 +66,23 @@
           "type": "timeline_step",
           "settings": {
             "year": "late '80s",
-            "body": "Tina, a full-time mom and part-time preschool teacher, invents the dot paint applicator so kids can create mess-free.",
+            "body": "Tina, a mom and preschool teacher who used to work in medical sales, turns a few bottles from her old company into the first dot markers for her classroom.",
             "milestone": true
           }
         },
         "tl-2": {
           "type": "timeline_step",
           "settings": {
-            "year": "the '90s",
-            "body": "Tina and her husband Rob build the original dot art marker into a family business, one classroom and craft store at a time.",
+            "year": "a few years later",
+            "body": "Parents keep asking for sets of their own. Tina and Rob take the leap and make the original dot marker a family business.",
             "milestone": false
           }
         },
         "tl-3": {
           "type": "timeline_step",
           "settings": {
-            "year": "the 2000s",
-            "body": "Do-A-Dot Art! grows from a creative toy into an educational tool, loved by teachers and parents across the country.",
+            "year": "growing up",
+            "body": "Tiffany packs boxes in the garage at 12, and dot markers become a staple in preschools and kindergartens across the country.",
             "milestone": false
           }
         },
@@ -90,7 +90,7 @@
           "type": "timeline_step",
           "settings": {
             "year": "today",
-            "body": "The second generation carries it forward, and the craft closet expands with chunky crayons, watercolors, and more launching in 2026.",
+            "body": "Tiffany and Jesse carry it forward as the second generation, and the craft closet grows with beeswax crayons, watercolors, and more.",
             "milestone": true
           }
         },
@@ -98,16 +98,16 @@
           "type": "value",
           "settings": {
             "number": "01",
-            "heading": "Mess-free is the point.",
-            "body": "Tina believed in the magic of messy art, but knew that real homes and classrooms needed simplicity. Dot markers deliver bold, vibrant colors without the cleanup."
+            "heading": "No cups, no brush, no mess.",
+            "body": "That's been our promise since Tina's classroom. Easy setup and easy cleanup mean the art supplies actually come out, every day, even while dinner's cooking."
           }
         },
         "val-2": {
           "type": "value",
           "settings": {
             "number": "02",
-            "heading": "Safe enough for your little ones.",
-            "body": "Non-toxic, washable, ASTM-certified. When it comes to safety we hold ourselves to the highest standards, because we think of your little ones as our own."
+            "heading": "Layered learning in every dot.",
+            "body": "Every bottle has its color name silk-screened on the side, so kids see the word while they make the color. Our crayons carry their names on the barrel and inside the box, so putting them away turns into a memory game. A place for everything, and everything in its place."
           }
         },
         "val-3": {
@@ -115,7 +115,7 @@
           "settings": {
             "number": "03",
             "heading": "Made with pride in the USA.",
-            "body": "Our dot markers are made in the USA, and our paint sets are assembled by a dedicated team at a special-needs work center. Craftsmanship we're proud of."
+            "body": "Our dot markers and activity books are made in our family's factory in Montana, in a filling house that fills nothing but dot markers for kids."
           }
         },
         "val-4": {
@@ -123,23 +123,23 @@
           "settings": {
             "number": "04",
             "heading": "Color is a conversation.",
-            "body": "Every color we sell has a name: Piggy Pink, Tiger Tail Orange, Canary Yellow. Picking a color is the start of a story, not just a stroke."
+            "body": "Every color we sell has a name: Piggy Pink, Tiger Tail Orange, Canary Yellow. What does a canary do? It sings. Picking a color is the start of a story, not just a stroke."
           }
         },
         "val-5": {
           "type": "value",
           "settings": {
             "number": "05",
-            "heading": "Raising free thinkers.",
-            "body": "We want children to make their own choices, think creatively, and feel confident. Through art, kids build a love of learning, discovering, and creating that lasts a lifetime."
+            "heading": "Safe for little ones.",
+            "body": "Non-toxic and tested to the highest child safety standards. Classrooms count on that, and we think of your little ones as our own."
           }
         },
         "val-6": {
           "type": "value",
           "settings": {
             "number": "06",
-            "heading": "Imagination first.",
-            "body": "Building forts from couch cushions, castles from sand, stories from the clouds. Imagination is what transforms a plain sheet of paper into a masterpiece."
+            "heading": "Raising free thinkers.",
+            "body": "Leaves can be pink. Horses can be blue. We want kids making their own choices and feeling confident in them, because that's where a love of learning and creating starts."
           }
         },
         "team-1": {
@@ -147,7 +147,7 @@
           "disabled": true,
           "settings": {
             "name": "Tina",
-            "role": "founder · ceo",
+            "role": "founder · inventor",
             "bio": "Inventor of the original Dot Art Marker, lifelong educator, and the heart behind Do-A-Dot Art! Nearly four decades later, she's still creating, innovating, and reminding us that every masterpiece begins with a little dot!",
             "accent_color": "pink"
           }
@@ -198,8 +198,8 @@
       "settings": {
         "hero_eyebrow": "our story",
         "hero_heading": "A preschool teacher's idea,",
-        "hero_heading_accent": "38 years in.",
-        "hero_lede": "Do-A-Dot Art! began when Tina, a full-time mom and part-time preschool teacher, invented a mess-free way for kids to dip into every color of their imagination. Nearly four decades later, we're still the same family with the same idea: give children the freedom to create, without the cleanup.",
+        "hero_heading_accent": "37 years in.",
+        "hero_lede": "Do-A-Dot Art! began in Tina's preschool, where she wanted kids making art every single day, on their own. Her answer was the original dot marker: no cups, no brush, no mess. Nearly four decades later, we're still the same family with the same idea.",
         "hero_image": "shopify://shop_images/About_Our-Story.jpg",
         "timeline_heading": "Nearly four decades, dot by dot.",
         "timeline_lede": "A short walk through the milestones that got us here.",
