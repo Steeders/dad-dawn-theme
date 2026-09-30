@@ -14,8 +14,16 @@
     "announcement-bar": {
       "type": "announcement-bar",
       "blocks": {
+        "announcement_t6UiGF": {
+          "type": "announcement",
+          "settings": {
+            "text": "Fall Into Fun Crafts & Activities For Everyone",
+            "link": ""
+          }
+        },
         "announcement_ML8GYN": {
           "type": "announcement",
+          "disabled": true,
           "settings": {
             "text": "Get Back To School With Our Best Sellers",
             "link": "shopify://collections/best-sellers"
@@ -30,6 +38,7 @@
         }
       },
       "block_order": [
+        "announcement_t6UiGF",
         "announcement_ML8GYN",
         "announcement-bar-0"
       ],
