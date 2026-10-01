@@ -4079,6 +4079,21 @@ a:hover {
   .dad-hero--desk-corner .dad-hero__btn { padding: 12px 22px; font-size: 14px; }
 }
 
+/* Mobile "photo on top" puts the copy on a white panel, so seasonal
+   text colors and shadows (chosen for text over the photo) are
+   reset to brand there. Seasonal fonts and button colors still apply.
+   The "text card over photo" mobile layout keeps everything. */
+@media screen and (max-width: 989px) {
+  .dad-hero--stack-mobile .dad-hero__eyebrow { color: var(--accent); }
+  .dad-hero--stack-mobile .dad-hero__eyebrow::before { background: var(--accent); }
+  .dad-hero--stack-mobile .dad-hero__heading { color: var(--dad-ink); }
+  .dad-hero--stack-mobile .dad-hero__script { color: var(--accent); }
+  .dad-hero--stack-mobile .dad-hero__lede { color: var(--dad-ink); }
+  .dad-hero--stack-mobile .dad-hero__eyebrow,
+  .dad-hero--stack-mobile .dad-hero__heading,
+  .dad-hero--stack-mobile .dad-hero__lede { text-shadow: none; }
+}
+
 /* ============================================================
    Facet count hidden (snippets/facets.liquid — guarded stock edit)
    Consolidated products (one product, many variants) made the
