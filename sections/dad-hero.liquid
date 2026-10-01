@@ -44,7 +44,7 @@
   </style>
 {%- endif -%}
 
-<section class="dad-hero{% if section.settings.mobile_layout != 'overlay' %} dad-hero--stack-mobile{% endif %}{% if section.settings.desktop_layout != blank and section.settings.desktop_layout != 'card' %} dad-hero--desk-{{ section.settings.desktop_layout }}{% endif %}{% if section.settings.card_bg_opacity == 0 %} dad-hero--no-card{% endif %}{% if section.settings.text_backdrop != blank and section.settings.text_backdrop != 'none' %} dad-hero--text-{{ section.settings.text_backdrop }}{% endif %}" style="
+<section class="dad-hero{% if section.settings.mobile_layout != 'overlay' %} dad-hero--stack-mobile{% endif %}{% if section.settings.desktop_layout != blank and section.settings.desktop_layout != 'card' %} dad-hero--desk-{{ section.settings.desktop_layout }}{% endif %}{% if section.settings.card_bg_opacity == 0 %} dad-hero--no-card{% endif %}{% if section.settings.heading_font_mode == 'custom' %} dad-hero--season-font{% endif %}{% if section.settings.text_backdrop != blank and section.settings.text_backdrop != 'none' %} dad-hero--text-{{ section.settings.text_backdrop }}{% endif %}" style="
   {%- if section.settings.min_height_desktop -%}--dad-hero-min-h-desktop: {{ section.settings.min_height_desktop }}px;{%- endif -%}
   {%- if section.settings.min_height_mobile -%}--dad-hero-min-h-mobile: {{ section.settings.min_height_mobile }}px;{%- endif -%}
   --dad-hero-card-opacity: {{ section.settings.card_bg_opacity | default: 88 | divided_by: 100.0 }};

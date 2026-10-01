@@ -4093,6 +4093,10 @@ a:hover {
   .dad-hero--stack-mobile .dad-hero__heading,
   .dad-hero--stack-mobile .dad-hero__lede { text-shadow: none; }
 }
+/* Seasonal display fonts run wider than Dimbo; keep the phone headline inside the gutter. */
+@media screen and (max-width: 749px) {
+  .dad-hero--season-font .dad-hero__heading { font-size: clamp(28px, 8.6vw, 40px); }
+}
 
 /* ============================================================
    Facet count hidden (snippets/facets.liquid — guarded stock edit)
