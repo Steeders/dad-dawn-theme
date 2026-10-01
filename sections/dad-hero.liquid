@@ -27,7 +27,7 @@
   <style>#shopify-section-{{ section.id }} .dad-hero { {{ season_vars }} }</style>
 {%- endif -%}
 
-<section class="dad-hero{% if section.settings.mobile_layout != 'overlay' %} dad-hero--stack-mobile{% endif %}{% if section.settings.desktop_layout != blank and section.settings.desktop_layout != 'card' %} dad-hero--desk-{{ section.settings.desktop_layout }}{% endif %}{% if section.settings.card_bg_opacity == 0 %} dad-hero--no-card{% endif %}{% if section.settings.image_focus != blank and section.settings.image_focus != 'auto' %} dad-hero--focus{% endif %}" style="
+<section class="dad-hero{% if section.settings.mobile_layout != 'overlay' %} dad-hero--stack-mobile{% endif %}{% if section.settings.desktop_layout != blank and section.settings.desktop_layout != 'card' %} dad-hero--desk-{{ section.settings.desktop_layout }}{% endif %}{% if section.settings.card_bg_opacity == 0 %} dad-hero--no-card{% endif %}{% if section.settings.image_focus != blank and section.settings.image_focus != 'auto' %} dad-hero--focus{% endif %}{% unless section.settings.mobile_text_colors == 'desktop' %} dad-hero--mobile-brand-text{% endunless %}" style="
   {%- case section.settings.image_focus -%}
     {%- when 'top' -%}--dad-hero-img-pos: 50% 0%;
     {%- when 'bottom' -%}--dad-hero-img-pos: 50% 100%;
@@ -238,6 +238,17 @@
       ],
       "default": "5 / 4",
       "info": "Only used with Photo on top. Set the image's focal point so the crop keeps the kids and product in frame."
+    },
+    {
+      "type": "select",
+      "id": "mobile_text_colors",
+      "label": "Mobile text colors",
+      "options": [
+        { "value": "brand", "label": "Brand colors (safe on the white panel)" },
+        { "value": "desktop", "label": "Same as desktop" }
+      ],
+      "default": "brand",
+      "info": "The desktop colors are usually picked for text over the photo. With Photo on top, the copy sits on white, so brand colors keep it readable. Buttons keep their colors either way."
     },
     {
       "type": "image_picker",

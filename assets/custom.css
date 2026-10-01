@@ -4072,6 +4072,17 @@ a:hover {
   .dad-hero--desk-corner .dad-hero__btn { padding: 12px 22px; font-size: 14px; }
 }
 
+/* "Mobile text colors: Brand" — phones keep brand text colors so copy
+   chosen for text-over-photo never goes white-on-white on the sheet.
+   Buttons keep their seasonal colors. */
+@media screen and (max-width: 989px) {
+  .dad-hero--mobile-brand-text .dad-hero__eyebrow { color: var(--accent); }
+  .dad-hero--mobile-brand-text .dad-hero__eyebrow::before { background: var(--accent); }
+  .dad-hero--mobile-brand-text .dad-hero__heading { color: var(--dad-ink); }
+  .dad-hero--mobile-brand-text .dad-hero__script { color: var(--accent); }
+  .dad-hero--mobile-brand-text .dad-hero__lede { color: var(--dad-ink); }
+}
+
 /* ============================================================
    Facet count hidden (snippets/facets.liquid — guarded stock edit)
    Consolidated products (one product, many variants) made the
