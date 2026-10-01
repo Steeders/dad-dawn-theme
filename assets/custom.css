@@ -3969,7 +3969,7 @@ a:hover {
     display: grid;
     grid-template-columns: 1.15fr 1fr;
     column-gap: 48px;
-    align-items: center;
+    align-items: end;
   }
   .dad-hero--desk-band .dad-hero__copy,
   .dad-hero--desk-band .dad-hero__meta { display: block; }
@@ -3979,6 +3979,7 @@ a:hover {
     margin: 0;
   }
   .dad-hero--desk-band .dad-hero__lede { margin-bottom: 20px; max-width: 40ch; }
+  .dad-hero--desk-band .dad-hero__meta { padding-bottom: 6px; }
 
   /* Text left, photo right: solid white panel, photo becomes a column
      and nothing overlaps it. */
