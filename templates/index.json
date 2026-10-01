@@ -81,7 +81,7 @@
           "type": "tile",
           "settings": {
             "collection": "dot-markers-2",
-            "image": "shopify://shop_images/DoaDot-DotMarkerEdits-8.jpg",
+            "image": "shopify://shop_images/fall-tile-dot-markers.webp",
             "heading": "Dot Markers",
             "subtext": "",
             "link": ""
@@ -91,7 +91,7 @@
           "type": "tile",
           "settings": {
             "collection": "watercolor-collection",
-            "image": "shopify://shop_images/Rainbowbright1.jpg",
+            "image": "shopify://shop_images/fall-tile-watercolors.webp",
             "heading": "Watercolors",
             "subtext": "",
             "link": ""
@@ -112,7 +112,7 @@
           "type": "tile",
           "settings": {
             "collection": "crayons-coloring",
-            "image": "shopify://shop_images/2026-05-01_Do-a-Dot_batch1-4.webp",
+            "image": "shopify://shop_images/fall-tile-crayons.webp",
             "heading": "Crayons",
             "subtext": "",
             "link": ""
@@ -133,7 +133,7 @@
           "type": "tile",
           "settings": {
             "collection": "creative-activity-books-2",
-            "image": "shopify://shop_images/DoaDot-DotMarkerEdits-36.webp",
+            "image": "shopify://shop_images/fall-tile-activities.webp",
             "heading": "Activities",
             "subtext": "",
             "link": ""
