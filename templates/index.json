@@ -91,7 +91,7 @@
           "type": "tile",
           "settings": {
             "collection": "watercolor-collection",
-            "image": "shopify://shop_images/fall-tile-watercolors.webp",
+            "image": "shopify://shop_images/fall-tile-watercolors_ee8f1d78-fdaa-4bfb-81f2-9f88125af209.webp",
             "heading": "Watercolors",
             "subtext": "",
             "link": ""
@@ -112,7 +112,7 @@
           "type": "tile",
           "settings": {
             "collection": "crayons-coloring",
-            "image": "shopify://shop_images/fall-tile-crayons.webp",
+            "image": "shopify://shop_images/fall-tile-crayons_653bb9ef-b0b6-445a-bd93-2f54293f2ef3.webp",
             "heading": "Crayons",
             "subtext": "",
             "link": ""
