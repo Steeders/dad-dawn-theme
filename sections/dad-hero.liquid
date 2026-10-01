@@ -22,29 +22,12 @@
       endif
     endif
   endfor
-  if section.settings.heading_font_mode == 'custom' and section.settings.heading_font != blank
-    assign f = section.settings.heading_font
-    assign season_vars = season_vars | append: '--dad-hero-font-heading:' | append: f.family | append: ', ' | append: f.fallback_families | append: ';--dad-hero-font-heading-weight:' | append: f.weight | append: ';--dad-hero-font-heading-style:' | append: f.style | append: ';'
-  endif
-  if section.settings.script_font_mode == 'custom' and section.settings.script_font != blank
-    assign f = section.settings.script_font
-    assign season_vars = season_vars | append: '--dad-hero-font-script:' | append: f.family | append: ', ' | append: f.fallback_families | append: ';--dad-hero-font-script-weight:' | append: f.weight | append: ';--dad-hero-font-script-style:' | append: f.style | append: ';'
-  endif
 -%}
 {%- if season_vars != blank -%}
-  {%- comment -%} Font families carry quotes, so these live in a style block, not the style attribute. {%- endcomment -%}
-  <style>
-    {%- if section.settings.heading_font_mode == 'custom' and section.settings.heading_font != blank -%}
-      {{ section.settings.heading_font | font_face: font_display: 'swap' }}
-    {%- endif -%}
-    {%- if section.settings.script_font_mode == 'custom' and section.settings.script_font != blank -%}
-      {{ section.settings.script_font | font_face: font_display: 'swap' }}
-    {%- endif -%}
-    #shopify-section-{{ section.id }} .dad-hero { {{ season_vars }} }
-  </style>
+  <style>#shopify-section-{{ section.id }} .dad-hero { {{ season_vars }} }</style>
 {%- endif -%}
 
-<section class="dad-hero{% if section.settings.mobile_layout != 'overlay' %} dad-hero--stack-mobile{% endif %}{% if section.settings.desktop_layout != blank and section.settings.desktop_layout != 'card' %} dad-hero--desk-{{ section.settings.desktop_layout }}{% endif %}{% if section.settings.card_bg_opacity == 0 %} dad-hero--no-card{% endif %}{% if section.settings.heading_font_mode == 'custom' %} dad-hero--season-font{% endif %}{% if section.settings.text_backdrop != blank and section.settings.text_backdrop != 'none' %} dad-hero--text-{{ section.settings.text_backdrop }}{% endif %}" style="
+<section class="dad-hero{% if section.settings.mobile_layout != 'overlay' %} dad-hero--stack-mobile{% endif %}{% if section.settings.desktop_layout != blank and section.settings.desktop_layout != 'card' %} dad-hero--desk-{{ section.settings.desktop_layout }}{% endif %}{% if section.settings.card_bg_opacity == 0 %} dad-hero--no-card{% endif %}" style="
   {%- if section.settings.min_height_desktop -%}--dad-hero-min-h-desktop: {{ section.settings.min_height_desktop }}px;{%- endif -%}
   {%- if section.settings.min_height_mobile -%}--dad-hero-min-h-mobile: {{ section.settings.min_height_mobile }}px;{%- endif -%}
   --dad-hero-card-opacity: {{ section.settings.card_bg_opacity | default: 88 | divided_by: 100.0 }};
@@ -243,7 +226,7 @@
     {
       "type": "header",
       "content": "Seasonal colors",
-      "info": "Leave a color empty (or transparent) to use the brand default."
+      "info": "Each one is optional. Leave it empty (or transparent) to use the brand color. Colors apply on desktop and mobile; on phones the copy sits on a white panel."
     },
     { "type": "color", "id": "color_eyebrow", "label": "Eyebrow" },
     { "type": "color", "id": "color_heading", "label": "Heading" },
@@ -253,56 +236,6 @@
     { "type": "color", "id": "color_btn1_text", "label": "Primary button text" },
     { "type": "color", "id": "color_btn2_bg", "label": "Ghost button" },
     { "type": "color", "id": "color_btn2_text", "label": "Ghost button text and outline" },
-    {
-      "type": "select",
-      "id": "text_backdrop",
-      "label": "Help the text stand out",
-      "options": [
-        { "value": "none", "label": "No" },
-        { "value": "shadow", "label": "Soft dark shadow (for light text)" },
-        { "value": "glow", "label": "Soft light glow (for dark text)" }
-      ],
-      "default": "none",
-      "info": "Useful when the card background is turned off and the text sits straight on the photo."
-    },
-    {
-      "type": "header",
-      "content": "Seasonal fonts"
-    },
-    {
-      "type": "select",
-      "id": "heading_font_mode",
-      "label": "Heading font",
-      "options": [
-        { "value": "brand", "label": "Brand (Dimbo)" },
-        { "value": "custom", "label": "Pick one below" }
-      ],
-      "default": "brand"
-    },
-    {
-      "type": "font_picker",
-      "id": "heading_font",
-      "label": "Seasonal heading font",
-      "default": "assistant_n4",
-      "info": "Only used when Heading font is set to Pick one below."
-    },
-    {
-      "type": "select",
-      "id": "script_font_mode",
-      "label": "Script accent font",
-      "options": [
-        { "value": "brand", "label": "Brand (Kids Script)" },
-        { "value": "custom", "label": "Pick one below" }
-      ],
-      "default": "brand"
-    },
-    {
-      "type": "font_picker",
-      "id": "script_font",
-      "label": "Seasonal script font",
-      "default": "assistant_n4",
-      "info": "Only used when Script accent font is set to Pick one below."
-    },
     {
       "type": "header",
       "content": "Card appearance"
