@@ -17,7 +17,7 @@
         "announcement_t6UiGF": {
           "type": "announcement",
           "settings": {
-            "text": "Fall Into Fun Crafts & Activities For Everyone",
+            "text": "🎃 Fall Into Fun Crafts & Activities For Everyone 🎃",
             "link": ""
           }
         },
@@ -45,9 +45,9 @@
       "settings": {
         "auto_rotate": false,
         "change_slides_speed": 5,
-        "color_scheme": "",
-        "custom_text_color": "",
-        "custom_background_color": "",
+        "color_scheme": "scheme-4",
+        "custom_text_color": "#FFFFFF",
+        "custom_background_color": "#DF5605",
         "show_line_separator": true,
         "show_social": false,
         "enable_country_selector": false,
