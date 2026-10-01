@@ -3925,6 +3925,139 @@ a:hover {
   }
 }
 
+/* --- Desktop layouts (section setting "Where the text sits") ----
+   Default is the card above. Each variant below only applies at
+   desktop widths, so the mobile stack/overlay code is untouched.
+   The crop comes from the image's focal point (image_tag writes
+   object-position inline). ---------------------------------------- */
+.dad-hero__copy,
+.dad-hero__meta { display: contents; }
+
+@media screen and (min-width: 990px) {
+  /* Strip along the bottom: full-width frosted band over the tabletop.
+     Headline left, lede + buttons right. */
+  .dad-hero--desk-band .dad-hero__inner {
+    max-width: none;
+    padding: 0;
+    align-items: flex-end;
+  }
+  .dad-hero--desk-band .dad-hero__card {
+    max-width: none;
+    width: 100%;
+    border-radius: 0;
+    padding: 34px max(5rem, calc((100% - var(--page-width, 120rem)) / 2 + 5rem)) 38px;
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    column-gap: 48px;
+    align-items: center;
+  }
+  .dad-hero--desk-band .dad-hero__copy,
+  .dad-hero--desk-band .dad-hero__meta { display: block; }
+  .dad-hero--desk-band .dad-hero__eyebrow { margin-bottom: 10px; }
+  .dad-hero--desk-band .dad-hero__heading {
+    font-size: clamp(44px, 4.6vw, 66px);
+    margin: 0;
+  }
+  .dad-hero--desk-band .dad-hero__lede { margin-bottom: 20px; max-width: 40ch; }
+
+  /* Text left, photo right: solid white panel, photo becomes a column
+     and nothing overlaps it. */
+  .dad-hero--desk-split {
+    display: grid;
+    grid-template-columns: 42fr 58fr;
+    background: var(--dad-white);
+  }
+  .dad-hero--desk-split .dad-hero__photo {
+    position: relative;
+    grid-column: 2;
+    grid-row: 1;
+    min-height: var(--dad-hero-min-h-desktop, 720px);
+    border-radius: var(--r-xl, 32px) 0 0 var(--r-xl, 32px);
+    overflow: hidden;
+  }
+  .dad-hero--desk-split .dad-hero__inner {
+    grid-column: 1;
+    grid-row: 1;
+    max-width: none;
+    margin: 0;
+    padding: 72px 56px 72px clamp(5rem, 8vw, 10rem);
+    align-items: center;
+  }
+  .dad-hero--desk-split .dad-hero__card {
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    padding: 0;
+    border-radius: 0;
+    max-width: 520px;
+  }
+  .dad-hero--desk-split .dad-hero__heading { font-size: clamp(52px, 5.2vw, 76px); }
+
+  /* Text over a darkened top: no card, white copy on a shade that
+     fades out before the subjects. Needs a photo with a dark top. */
+  .dad-hero--desk-scrim .dad-hero__photo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgb(var(--dad-scrim-rgb) / 0.82) 0%,
+      rgb(var(--dad-scrim-rgb) / 0.62) 26%,
+      rgb(var(--dad-scrim-rgb) / 0) 48%
+    );
+    pointer-events: none;
+  }
+  .dad-hero--desk-scrim .dad-hero__inner {
+    align-items: flex-start;
+    padding-top: 44px;
+  }
+  .dad-hero--desk-scrim .dad-hero__card {
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    padding: 0;
+    border-radius: 0;
+    max-width: none;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    column-gap: 48px;
+    align-items: start;
+  }
+  .dad-hero--desk-scrim .dad-hero__copy,
+  .dad-hero--desk-scrim .dad-hero__meta { display: block; }
+  .dad-hero--desk-scrim .dad-hero__meta { padding-top: 30px; }
+  .dad-hero--desk-scrim .dad-hero__eyebrow { color: var(--dad-yellow); margin-bottom: 10px; }
+  .dad-hero--desk-scrim .dad-hero__eyebrow::before { background: var(--dad-yellow); }
+  .dad-hero--desk-scrim .dad-hero__heading {
+    color: var(--dad-white);
+    font-size: clamp(48px, 4.8vw, 68px);
+    margin: 0;
+  }
+  .dad-hero--desk-scrim .dad-hero__script { color: var(--dad-yellow); }
+  .dad-hero--desk-scrim .dad-hero__lede { color: var(--dad-white); margin-bottom: 18px; max-width: 40ch; }
+  .dad-hero--desk-scrim .dad-hero__btn--ghost { border-color: var(--dad-white); }
+
+  /* Small card in the bottom corner: today's card, smaller, parked
+     over the tabletop. */
+  .dad-hero--desk-corner .dad-hero__inner {
+    align-items: flex-end;
+    padding-bottom: 40px;
+  }
+  .dad-hero--desk-corner .dad-hero__card {
+    max-width: 470px;
+    padding: 32px 40px;
+    border-radius: var(--r-xl, 28px);
+  }
+  .dad-hero--desk-corner .dad-hero__eyebrow { margin-bottom: 12px; }
+  .dad-hero--desk-corner .dad-hero__heading {
+    font-size: clamp(40px, 3.6vw, 52px);
+    margin-bottom: 14px;
+  }
+  .dad-hero--desk-corner .dad-hero__lede { font-size: 15px; margin-bottom: 20px; }
+  .dad-hero--desk-corner .dad-hero__btn { padding: 12px 22px; font-size: 14px; }
+}
+
 /* ============================================================
    Facet count hidden (snippets/facets.liquid — guarded stock edit)
    Consolidated products (one product, many variants) made the

@@ -59,6 +59,7 @@
   /* Ink — never pure black. */
   --dad-ink:         #2b2a2d;
   --dad-ink-muted:   #6a6770;
+  --dad-scrim-rgb:   18 30 16;      /* dark-foliage shade behind hero text (rgb() channels) */
   --dad-ink-soft:    #9c98a4;
   --dad-rule:        #e8e2d8;
 

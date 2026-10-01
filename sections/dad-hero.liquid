@@ -3,7 +3,7 @@
   layout="image" (full-bleed lifestyle photo + frosted-white copy card).
 {%- endcomment -%}
 
-<section class="dad-hero{% if section.settings.mobile_layout != 'overlay' %} dad-hero--stack-mobile{% endif %}" style="
+<section class="dad-hero{% if section.settings.mobile_layout != 'overlay' %} dad-hero--stack-mobile{% endif %}{% if section.settings.desktop_layout != blank and section.settings.desktop_layout != 'card' %} dad-hero--desk-{{ section.settings.desktop_layout }}{% endif %}" style="
   {%- if section.settings.min_height_desktop -%}--dad-hero-min-h-desktop: {{ section.settings.min_height_desktop }}px;{%- endif -%}
   {%- if section.settings.min_height_mobile -%}--dad-hero-min-h-mobile: {{ section.settings.min_height_mobile }}px;{%- endif -%}
   --dad-hero-card-opacity: {{ section.settings.card_bg_opacity | default: 88 | divided_by: 100.0 }};
@@ -59,6 +59,7 @@
 
   <div class="dad-hero__inner page-width">
     <div class="dad-hero__card">
+      <div class="dad-hero__copy">
       {%- if section.settings.eyebrow != blank -%}
         <span class="dad-hero__eyebrow">{{ section.settings.eyebrow }}</span>
       {%- endif -%}
@@ -69,7 +70,9 @@
           <span class="dad-hero__script">{{ section.settings.script_accent }}</span>
         {%- endif -%}
       </h1>
+      </div>
 
+      <div class="dad-hero__meta">
       {%- if section.settings.lede != blank -%}
         <p class="dad-hero__lede">{{ section.settings.lede }}</p>
       {%- endif -%}
@@ -89,6 +92,7 @@
           {%- endif -%}
         </div>
       {%- endif -%}
+      </div>
     </div>
   </div>
 </section>
@@ -141,6 +145,24 @@
       "step": 20,
       "default": 480,
       "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Desktop layout"
+    },
+    {
+      "type": "select",
+      "id": "desktop_layout",
+      "label": "Where the text sits (desktop only)",
+      "options": [
+        { "value": "card", "label": "Text card over photo" },
+        { "value": "band", "label": "Strip along the bottom" },
+        { "value": "split", "label": "Text left, photo right" },
+        { "value": "scrim", "label": "Text over a darkened top" },
+        { "value": "corner", "label": "Small card in the bottom corner" }
+      ],
+      "default": "card",
+      "info": "Pick whichever keeps faces clear for this photo. Mobile is not affected. To change the crop, set the photo's focal point under Content → Files."
     },
     {
       "type": "header",
