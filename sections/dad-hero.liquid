@@ -27,7 +27,14 @@
   <style>#shopify-section-{{ section.id }} .dad-hero { {{ season_vars }} }</style>
 {%- endif -%}
 
-<section class="dad-hero{% if section.settings.mobile_layout != 'overlay' %} dad-hero--stack-mobile{% endif %}{% if section.settings.desktop_layout != blank and section.settings.desktop_layout != 'card' %} dad-hero--desk-{{ section.settings.desktop_layout }}{% endif %}{% if section.settings.card_bg_opacity == 0 %} dad-hero--no-card{% endif %}" style="
+<section class="dad-hero{% if section.settings.mobile_layout != 'overlay' %} dad-hero--stack-mobile{% endif %}{% if section.settings.desktop_layout != blank and section.settings.desktop_layout != 'card' %} dad-hero--desk-{{ section.settings.desktop_layout }}{% endif %}{% if section.settings.card_bg_opacity == 0 %} dad-hero--no-card{% endif %}{% if section.settings.image_focus != blank and section.settings.image_focus != 'auto' %} dad-hero--focus{% endif %}" style="
+  {%- case section.settings.image_focus -%}
+    {%- when 'top' -%}--dad-hero-img-pos: 50% 0%;
+    {%- when 'bottom' -%}--dad-hero-img-pos: 50% 100%;
+    {%- when 'left' -%}--dad-hero-img-pos: 0% 50%;
+    {%- when 'right' -%}--dad-hero-img-pos: 100% 50%;
+    {%- when 'center' -%}--dad-hero-img-pos: 50% 50%;
+  {%- endcase -%}
   {%- if section.settings.min_height_desktop -%}--dad-hero-min-h-desktop: {{ section.settings.min_height_desktop }}px;{%- endif -%}
   {%- if section.settings.min_height_mobile -%}--dad-hero-min-h-mobile: {{ section.settings.min_height_mobile }}px;{%- endif -%}
   --dad-hero-card-opacity: {{ section.settings.card_bg_opacity | default: 88 | divided_by: 100.0 }};
@@ -149,6 +156,21 @@
       "id": "video",
       "label": "Background video",
       "info": "Shopify-hosted video. Used when Background media is set to Video."
+    },
+    {
+      "type": "select",
+      "id": "image_focus",
+      "label": "Photo focus",
+      "options": [
+        { "value": "auto", "label": "Use the photo's focal point" },
+        { "value": "center", "label": "Center" },
+        { "value": "top", "label": "Top" },
+        { "value": "bottom", "label": "Bottom" },
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "auto",
+      "info": "Which part of the photo stays in view when the screen shape crops it. Applies on desktop and mobile. For a precise point, leave this on focal point and set it on the image under Content → Files."
     },
     {
       "type": "range",

@@ -3934,6 +3934,12 @@ a:hover {
 .dad-hero__copy,
 .dad-hero__meta { display: contents; }
 
+/* "Photo focus" setting: overrides the image's own focal point. */
+.dad-hero--focus .dad-hero__photo img,
+.dad-hero--focus .dad-hero__photo video {
+  object-position: var(--dad-hero-img-pos, 50% 50%) !important;
+}
+
 /* Card opacity 0 = text straight on the photo: drop the blur too. */
 .dad-hero--no-card .dad-hero__card {
   backdrop-filter: none;
