@@ -1,0 +1,66 @@
+{% comment %}
+  Do-A-Dot kit picker: one pill per variant, named by the variant's
+  custom.kit_name metafield (falls back to the variant title).
+
+  Rendered by dad-variant-image-swatches when the product has
+  custom.kit_picker_label. The stock option picker still renders (hidden)
+  next to it, because Dawn's product-info.js reads the selected options
+  from <variant-selects>. Choosing a kit sets those stock inputs to the
+  variant's option values and fires the change Dawn listens for, so price,
+  media, URL, variant id and the buy button all update the normal way.
+  See assets/dad-kit-picker.js.
+
+  Accepts:
+  - product: {Object}
+  - label: {String} legend text (the product's custom.kit_picker_label)
+
+  Usage:
+  {% render 'dad-kit-picker', product: product, label: kit_label %}
+{% endcomment %}
+
+{%- assign kit_selected_id = product.selected_or_first_available_variant.id -%}
+<dad-kit-picker id="DadKitPicker-{{ section.id }}" class="dad-kit-picker" data-section="{{ section.id }}">
+  <fieldset class="product-form__input product-form__input--pill dad-kit-picker__fieldset">
+    <legend class="form__label">{{ label | escape }}</legend>
+    {%- for variant in product.variants -%}
+      {%- liquid
+        assign kit_name = variant.metafields.custom.kit_name.value | default: variant.title
+        assign kit_input_id = 'DadKit-' | append: section.id | append: '-' | append: forloop.index
+      -%}
+      <input
+        type="radio"
+        id="{{ kit_input_id }}"
+        name="dad-kit-{{ section.id }}"
+        value="{{ variant.id }}"
+        data-options="{{ variant.options | json | escape }}"
+        {% if variant.id == kit_selected_id %}
+          checked
+        {% endif %}
+        {% unless variant.available %}
+          disabled
+        {% endunless %}
+      >
+      <label for="{{ kit_input_id }}">
+        {{- kit_name | escape -}}
+        {%- unless variant.available -%}
+          <span class="visually-hidden">, {{ 'products.product.sold_out' | t }}</span>
+        {%- endunless -%}
+      </label>
+    {%- endfor -%}
+  </fieldset>
+</dad-kit-picker>
+<script src="{{ 'dad-kit-picker.js' | asset_url }}" defer="defer"></script>
+
+{% stylesheet %}
+  .dad-kit-picker__fieldset {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-2);
+  }
+  .dad-kit-picker__fieldset > .form__label {
+    flex-basis: 100%;
+  }
+  .dad-kit-picker__fieldset input[type='radio'] + label {
+    margin: 0;
+  }
+{% endstylesheet %}

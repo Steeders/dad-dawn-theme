@@ -18,6 +18,14 @@
 {% endcomment %}
 
 {%- unless product.has_only_default_variant -%}
+  {%- comment -%}
+    Kit picker: when the product sets custom.kit_picker_label, show one pill
+    per variant (snippets/dad-kit-picker.liquid) and keep the stock picker
+    below in the DOM but hidden, because Dawn's JS drives variant changes
+    through it.
+  {%- endcomment -%}
+  {%- assign kit_label = product.metafields.custom.kit_picker_label.value -%}
+  {%- capture dad_stock_picker -%}
   {%- if product.options.size == 1 -%}
     <variant-selects
       id="variant-selects-{{ section.id }}"
@@ -132,5 +140,12 @@
       block: block,
       product_form_id: product_form_id
     %}
+  {%- endif -%}
+  {%- endcapture -%}
+  {%- if kit_label != blank -%}
+    {% render 'dad-kit-picker', product: product, label: kit_label %}
+    <div class="dad-kit-picker__stock" hidden>{{ dad_stock_picker }}</div>
+  {%- else -%}
+    {{ dad_stock_picker }}
   {%- endif -%}
 {%- endunless -%}
