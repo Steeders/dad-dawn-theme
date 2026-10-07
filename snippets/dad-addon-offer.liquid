@@ -1,0 +1,147 @@
+{% comment %}
+  Do-A-Dot add-on offer (main-product block "Add-on offer").
+
+  Shows a checkbox offering the selected variant's custom.addon_variant
+  (a variant_reference) at its normal price. Renders only when that metafield
+  is set and the add-on variant is available. The wrapper always renders so
+  assets/dad-addon-offer.js can refill it from the section HTML Dawn fetches
+  on every variant change.
+
+  On add to cart with the box checked, the add-on is added as its own line
+  (qty 1, no discount) just before the main item; see assets/dad-addon-offer.js.
+
+  Accepts:
+  - product: {Object}
+  - block: {Object}
+  - product_form_id: {String}
+
+  Usage:
+  {% render 'dad-addon-offer', product: product, block: block, product_form_id: product_form_id %}
+{% endcomment %}
+
+{%- liquid
+  assign addon_main = product.selected_or_first_available_variant
+  assign addon = addon_main.metafields.custom.addon_variant.value
+  assign addon_show = false
+  if addon != blank and addon.available
+    assign addon_show = true
+  endif
+-%}
+<dad-addon-offer
+  id="DadAddon-{{ section.id }}"
+  class="dad-addon-offer"
+  data-section="{{ section.id }}"
+  data-form-id="{{ product_form_id }}"
+  {{ block.shopify_attributes }}
+>
+  {%- if addon_show -%}
+    {%- liquid
+      assign addon_image = addon.featured_image | default: addon.product.featured_image
+      assign addon_name = addon.product.title
+      unless addon.product.has_only_default_variant
+        assign addon_name = addon.title | append: ' ' | append: addon.product.title
+      endunless
+      assign addon_label = block.settings.label_prefix | strip | append: ' ' | append: addon_name | strip
+    -%}
+    <label class="dad-addon-offer__row" for="DadAddonCheck-{{ section.id }}">
+      <input
+        type="checkbox"
+        id="DadAddonCheck-{{ section.id }}"
+        class="dad-addon-offer__check"
+        data-addon-variant-id="{{ addon.id }}"
+        {% if block.settings.checked_by_default %}
+          checked
+        {% endif %}
+      >
+      {%- if addon_image != blank -%}
+        <span class="dad-addon-offer__thumb">
+          {{
+            addon_image
+            | image_url: width: 168
+            | image_tag: width: 56, height: 56, widths: '56, 112, 168', sizes: '56px', alt: '', loading: 'lazy'
+          }}
+        </span>
+      {%- endif -%}
+      <span class="dad-addon-offer__text">
+        <span class="dad-addon-offer__label">{{ addon_label | escape }}</span>
+        <span class="dad-addon-offer__price">+{{ addon.price | money }}</span>
+      </span>
+    </label>
+  {%- elsif request.design_mode -%}
+    <p class="dad-addon-offer__hint">
+      Add-on offer is hidden for this variant: it has no custom.addon_variant, or the add-on is sold out.
+    </p>
+  {%- endif -%}
+</dad-addon-offer>
+<script src="{{ 'dad-addon-offer.js' | asset_url }}" defer="defer"></script>
+
+{% stylesheet %}
+  .dad-addon-offer {
+    display: block;
+    margin: var(--s-2) 0 var(--s-4);
+  }
+  .dad-addon-offer:empty {
+    display: none;
+  }
+  .dad-addon-offer__row {
+    display: flex;
+    align-items: center;
+    gap: var(--s-3);
+    padding: var(--s-3);
+    border: 1.5px solid var(--border);
+    border-radius: var(--r-md);
+    background: var(--bg-elev);
+    cursor: pointer;
+    transition: border-color var(--dur-fast);
+  }
+  .dad-addon-offer__row:has(.dad-addon-offer__check:checked) {
+    border-color: var(--border-strong);
+  }
+  .dad-addon-offer__check {
+    flex: none;
+    width: var(--s-5);
+    height: var(--s-5);
+    margin: 0;
+    accent-color: var(--accent);
+    cursor: pointer;
+  }
+  .dad-addon-offer__check:focus-visible {
+    outline: none;
+    box-shadow: var(--shadow-focus);
+  }
+  .dad-addon-offer__thumb {
+    flex: none;
+    width: calc(var(--s-12) + var(--s-2));
+    height: calc(var(--s-12) + var(--s-2));
+    border-radius: var(--r-sm);
+    overflow: hidden;
+    background: var(--dad-cream);
+  }
+  .dad-addon-offer__thumb img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .dad-addon-offer__text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-1);
+    min-width: 0;
+    font-family: var(--font-body);
+    font-size: var(--fs-small);
+    line-height: 1.3;
+    color: var(--fg);
+  }
+  .dad-addon-offer__label {
+    font-weight: 700;
+  }
+  .dad-addon-offer__price {
+    color: var(--fg-muted);
+  }
+  .dad-addon-offer__hint {
+    margin: 0;
+    font-size: var(--fs-small);
+    color: var(--fg-muted);
+  }
+{% endstylesheet %}

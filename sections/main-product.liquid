@@ -498,6 +498,8 @@
 
               {%- when 'variant_picker' -%}
                 {% render 'dad-variant-image-swatches', product: product, block: block, product_form_id: product_form_id %}
+              {%- when 'dad_addon_offer' -%}
+                {% render 'dad-addon-offer', product: product, block: block, product_form_id: product_form_id %}
               {%- when 'buy_buttons' -%}
                 {%- render 'buy-buttons',
                   block: block,
@@ -952,6 +954,29 @@
           "default": true,
           "label": "t:sections.main-product.blocks.buy_buttons.settings.show_gift_card_recipient.label",
           "info": "t:sections.main-product.blocks.buy_buttons.settings.show_gift_card_recipient.info"
+        }
+      ]
+    },
+    {
+      "type": "dad_addon_offer",
+      "name": "Add-on offer",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Offers the selected variant's custom.addon_variant as a checkbox. Hidden when the variant has none or the add-on is sold out."
+        },
+        {
+          "type": "text",
+          "id": "label_prefix",
+          "label": "Label prefix",
+          "default": "Add a"
+        },
+        {
+          "type": "checkbox",
+          "id": "checked_by_default",
+          "label": "Checked by default",
+          "default": false
         }
       ]
     },
