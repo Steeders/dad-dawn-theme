@@ -11,6 +11,22 @@
   "name": "t:sections.footer.name",
   "type": "footer",
   "sections": {
+    "colorful_mail": {
+      "type": "dad-colorful-mail",
+      "settings": {
+        "heading": "Get colorful mail.",
+        "body": "<p>First dibs on new launches, color drops, and ideas for rainy-day projects. <strong>10% off your first order</strong> for joining.</p>",
+        "klaviyo_form_id": "VGQzXB",
+        "klaviyo_company_id": "",
+        "consent": "By signing up you agree to receive emails from Do-A-Dot Art. Unsubscribe anytime.",
+        "placeholder": "you@household.com",
+        "button_label": "join the club",
+        "card_background": "#fbe3ea",
+        "color_scheme": "",
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
+    },
     "footer": {
       "type": "dad-footer",
       "blocks": {
@@ -58,17 +74,14 @@
         "signoff": "hi, friends!",
         "description": "<p>Mess-free, big-hearted craft supplies from a 37-year-old family business. Made for tiny hands. Loved by big imaginations.</p>",
         "help_label": "questions? we answer them ourselves.",
-        "help_phone": "800-436-8278",
-        "help_email": "hello@dotart.com",
+        "help_phone": "818-597-9430",
+        "help_email": "orderprocessing@dotart.com",
+        "instagram_url": "",
+        "tiktok_url": "",
+        "youtube_url": "",
+        "pinterest_url": "",
         "made_in_label": "made in the usa",
         "copyright": "© 2026 Do-A-Dot Art, Inc. Made for little hands."
-      }
-    },
-    "colorful_mail": {
-      "type": "dad-colorful-mail",
-      "settings": {
-        "body": "<p>First dibs on new launches, color drops, and ideas for rainy-day projects. <strong>10% off your first order</strong> for joining.</p>",
-        "klaviyo_form_id": "VGQzXB"
       }
     }
   },
