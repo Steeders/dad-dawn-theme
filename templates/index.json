@@ -12,7 +12,7 @@
     "dad_hero": {
       "type": "dad-hero",
       "settings": {
-        "media_type": "image",
+        "media_type": "video",
         "image": "shopify://shop_images/dotart-hero-fall-leaf-rubbing-2026-11.jpg",
         "image_focus": "auto",
         "min_height_desktop": 720,
@@ -37,7 +37,8 @@
         "btn1_label": "shop all",
         "btn1_link": "shopify://collections/all",
         "btn2_label": "Shop best sellers",
-        "btn2_link": "shopify://collections/best-sellers"
+        "btn2_link": "shopify://collections/best-sellers",
+        "video": "shopify://files/videos/dotart-hero-holiday-crafts-2026-11.mp4"
       }
     },
     "dad_hero_NnXHaP": {
