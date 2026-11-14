@@ -12,7 +12,7 @@
     "dad_hero": {
       "type": "dad-hero",
       "settings": {
-        "media_type": "image",
+        "media_type": "video",
         "image": "shopify://shop_images/dotart-hero-fall-leaf-rubbing-2026-11.jpg",
         "image_focus": "auto",
         "min_height_desktop": 720,
@@ -23,22 +23,23 @@
         "mobile_text_colors": "brand",
         "color_eyebrow": "#D90808",
         "color_heading": "#ffffff",
-        "color_script": "#000000",
+        "color_script": "#FFD241",
         "color_lede": "#ffffff",
-        "color_btn1_bg": "#FF0000",
-        "color_btn1_text": "",
+        "color_btn1_bg": "#D90808",
+        "color_btn1_text": "#ffffff",
         "color_btn2_bg": "#ffffff",
-        "color_btn2_text": "#ff5e00",
+        "color_btn2_text": "#1B4D2E",
         "card_bg_opacity": 24,
         "card_position": "flex-end",
         "eyebrow": "the whole craft closet",
-        "heading": "Fall into fun crafts & activities",
+        "heading": "Holiday crafts & activities",
         "script_accent": "for everyone",
         "lede": "Mess-free art supplies made for little hands and big imaginations.",
         "btn1_label": "shop all",
         "btn1_link": "shopify://collections/all",
         "btn2_label": "Shop best sellers",
-        "btn2_link": "shopify://collections/best-sellers"
+        "btn2_link": "shopify://collections/best-sellers",
+        "video": "shopify://files/videos/dotart-hero-holiday-crafts-v6-2026-11.mp4"
       }
     },
     "dad_hero_NnXHaP": {
