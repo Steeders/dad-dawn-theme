@@ -115,7 +115,7 @@
           "type": "tile",
           "settings": {
             "collection": "dot-markers-2",
-            "image": "shopify://shop_images/holiday-tile-dot-markers.webp",
+            "image": "shopify://shop_images/holiday-tile-dot-markers-v2.webp",
             "heading": "Dot Markers",
             "subtext": "",
             "link": ""
@@ -146,7 +146,7 @@
           "type": "tile",
           "settings": {
             "collection": "crayons-coloring",
-            "image": "shopify://shop_images/holiday-tile-crayons.webp",
+            "image": "shopify://shop_images/holiday-tile-crayons-v2.webp",
             "heading": "Crayons",
             "subtext": "",
             "link": ""
@@ -167,7 +167,7 @@
           "type": "tile",
           "settings": {
             "collection": "creative-activity-books-2",
-            "image": "shopify://shop_images/holiday-tile-activities.webp",
+            "image": "shopify://shop_images/holiday-tile-activities-v2.webp",
             "heading": "Activities",
             "subtext": "",
             "link": ""
