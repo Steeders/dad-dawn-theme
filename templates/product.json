@@ -112,7 +112,7 @@
         "sale_callout": {
           "type": "custom_liquid",
           "settings": {
-            "custom_liquid": "{% render 'dad-sale-callout', title: 'Our Black Friday Sale is on', body: '20% off, already marked down. No code needed. Grab it while supplies last.' %}"
+            "custom_liquid": "{% render 'dad-sale-callout', title: 'Black Friday Sale', body: '20% off sitewide. No code needed.' %}"
           }
         }
       },

@@ -29,8 +29,8 @@
     "sale_strip": {
       "type": "dad-sale-strip",
       "settings": {
-        "eyebrow": "Our Black Friday Sale",
-        "text": "20% off the whole shop, already marked down. No code needed, while supplies last.",
+        "eyebrow": "Black Friday Sale",
+        "text": "20% off sitewide. No code needed.",
         "link": "",
         "color_bg": "#EC1B2A",
         "color_text": "#FFFFFF"
