@@ -5234,7 +5234,7 @@ video.dad-vg-lightbox__media { width: 100%; }
 
 /* Card badge (Sale / Sold out) pinned to the photo's top-left corner.
    Dawn's badge_position grid rule does not apply to the flex card layout above. */
-.card-wrapper .card__inner > .card__content { position: static; }
+.card-wrapper .card.card--media .card__inner > .card__content { position: static; }
 .card-wrapper .card__inner .card__badge {
   position: absolute;
   top: var(--s-2);
