@@ -115,7 +115,7 @@
           "type": "tile",
           "settings": {
             "collection": "dot-markers-2",
-            "image": "shopify://shop_images/fall-tile-dot-markers.webp",
+            "image": "shopify://shop_images/holiday-tile-dot-markers.webp",
             "heading": "Dot Markers",
             "subtext": "",
             "link": ""
@@ -125,7 +125,7 @@
           "type": "tile",
           "settings": {
             "collection": "watercolor-collection",
-            "image": "shopify://shop_images/fall-tile-watercolors_ee8f1d78-fdaa-4bfb-81f2-9f88125af209.webp",
+            "image": "shopify://shop_images/holiday-tile-watercolors.webp",
             "heading": "Watercolors",
             "subtext": "",
             "link": ""
@@ -146,7 +146,7 @@
           "type": "tile",
           "settings": {
             "collection": "crayons-coloring",
-            "image": "shopify://shop_images/fall-tile-crayons_653bb9ef-b0b6-445a-bd93-2f54293f2ef3.webp",
+            "image": "shopify://shop_images/holiday-tile-crayons.webp",
             "heading": "Crayons",
             "subtext": "",
             "link": ""
@@ -167,7 +167,7 @@
           "type": "tile",
           "settings": {
             "collection": "creative-activity-books-2",
-            "image": "shopify://shop_images/fall-tile-activities.webp",
+            "image": "shopify://shop_images/holiday-tile-activities.webp",
             "heading": "Activities",
             "subtext": "",
             "link": ""
@@ -332,7 +332,7 @@
         "btn1_link": "shopify://products/do-a-dot-art-dot-markers",
         "btn2_label": "",
         "btn2_link": "",
-        "image": "shopify://shop_images/DoaDot-DotMarkerEdits-21.webp",
+        "image": "shopify://shop_images/holiday-spotlight-dot-marker.webp",
         "badge_text": "best seller!",
         "panel_color": "#ec1b2a",
         "image_position": "right",
@@ -366,7 +366,7 @@
             "collection": "dot-markers-2",
             "link": "",
             "cta_label": "shop dot markers",
-            "image": "shopify://shop_images/DoaDot-DotMarkerEdits-18.jpg",
+            "image": "shopify://shop_images/holiday-shop-by-craft-dot-markers.webp",
             "bg_color": "#e9f6fd"
           }
         },
