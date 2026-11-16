@@ -1,0 +1,130 @@
+{%- comment -%}
+  Collection title band (a copy of Dawn's main-collection-banner) with an optional
+  callout card on the right: a sale or seasonal message. Turn the callout off in the
+  editor when the promo ends. Stacks under the title on phones.
+{%- endcomment -%}
+{% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
+{{ 'component-collection-hero.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign show_callout = false
+  if section.settings.show_callout and section.settings.callout_text != blank
+    assign show_callout = true
+  endif
+-%}
+
+<div class="collection-hero{% if section.settings.show_collection_image and collection.image %} collection-hero--with-image{% endif %}{% if show_callout %} dad-collection-hero--callout{% endif %} color-{{ section.settings.color_scheme }} gradient">
+  <div class="collection-hero__inner page-width {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
+    <div class="collection-hero__text-wrapper">
+      <h1 class="collection-hero__title">
+        <span class="visually-hidden">{{ 'sections.collection_template.title' | t }}: </span>
+        {{- collection.title | escape -}}
+      </h1>
+
+      {%- if section.settings.show_collection_description and collection.description != blank -%}
+        <div class="collection-hero__description rte">{{ collection.description }}</div>
+      {%- endif -%}
+    </div>
+
+    {%- if show_callout -%}
+      {%- if section.settings.callout_link != blank -%}
+        <a class="dad-collection-callout" href="{{ section.settings.callout_link }}" style="--dad-callout-bg: {{ section.settings.callout_bg }}; --dad-callout-text: {{ section.settings.callout_color }};">
+      {%- else -%}
+        <div class="dad-collection-callout" style="--dad-callout-bg: {{ section.settings.callout_bg }}; --dad-callout-text: {{ section.settings.callout_color }};">
+      {%- endif -%}
+        {%- if section.settings.callout_eyebrow != blank -%}
+          <span class="dad-collection-callout__eyebrow">{{ section.settings.callout_eyebrow }}</span>
+        {%- endif -%}
+        <span class="dad-collection-callout__text">{{ section.settings.callout_text }}</span>
+      {%- if section.settings.callout_link != blank -%}</a>{%- else -%}</div>{%- endif -%}
+    {%- endif -%}
+
+    {%- if section.settings.show_collection_image and collection.image -%}
+      <div class="collection-hero__image-container media gradient">
+        <img
+          srcset="
+            {%- if collection.image.width >= 165 -%}{{ collection.image | image_url: width: 165 }} 165w,{%- endif -%}
+            {%- if collection.image.width >= 360 -%}{{ collection.image | image_url: width: 360 }} 360w,{%- endif -%}
+            {%- if collection.image.width >= 535 -%}{{ collection.image | image_url: width: 535 }} 535w,{%- endif -%}
+            {%- if collection.image.width >= 750 -%}{{ collection.image | image_url: width: 750 }} 750w,{%- endif -%}
+            {%- if collection.image.width >= 1070 -%}{{ collection.image | image_url: width: 1070 }} 1070w,{%- endif -%}
+            {%- if collection.image.width >= 1500 -%}{{ collection.image | image_url: width: 1500 }} 1500w,{%- endif -%}
+            {{ collection.image | image_url }} {{ collection.image.width }}w
+          "
+          src="{{ collection.image | image_url: width: 750 }}"
+          sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc(50vw - 130px), calc(50vw - 55px)"
+          alt="{{ collection.image.alt | escape }}"
+          width="{{ collection.image.width }}"
+          height="{{ collection.image.height }}"
+        >
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .dad-collection-hero--callout .collection-hero__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--s-5);
+  }
+  .dad-collection-hero--callout .collection-hero__title { margin-bottom: 0; }
+  .dad-collection-hero--callout .collection-hero__description.rte { margin-top: var(--s-3); }
+  .dad-collection-callout {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-1);
+    padding: var(--s-4) var(--s-5);
+    border-radius: var(--r-lg);
+    background: var(--dad-callout-bg);
+    color: var(--dad-callout-text);
+    text-decoration: none;
+  }
+  .dad-collection-callout__eyebrow {
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    line-height: 1.1;
+  }
+  .dad-collection-callout__text {
+    font-family: var(--font-body);
+    font-size: var(--fs-body);
+    font-weight: 600;
+    line-height: 1.35;
+  }
+  a.dad-collection-callout:hover .dad-collection-callout__text { text-decoration: underline; }
+  @media screen and (min-width: 750px) {
+    .dad-collection-hero--callout .collection-hero__inner {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--s-8);
+    }
+    .dad-collection-hero--callout .collection-hero__text-wrapper { flex: 1 1 auto; min-width: 0; }
+    .dad-collection-callout {
+      flex: 0 0 auto;
+      max-width: 360px;
+      padding: var(--s-5) var(--s-8);
+      text-align: center;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Collection banner",
+  "class": "section",
+  "settings": [
+    { "type": "checkbox", "id": "show_collection_description", "default": true, "label": "Show collection description" },
+    { "type": "checkbox", "id": "show_collection_image", "default": false, "label": "Show collection image" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "header", "content": "Callout" },
+    { "type": "checkbox", "id": "show_callout", "default": false, "label": "Show callout" },
+    { "type": "text", "id": "callout_eyebrow", "label": "Eyebrow", "default": "Black Friday Sale" },
+    { "type": "text", "id": "callout_text", "label": "Message", "default": "20% off sitewide. No code needed." },
+    { "type": "url", "id": "callout_link", "label": "Link" },
+    { "type": "color", "id": "callout_bg", "label": "Background", "default": "#EC1B2A" },
+    { "type": "color", "id": "callout_color", "label": "Text", "default": "#FFFFFF" }
+  ]
+}
+{% endschema %}
