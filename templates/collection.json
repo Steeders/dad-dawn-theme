@@ -25,10 +25,21 @@
         "padding_bottom": 36,
         "quick_add": "standard"
       }
+    },
+    "sale_strip": {
+      "type": "dad-sale-strip",
+      "settings": {
+        "eyebrow": "Our Black Friday Sale",
+        "text": "20% off the whole shop, already marked down. No code needed, while supplies last.",
+        "link": "",
+        "color_bg": "#EC1B2A",
+        "color_text": "#FFFFFF"
+      }
     }
   },
   "order": [
     "banner",
+    "sale_strip",
     "product-grid"
   ]
 }

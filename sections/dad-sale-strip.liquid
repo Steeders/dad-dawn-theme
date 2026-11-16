@@ -1,0 +1,45 @@
+{%- comment -%}
+  Slim sale strip for collection (or any) templates. Turn it off in the editor
+  when the sale ends; nothing else depends on it.
+{%- endcomment -%}
+{%- if section.settings.text != blank -%}
+  <div class="dad-sale-strip page-width">
+    <a
+      class="dad-sale-strip__inner{% if section.settings.link == blank %} dad-sale-strip__inner--static{% endif %}"
+      {% if section.settings.link != blank %}href="{{ section.settings.link }}"{% endif %}
+      style="--dad-sale-strip-bg: {{ section.settings.color_bg }}; --dad-sale-strip-text: {{ section.settings.color_text }};"
+    >
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="dad-sale-strip__eyebrow">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+      <span class="dad-sale-strip__text">{{ section.settings.text }}</span>
+    </a>
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  .dad-sale-strip { margin-top: var(--s-4); margin-bottom: var(--s-4); }
+  .dad-sale-strip__inner {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+    gap: var(--s-2) var(--s-4); padding: var(--s-3) var(--s-6);
+    border-radius: var(--r-lg); background: var(--dad-sale-strip-bg); color: var(--dad-sale-strip-text);
+    text-decoration: none; text-align: center;
+  }
+  .dad-sale-strip__eyebrow { font-family: var(--font-display); font-size: var(--fs-h4); letter-spacing: .02em; }
+  .dad-sale-strip__text { font-family: var(--font-body); font-size: var(--fs-body); font-weight: 600; }
+  a.dad-sale-strip__inner:not(.dad-sale-strip__inner--static):hover .dad-sale-strip__text { text-decoration: underline; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Sale strip",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Our Black Friday Sale" },
+    { "type": "text", "id": "text", "label": "Message", "default": "20% off the whole shop, already marked down. No code needed." },
+    { "type": "url", "id": "link", "label": "Link" },
+    { "type": "color", "id": "color_bg", "label": "Background", "default": "#EC1B2A" },
+    { "type": "color", "id": "color_text", "label": "Text", "default": "#FFFFFF" }
+  ],
+  "presets": [{ "name": "Sale strip" }]
+}
+{% endschema %}

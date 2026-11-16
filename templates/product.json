@@ -108,6 +108,12 @@
           "settings": {
             "share_label": "Share"
           }
+        },
+        "sale_callout": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'dad-sale-callout', title: 'Our Black Friday Sale is on', body: '20% off, already marked down. No code needed. Grab it while supplies last.' %}"
+          }
         }
       },
       "block_order": [
@@ -116,6 +122,7 @@
         "judge_me_reviews_preview_badge_pgwxJx",
         "caption",
         "price",
+        "sale_callout",
         "variant_picker",
         "quantity_selector",
         "buy_buttons",

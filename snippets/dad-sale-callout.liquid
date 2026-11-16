@@ -1,0 +1,15 @@
+{%- comment -%}
+  Sale callout for the PDP, shown only while the product's variant is marked down
+  (compare-at above price). Drop in via a custom_liquid block:
+  {% render 'dad-sale-callout', title: 'Our Black Friday Sale is on', body: '...' %}
+{%- endcomment -%}
+{%- assign sale_variant = product.selected_or_first_available_variant -%}
+{%- if sale_variant.compare_at_price > sale_variant.price -%}
+  <div class="dad-sale-callout">
+    <span class="dad-sale-callout__dot" aria-hidden="true"></span>
+    <div class="dad-sale-callout__copy">
+      {%- if title != blank -%}<p class="dad-sale-callout__title">{{ title }}</p>{%- endif -%}
+      {%- if body != blank -%}<p class="dad-sale-callout__body">{{ body }}</p>{%- endif -%}
+    </div>
+  </div>
+{%- endif -%}

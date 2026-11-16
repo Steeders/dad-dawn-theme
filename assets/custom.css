@@ -5216,3 +5216,18 @@ video.dad-vg-lightbox__media { width: 100%; }
   .dad-howto__arrow { transition: none; }
   .dad-howto__link:hover .dad-howto__arrow { transform: none; }
 }
+
+/* PDP sale callout — snippets/dad-sale-callout.liquid via custom_liquid block. */
+.dad-sale-callout {
+  display: flex; align-items: flex-start; gap: var(--s-3);
+  margin: var(--s-3) 0 var(--s-4); padding: var(--s-3) var(--s-4);
+  border: 2px solid var(--dad-brand-red); border-radius: var(--r-md);
+  background: var(--dad-white); color: var(--dad-ink);
+}
+.dad-sale-callout__dot {
+  flex: none; width: 14px; height: 14px; margin-top: 5px;
+  border-radius: var(--r-pill); background: var(--dad-brand-red);
+}
+.dad-sale-callout__copy p { margin: 0; }
+.dad-sale-callout__title { font-family: var(--font-display); font-size: var(--fs-h4); color: var(--dad-brand-red); line-height: 1.3; }
+.dad-sale-callout__body { font-family: var(--font-body); font-size: var(--fs-small); line-height: 1.45; }
