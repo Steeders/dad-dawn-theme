@@ -15,7 +15,17 @@
   Usage: {% render 'dad-variant-card', card_product: product, card_variant: variant, section_id: section.id %}
 {% endcomment %}
 {%- if card_product and card_variant -%}
+  {%- capture vc_md_pct -%}{% render 'dad-markdown-pct', product: card_product, variant: card_variant %}{%- endcapture -%}
   {%- liquid
+    assign vc_md_pct = vc_md_pct | strip | plus: 0
+    assign vc_price = card_variant.price
+    assign vc_compare = card_variant.compare_at_price
+    if vc_md_pct > 0
+      assign vc_compare = vc_price
+      assign vc_off = vc_price | times: vc_md_pct | divided_by: 100.0 | round
+      assign vc_price = vc_price | minus: vc_off
+    endif
+
     assign vimages = card_variant.metafields.custom.variant_images.value
 
     comment
@@ -142,9 +152,9 @@
               <span class="badge badge--bottom-left color-{{ settings.sold_out_badge_color_scheme }}">
                 {{- 'products.product.sold_out' | t -}}
               </span>
-            {%- elsif card_variant.compare_at_price > card_variant.price -%}
+            {%- elsif vc_compare > vc_price -%}
               <span class="badge badge--bottom-left color-{{ settings.sale_badge_color_scheme }}">
-                {{- 'products.product.on_sale' | t -}}
+                {%- if vc_md_pct > 0 -%}{{ 'products.product.dad_save_percent' | t: percent: vc_md_pct }}{%- else -%}{{ 'products.product.on_sale' | t }}{%- endif -%}
               </span>
             {%- endif -%}
           </div>
@@ -161,17 +171,17 @@
             <p class="dad-variant-card__subtitle">{{ card_subtitle | escape }}</p>
           {%- endif -%}
           <div class="card-information">
-            <div class="price{% if card_variant.compare_at_price > card_variant.price %} price--on-sale{% endif %}">
+            <div class="price{% if vc_compare > vc_price %} price--on-sale{% endif %}">
               <div class="price__container">
                 <div class="price__regular">
-                  <span class="price-item price-item--regular">{{ card_variant.price | money }}</span>
+                  <span class="price-item price-item--regular">{{ vc_price | money }}</span>
                 </div>
                 <div class="price__sale">
-                  {%- if card_variant.compare_at_price > card_variant.price -%}
+                  {%- if vc_compare > vc_price -%}
                     <span class="price-item price-item--regular">
-                      <s>{{ card_variant.compare_at_price | money }}</s>
+                      <s>{{ vc_compare | money }}</s>
                     </span>
-                    <span class="price-item price-item--sale price-item--last">{{ card_variant.price | money }}</span>
+                    <span class="price-item price-item--sale price-item--last">{{ vc_price | money }}</span>
                   {%- endif -%}
                 </div>
               </div>

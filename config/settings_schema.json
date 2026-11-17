@@ -1439,7 +1439,7 @@
         "id": "free_shipping_threshold",
         "label": "Free shipping threshold",
         "info": "Order total (in store currency) that unlocks free shipping. Must match the free shipping rate in Settings > Shipping and delivery. Set to 0 to hide the progress bar.",
-        "default":60
+        "default": 60
       },
       {
         "type": "number",
@@ -1496,6 +1496,129 @@
         "id": "cart_color_scheme",
         "label": "t:sections.all.colors.label",
         "default": "scheme-1"
+      }
+    ]
+  },
+  {
+    "name": "Sale markdown (automatic discount)",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Shows a Shopify automatic discount as a markdown: the page price crossed out and the sale price beside it, on product pages, cards and the cart upsell. The discount itself lives in Shopify Discounts and must match these percentages and dates. Times are Mountain, written like 2026-12-03 00:00 -0700. A blank end date means no end."
+      },
+      {
+        "type": "checkbox",
+        "id": "dad_md_enabled",
+        "label": "Show sale markdown",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "dad_md_exclude_tag",
+        "label": "Leave out products tagged",
+        "default": "no-sale"
+      },
+      {
+        "type": "header",
+        "content": "Sale 1"
+      },
+      {
+        "type": "number",
+        "id": "dad_md_1_percent",
+        "label": "Percent off",
+        "default": 20
+      },
+      {
+        "type": "text",
+        "id": "dad_md_1_label",
+        "label": "Sale name",
+        "default": "Black Friday Sale"
+      },
+      {
+        "type": "text",
+        "id": "dad_md_1_start",
+        "label": "Starts",
+        "default": "2026-11-16 00:00 -0700"
+      },
+      {
+        "type": "text",
+        "id": "dad_md_1_end",
+        "label": "Ends",
+        "default": "2026-12-03 00:00 -0700"
+      },
+      {
+        "type": "header",
+        "content": "Sale 2"
+      },
+      {
+        "type": "number",
+        "id": "dad_md_2_percent",
+        "label": "Percent off",
+        "default": 15
+      },
+      {
+        "type": "text",
+        "id": "dad_md_2_label",
+        "label": "Sale name",
+        "default": "Holiday Sale"
+      },
+      {
+        "type": "text",
+        "id": "dad_md_2_start",
+        "label": "Starts",
+        "default": "2026-12-03 00:00 -0700"
+      },
+      {
+        "type": "text",
+        "id": "dad_md_2_end",
+        "label": "Ends",
+        "default": "2026-12-17 00:00 -0700"
+      }
+    ]
+  },
+  {
+    "name": "Cart upsell",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "dad_upsell_enabled",
+        "label": "Show upsell in cart",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "dad_upsell_heading",
+        "label": "Heading",
+        "default": "Complete the set"
+      },
+      {
+        "type": "text",
+        "id": "dad_upsell_ship_heading",
+        "label": "Heading when short of free shipping",
+        "info": "[amount] is replaced with how much more the cart needs.",
+        "default": "Add [amount] for free shipping"
+      },
+      {
+        "type": "product_list",
+        "id": "dad_upsell_products",
+        "label": "Add-ons and small bundles",
+        "info": "Mixed in after 'bought together' picks. Leave empty to use the best sellers collection.",
+        "limit": 12
+      },
+      {
+        "type": "collection",
+        "id": "dad_upsell_fallback",
+        "label": "Fallback collection",
+        "info": "Usually Best Sellers."
+      },
+      {
+        "type": "range",
+        "id": "dad_upsell_count",
+        "label": "Products shown",
+        "min": 1,
+        "max": 4,
+        "step": 1,
+        "default": 3
       }
     ]
   }

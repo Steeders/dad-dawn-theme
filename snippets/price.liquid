@@ -26,6 +26,34 @@
   assign price_min = product.price_min
   assign price_max = product.price_max
   assign available = target.available | default: false
+
+  comment
+    Sale markdown: an automatic discount shown as a markdown. The page price
+    becomes the crossed-out price and the discounted price shows beside it.
+    Rounded per unit the way Shopify rounds a percentage discount.
+  endcomment
+  assign dad_md_pct = 0
+  if target != null and product != blank
+    if target == product
+      capture dad_md_pct
+        render 'dad-markdown-pct', product: product
+      endcapture
+    else
+      capture dad_md_pct
+        render 'dad-markdown-pct', product: product, variant: target
+      endcapture
+    endif
+    assign dad_md_pct = dad_md_pct | strip | plus: 0
+  endif
+  if dad_md_pct > 0
+    assign compare_at_price = price
+    assign dad_md_off = price | times: dad_md_pct | divided_by: 100.0 | round
+    assign price = price | minus: dad_md_off
+    assign dad_md_off = price_min | times: dad_md_pct | divided_by: 100.0 | round
+    assign price_min = price_min | minus: dad_md_off
+    assign dad_md_off = price_max | times: dad_md_pct | divided_by: 100.0 | round
+    assign price_max = price_max | minus: dad_md_off
+  endif
   assign money_price = price | money
   assign money_price_min = price_min | money
   assign money_price_max = price_max | money
@@ -114,7 +142,11 @@
     </div>
     {%- if show_badges -%}
       <span class="badge price__badge-sale color-{{ settings.sale_badge_color_scheme }}">
-        {{ 'products.product.on_sale' | t }}
+        {%- if dad_md_pct > 0 -%}
+          {{ 'products.product.dad_save_percent' | t: percent: dad_md_pct }}
+        {%- else -%}
+          {{ 'products.product.on_sale' | t }}
+        {%- endif -%}
       </span>
 
       <span class="badge price__badge-sold-out color-{{ settings.sold_out_badge_color_scheme }}">

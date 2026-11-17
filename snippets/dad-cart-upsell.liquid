@@ -1,0 +1,37 @@
+{%- comment -%}
+  Cart upsell mount point (drawer and cart page). The products come from
+  sections/dad-cart-upsell.liquid, fetched by assets/dad-cart-upsell.js through
+  Shopify's product recommendations for the priciest non-gift item in the cart.
+  Settings: Theme settings > Cart upsell.
+
+  Accepts:
+  - context: 'drawer' (default) or 'page'
+{%- endcomment -%}
+{%- if settings.dad_upsell_enabled and cart.item_count > 0 -%}
+  {%- liquid
+    assign dcu_anchor = ''
+    assign dcu_anchor_price = -1
+    for item in cart.items
+      assign dcu_gift = false
+      for prop in item.properties
+        if prop.last != blank and prop.first contains '_dad_free_gift'
+          assign dcu_gift = true
+        endif
+      endfor
+      if dcu_gift == false and item.original_price > dcu_anchor_price
+        assign dcu_anchor = item.product_id
+        assign dcu_anchor_price = item.original_price
+      endif
+    endfor
+  -%}
+  {%- if dcu_anchor != blank -%}
+    <dad-cart-upsell
+      class="dad-upsell dad-upsell--{{ context | default: 'drawer' }}"
+      data-product-id="{{ dcu_anchor }}"
+      data-url="{{ routes.product_recommendations_url }}"
+      data-count="{{ settings.dad_upsell_count }}"
+      data-context="{{ context | default: 'drawer' }}"
+      hidden
+    ></dad-cart-upsell>
+  {%- endif -%}
+{%- endif -%}

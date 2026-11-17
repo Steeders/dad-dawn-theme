@@ -1,0 +1,78 @@
+{%- comment -%}
+  Prints the sale markdown that applies to a product right now, or nothing.
+  The discount itself is a Shopify automatic discount; this only decides what
+  the page shows, so its percentages and dates must match Shopify Discounts.
+
+  Accepts:
+  - product: {Object} required
+  - variant: {Object} optional. A variant already marked down with a real
+    compare-at price keeps its own sale display (no double discount shown).
+  - field: 'percent' (default) or 'label'
+
+  Usage:
+  {%- capture md_pct -%}{% render 'dad-markdown-pct', product: product, variant: variant %}{%- endcapture -%}
+  {%- assign md_pct = md_pct | strip | plus: 0 -%}
+{%- endcomment -%}
+{%- liquid
+  assign dmd_pct = 0
+  assign dmd_label = ''
+  assign dmd_ok = false
+
+  if settings.dad_md_enabled and product != blank and product.gift_card? != true
+    assign dmd_ok = true
+    if settings.dad_md_exclude_tag != blank and product.tags contains settings.dad_md_exclude_tag
+      assign dmd_ok = false
+    endif
+    if variant != blank
+      if variant.compare_at_price > variant.price
+        assign dmd_ok = false
+      endif
+    elsif product.compare_at_price > product.price
+      assign dmd_ok = false
+    endif
+  endif
+
+  if dmd_ok
+    assign dmd_now = 'now' | date: '%s' | plus: 0
+
+    assign dmd_start = 0
+    assign dmd_end = 0
+    if settings.dad_md_1_start != blank
+      assign dmd_start = settings.dad_md_1_start | date: '%s' | plus: 0
+    endif
+    if settings.dad_md_1_end != blank
+      assign dmd_end = settings.dad_md_1_end | date: '%s' | plus: 0
+    endif
+    if settings.dad_md_1_percent > 0 and dmd_now >= dmd_start
+      if dmd_end == 0 or dmd_now < dmd_end
+        assign dmd_pct = settings.dad_md_1_percent
+        assign dmd_label = settings.dad_md_1_label
+      endif
+    endif
+
+    if dmd_pct == 0
+      assign dmd_start = 0
+      assign dmd_end = 0
+      if settings.dad_md_2_start != blank
+        assign dmd_start = settings.dad_md_2_start | date: '%s' | plus: 0
+      endif
+      if settings.dad_md_2_end != blank
+        assign dmd_end = settings.dad_md_2_end | date: '%s' | plus: 0
+      endif
+      if settings.dad_md_2_percent > 0 and dmd_now >= dmd_start
+        if dmd_end == 0 or dmd_now < dmd_end
+          assign dmd_pct = settings.dad_md_2_percent
+          assign dmd_label = settings.dad_md_2_label
+        endif
+      endif
+    endif
+  endif
+
+  if field == 'label'
+    if dmd_pct > 0
+      echo dmd_label | escape
+    endif
+  elsif dmd_pct > 0
+    echo dmd_pct
+  endif
+-%}

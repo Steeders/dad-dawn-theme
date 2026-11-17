@@ -9,6 +9,18 @@
  */
 {
   "current": {
+    "dad_upsell_products": [
+      "creative-activity-books",
+      "dot-and-discover-gift-kits",
+      "3-in-1-mixed-media-art-pad",
+      "little-hands-big-coloring-kit",
+      "watercolor-crayons",
+      "whirl-of-color-starter-kit",
+      "beeswax-crayons",
+      "dandy-doodles-starter-kit",
+      "do-a-dot-art-dot-markers"
+    ],
+    "dad_upsell_fallback": "best-sellers",
     "logo": "shopify://shop_images/logo-da.png",
     "logo_width": 90,
     "favicon": "shopify://shop_images/cropped-da-icon-1-192x192.png",

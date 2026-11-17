@@ -1,0 +1,147 @@
+{%- comment -%}
+  Candidate products for the cart upsell. Not placed in any template: it is only
+  rendered through /recommendations/products?section_id=dad-cart-upsell, which
+  fills `recommendations` with Shopify's related products for the anchor item.
+
+  Pool, in order: related products, Theme settings > Cart upsell > Add-ons and
+  small bundles, then the fallback collection. Skips anything in the cart, sold
+  out, gift cards, and Swishies whenever the cart holds Dot Markers (dot markers
+  are the no-brush, no-water promise). assets/dad-cart-upsell.js picks which to show.
+{%- endcomment -%}
+{%- liquid
+  assign dcu_in_cart = ','
+  assign dcu_has_dots = false
+  for item in cart.items
+    assign dcu_in_cart = dcu_in_cart | append: item.product_id | append: ','
+    if item.product.type == 'Dot Markers'
+      assign dcu_has_dots = true
+    endif
+  endfor
+
+  assign dcu_threshold = settings.free_shipping_threshold | default: 0 | times: 100
+  assign dcu_gap = 0
+  if dcu_threshold > 0
+    assign dcu_gap = dcu_threshold | minus: cart.total_price
+    if dcu_gap < 0
+      assign dcu_gap = 0
+    endif
+  endif
+
+  assign dcu_seen = dcu_in_cart
+  assign dcu_count = 0
+-%}
+<div
+  class="dad-upsell__data"
+  data-gap="{{ dcu_gap }}"
+  data-gap-text="{{ dcu_gap | money }}"
+  data-heading="{{ settings.dad_upsell_heading | escape }}"
+  data-ship-heading="{{ settings.dad_upsell_ship_heading | escape }}"
+>
+  {%- for dcu_source in (1..3) -%}
+    {%- liquid
+      case dcu_source
+        when 1
+          if recommendations.performed?
+            assign dcu_list = recommendations.products
+          else
+            assign dcu_list = nil
+          endif
+          assign dcu_src = 'related'
+        when 2
+          assign dcu_list = settings.dad_upsell_products
+          assign dcu_src = 'pick'
+        when 3
+          assign dcu_list = settings.dad_upsell_fallback.products
+          if dcu_list == blank
+            assign dcu_list = collections['best-sellers'].products
+          endif
+          assign dcu_src = 'best'
+      endcase
+    -%}
+    {%- for p in dcu_list limit: 12 -%}
+      {%- liquid
+        assign dcu_key = ',' | append: p.id | append: ','
+        if p.available == false or p.gift_card? or dcu_seen contains dcu_key or dcu_count >= 10
+          continue
+        endif
+        if dcu_has_dots and p.handle contains 'swishies'
+          continue
+        endif
+        assign dcu_seen = dcu_seen | append: p.id | append: ','
+        assign dcu_count = dcu_count | plus: 1
+        assign dcu_v = p.selected_or_first_available_variant
+      -%}
+      <div
+        class="dad-upsell__item"
+        data-source="{{ dcu_src }}"
+        data-type="{{ p.type | escape }}"
+      >
+        <a href="{{ p.url }}" class="dad-upsell__media" tabindex="-1" aria-hidden="true">
+          {%- if p.featured_media -%}
+            {{ p.featured_media | image_url: width: 180 | image_tag: loading: 'lazy', alt: '', width: 90, height: 90 }}
+          {%- endif -%}
+        </a>
+        <div class="dad-upsell__info">
+          <a href="{{ p.url }}" class="dad-upsell__title">{{ p.title | escape }}</a>
+          <div class="dad-upsell__price"><s class="dad-upsell__compare"></s><span class="dad-upsell__now"></span></div>
+          {%- if p.variants.size > 1 -%}
+            <select class="dad-upsell__select" aria-label="{{ p.title | escape }}">
+          {%- endif -%}
+          {%- for v in p.variants -%}
+            {%- unless v.available -%}{%- continue -%}{%- endunless -%}
+            {%- liquid
+              capture dcu_pct
+                render 'dad-markdown-pct', product: p, variant: v
+              endcapture
+              assign dcu_pct = dcu_pct | strip | plus: 0
+              assign dcu_price = v.price
+              assign dcu_compare = v.compare_at_price | default: 0
+              if dcu_pct > 0
+                assign dcu_compare = v.price
+                assign dcu_off = v.price | times: dcu_pct | divided_by: 100.0 | round
+                assign dcu_price = v.price | minus: dcu_off
+              endif
+              assign dcu_compare_text = ''
+              if dcu_compare > dcu_price
+                assign dcu_compare_text = dcu_compare | money
+              endif
+            -%}
+            {%- if p.variants.size > 1 -%}
+              <option
+                value="{{ v.id }}"
+                data-price="{{ dcu_price }}"
+                data-price-text="{{ dcu_price | money }}"
+                data-compare-text="{{ dcu_compare_text }}"
+                {% if v.id == dcu_v.id %}selected{% endif %}
+              >
+                {{- v.title | escape -}}
+              </option>
+            {%- else -%}
+              <input
+                type="hidden"
+                class="dad-upsell__variant"
+                value="{{ v.id }}"
+                data-price="{{ dcu_price }}"
+                data-price-text="{{ dcu_price | money }}"
+                data-compare-text="{{ dcu_compare_text }}"
+              >
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if p.variants.size > 1 -%}
+            </select>
+          {%- endif -%}
+        </div>
+        <button type="button" class="dad-upsell__add button button--secondary">
+          {{- 'sections.cart.dad_upsell_add' | t -}}
+        </button>
+      </div>
+    {%- endfor -%}
+  {%- endfor -%}
+</div>
+
+{% schema %}
+{
+  "name": "Cart upsell (internal)",
+  "settings": []
+}
+{% endschema %}

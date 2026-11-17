@@ -58,6 +58,10 @@
                   {%- endif -%}
                 </div>
 
+                {%- assign dad_cart_savings = cart.original_total_price | minus: cart.total_price -%}
+                {%- if dad_cart_savings > 0 -%}
+                  <p class="dad-cart-savings">{{ 'sections.cart.dad_you_save' | t: amount: dad_cart_savings | money }}</p>
+                {%- endif -%}
                 <div class="totals">
                   <h2 class="totals__total">{{ 'sections.cart.estimated_total' | t }}</h2>
                   <p class="totals__total-value">{{ cart.total_price | money_with_currency }}</p>

@@ -118,6 +118,7 @@
       "inventory_out_of_stock_continue_selling": "In stock",
       "sku": "SKU",
       "on_sale": "Sale",
+      "dad_save_percent": "Save {{ percent }}%",
       "product_variants": "Product variants",
       "media": {
         "gallery_viewer": "Gallery Viewer",
@@ -287,6 +288,9 @@
       "title": "Your cart",
       "caption": "Cart items",
       "dad_free_gift_badge": "Free gift",
+      "dad_you_save": "You're saving {{ amount }}",
+      "dad_upsell_add": "Add",
+      "dad_upsell_added": "Added",
       "dad_free_gift_note": "Free with your order",
       "remove_title": "Remove {{ title }}",
       "estimated_total": "Estimated total",
