@@ -5268,5 +5268,6 @@ video.dad-vg-lightbox__media { width: 100%; }
 .dad-upsell__compare[hidden] { display: none; }
 .dad-upsell__now { font-weight: 700; color: var(--dad-ink); }
 .dad-upsell__select { max-width: 100%; margin-top: 2px; padding: 2px 6px; font-size: 1.3rem; border: 1px solid var(--dad-rule, #ddd); border-radius: 6px; background: var(--dad-white, #fff); color: var(--dad-ink); }
-.dad-upsell__add.button { min-width: 0; min-height: 36px; padding: 0 14px; font-size: 1.4rem; }
+.dad-upsell__add.button { min-width: 0; min-height: 36px; padding: 0 16px; font-size: 1.4rem; font-weight: 700; border: 2px solid var(--dad-brand-red); border-radius: 999px; background: var(--dad-white, #fff); color: var(--dad-brand-red); }
+.dad-upsell__add.button:hover { background: var(--dad-brand-red); color: var(--dad-white, #fff); }
 .dad-upsell__add.button::after, .dad-upsell__add.button::before { box-shadow: none; }
