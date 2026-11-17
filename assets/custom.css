@@ -5333,3 +5333,21 @@ body:has(cart-drawer.active) shopify-chat { display: none !important; }
 @media (prefers-reduced-motion: reduce) {
   .dad-upsell-sheet__panel, .dad-upsell-sheet__scrim, .dad-upsell__dots span { transition: none; }
 }
+
+/* Discount name on a cart line ("Black Friday Sale") as a red pill. */
+.cart-item .discounts { margin-top: 6px; }
+.cart-item .discounts__discount {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--dad-brand-red);
+  color: var(--dad-white);
+  font-family: var(--font-body);
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+.cart-item .discounts__discount svg,
+.cart-item .discounts__discount .icon { color: var(--dad-white); width: 1.1rem; height: 1.1rem; margin-right: 0; }
