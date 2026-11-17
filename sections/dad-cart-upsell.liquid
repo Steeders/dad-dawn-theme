@@ -98,7 +98,7 @@
               assign dcu_compare = v.compare_at_price | default: 0
               if dcu_pct > 0
                 assign dcu_compare = v.price
-                assign dcu_off = v.price | times: dcu_pct | divided_by: 100.0 | round
+                assign dcu_off = v.price | times: dcu_pct | divided_by: 100.0 | floor
                 assign dcu_price = v.price | minus: dcu_off
               endif
               assign dcu_compare_text = ''

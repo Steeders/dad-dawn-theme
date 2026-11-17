@@ -58,9 +58,18 @@
                   {%- endif -%}
                 </div>
 
-                {%- assign dad_cart_savings = cart.original_total_price | minus: cart.total_price -%}
+                {%- liquid
+            assign dad_cart_savings = 0
+            for dad_si in cart.items
+              assign dad_cart_savings = dad_cart_savings | plus: dad_si.original_line_price | minus: dad_si.final_line_price
+            endfor
+            for dad_sd in cart.cart_level_discount_applications
+              assign dad_cart_savings = dad_cart_savings | plus: dad_sd.total_allocated_amount
+            endfor
+            assign dad_cart_savings_text = dad_cart_savings | money
+          -%}
                 {%- if dad_cart_savings > 0 -%}
-                  <p class="dad-cart-savings">{{ 'sections.cart.dad_you_save' | t: amount: dad_cart_savings | money }}</p>
+                  <p class="dad-cart-savings">{{ 'sections.cart.dad_you_save' | t: amount: dad_cart_savings_text }}</p>
                 {%- endif -%}
                 <div class="totals">
                   <h2 class="totals__total">{{ 'sections.cart.estimated_total' | t }}</h2>

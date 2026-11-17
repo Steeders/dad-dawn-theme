@@ -30,7 +30,7 @@
   comment
     Sale markdown: an automatic discount shown as a markdown. The page price
     becomes the crossed-out price and the discounted price shows beside it.
-    Rounded per unit the way Shopify rounds a percentage discount.
+    Shopify rounds a percentage discount DOWN to the cent ($11.99 at 20% = $2.39 off, $9.60), so floor, not round.
   endcomment
   assign dad_md_pct = 0
   if target != null and product != blank
@@ -47,11 +47,11 @@
   endif
   if dad_md_pct > 0
     assign compare_at_price = price
-    assign dad_md_off = price | times: dad_md_pct | divided_by: 100.0 | round
+    assign dad_md_off = price | times: dad_md_pct | divided_by: 100.0 | floor
     assign price = price | minus: dad_md_off
-    assign dad_md_off = price_min | times: dad_md_pct | divided_by: 100.0 | round
+    assign dad_md_off = price_min | times: dad_md_pct | divided_by: 100.0 | floor
     assign price_min = price_min | minus: dad_md_off
-    assign dad_md_off = price_max | times: dad_md_pct | divided_by: 100.0 | round
+    assign dad_md_off = price_max | times: dad_md_pct | divided_by: 100.0 | floor
     assign price_max = price_max | minus: dad_md_off
   endif
   assign money_price = price | money

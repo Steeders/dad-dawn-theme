@@ -22,7 +22,7 @@
     assign vc_compare = card_variant.compare_at_price
     if vc_md_pct > 0
       assign vc_compare = vc_price
-      assign vc_off = vc_price | times: vc_md_pct | divided_by: 100.0 | round
+      assign vc_off = vc_price | times: vc_md_pct | divided_by: 100.0 | floor
       assign vc_price = vc_price | minus: vc_off
     endif
 

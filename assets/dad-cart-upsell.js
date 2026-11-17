@@ -2,8 +2,8 @@
  * Cart upsell (snippets/dad-cart-upsell.liquid mounts it, sections/dad-cart-upsell.liquid
  * supplies the candidates). Picks which products to show:
  *  1. if the cart is short of free shipping, the cheapest item that closes the gap
- *  2. a small add-on (under $15)
- *  3. a bundle
+ *  2. a small add-on (under $15), curated picks first
+ *  3. a bundle, curated (smaller) bundles first
  *  then fills any open slot in the section's order (related, add-ons, best sellers).
  * Add puts one unit in the cart and refreshes the drawer, or the cart page sections.
  */
@@ -110,8 +110,12 @@
         const closers = pool.filter((i) => priceOf(i) >= gap).sort((a, b) => priceOf(a) - priceOf(b));
         take(closers[0]);
       }
-      take(pool.find((i) => !chosen.includes(i) && priceOf(i) > 0 && priceOf(i) <= SMALL_ADDON_CENTS));
-      take(pool.find((i) => !chosen.includes(i) && i.dataset.type === 'Bundles'));
+      // Curated picks (theme settings) win these two slots over related products.
+      const small = (i) => !chosen.includes(i) && priceOf(i) > 0 && priceOf(i) <= SMALL_ADDON_CENTS;
+      const bundle = (i) => !chosen.includes(i) && i.dataset.type === 'Bundles';
+      const curated = (i) => i.dataset.source === 'pick';
+      take(pool.find((i) => small(i) && curated(i)) || pool.find(small));
+      take(pool.find((i) => bundle(i) && curated(i)) || pool.find(bundle));
       pool.forEach(take);
       return chosen;
     }
