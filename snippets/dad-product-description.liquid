@@ -3,10 +3,13 @@
   (the theme draws real Do-A-Dot dot images as the bullets; see .product__description
   in assets/custom.css). Display only: the description text in Shopify is unchanged,
   so feeds and search still get it as written. Add an emoji here if a new description
-  starts list items with one.
+  starts list items with one. The kit descriptions also carry inline list styles
+  (hand-made hanging indent for the emoji); those come off too so the dot bullets line up.
 {%- endcomment -%}
 {%- liquid
   assign dad_desc = product.description
+  assign dad_desc = dad_desc | replace: '<ul style="list-style:none;padding-left:0;margin-left:0;">', '<ul>'
+  assign dad_desc = dad_desc | replace: '<li style="padding-left:1.75em;text-indent:-1.75em;">', '<li>'
   assign dad_desc = dad_desc | replace: '<li>🔴 ', '<li>'
   assign dad_desc = dad_desc | replace: '<li>🟠 ', '<li>'
   assign dad_desc = dad_desc | replace: '<li>🟡 ', '<li>'
