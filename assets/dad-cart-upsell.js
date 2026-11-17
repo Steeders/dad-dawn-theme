@@ -239,6 +239,18 @@
         });
         chips.appendChild(chip);
       });
+      if (vs.length > 7) {
+        const extra = [...chips.children].slice(6).filter((c) => c._v !== picked);
+        extra.forEach((c) => (c.hidden = true));
+        const more = el('button', 'dad-upsell-sheet__chip dad-upsell-sheet__more', `+${extra.length} more`);
+        more.type = 'button';
+        more.addEventListener('click', () => {
+          extra.forEach((c) => (c.hidden = false));
+          more.remove();
+          extra[0]?.focus();
+        });
+        chips.appendChild(more);
+      }
       group.appendChild(chips);
       panel.append(top, group, add);
       wrap.append(scrim, panel);

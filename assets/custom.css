@@ -5324,7 +5324,9 @@ body:has(cart-drawer.active) .jdgm-revs-tab-btn { display: none !important; }
 .dad-upsell-sheet__chips { display: flex; flex-wrap: wrap; gap: 8px; }
 .dad-upsell-sheet__chip { min-height: 40px; padding: 0 14px; border-radius: 999px; border: 1.5px solid var(--dad-rule); background: var(--dad-white); color: var(--dad-ink); font-family: inherit; font-size: 1.3rem; font-weight: 600; cursor: pointer; }
 .dad-upsell-sheet__chip[aria-pressed="true"] { border: 2px solid var(--dad-brand-red); background: var(--dad-pink-tint); font-weight: 700; }
-.dad-upsell-sheet__add { height: 52px; border: 0; border-radius: 999px; background: var(--dad-brand-red); color: var(--dad-white); font-family: inherit; font-size: 1.7rem; font-weight: 700; cursor: pointer; }
+.dad-upsell-sheet__chip[hidden] { display: none; }
+.dad-upsell-sheet__more { color: var(--dad-ink-muted); }
+.dad-upsell-sheet__add { position: sticky; bottom: 0; flex: none; box-shadow: 0 10px 0 var(--dad-white), 0 -10px 14px var(--dad-white); height: 52px; border: 0; border-radius: 999px; background: var(--dad-brand-red); color: var(--dad-white); font-family: inherit; font-size: 1.7rem; font-weight: 700; cursor: pointer; }
 .dad-upsell-sheet__add:hover { background: #c9101e; }
 .dad-upsell-sheet__add.is-added { background: #2a8f3c; }
 @media (prefers-reduced-motion: reduce) {
