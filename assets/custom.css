@@ -5262,7 +5262,8 @@ video.dad-vg-lightbox__media { width: 100%; }
 .dad-upsell--drawer .dad-upsell__track { padding: 4px 14px 10px; scroll-padding-inline: 14px; }
 cart-drawer .drawer__inner { position: relative; }
 cart-drawer cart-drawer-items { overflow-x: hidden; }
-body:has(cart-drawer.active) .jdgm-revs-tab-btn { display: none !important; }
+body:has(cart-drawer.active) .jdgm-revs-tab-btn,
+body:has(cart-drawer.active) shopify-chat { display: none !important; }
 .dad-upsell--page { margin: var(--s-4, 16px) 0 0; border-radius: 20px; }
 .dad-upsell__head { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; padding: 0 20px 12px; }
 .dad-upsell__words { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
