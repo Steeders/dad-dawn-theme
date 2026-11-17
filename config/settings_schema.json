@@ -1616,9 +1616,9 @@
         "id": "dad_upsell_count",
         "label": "Products shown",
         "min": 1,
-        "max": 4,
+        "max": 8,
         "step": 1,
-        "default": 3
+        "default": 6
       }
     ]
   }
