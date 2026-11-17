@@ -79,7 +79,41 @@
               </thead>
 
               <tbody>
+{%- liquid
+  comment
+    Sale markdown in the cart. The sale is an ORDER automatic discount (a per-item
+    product discount breaks the free-book Buy X Get Y), so Shopify only gives a
+    cart-level line. When that sale is on the cart, show each item crossed out at
+    its sale price, the same as the product page. Display only; the total and
+    checkout come from Shopify.
+  endcomment
+  assign dad_cart_sale_on = false
+  for dad_cd in cart.cart_level_discount_applications
+    if settings.dad_md_1_label != blank and dad_cd.title == settings.dad_md_1_label
+      assign dad_cart_sale_on = true
+    endif
+    if settings.dad_md_2_label != blank and dad_cd.title == settings.dad_md_2_label
+      assign dad_cart_sale_on = true
+    endif
+  endfor
+-%}
                 {%- for item in cart.items -%}
+{%- liquid
+  assign dli_final = item.final_price
+  assign dli_final_line = item.final_line_price
+  if dad_cart_sale_on and item.final_price == item.original_price and item.original_price > 0
+    capture dli_pct
+      render 'dad-markdown-pct', product: item.product, variant: item.variant
+    endcapture
+    assign dli_pct = dli_pct | strip | plus: 0
+    if dli_pct > 0
+      assign dli_off = item.original_price | times: dli_pct | divided_by: 100.0 | floor
+      assign dli_final = item.original_price | minus: dli_off
+      assign dli_off = item.original_line_price | times: dli_pct | divided_by: 100.0 | floor
+      assign dli_final_line = item.original_line_price | minus: dli_off
+    endif
+  endif
+-%}
                   {%- comment -%}
                     Auto-added free-gift lines (see assets/dad-free-gift.js) are
                     tagged with a `_dad_free_gift*` property. Flag them so the row
@@ -129,7 +163,7 @@
 
                       <a href="{{ item.url }}" class="cart-item__name h4 break">{{ item.product.title | escape }}</a>
 
-                      {%- if item.original_price != item.final_price -%}
+                      {%- if item.original_price != dli_final -%}
                         <div class="cart-item__discounted-prices">
                           <span class="visually-hidden">
                             {{ 'products.product.price.regular_price' | t }}
@@ -141,7 +175,7 @@
                             {{ 'products.product.price.sale_price' | t }}
                           </span>
                           <strong class="cart-item__final-price product-option">
-                            {{ item.final_price | money }}
+                            {{ dli_final | money }}
                           </strong>
                         </div>
                       {%- else -%}
@@ -203,7 +237,7 @@
                     <td class="cart-item__totals right medium-hide large-up-hide">
                       {%- render 'loading-spinner' -%}
                       <div class="cart-item__price-wrapper">
-                        {%- if item.original_line_price != item.final_line_price -%}
+                        {%- if item.original_line_price != dli_final_line -%}
                           <dl class="cart-item__discounted-prices">
                             <dt class="visually-hidden">
                               {{ 'products.product.price.regular_price' | t }}
@@ -217,7 +251,7 @@
                               {{ 'products.product.price.sale_price' | t }}
                             </dt>
                             <dd class="price price--end">
-                              {{ item.final_line_price | money }}
+                              {{ dli_final_line | money }}
                             </dd>
                           </dl>
                         {%- else -%}
@@ -430,7 +464,7 @@
                     <td class="cart-item__totals right small-hide">
                       {%- render 'loading-spinner' -%}
                       <div class="cart-item__price-wrapper">
-                        {%- if item.original_line_price != item.final_line_price -%}
+                        {%- if item.original_line_price != dli_final_line -%}
                           <dl class="cart-item__discounted-prices">
                             <dt class="visually-hidden">
                               {{ 'products.product.price.regular_price' | t }}
@@ -444,7 +478,7 @@
                               {{ 'products.product.price.sale_price' | t }}
                             </dt>
                             <dd class="price price--end">
-                              {{ item.final_line_price | money }}
+                              {{ dli_final_line | money }}
                             </dd>
                           </dl>
                         {%- else -%}

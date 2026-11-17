@@ -28,6 +28,8 @@
   endif
 
   assign dcu_seen = dcu_in_cart
+  assign dcu_curated = settings.dad_upsell_products | map: 'id' | join: ','
+  assign dcu_curated = ',' | append: dcu_curated | append: ','
   assign dcu_count = 0
 -%}
 <div
@@ -74,6 +76,8 @@
       <div
         class="dad-upsell__item"
         data-source="{{ dcu_src }}"
+        {%- assign dcu_key2 = ',' | append: p.id | append: ',' -%}
+        {% if dcu_curated contains dcu_key2 %}data-curated{% endif %}
         data-type="{{ p.type | escape }}"
       >
         <a href="{{ p.url }}" class="dad-upsell__media" tabindex="-1" aria-hidden="true">

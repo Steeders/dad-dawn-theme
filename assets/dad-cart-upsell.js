@@ -113,7 +113,7 @@
       // Curated picks (theme settings) win these two slots over related products.
       const small = (i) => !chosen.includes(i) && priceOf(i) > 0 && priceOf(i) <= SMALL_ADDON_CENTS;
       const bundle = (i) => !chosen.includes(i) && i.dataset.type === 'Bundles';
-      const curated = (i) => i.dataset.source === 'pick';
+      const curated = (i) => i.hasAttribute('data-curated');
       take(pool.find((i) => small(i) && curated(i)) || pool.find(small));
       take(pool.find((i) => bundle(i) && curated(i)) || pool.find(bundle));
       pool.forEach(take);
