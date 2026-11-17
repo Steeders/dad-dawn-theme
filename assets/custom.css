@@ -5351,3 +5351,23 @@ body:has(cart-drawer.active) shopify-chat { display: none !important; }
 }
 .cart-item .discounts__discount svg,
 .cart-item .discounts__discount .icon { color: var(--dad-white); width: 1.1rem; height: 1.1rem; margin-right: 0; }
+
+/* Product description lists: real Do-A-Dot dots as bullets, cycling the brand colors.
+   Leading emoji dots are stripped in snippets/dad-product-description.liquid. */
+.product__description.rte ul { list-style: none; padding-left: 0; margin: 1.2rem 0 1.6rem; }
+.product__description.rte ul li { position: relative; padding-left: 3rem; margin: 0 0 1rem; }
+.product__description.rte ul li:last-child { margin-bottom: 0; }
+.product__description.rte ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.15em;
+  width: 1.9rem;
+  height: 1.9rem;
+  background: url("dot-orange.png") center / contain no-repeat;
+}
+.product__description.rte ul li:nth-child(5n + 2)::before { background-image: url("dot-yellow.png"); }
+.product__description.rte ul li:nth-child(5n + 3)::before { background-image: url("dot-green.png"); }
+.product__description.rte ul li:nth-child(5n + 4)::before { background-image: url("dot-blue.png"); }
+.product__description.rte ul li:nth-child(5n + 5)::before { background-image: url("dot-pink-small.png"); }
+.product__description.rte ul li strong { color: var(--dad-ink); }

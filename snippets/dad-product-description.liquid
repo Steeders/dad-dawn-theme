@@ -1,0 +1,25 @@
+{%- comment -%}
+  Product description with the emoji "dots" taken off the front of list items
+  (the theme draws real Do-A-Dot dot images as the bullets; see .product__description
+  in assets/custom.css). Display only: the description text in Shopify is unchanged,
+  so feeds and search still get it as written. Add an emoji here if a new description
+  starts list items with one.
+{%- endcomment -%}
+{%- liquid
+  assign dad_desc = product.description
+  assign dad_desc = dad_desc | replace: '<li>🔴 ', '<li>'
+  assign dad_desc = dad_desc | replace: '<li>🟠 ', '<li>'
+  assign dad_desc = dad_desc | replace: '<li>🟡 ', '<li>'
+  assign dad_desc = dad_desc | replace: '<li>🟢 ', '<li>'
+  assign dad_desc = dad_desc | replace: '<li>🔵 ', '<li>'
+  assign dad_desc = dad_desc | replace: '<li>🟣 ', '<li>'
+  assign dad_desc = dad_desc | replace: '<li>💗 ', '<li>'
+  assign dad_desc = dad_desc | replace: '<li>🩵 ', '<li>'
+  assign dad_desc = dad_desc | replace: '<li>💜 ', '<li>'
+  assign dad_desc = dad_desc | replace: '<li>🌸 ', '<li>'
+  assign dad_desc = dad_desc | replace: '<li>🌈 ', '<li>'
+  assign dad_desc = dad_desc | replace: '<li>🐞 ', '<li>'
+  assign dad_desc = dad_desc | replace: '<li>🧜 ', '<li>'
+  assign dad_desc = dad_desc | replace: '<li>🚚 ', '<li>'
+  echo dad_desc
+-%}
