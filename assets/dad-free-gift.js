@@ -11,10 +11,9 @@
  * The first tier keeps the original `_dad_free_gift` key so carts created
  * before the second tier existed still resolve.
  *
- * Pricing enforcement lives in the automatic Buy X Get Y discount in Shopify
- * admin, one per tier — this script only manages the line item, so if it ever
- * fails the customer just doesn't get the gift auto-added; they are never
- * mischarged.
+ * Since 2026-11-17 the tier-1 gift is its own $0 product (Free Gift: Discovering
+ * My World Book), not a Buy X Get Y discount: a per-item sale discount stopped
+ * the BXGY from qualifying and the book got charged. No discount prices it.
  *
  * Config comes from window.dadFreeGift, set in layout/theme.liquid from theme
  * settings (Cart group).
@@ -84,6 +83,12 @@
       const lines = linesFor(cart, tier.prop);
       const qualifies = subtotal >= tier.thresholdCents;
 
+      // A gift line for a different variant (the gift product changed) comes out first;
+      // the next step adds the current one.
+      const stale = lines.find((l) => String(l.variant_id) !== String(tier.variantId));
+      if (stale) {
+        return post('/cart/change.js', { id: stale.key, quantity: 0 });
+      }
       if (qualifies && lines.length === 0) {
         return post('/cart/add.js', {
           items: [
@@ -147,7 +152,7 @@
     }
   }
 
-  if (window.subscribe && window.PUB_SUB_EVENTS && PUB_SUB_EVENTS.cartUpdate) {
+  if (typeof subscribe === 'function' && typeof PUB_SUB_EVENTS !== 'undefined' && PUB_SUB_EVENTS.cartUpdate) {
     subscribe(PUB_SUB_EVENTS.cartUpdate, (event) => {
       if (event && event.source === 'dad-free-gift') return;
       sync();

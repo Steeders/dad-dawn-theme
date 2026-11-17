@@ -66,6 +66,9 @@
         if p.available == false or p.gift_card? or dcu_seen contains dcu_key or dcu_count >= 10
           continue
         endif
+        if p.price == 0 or p.tags contains 'free-gift'
+          continue
+        endif
         if dcu_has_dots and p.handle contains 'swishies'
           continue
         endif
