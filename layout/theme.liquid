@@ -427,6 +427,19 @@
         assign dad_gift_tier_count = 2
       endif
     -%}
+    {%- capture dad_db -%}{%- render 'dad-doorbuster' -%}{%- endcapture -%}
+    {%- liquid
+      comment
+        Door-buster day: the tier-1 gift goes in ANY order (1 cent = anything in the cart).
+      endcomment
+      assign dad_gift1_cents = settings.free_gift_threshold | times: 100
+      if dad_db == 'on' and settings.free_gift_variant_id != blank
+        assign dad_gift1_cents = 1
+        if dad_gift_tier_count == 0
+          assign dad_gift_tier_count = 1
+        endif
+      endif
+    -%}
     {%- if dad_gift_tier_count > 0 -%}
       <script>
         window.dadFreeGift = {
@@ -434,7 +447,7 @@
             {
               prop: '_dad_free_gift',
               variantId: {{ settings.free_gift_variant_id | json }},
-              thresholdCents: {{ settings.free_gift_threshold | times: 100 }}
+              thresholdCents: {{ dad_gift1_cents }}
             }{% if dad_gift_tier_count > 1 %},
             {
               prop: '_dad_free_gift_2',

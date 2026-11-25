@@ -1,0 +1,14 @@
+{%- comment -%}
+  Outputs "on" when today (shop timezone) is listed in settings.doorbuster_dates
+  (comma-separated YYYY-MM-DD). On those days the tier-1 free gift is added to
+  ANY order (theme.liquid) and the rewards bar drops the gift node and says so
+  (dad-free-shipping-bar). Black Friday + Cyber Monday 2026 door-busters.
+  Usage: {% capture dad_db %}{% render 'dad-doorbuster' %}{% endcapture %}
+{%- endcomment -%}
+{%- liquid
+  assign dad_db_today = 'now' | date: '%Y-%m-%d'
+  assign dad_db_dates = settings.doorbuster_dates | default: '' | remove: ' ' | split: ','
+  if dad_db_dates contains dad_db_today
+    echo 'on'
+  endif
+-%}

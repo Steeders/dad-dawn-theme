@@ -41,6 +41,15 @@
   assign dad_gift1_amt = settings.free_gift_threshold | default: 0 | times: 100
   assign dad_gift2_amt = settings.free_gift_2_threshold | default: 0 | times: 100
   assign dad_gift1_label = settings.free_gift_label | default: 'free gift'
+  capture dad_db
+    render 'dad-doorbuster'
+  endcapture
+  if dad_db == 'on'
+    comment
+      Door-buster: the gift is in every order today, so it isn't a tier to reach.
+    endcomment
+    assign dad_gift1_amt = 0
+  endif
   assign dad_gift2_label = settings.free_gift_2_label | default: 'free gift'
 
   comment
@@ -153,6 +162,9 @@
     class="dad-rewards{% if context == 'page' %} dad-rewards--page{% endif %}{% if dad_next_amt == 0 %} dad-rewards--complete{% endif %}"
     style="--dad-rw-progress: {{ dad_progress }}%;"
   >
+    {%- if dad_db == 'on' -%}
+      <p class="dad-rewards__msg dad-rewards__msg--db"><strong>&#127873; Door-buster: a free book comes with every order today.</strong></p>
+    {%- endif -%}
     <p class="dad-rewards__msg" role="status">
       {%- if dad_next_amt > 0 -%}
         {%- if dad_hit_count > 0 -%}

@@ -1482,6 +1482,12 @@
         "default": "FREE sticker pack"
       },
       {
+        "type": "text",
+        "id": "doorbuster_dates",
+        "label": "Door-buster days (free gift with ANY order)",
+        "info": "Comma-separated dates, YYYY-MM-DD, in the store's timezone. On these days the first free gift is added to every order, whatever the total. Leave blank to turn off."
+      },
+      {
         "type": "header",
         "content": "t:settings_schema.cart.settings.cart_drawer.header"
       },
