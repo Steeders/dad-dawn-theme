@@ -1,14 +1,186 @@
 {%- comment -%}
-  Outputs "on" when today (shop timezone) is listed in settings.doorbuster_dates
-  (comma-separated YYYY-MM-DD). On those days the tier-1 free gift is added to
-  ANY order (theme.liquid) and the rewards bar drops the gift node and says so
-  (dad-free-shipping-bar). Black Friday + Cyber Monday 2026 door-busters.
-  Usage: {% capture dad_db %}{% render 'dad-doorbuster' %}{% endcapture %}
+  Door-buster weekend: a free Art and Activity Book with every order, Fri Nov 27 through Mon Nov 30 2026.
+  Design: https://claude.ai/artifact/2WYY75ioRQMKw2FtFaPTTE
+
+  ON when today (shop timezone) is in settings.doorbuster_dates (comma-separated YYYY-MM-DD) and the
+  close-out switch is not set. Close-out = shop metafield dad.doorbuster_off = true (one CLI call, no
+  deploy): every mention disappears, any claimed book drops out of open carts, and the store falls back
+  to the free book on $75+ orders. Never a sold-out message.
+
+  CLICK TO CLAIM (no auto-add): the cart shows a card with a book picker and an Add button. The line is
+  the free-gift product ($0) variant the shopper picked, with property _dad_free_gift_db. Discovering My
+  World stays reserved for the $75 tier, so it is not in the picker.
+
+  Claimed bar: claimed = 0 minus the summed inventory of the picker variants (they started at 0 and drop
+  one per order), shown as a share of settings.doorbuster_bar_total (100). Hidden under
+  settings.doorbuster_bar_hide_below percent, held at 99% at most.
+
+  QA on an unpublished theme: put today's date in that theme's doorbuster_dates.
+
+  @param {string} [mode] - (none) echoes "on" | bar | home | pdp | collection | badge | claim | bar-line | gift-badge | gift-note
 {%- endcomment -%}
 {%- liquid
-  assign dad_db_today = 'now' | date: '%Y-%m-%d'
-  assign dad_db_dates = settings.doorbuster_dates | default: '' | remove: ' ' | split: ','
-  if dad_db_dates contains dad_db_today
-    echo 'on'
+  assign db_on = false
+  assign db_today = 'now' | date: '%Y-%m-%d'
+  assign db_dates = settings.doorbuster_dates | default: '' | remove: ' ' | split: ','
+  if db_dates contains db_today
+    assign db_on = true
+  endif
+  if shop.metafields.dad.doorbuster_off.value == true
+    assign db_on = false
   endif
 -%}
+{%- if db_on -%}
+{%- liquid
+  assign db_book = all_products['free-gift-discovering-my-world-book']
+  assign db_reserved = settings.free_gift_variant_id | append: ''
+  assign db_value = settings.doorbuster_book_value | default: '$8.99'
+  assign db_total = settings.doorbuster_bar_total | default: 100
+  assign db_hide_below = settings.doorbuster_bar_hide_below | default: 10
+  assign db_left = 0
+  assign db_first = nil
+  for v in db_book.variants
+    assign vid = v.id | append: ''
+    if vid != db_reserved
+      assign db_left = db_left | plus: v.inventory_quantity
+      if db_first == nil
+        assign db_first = v
+      endif
+    endif
+  endfor
+  assign db_claimed = 0 | minus: db_left
+  if db_claimed < 0
+    assign db_claimed = 0
+  endif
+  assign db_pct = db_claimed | times: 100 | divided_by: db_total
+  if db_pct > 99
+    assign db_pct = 99
+  endif
+  assign db_show_bar = false
+  if db_pct >= db_hide_below
+    assign db_show_bar = true
+  endif
+-%}
+{%- capture db_meter -%}
+  {%- if db_show_bar -%}
+    <div class="dad-db-meter">
+      <div class="dad-db-meter__row"><span>{{ db_pct }}% claimed</span><span class="dad-db-meter__hot">{% if db_pct >= 75 %}Almost gone{% else %}Going fast{% endif %}</span></div>
+      <div class="dad-db-meter__track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ db_pct }}" aria-label="{{ db_pct }}% of the free books claimed"><span style="width: {{ db_pct }}%"></span></div>
+    </div>
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- case mode -%}
+  {%- when 'bar' -%}
+    <style>.shopify-section-group-header-group .utility-bar,.dad-collection-callout{display:none}</style>
+    <div class="dad-db-bar" role="region" aria-label="Door-buster weekend">
+      <a href="{{ routes.all_products_collection_url }}" class="dad-db-bar__link">Door-buster weekend: a <span class="dad-db-bar__hi">FREE book</span> with every order. Through Cyber Monday.</a>
+    </div>
+
+  {%- when 'home' -%}
+    <section class="dad-db-home page-width" aria-label="Door-buster weekend">
+      <div class="dad-db-ticket">
+        <span class="dad-db-ribbon">Door-buster weekend</span>
+        <p class="dad-db-ticket__script">friday to monday!</p>
+        <h2 class="dad-db-ticket__title">Get a free art book with every order.</h2>
+        <div class="dad-db-book">
+          {%- if db_first.image -%}{{ db_first.image | image_url: width: 240 | image_tag: alt: 'Art and Activity Book', class: 'dad-db-book__img', width: 76, height: 76 }}{%- endif -%}
+          <div class="dad-db-book__copy">
+            <span class="dad-db-book__name">Art and Activity Book</span>
+            <span class="dad-db-book__price"><b>FREE</b> <s>{{ db_value }}</s></span>
+            <span class="dad-db-book__note">Pick yours in the cart. No code.</span>
+          </div>
+        </div>
+        <p class="dad-db-ticket__body">On top of 20% off sitewide.<br>Limited quantities available.</p>
+        {{ db_meter }}
+        <a href="{{ routes.all_products_collection_url }}" class="dad-db-btn">shop the sale &rarr;</a>
+      </div>
+    </section>
+
+  {%- when 'pdp' or 'collection' -%}
+    <div class="dad-db-card{% if mode == 'collection' %} dad-db-card--collection{% endif %}">
+      <span class="dad-db-ribbon dad-db-ribbon--left">{% if mode == 'pdp' %}Door-buster · Fri to Cyber Monday{% else %}Door-buster weekend{% endif %}</span>
+      <div class="dad-db-card__main">
+        {%- if db_first.image -%}
+          <span class="dad-db-card__thumb">{{ db_first.image | image_url: width: 160 | image_tag: alt: 'Art and Activity Book', loading: 'lazy', width: 64, height: 64 }}</span>
+        {%- endif -%}
+        <span class="dad-db-card__copy">
+          {%- if mode == 'pdp' -%}
+            <span class="dad-db-card__title">FREE art book with your order</span>
+            <span class="dad-db-card__body">An <s>{{ db_value }}</s> Art and Activity Book, free with any order. Pick yours in the cart.</span>
+          {%- else -%}
+            <span class="dad-db-card__title">20% off + a FREE book</span>
+            <span class="dad-db-card__body">Every order through Cyber Monday. No code needed. Limited quantities.</span>
+          {%- endif -%}
+        </span>
+      </div>
+      {%- if mode == 'pdp' -%}{{ db_meter }}{%- endif -%}
+    </div>
+
+  {%- when 'badge' -%}
+    <span class="dad-db-badge">+ FREE BOOK</span>
+
+  {%- when 'bar-line' -%}
+    <p class="dad-rewards__msg dad-rewards__msg--db">Door-buster: get a free book with every order through Cyber Monday.</p>
+
+  {%- when 'claim' -%}
+    {%- liquid
+      assign db_has = false
+      assign db_paid = 0
+      for item in cart.items
+        assign db_is_gift = false
+        for prop in item.properties
+          if prop.last != blank and prop.first contains '_dad_free_gift'
+            assign db_is_gift = true
+          endif
+          if prop.first == '_dad_free_gift_db' and prop.last != blank
+            assign db_has = true
+          endif
+        endfor
+        unless db_is_gift
+          assign db_paid = db_paid | plus: item.final_line_price
+        endunless
+      endfor
+    -%}
+    {%- if db_has == false and db_paid > 0 -%}
+      <div class="dad-db-claim" data-dad-db-claim>
+        <span class="dad-db-ribbon dad-db-ribbon--left">Door-buster gift</span>
+        <div class="dad-db-claim__main">
+          <span class="dad-db-card__thumb">
+            {%- assign db_n = 0 -%}
+            {%- for v in db_book.variants -%}
+              {%- assign vid = v.id | append: '' -%}
+              {%- if vid != db_reserved and v.image -%}
+                {%- assign db_n = db_n | plus: 1 -%}
+                <img src="{{ v.image | image_url: width: 160 }}" alt="{{ v.title | escape }}" width="64" height="64" loading="lazy" data-dad-db-img="{{ v.id }}"{% if db_n > 1 %} hidden{% endif %}>
+              {%- endif -%}
+            {%- endfor -%}
+          </span>
+          <div class="dad-db-claim__copy">
+            <span class="dad-db-card__title">Pick your free art book</span>
+            <span class="dad-db-card__body"><b class="dad-db-free">FREE</b> <s>{{ db_value }}</s> with your order through Cyber Monday.</span>
+          </div>
+        </div>
+        <div class="dad-db-claim__row">
+          <label class="visually-hidden" for="DadDbPick-{{ db_ctx | default: 'cart' }}">Choose your free book</label>
+          <select id="DadDbPick-{{ db_ctx | default: 'cart' }}" class="dad-db-select" data-dad-db-select>
+            {%- for v in db_book.variants -%}
+              {%- assign vid = v.id | append: '' -%}
+              {%- if vid != db_reserved -%}<option value="{{ v.id }}">{{ v.title | escape }}</option>{%- endif -%}
+            {%- endfor -%}
+          </select>
+          <button type="button" class="dad-db-btn dad-db-btn--sm" data-dad-db-add>Add my free book</button>
+        </div>
+        {{ db_meter }}
+      </div>
+    {%- endif -%}
+
+  {%- when 'gift-badge' -%}
+    <span class="dad-gift-pill dad-gift-pill--db">Door-buster gift</span>
+
+  {%- when 'gift-note' -%}
+    <p class="dad-gift-note dad-gift-note--db"><b>FREE</b> <s>{{ db_value }}</s> &middot; Fri to Cyber Monday only.</p>
+
+  {%- else -%}on
+{%- endcase -%}
+{%- endif -%}

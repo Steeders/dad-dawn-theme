@@ -75,6 +75,7 @@
         </button>
       </div>
       {% render 'dad-free-shipping-bar' %}
+      {%- render 'dad-doorbuster', mode: 'claim', db_ctx: 'drawer' -%}
       <cart-drawer-items
         {% if cart == empty %}
           class=" is-empty"
@@ -200,7 +201,8 @@
                           {%- endif -%}
 
                           {%- if dad_is_gift -%}
-                            <span class="dad-gift-pill">{{ 'sections.cart.dad_free_gift_badge' | t }}</span>
+                            {%- capture dad_db_pill -%}{%- render 'dad-doorbuster', mode: 'gift-badge' -%}{%- endcapture -%}
+                            {%- if dad_db_pill != blank -%}{{ dad_db_pill }}{%- else -%}<span class="dad-gift-pill">{{ 'sections.cart.dad_free_gift_badge' | t }}</span>{%- endif -%}
                           {%- endif -%}
 
                           <a href="{{ item.url }}" class="cart-item__name h4 break">
@@ -210,7 +212,8 @@
                           {%- comment -%} Unit price under the title removed 2026-11-17 (Russell): the line total on the right already shows it. {%- endcomment -%}
 
                           {%- if dad_is_gift -%}
-                            <p class="dad-gift-note">{{ 'sections.cart.dad_free_gift_note' | t }}</p>
+                            {%- capture dad_db_note -%}{%- render 'dad-doorbuster', mode: 'gift-note' -%}{%- endcapture -%}
+                            {%- if dad_db_note != blank -%}{{ dad_db_note }}{%- else -%}<p class="dad-gift-note">{{ 'sections.cart.dad_free_gift_note' | t }}</p>{%- endif -%}
                           {%- endif -%}
 
                           {%- if item.product.has_only_default_variant == false

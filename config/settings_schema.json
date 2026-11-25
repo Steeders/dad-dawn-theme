@@ -1485,7 +1485,26 @@
         "type": "text",
         "id": "doorbuster_dates",
         "label": "Door-buster days (free gift with ANY order)",
-        "info": "Comma-separated dates, YYYY-MM-DD, in the store's timezone. On these days the first free gift is added to every order, whatever the total. Leave blank to turn off."
+        "info": "Comma-separated dates, YYYY-MM-DD, in the store's timezone. On these days the first free gift is added to every order, whatever the total, and the site shows the door-buster callouts. Leave blank to turn off. Emergency off without a deploy: shop metafield dad.doorbuster_off = true."
+      },
+      {
+        "type": "text",
+        "id": "doorbuster_book_value",
+        "label": "Door-buster gift value (struck through)",
+        "default": "$8.99"
+      },
+      {
+        "type": "number",
+        "id": "doorbuster_bar_total",
+        "label": "Door-buster claimed bar: books set aside",
+        "info": "The bar shows books claimed as a share of this number. Claimed = how far the picker variants' inventory has dropped below 0.",
+        "default": 100
+      },
+      {
+        "type": "number",
+        "id": "doorbuster_bar_hide_below",
+        "label": "Door-buster claimed bar: hide below this percent",
+        "default": 10
       },
       {
         "type": "header",

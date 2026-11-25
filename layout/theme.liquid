@@ -292,6 +292,7 @@
 
     {{ 'dad-tokens.css' | asset_url | stylesheet_tag }}
     {{ 'custom.css' | asset_url | stylesheet_tag }}
+    {{ 'dad-doorbuster.css' | asset_url | stylesheet_tag }}
 
     <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
 
@@ -344,9 +345,11 @@
       {%- render 'cart-drawer' -%}
     {%- endif -%}
 
+    {%- render 'dad-doorbuster', mode: 'bar' -%}
     {% sections 'header-group' %}
 
     <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
+      {%- if template.name == 'index' -%}{%- render 'dad-doorbuster', mode: 'home' -%}{%- endif -%}
       {{ content_for_layout }}
     </main>
 
@@ -430,14 +433,13 @@
     {%- capture dad_db -%}{%- render 'dad-doorbuster' -%}{%- endcapture -%}
     {%- liquid
       comment
-        Door-buster day: the tier-1 gift goes in ANY order (1 cent = anything in the cart).
+        Door-buster day: no auto-added gift tiers at all. The shopper claims the free book from
+        the cart card instead (snippets/dad-doorbuster.liquid mode claim + assets/dad-doorbuster.js).
       endcomment
       assign dad_gift1_cents = settings.free_gift_threshold | times: 100
-      if dad_db == 'on' and settings.free_gift_variant_id != blank
-        assign dad_gift1_cents = 1
-        if dad_gift_tier_count == 0
-          assign dad_gift_tier_count = 1
-        endif
+      assign dad_db = dad_db | strip
+      if dad_db == 'on'
+        assign dad_gift_tier_count = 0
       endif
     -%}
     {%- if dad_gift_tier_count > 0 -%}
@@ -459,6 +461,8 @@
       </script>
       <script src="{{ 'dad-free-gift.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
+    <script>window.dadDoorbuster = { on: {% if dad_db == 'on' %}true{% else %}false{% endif %}, prop: '_dad_free_gift_db', productHandle: 'free-gift-discovering-my-world-book' };</script>
+    <script src="{{ 'dad-doorbuster.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'dad-cart-upsell.js' | asset_url }}" defer="defer"></script>
   </body>
 </html>

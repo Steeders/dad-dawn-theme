@@ -125,6 +125,7 @@
             </h3>
           </div>
           {%- capture card_md_pct -%}{% render 'dad-markdown-pct', product: card_product %}{%- endcapture -%}{%- assign card_md_pct = card_md_pct | strip | plus: 0 -%}
+{%- unless card_product.tags contains 'free-gift' -%}{%- render 'dad-doorbuster', mode: 'badge' -%}{%- endunless -%}
 <div class="card__badge {{ settings.badge_position }}">
             {%- if card_product.available == false -%}
               <span
@@ -554,6 +555,7 @@
           {% endif %}
         {% endif %}
         {%- capture card_md_pct -%}{% render 'dad-markdown-pct', product: card_product %}{%- endcapture -%}{%- assign card_md_pct = card_md_pct | strip | plus: 0 -%}
+{%- unless card_product.tags contains 'free-gift' -%}{%- render 'dad-doorbuster', mode: 'badge' -%}{%- endunless -%}
 <div class="card__badge {{ settings.badge_position }}">
           {%- if card_product.available == false -%}
             <span

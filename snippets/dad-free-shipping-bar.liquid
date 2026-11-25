@@ -44,6 +44,7 @@
   capture dad_db
     render 'dad-doorbuster'
   endcapture
+  assign dad_db = dad_db | strip
   if dad_db == 'on'
     comment
       Door-buster: the gift is in every order today, so it isn't a tier to reach.
@@ -163,7 +164,7 @@
     style="--dad-rw-progress: {{ dad_progress }}%;"
   >
     {%- if dad_db == 'on' -%}
-      <p class="dad-rewards__msg dad-rewards__msg--db"><strong>&#127873; Door-buster: a free book comes with every order today.</strong></p>
+      {%- render 'dad-doorbuster', mode: 'bar-line' -%}
     {%- endif -%}
     <p class="dad-rewards__msg" role="status">
       {%- if dad_next_amt > 0 -%}
