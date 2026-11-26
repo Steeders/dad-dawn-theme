@@ -1,4 +1,4 @@
-/* Do-A-Dot door-buster weekend: click to claim a free Art and Activity Book.
+/* Do-A-Dot door-buster weekend: click to claim a free activity book.
  * Markup: snippets/dad-doorbuster.liquid (mode 'claim'). Config: window.dadDoorbuster from layout/theme.liquid.
  *
  * - Add button: adds the picked $0 variant with property _dad_free_gift_db, then re-renders the drawer

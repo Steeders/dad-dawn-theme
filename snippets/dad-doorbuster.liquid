@@ -1,5 +1,5 @@
 {%- comment -%}
-  Door-buster weekend: a free Art and Activity Book with every order, Fri Nov 27 through Mon Nov 30 2026.
+  Door-buster weekend: a free activity book with every order, Fri Nov 27 through Mon Nov 30 2026.
   Design: https://claude.ai/artifact/2WYY75ioRQMKw2FtFaPTTE
 
   ON when today (shop timezone) is in settings.doorbuster_dates (comma-separated YYYY-MM-DD) and the
@@ -82,11 +82,11 @@
       <div class="dad-db-ticket">
         <span class="dad-db-ribbon">Door-buster weekend</span>
         <p class="dad-db-ticket__script">friday to monday!</p>
-        <h2 class="dad-db-ticket__title">Get a free art book with every order.</h2>
+        <h2 class="dad-db-ticket__title">Get a free activity book with every order.</h2>
         <div class="dad-db-book">
-          {%- if db_first.image -%}{{ db_first.image | image_url: width: 240 | image_tag: alt: 'Art and Activity Book', class: 'dad-db-book__img', width: 76, height: 76 }}{%- endif -%}
+          {%- if db_first.image -%}{{ db_first.image | image_url: width: 240 | image_tag: alt: 'Activity Book', class: 'dad-db-book__img', width: 76, height: 76 }}{%- endif -%}
           <div class="dad-db-book__copy">
-            <span class="dad-db-book__name">Art and Activity Book</span>
+            <span class="dad-db-book__name">Activity Book</span>
             <span class="dad-db-book__price"><b>FREE</b> <s>{{ db_value }}</s></span>
             <span class="dad-db-book__note">Pick yours in the cart. No code.</span>
           </div>
@@ -102,12 +102,12 @@
       <span class="dad-db-ribbon dad-db-ribbon--left">{% if mode == 'pdp' %}Door-buster · Fri to Cyber Monday{% else %}Door-buster weekend{% endif %}</span>
       <div class="dad-db-card__main">
         {%- if db_first.image -%}
-          <span class="dad-db-card__thumb">{{ db_first.image | image_url: width: 160 | image_tag: alt: 'Art and Activity Book', loading: 'lazy', width: 64, height: 64 }}</span>
+          <span class="dad-db-card__thumb">{{ db_first.image | image_url: width: 160 | image_tag: alt: 'Activity Book', loading: 'lazy', width: 64, height: 64 }}</span>
         {%- endif -%}
         <span class="dad-db-card__copy">
           {%- if mode == 'pdp' -%}
-            <span class="dad-db-card__title">FREE art book with your order</span>
-            <span class="dad-db-card__body">An <s>{{ db_value }}</s> Art and Activity Book, free with any order. Pick yours in the cart.</span>
+            <span class="dad-db-card__title">FREE activity book with your order</span>
+            <span class="dad-db-card__body">An <s>{{ db_value }}</s> Activity Book, free with any order. Pick yours in the cart.</span>
           {%- else -%}
             <span class="dad-db-card__title">20% off + a FREE book</span>
             <span class="dad-db-card__body">Every order through Cyber Monday. No code needed. Limited quantities.</span>
@@ -157,7 +157,7 @@
             {%- endfor -%}
           </span>
           <div class="dad-db-claim__copy">
-            <span class="dad-db-card__title">Pick your free art book</span>
+            <span class="dad-db-card__title">Pick your free activity book</span>
             <span class="dad-db-card__body"><b class="dad-db-free">FREE</b> <s>{{ db_value }}</s> with your order through Cyber Monday.</span>
           </div>
         </div>

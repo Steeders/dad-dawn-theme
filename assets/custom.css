@@ -4609,142 +4609,56 @@ video.dad-vg-lightbox__media { width: 100%; }
   border-bottom: 1px solid var(--dad-rule);
   background: var(--dad-white);
 }
-.dad-rewards__msg {
-  margin: 0 0 14px;
-  font-family: var(--font-body);
-  font-size: 13px;
-  font-weight: 600;
-  line-height: var(--lh-snug);
-  color: var(--dad-ink);
-  text-wrap: pretty;
+.dad-rw {
+  --rw-red: #EC1B2A; --rw-red-d: #9e1019; --rw-gold: #f2b632; --rw-green: #22a04b; --rw-pine: #1b4d2e;
+  display: flex; flex-direction: column; gap: 8px;
+  background: #fff6dc; border: 2px solid #f6dc9a; border-radius: 18px; padding: 14px 14px 10px;
+  font-family: var(--font-body); color: var(--dad-ink);
 }
-.dad-rewards__msg strong { color: var(--accent); }
-.dad-rewards--complete .dad-rewards__msg strong { color: var(--dad-dark-green); }
-
-/* Meter: track is 10px tall, labels hang into the bottom padding. */
-.dad-rewards__meter {
-  position: relative;
-  padding-bottom: 40px;
+.dad-rw.is-all { border-color: var(--rw-gold); box-shadow: 0 0 0 3px rgba(242,182,50,.25); }
+.dad-rw__msg { margin: 0; font-weight: 700; font-size: 15px; line-height: 1.3; text-wrap: pretty; }
+.dad-rw__msg em { font-style: normal; color: var(--rw-red); }
+.dad-rw.is-all .dad-rw__msg em { color: #1b7a3a; }
+.dad-rw__track { position: relative; height: 54px; }
+.dad-rw__rail {
+  position: absolute; left: 0; right: 27px; top: 20px; height: 14px; border-radius: 999px;
+  background: #f3e4c6; box-shadow: inset 0 0 0 1.5px #e8cf9f; overflow: hidden;
 }
-.dad-rewards__track {
-  position: relative;
-  height: 10px;
-  border-radius: var(--r-pill);
-  background: var(--dad-pink-tint);
+.dad-rw__fill {
+  display: block; height: 100%; width: var(--dad-rw-progress, 0%); box-sizing: border-box; border-radius: 999px;
+  border: 2px solid var(--rw-red);
+  background: repeating-linear-gradient(-45deg, var(--rw-red) 0 7px, #fff 7px 14px);
+  background-size: 19.8px 19.8px; animation: dad-rw-cane .9s linear infinite;
 }
-.dad-rewards__fill {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: var(--dad-rw-progress, 0%);
-  max-width: 100%;
-  background: var(--accent);
-  border-radius: var(--r-pill);
-  transition: width var(--dur-med) var(--ease-out);
+.dad-rw.is-all .dad-rw__fill {
+  border-color: var(--rw-green);
+  background: repeating-linear-gradient(-45deg, var(--rw-green) 0 7px, #fff 7px 14px);
+  background-size: 19.8px 19.8px;
 }
-
-/* Tier nodes overlay the track box exactly. */
-.dad-rewards__tiers {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 10px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
+@keyframes dad-rw-cane { to { background-position: 19.8px 0; } }
+.dad-rw__node {
+  position: absolute; box-sizing: border-box; border-radius: 999px; display: flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; top: 10px; margin-left: -17px;
+  background: #fff; border: 2.5px solid #d9d3c7; color: #6b6870;
 }
-.dad-rewards__tier {
-  position: absolute;
-  top: 50%;
-  left: var(--dad-rw-pos, 100%);
-  width: 0;
+.dad-rw__node.is-last { left: auto; right: 0; margin-left: 0; }
+.dad-rw__node.is-on { background: var(--rw-red); border-color: var(--rw-red); color: #fff; box-shadow: 0 3px 0 var(--rw-red-d); }
+.dad-rw__node--gift { width: 54px; height: 54px; top: 0; border-color: var(--rw-gold); }
+.dad-rw__node--gift img { width: 40px; height: 40px; object-fit: contain; border-radius: 6px; filter: saturate(.55); opacity: .8; }
+.dad-rw__node--gift.is-on { background: #fff; border-color: var(--rw-pine); color: var(--rw-pine); box-shadow: 0 0 0 4px rgba(27,77,46,.15); }
+.dad-rw__node--gift.is-on img { filter: none; opacity: 1; }
+.dad-rw__badge {
+  position: absolute; right: -5px; bottom: -5px; width: 22px; height: 22px; box-sizing: border-box; border-radius: 999px;
+  border: 2px solid #fff6dc; background: #6b6870; color: #fff; display: flex; align-items: center; justify-content: center;
 }
-.dad-rewards__node {
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform: translate(-50%, -50%);
-  display: grid;
-  place-items: center;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: var(--dad-white);
-  border: 2.5px solid var(--dad-rule);
-  color: var(--dad-white);
-  transition: background var(--dur-med) var(--ease-out),
-              border-color var(--dur-med) var(--ease-out),
-              box-shadow var(--dur-fast) var(--ease-out);
-}
-.dad-rewards__check {
-  width: 12px;
-  height: 12px;
-  display: block;
-}
-/* Cleared tier: solid brand red, matching the fill it sits on. */
-.dad-rewards__tier.is-hit .dad-rewards__node {
-  background: var(--accent);
-  border-color: var(--accent);
-}
-/* The tier being worked toward: outlined in brand red with a soft halo. */
-.dad-rewards__tier.is-next .dad-rewards__node {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 4px rgba(236, 27, 42, 0.14);
-}
-
-/* Threshold + reward name, centred under each node. */
-.dad-rewards__labels {
-  position: absolute;
-  top: 15px;
-  left: 0;
-  transform: translateX(-50%);
-  width: 88px;
-  text-align: center;
-}
-.dad-rewards__amt,
-.dad-rewards__name {
-  display: block;
-  font-family: var(--font-body);
-  line-height: 1.15;
-}
-.dad-rewards__amt {
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--dad-ink-soft);
-}
-.dad-rewards__name {
-  margin-top: 1px;
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--dad-ink-soft);
-}
-.dad-rewards__tier.is-hit .dad-rewards__amt,
-.dad-rewards__tier.is-hit .dad-rewards__name { color: var(--dad-ink-muted); }
-.dad-rewards__tier.is-next .dad-rewards__amt { color: var(--dad-ink); }
-.dad-rewards__tier.is-next .dad-rewards__name { color: var(--accent); }
-/* Three tiers in a ~340px drawer bring the last two labels close together.
-   Tighten the type and stop pulling the final label all the way back, so the
-   two clear each other; the overhang lands in the drawer's side padding. */
-.dad-rewards__tiers:has(> :nth-child(3)) .dad-rewards__labels { width: 74px; }
-.dad-rewards__tiers:has(> :nth-child(3)) .dad-rewards__amt { font-size: 11px; }
-.dad-rewards__tiers:has(> :nth-child(3)) .dad-rewards__name { font-size: 10px; }
-.dad-rewards__tiers:has(> :nth-child(3)) .dad-rewards__tier--last .dad-rewards__labels {
-  transform: translateX(-82%);
-}
-
-/* Final tier sits at 100%, so pull its label back inside the track. */
-.dad-rewards__tier--last .dad-rewards__labels {
-  transform: translateX(-100%);
-  text-align: right;
-  padding-right: 2px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .dad-rewards__fill,
-  .dad-rewards__node { transition: none; }
-}
+.dad-rw__node--gift.is-on .dad-rw__badge { background: var(--rw-pine); }
+.dad-rw__labels { position: relative; height: 34px; font-size: 12px; line-height: 1.3; color: #55525a; }
+.dad-rw__labels b { color: var(--dad-ink); }
+.dad-rw__label { position: absolute; white-space: nowrap; transform: translateX(-50%); text-align: center; }
+.dad-rw__label.is-last { right: 0; transform: none; text-align: right; }
+.dad-rw__label--ship.is-on b { color: var(--rw-red); }
+.dad-rw__label--gift.is-on b { color: #1b7a3a; }
+@media (prefers-reduced-motion: reduce) { .dad-rw__fill { animation: none; } }
 
 /* Cart page variant: sits above the line-item table inside the page
    width, so drop the drawer's edge-to-edge padding + rule */

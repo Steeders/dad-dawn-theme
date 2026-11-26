@@ -127,3 +127,6 @@
 }
 
 .card > .card__content .dad-db-badge { display: none; }
+
+/* In the drawer the claim card sits outside the padded items area; give it the same inset as the rewards bar. */
+cart-drawer .dad-db-claim, .cart-drawer .dad-db-claim { margin-left: 20px; margin-right: 20px; }

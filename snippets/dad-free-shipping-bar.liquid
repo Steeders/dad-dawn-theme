@@ -1,5 +1,6 @@
 {%- comment -%}
-  Do-A-Dot tiered rewards progress bar — rendered at the top of the cart
+  Do-A-Dot tiered rewards progress bar (candy-cane design, Nov 2026:
+  https://claude.ai/artifact/2WYY75ioRQMKw2FtFaPTTE, artboard Rewards) — rendered at the top of the cart
   drawer and cart page. Both re-render via the Section Rendering API on
   cart changes, so the bar stays current without extra JS.
 
@@ -123,9 +124,9 @@
         assign dad_hit_count = forloop.index
         assign dad_last_hit_label = dad_tier_label
         if dad_tier_kind == 'ship'
-          assign dad_frag = 'free shipping'
+          assign dad_frag = 'FREE shipping'
         else
-          assign dad_frag = 'your ' | append: dad_tier_label
+          assign dad_frag = 'a ' | append: dad_tier_label
         endif
         if dad_unlocked_text == blank
           assign dad_unlocked_text = dad_frag
@@ -159,30 +160,65 @@
     endif
     assign dad_remaining = dad_next_amt | minus: dad_cart_total
   -%}
-  <div
-    class="dad-rewards{% if context == 'page' %} dad-rewards--page{% endif %}{% if dad_next_amt == 0 %} dad-rewards--complete{% endif %}"
-    style="--dad-rw-progress: {{ dad_progress }}%;"
-  >
+  {%- liquid
+    comment
+      Picture for the gift checkpoint: the reserved $75-tier variant's image.
+    endcomment
+    assign dad_gift_img = nil
+    assign dad_gift_vid = settings.free_gift_variant_id | append: ''
+    for v in all_products['free-gift-discovering-my-world-book'].variants
+      assign dad_vid = v.id | append: ''
+      if dad_vid == dad_gift_vid
+        assign dad_gift_img = v.image
+      endif
+    endfor
+  -%}
+  <div class="dad-rewards{% if context == 'page' %} dad-rewards--page{% endif %}">
     {%- if dad_db == 'on' -%}
       {%- render 'dad-doorbuster', mode: 'bar-line' -%}
     {%- endif -%}
-    <p class="dad-rewards__msg" role="status">
-      {%- if dad_next_amt > 0 -%}
-        {%- if dad_hit_count > 0 -%}
-          &#127881; {{ dad_last_hit_label }} unlocked.
+    <div class="dad-rw{% if dad_next_amt == 0 %} is-all{% endif %}" style="--dad-rw-progress: {{ dad_progress }}%;">
+      <p class="dad-rw__msg" role="status">
+        {%- if dad_next_amt > 0 -%}
+          {%- if dad_hit_count > 0 -%}{{ dad_last_hit_label | replace: 'Free shipping', 'FREE shipping' }} unlocked! Add <em>{{ dad_remaining | money }} more</em> for {% if dad_next_kind == 'ship' %}FREE shipping{% else %}a {{ dad_next_label }}{% endif %}.
+          {%- elsif dad_next_kind == 'ship' -%}You're <em>{{ dad_remaining | money }} away</em> from FREE shipping!
+          {%- else -%}Add <em>{{ dad_remaining | money }} more</em> for a {{ dad_next_label }}.
+          {%- endif -%}
+        {%- else -%}
+          You unlocked <em>{{ dad_unlocked_text }}!</em>
         {%- endif -%}
-        You're <strong>{{ dad_remaining | money_without_trailing_zeros }} away</strong>
-        {%- if dad_next_kind == 'ship' %} from free shipping{% else %} from your {{ dad_next_label }}{% endif -%}
-      {%- else -%}
-        &#127881; you've unlocked <strong>{{ dad_unlocked_text }}</strong>
-      {%- endif -%}
-    </p>
-
-    <div class="dad-rewards__meter">
-      <div class="dad-rewards__track" aria-hidden="true">
-        <span class="dad-rewards__fill"></span>
+      </p>
+      <div class="dad-rw__track" aria-hidden="true">
+        <div class="dad-rw__rail"><span class="dad-rw__fill"></span></div>
+        {%- for tier in dad_tiers -%}
+          {%- liquid
+            assign dad_parts = tier | split: '~'
+            assign dad_node_amt = dad_parts[0] | plus: 0
+            assign dad_node_kind = dad_parts[2]
+            assign dad_node_pos = forloop.index | times: 100.0 | divided_by: dad_tier_count | round: 2
+            assign dad_node_hit = false
+            if dad_cart_total >= dad_node_amt
+              assign dad_node_hit = true
+            endif
+          -%}
+          <span class="dad-rw__node dad-rw__node--{{ dad_node_kind }}{% if forloop.last %} is-last{% endif %}{% if dad_node_hit %} is-on{% endif %}"{% unless forloop.last %} style="left: calc((100% - 27px) * {{ dad_node_pos }} / 100);"{% endunless %}>
+            {%- if dad_node_kind == 'gift' and dad_gift_img -%}
+              <img src="{{ dad_gift_img | image_url: width: 120 }}" alt="" width="40" height="40">
+              <span class="dad-rw__badge">
+                {%- if dad_node_hit -%}<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+                {%- else -%}<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>{%- endif -%}
+              </span>
+            {%- elsif dad_node_hit -%}
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+            {%- elsif dad_node_kind == 'ship' -%}
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6h11v9H2zM13 9h4.5l3.5 3.5V15h-8"/><circle cx="6" cy="17.5" r="1.9"/><circle cx="17" cy="17.5" r="1.9"/></svg>
+            {%- else -%}
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/></svg>
+            {%- endif -%}
+          </span>
+        {%- endfor -%}
       </div>
-      <ol class="dad-rewards__tiers">
+      <div class="dad-rw__labels">
         {%- for tier in dad_tiers -%}
           {%- liquid
             assign dad_parts = tier | split: '~'
@@ -194,38 +230,16 @@
             if dad_cart_total >= dad_node_amt
               assign dad_node_hit = true
             endif
-
-            comment
-              Node labels drop a leading "FREE" from the gift name. The threshold
-              sitting right above it already says the reward is free, and the
-              shorter name is what keeps three labels from colliding in a phone
-              width drawer. The full name is still used in the sentence above.
-            endcomment
             if dad_node_kind == 'gift'
               assign dad_node_label = dad_node_label | remove_first: 'FREE ' | remove_first: 'Free ' | remove_first: 'free '
-              assign dad_label_head = dad_node_label | slice: 0, 1 | upcase
-              assign dad_label_tail = dad_node_label | slice: 1, 200
-              assign dad_node_label = dad_label_head | append: dad_label_tail
+              assign dad_node_label = 'Free ' | append: dad_node_label
             endif
           -%}
-          <li
-            class="dad-rewards__tier{% if forloop.last %} dad-rewards__tier--last{% endif %}{% if dad_node_hit %} is-hit{% elsif dad_node_amt == dad_next_amt %} is-next{% endif %}"
-            style="--dad-rw-pos: {{ dad_node_pos }}%;"
-          >
-            <span class="dad-rewards__node" aria-hidden="true">
-              {%- if dad_node_hit -%}
-                <svg class="dad-rewards__check" viewBox="0 0 12 12" fill="none" focusable="false">
-                  <path d="M2 6.2 4.6 8.8 10 3.4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              {%- endif -%}
-            </span>
-            <span class="dad-rewards__labels">
-              <span class="dad-rewards__amt">{{ dad_node_amt | money_without_trailing_zeros }}</span>
-              <span class="dad-rewards__name">{{ dad_node_label }}</span>
-            </span>
-          </li>
+          <span class="dad-rw__label dad-rw__label--{{ dad_node_kind }}{% if forloop.last %} is-last{% endif %}{% if dad_node_hit %} is-on{% endif %}"{% unless forloop.last %} style="left: calc((100% - 27px) * {{ dad_node_pos }} / 100);"{% endunless %}>
+            {{- dad_node_label -}}<br><b>{% if dad_node_hit %}{% if dad_node_kind == 'gift' %}Added to cart{% else %}Unlocked{% endif %}{% else %}{{ dad_node_amt | money_without_trailing_zeros }}{% endif %}</b>
+          </span>
         {%- endfor -%}
-      </ol>
+      </div>
     </div>
   </div>
 {%- endif -%}
