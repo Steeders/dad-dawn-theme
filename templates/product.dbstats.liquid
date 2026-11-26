@@ -1,0 +1,25 @@
+{%- layout none -%}
+{%- comment -%}
+  Door-buster claims as JSON, read by the ads-analyzer Vercel cron (/api/cron/dad-doorbuster) that texts Russell
+  via Babs every 3 hours. URL: /products/free-gift-discovering-my-world-book?view=dbstats
+  claimed per title = 0 minus that picker variant's inventory (they started at 0, one drop per order).
+{%- endcomment -%}
+{%- liquid
+  assign reserved = settings.free_gift_variant_id | append: ''
+  capture db
+    render 'dad-doorbuster'
+  endcapture
+  assign db = db | strip
+  assign total = 0
+-%}
+{"on":{% if db == 'on' %}true{% else %}false{% endif %},"closed_out":{% if shop.metafields.dad.doorbuster_off.value == true %}true{% else %}false{% endif %},"dates":{{ settings.doorbuster_dates | json }},"set_aside":{{ settings.doorbuster_bar_total | default: 100 }},"titles":[
+{%- for v in product.variants -%}
+  {%- assign vid = v.id | append: '' -%}
+  {%- if vid != reserved -%}
+    {%- assign c = 0 | minus: v.inventory_quantity -%}{%- if c < 0 -%}{%- assign c = 0 -%}{%- endif -%}
+    {%- assign total = total | plus: c -%}
+    {%- unless first_done -%}{%- assign first_done = true -%}{%- else -%},{%- endunless -%}
+    {"title":{{ v.title | json }},"claimed":{{ c }}}
+  {%- endif -%}
+{%- endfor -%}
+],"claimed":{{ total }},"tier75_variant_inventory":{{ product.selected_or_first_available_variant.inventory_quantity | default: 0 }}}
