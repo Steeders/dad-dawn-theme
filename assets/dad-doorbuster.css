@@ -188,3 +188,38 @@ cart-drawer .dad-db-claim, .cart-drawer .dad-db-claim { margin: 14px 20px 8px; }
 .dad-db-select { flex: 1 1 auto; min-width: 0; min-height: 38px; font-size: 14px; padding: 0 10px; border-width: 1.5px; }
 .dad-db-claim .dad-db-btn--sm { flex: 0 0 auto; min-height: 38px; font-size: 14px; padding: 0 14px; box-shadow: 0 3px 0 var(--db-red-shadow); }
 .dad-db-claim .dad-db-meter__track { height: 6px; }
+
+/* Ticket tucked over the hero (2026-11-27). Rendered by sections/dad-hero.liquid right after the first home hero;
+   the hero's copy card is hidden (kept for screen readers) so the video carries the top and the ticket bites its bottom. */
+.dad-hero--db .dad-hero__card {
+  position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+.dad-db-home { position: relative; z-index: 2; margin-top: -64px; padding-top: 0; padding-bottom: 28px; }
+/* Real cut-out notches: the gold lives on a masked layer, so the video shows through the holes and the
+   ribbon above the edge is not clipped. */
+.dad-db-ticket {
+  --n1: 0 50%; --n2: 100% 50%; --nr: 13px;
+  background: transparent; box-shadow: none; isolation: isolate;
+  filter: drop-shadow(0 14px 22px rgba(43, 42, 45, .28));
+}
+.dad-db-ticket::after { display: none; }
+.dad-db-ticket::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; width: auto; height: auto; margin: 0; top: 0; left: 0;
+  border-radius: inherit; background: var(--db-gold); box-shadow: inset 0 -6px 0 var(--db-gold-shadow);
+  -webkit-mask: radial-gradient(circle var(--nr) at var(--n1), transparent 98%, #000 100%),
+                radial-gradient(circle var(--nr) at var(--n2), transparent 98%, #000 100%);
+  -webkit-mask-composite: source-in;
+  mask: radial-gradient(circle var(--nr) at var(--n1), transparent 98%, #000 100%),
+        radial-gradient(circle var(--nr) at var(--n2), transparent 98%, #000 100%);
+  mask-composite: intersect;
+}
+.dad-db-ticket { padding-bottom: 28px; }
+@media screen and (min-width: 750px) {
+  .dad-db-home { margin-top: -150px; padding-bottom: 36px; }
+  .dad-db-ticket { --n1: calc(100% - 36px - var(--stub) - 1.5px) 0; --n2: calc(100% - 36px - var(--stub) - 1.5px) 100%; --nr: 15px; }
+  .dad-db-ticket::before { left: 0; top: 0; }
+}
+@media screen and (min-width: 990px) {
+  .dad-hero--db, .dad-hero--db .dad-hero__inner { min-height: 600px; }
+}

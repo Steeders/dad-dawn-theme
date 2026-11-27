@@ -5305,3 +5305,31 @@ body:has(cart-drawer.active) shopify-chat { display: none !important; }
 .dad-rw.is-single .dad-rw__rail { top: 8px; }
 .dad-rw.is-single .dad-rw__node { top: 0; }
 .dad-rw.is-single .dad-rw__labels { display: none; }
+
+/* Tighter drawer line items (2026-11-27). */
+.cart-drawer .cart-items .cart-item { gap: .6rem 1rem; }
+.cart-drawer .cart-items tbody td { padding-top: 1rem; }
+.cart-drawer .cart-item:last-child { margin-bottom: .8rem; }
+.cart-drawer .cart-item__details > * + * { margin-top: .4rem; }
+.cart-drawer .cart-item quantity-popover, .cart-drawer .cart-item .cart-item__quantity-wrapper { margin-top: 0; }
+.cart-drawer .cart-item .quantity { min-height: 3.6rem; }
+/* Free-book row: a slim tinted strip. The quantity is always 1, so the stepper goes; the trash can stays. */
+.cart-drawer .cart-items .cart-item.dad-cart-item--gift { padding: 8px 10px; margin: 8px 0 2px; gap: .2rem 1rem; border-radius: 12px; }
+.cart-drawer .cart-items .cart-item.dad-cart-item--gift > td { padding-top: 0; }
+.cart-drawer .cart-items .cart-item.dad-cart-item--gift .cart-item__image { max-width: 72%; }
+.cart-drawer .cart-items .cart-item.dad-cart-item--gift .dad-gift-pill { margin-bottom: 3px; }
+.cart-drawer .cart-items .cart-item.dad-cart-item--gift .cart-item__name { font-size: 1.5rem; }
+.cart-drawer .cart-items .cart-item.dad-cart-item--gift .dad-gift-note { font-size: 11.5px; }
+.cart-drawer .cart-items .cart-item.dad-cart-item--gift .product-option { font-size: 1.2rem; margin-top: 0; }
+.cart-drawer .cart-items .cart-item.dad-cart-item--gift quantity-input,
+.cart-drawer .cart-items .cart-item.dad-cart-item--gift .quantity { display: none; }
+/* Free-book row layout: thumb | text | price, trash under the price. */
+.cart-drawer .cart-items .cart-item.dad-cart-item--gift { grid-template-columns: 52px minmax(0, 1fr) auto; grid-template-rows: auto auto; align-items: start; }
+.cart-drawer .cart-items .cart-item.dad-cart-item--gift .cart-item__media { grid-column: 1; grid-row: 1 / 3; width: 52px; }
+.cart-drawer .cart-items .cart-item.dad-cart-item--gift .cart-item__image { max-width: 52px; width: 52px; }
+.cart-drawer .cart-items .cart-item.dad-cart-item--gift .cart-item__details { grid-column: 2; grid-row: 1 / 3; padding-left: 0; }
+.cart-drawer .cart-items .cart-item.dad-cart-item--gift .cart-item__totals { grid-column: 3; grid-row: 1; }
+.cart-drawer .cart-items .cart-item.dad-cart-item--gift .cart-item__quantity { grid-column: 3; grid-row: 2; justify-self: end; padding-left: 0; }
+.cart-drawer .cart-items .cart-item.dad-cart-item--gift .cart-item__quantity-wrapper { justify-content: flex-end; }
+.cart-drawer .cart-items .cart-item.dad-cart-item--gift .cart-item__name { display: block; }
+.cart-drawer .cart-items .cart-item.dad-cart-item--gift .dad-gift-note br { display: none; }

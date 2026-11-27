@@ -23,11 +23,26 @@
     endif
   endfor
 -%}
+{%- liquid
+  comment
+    Door-buster weekend: on the first hero of the home page, the ticket replaces the copy card and tucks
+    over the bottom of the video. The card stays in the markup (screen readers) but is hidden.
+  endcomment
+  assign dad_db_hero = false
+  if template.name == 'index' and section.index == 1
+    capture dad_db_state
+      render 'dad-doorbuster'
+    endcapture
+    if dad_db_state contains 'on'
+      assign dad_db_hero = true
+    endif
+  endif
+-%}
 {%- if season_vars != blank -%}
   <style>#shopify-section-{{ section.id }} .dad-hero { {{ season_vars }} }</style>
 {%- endif -%}
 
-<section class="dad-hero{% if section.settings.mobile_layout != 'overlay' %} dad-hero--stack-mobile{% endif %}{% if section.settings.desktop_layout != blank and section.settings.desktop_layout != 'card' %} dad-hero--desk-{{ section.settings.desktop_layout }}{% endif %}{% if section.settings.card_bg_opacity == 0 %} dad-hero--no-card{% endif %}{% if section.settings.image_focus != blank and section.settings.image_focus != 'auto' %} dad-hero--focus{% endif %}{% unless section.settings.mobile_text_colors == 'desktop' %} dad-hero--mobile-brand-text{% endunless %}" style="
+<section class="dad-hero{% if dad_db_hero %} dad-hero--db{% endif %}{% if section.settings.mobile_layout != 'overlay' %} dad-hero--stack-mobile{% endif %}{% if section.settings.desktop_layout != blank and section.settings.desktop_layout != 'card' %} dad-hero--desk-{{ section.settings.desktop_layout }}{% endif %}{% if section.settings.card_bg_opacity == 0 %} dad-hero--no-card{% endif %}{% if section.settings.image_focus != blank and section.settings.image_focus != 'auto' %} dad-hero--focus{% endif %}{% unless section.settings.mobile_text_colors == 'desktop' %} dad-hero--mobile-brand-text{% endunless %}" style="
   {%- case section.settings.image_focus -%}
     {%- when 'top' -%}--dad-hero-img-pos: 50% 0%;
     {%- when 'bottom' -%}--dad-hero-img-pos: 50% 100%;
@@ -127,6 +142,7 @@
     </div>
   </div>
 </section>
+{%- if dad_db_hero -%}{%- render 'dad-doorbuster', mode: 'home' -%}{%- endif -%}
 
 {% schema %}
 {
