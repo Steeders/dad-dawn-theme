@@ -349,7 +349,6 @@
     {% sections 'header-group' %}
 
     <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
-      {%- if template.name == 'index' -%}{%- render 'dad-doorbuster', mode: 'home' -%}{%- endif -%}
       {{ content_for_layout }}
     </main>
 
