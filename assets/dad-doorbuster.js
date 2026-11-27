@@ -4,6 +4,7 @@
  * - Add button: adds the picked $0 variant with property _dad_free_gift_db, then re-renders the drawer
  *   (or reloads /cart).
  * - Keeps the cart honest on every cart update: one book, quantity 1, only while the cart has a paid item,
+ *   no leftover $75-tier gift line on door-buster days,
  *   and none at all once the door-buster is off (dates passed or close-out switch set).
  */
 (function () {
@@ -50,6 +51,10 @@
     const cart = await (await fetch('/cart.js')).json();
     const db = cart.items.filter(isDb);
     const paid = cart.items.filter((i) => !isAnyGift(i)).reduce((s, i) => s + i.final_line_price, 0);
+    // Door-buster days run no threshold gifts: a $75-tier line left from before the switch comes out,
+    // so nobody gets two free books.
+    const tierGift = cfg.on && cart.items.find((i) => isAnyGift(i) && !isDb(i));
+    if (tierGift) return post('/cart/change.js', { id: tierGift.key, quantity: 0 });
     if (db.length && (!cfg.on || paid <= 0)) return post('/cart/change.js', { id: db[0].key, quantity: 0 });
     if (db.length > 1) return post('/cart/change.js', { id: db[1].key, quantity: 0 });
     if (db.length === 1 && db[0].quantity !== 1) return post('/cart/change.js', { id: db[0].key, quantity: 1 });
