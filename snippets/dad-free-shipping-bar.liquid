@@ -174,10 +174,7 @@
     endfor
   -%}
   <div class="dad-rewards{% if context == 'page' %} dad-rewards--page{% endif %}">
-    {%- if dad_db == 'on' -%}
-      {%- render 'dad-doorbuster', mode: 'bar-line' -%}
-    {%- endif -%}
-    <div class="dad-rw{% if dad_next_amt == 0 %} is-all{% endif %}" style="--dad-rw-progress: {{ dad_progress }}%;">
+    <div class="dad-rw{% if dad_next_amt == 0 %} is-all{% endif %}{% if dad_tier_count == 1 %} is-single{% endif %}" style="--dad-rw-progress: {{ dad_progress }}%;">
       <p class="dad-rw__msg" role="status">
         {%- if dad_next_amt > 0 -%}
           {%- if dad_hit_count > 0 -%}{{ dad_last_hit_label | replace: 'Free shipping', 'FREE shipping' }} unlocked! Add <em>{{ dad_remaining | money }} more</em> for {% if dad_next_kind == 'ship' %}FREE shipping{% else %}a {{ dad_next_label }}{% endif %}.

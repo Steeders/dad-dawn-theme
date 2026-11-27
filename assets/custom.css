@@ -5285,3 +5285,23 @@ body:has(cart-drawer.active) shopify-chat { display: none !important; }
 .product__description.rte ul li:nth-child(5n + 4)::before { background-image: url("dot-blue.png"); }
 .product__description.rte ul li:nth-child(5n + 5)::before { background-image: url("dot-pink-small.png"); }
 .product__description.rte ul li strong { color: var(--dad-ink); }
+
+/* Compact rewards card (2026-11-27): the drawer header stack was pushing the cart items off screen. */
+.dad-rewards { padding: 10px 20px 10px; }
+.dad-rw { gap: 4px; padding: 9px 12px 6px; border-radius: 14px; }
+.dad-rw__msg { font-size: 14px; }
+.dad-rw__track { height: 40px; }
+.dad-rw__rail { top: 14px; height: 12px; right: 20px; }
+.dad-rw__node { width: 28px; height: 28px; top: 6px; margin-left: -14px; }
+.dad-rw__node svg { width: 13px; height: 13px; }
+.dad-rw__node--gift { width: 40px; height: 40px; top: 0; }
+.dad-rw__node--gift img { width: 30px; height: 30px; }
+.dad-rw__badge { width: 18px; height: 18px; right: -4px; bottom: -4px; }
+.dad-rw__badge svg { width: 9px; height: 9px; }
+.dad-rw__labels { height: 30px; font-size: 11px; line-height: 1.25; }
+/* One tier (door-buster days): message + bar on one tight strip, no labels. */
+.dad-rw.is-single { gap: 2px; padding: 8px 12px 6px; }
+.dad-rw.is-single .dad-rw__track { height: 28px; }
+.dad-rw.is-single .dad-rw__rail { top: 8px; }
+.dad-rw.is-single .dad-rw__node { top: 0; }
+.dad-rw.is-single .dad-rw__labels { display: none; }

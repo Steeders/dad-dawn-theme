@@ -120,6 +120,50 @@
 .dad-db-btn--sm[disabled] { opacity: .7; cursor: default; }
 .dad-db-ticket .dad-db-meter { margin-top: 2px; }
 
+/* Home ticket: phones keep the stacked card (script, title, book, body, meter, button). */
+.dad-db-ticket__copy, .dad-db-ticket__stub { display: contents; }
+.dad-db-ticket__script { order: 1; }
+.dad-db-ticket__title { order: 2; }
+.dad-db-book { order: 3; }
+.dad-db-ticket__body { order: 4; }
+.dad-db-ticket .dad-db-meter { order: 5; }
+.dad-db-ticket .dad-db-btn { order: 6; }
+
+/* Desktop: a wide admission ticket. Copy left, book in the middle, a torn-off stub with the button on the right. */
+@media screen and (min-width: 750px) {
+  .dad-db-home { padding-top: 44px; padding-bottom: 20px; }
+  .dad-db-ticket {
+    --stub: 270px;
+    max-width: 1120px; display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) var(--stub);
+    align-items: center; gap: 0 36px; padding: 40px 36px 36px 44px; text-align: left; border-radius: 28px;
+  }
+  .dad-db-ticket__copy { display: flex; flex-direction: column; gap: 10px; order: 1; }
+  .dad-db-ticket .dad-db-book { order: 2; }
+  .dad-db-ticket__stub { order: 3; }
+  .dad-db-ticket__stub {
+    display: flex; flex-direction: column; justify-content: center; gap: 14px; align-self: stretch;
+    margin-left: -6px; padding-left: 30px; border-left: 3px dashed rgba(43, 42, 45, .28);
+  }
+  /* Notches sit at the top and bottom of the perforation instead of the sides. */
+  .dad-db-ticket::before, .dad-db-ticket::after {
+    left: calc(100% - 36px - var(--stub) - 13px); right: auto; width: 28px; height: 28px; margin-top: 0;
+  }
+  .dad-db-ticket::before { top: -14px; }
+  .dad-db-ticket::after { top: auto; bottom: -14px; }
+  .dad-db-ribbon:not(.dad-db-ribbon--left) { left: 44px; transform: none; }
+  .dad-db-ticket__script { font-size: 34px; }
+  .dad-db-ticket__title { font-size: clamp(40px, 4.2vw, 56px); }
+  .dad-db-ticket__body { font-size: 16px; }
+  .dad-db-book {
+    flex-direction: column; text-align: center; gap: 10px; padding: 20px 18px 18px; border-radius: 22px;
+    box-shadow: 0 4px 0 var(--db-gold-shadow);
+  }
+  .dad-db-book__img { width: 132px; height: 132px; }
+  .dad-db-book__name { font-size: 18px; }
+  .dad-db-book__price { font-size: 16px; }
+  .dad-db-ticket .dad-db-btn { min-height: 60px; font-size: 19px; }
+}
+
 .dad-gift-pill--db { white-space: nowrap; }
 .dad-rewards__msg--db {
   margin: 0 0 10px; background: var(--db-pine); color: #fff; border-radius: 12px; padding: 10px 12px;
@@ -130,3 +174,17 @@
 
 /* In the drawer the claim card sits outside the padded items area; give it the same inset as the rewards bar. */
 cart-drawer .dad-db-claim, .cart-drawer .dad-db-claim { margin-left: 20px; margin-right: 20px; }
+
+/* Compact claim card in the cart (2026-11-27): one short row of picker + button. */
+.dad-db-claim { gap: 8px; margin: 14px 0 10px; padding: 16px 12px 10px; border-radius: 14px; }
+cart-drawer .dad-db-claim, .cart-drawer .dad-db-claim { margin: 14px 20px 8px; }
+.dad-db-claim .dad-db-ribbon--left { top: -10px; font-size: 10px; padding: 4px 9px; }
+.dad-db-claim__main { gap: 10px; }
+.dad-db-claim .dad-db-card__thumb { width: 44px; height: 44px; border-radius: 10px; }
+.dad-db-claim .dad-db-card__thumb img { width: 38px; height: 38px; }
+.dad-db-claim .dad-db-card__title { font-size: 17px; }
+.dad-db-claim .dad-db-card__body { font-size: 13px; }
+.dad-db-claim__row { flex-wrap: nowrap; gap: 6px; }
+.dad-db-select { flex: 1 1 auto; min-width: 0; min-height: 38px; font-size: 14px; padding: 0 10px; border-width: 1.5px; }
+.dad-db-claim .dad-db-btn--sm { flex: 0 0 auto; min-height: 38px; font-size: 14px; padding: 0 14px; box-shadow: 0 3px 0 var(--db-red-shadow); }
+.dad-db-claim .dad-db-meter__track { height: 6px; }

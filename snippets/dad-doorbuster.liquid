@@ -81,8 +81,11 @@
     <section class="dad-db-home page-width" aria-label="Door-buster weekend">
       <div class="dad-db-ticket">
         <span class="dad-db-ribbon">Door-buster weekend</span>
-        <p class="dad-db-ticket__script">friday to monday!</p>
-        <h2 class="dad-db-ticket__title">Get a free activity book with every order.</h2>
+        <div class="dad-db-ticket__copy">
+          <p class="dad-db-ticket__script">friday to monday!</p>
+          <h2 class="dad-db-ticket__title">Get a free activity book with every order.</h2>
+          <p class="dad-db-ticket__body">On top of 20% off sitewide.<br>Limited quantities available.</p>
+        </div>
         <div class="dad-db-book">
           {%- if db_first.image -%}{{ db_first.image | image_url: width: 240 | image_tag: alt: 'Activity Book', class: 'dad-db-book__img', width: 76, height: 76 }}{%- endif -%}
           <div class="dad-db-book__copy">
@@ -91,9 +94,10 @@
             <span class="dad-db-book__note">Pick yours in the cart. No code.</span>
           </div>
         </div>
-        <p class="dad-db-ticket__body">On top of 20% off sitewide.<br>Limited quantities available.</p>
-        {{ db_meter }}
-        <a href="{{ routes.all_products_collection_url }}" class="dad-db-btn">shop the sale &rarr;</a>
+        <div class="dad-db-ticket__stub">
+          {{ db_meter }}
+          <a href="{{ routes.all_products_collection_url }}" class="dad-db-btn">shop the sale &rarr;</a>
+        </div>
       </div>
     </section>
 
@@ -169,7 +173,7 @@
               {%- if vid != db_reserved -%}<option value="{{ v.id }}">{{ v.title | escape }}</option>{%- endif -%}
             {%- endfor -%}
           </select>
-          <button type="button" class="dad-db-btn dad-db-btn--sm" data-dad-db-add>Add my free book</button>
+          <button type="button" class="dad-db-btn dad-db-btn--sm" data-dad-db-add>Add free book</button>
         </div>
         {{ db_meter }}
       </div>
